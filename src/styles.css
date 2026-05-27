@@ -257,8 +257,13 @@ body {
   position: fixed;
   inset: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  box-sizing: border-box;
+  /* Pin the page just under the fixed topbar (52px) so the navy surround
+     above it is closed up. Any remaining vertical room falls below the page,
+     above the rail. */
+  padding-top: 52px;
   background: var(--letterbox);
   /* very subtle accent texture in letterbox so it feels less flat */
   background-image:
@@ -266,14 +271,29 @@ body {
     radial-gradient(circle at 80% 80%, color-mix(in oklab, var(--accent) 16%, transparent) 0%, transparent 55%);
 }
 
+/* All pages stay rendered (no display:none) and stack via absolute positioning,
+   so when idx changes the outgoing page fades out while the incoming one fades
+   in — a true cross-fade with no visible gap. */
 .page-scaler {
+  position: absolute;
+  top: 52px;            /* clear the fixed topbar */
+  left: 50%;
   width: var(--page-w);
   height: var(--page-h);
-  flex-shrink: 0;
-  transform: scale(var(--scale, 1));
-  transform-origin: center center;
+  transform: translateX(-50%) scale(var(--scale, 1));
+  transform-origin: top center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 240ms ease-out;
 }
-.page-scaler[data-active="false"] { display: none; }
+.page-scaler[data-active="true"] {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-scaler { transition: none; }
+}
 
 /* ── PAGE FRAME ────────────────────────────────────────────── */
 .page-frame {
@@ -4138,7 +4158,12 @@ html[data-surround="white"] .topbar__logo .topbar__doc {
     page-break-after: always;
     break-after: page;
     overflow: hidden;
-    position: relative;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transition: none !important;
     margin: 0;
     padding: 0;
   }

@@ -538,5 +538,15 @@
     "file": "images/family-signal-box-concept-sketch.png",
     "v": 1779907613286,
     "fit": "cover"
+  },
+  "material-01-brick-sample.jpg": {
+    "file": "images/material-01-brick-sample.png",
+    "v": 1779908635941,
+    "fit": "cover"
+  },
+  "material-04-aluminium-detail.jpg": {
+    "file": "images/material-04-aluminium-detail.png",
+    "v": 1779908635941,
+    "fit": "cover"
   }
 }
