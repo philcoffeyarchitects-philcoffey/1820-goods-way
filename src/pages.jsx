@@ -3618,25 +3618,47 @@ const SChallenge = sectionPages(
       label: "Who is the tenant?",
       presentation: () => (
         <div className="pc-stmt" style={{maxWidth: 'none', width: '100%'}}>
-          <Eyebrow>§07 · Who is the tenant?</Eyebrow>
-          <h2 className="h-title" style={{marginBottom: 18}}>Whole floor. 500–600 m².</h2>
-          <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18, marginBottom: 14}}>
-            {[
-              { v: "~50%",       l: "of central London supply is sub-5,000 sqft", s: "Savills, Q4 2025 — the boutique segment is structurally short." },
-              { v: "£200–296",   l: "per sqft on fully-managed boutique floors",   s: "170 Piccadilly, 141 Wardour, GPE H2 2025 deals." },
-              { v: "450k sqft",  l: "AI lettings in London — May 2026 alone",      s: ">10× the 2025 monthly average. King's Cross is the cluster." },
-            ].map((s, i) => (
-              <div key={i} style={{border: '1px solid var(--rule-soft)', padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 4}}>
-                <div className="mono" style={{fontSize: 22, color: 'var(--accent)', fontWeight: 500, letterSpacing: 0.02}}>{s.v}</div>
-                <div style={{fontSize: 12, color: 'var(--fg)', lineHeight: 1.3}}>{s.l}</div>
-                <div className="mono" style={{fontSize: 10, color: 'var(--fg-dim)', letterSpacing: 0.04, marginTop: 4}}>{s.s}</div>
-              </div>
-            ))}
+          <Eyebrow>§07 · The Challenge</Eyebrow>
+          <h2 className="h-title" style={{marginBottom: 4}}>Who is the tenant?</h2>
+          <div className="prose" style={{fontSize: 18, color: 'var(--fg-soft)', marginBottom: 22}}>
+            Whole floor. 500/600 m².
           </div>
-          <div className="prose" style={{maxWidth: '78ch', fontSize: 13, color: 'var(--fg-soft)', marginBottom: 10}}>
-            <strong style={{color: 'var(--fg)'}}>Who's in the segment.</strong> Creative + design agencies · Series B–C tech scale-ups · AI scale-ups below the top tier · Specialist finance and wealth · Architecture, engineering, consulting · International UK headquarters.
+          <div style={{flex: 1, minHeight: 0, display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 36, alignItems: 'start'}}>
+            {/* LEFT — three stat tiles stacked vertically */}
+            <div style={{display: 'flex', flexDirection: 'column', gap: 14}}>
+              {[
+                { v: "~50%",       l: "of central London supply is sub-5,000 sqft", s: "Savills, Q4 2025 — the boutique segment is structurally short." },
+                { v: "£200–296",   l: "per sqft on fully-managed boutique floors",   s: "170 Piccadilly, 141 Wardour, GPE H2 2025 deals." },
+                { v: "450k sqft",  l: "AI lettings in London — May 2026 alone",      s: ">10× the 2025 monthly average. King's Cross is the cluster." },
+              ].map((s, i) => (
+                <div key={i} style={{borderLeft: '2px solid var(--accent)', paddingLeft: 14, display: 'flex', flexDirection: 'column', gap: 4}}>
+                  <div className="mono" style={{fontSize: 22, color: 'var(--accent)', fontWeight: 500, letterSpacing: 0.02}}>{s.v}</div>
+                  <div style={{fontSize: 13, color: 'var(--fg)', lineHeight: 1.35}}>{s.l}</div>
+                  <div className="mono" style={{fontSize: 10, color: 'var(--fg-dim)', letterSpacing: 0.04, marginTop: 2}}>{s.s}</div>
+                </div>
+              ))}
+            </div>
+            {/* RIGHT — segment list */}
+            <div style={{display: 'flex', flexDirection: 'column', gap: 10}}>
+              <div className="mono" style={{fontSize: 11, color: 'var(--accent)', letterSpacing: 0.18, textTransform: 'uppercase'}}>Who's in the segment</div>
+              <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8, fontSize: 13, color: 'var(--fg)', lineHeight: 1.4}}>
+                {[
+                  "Creative + design agencies",
+                  "Series B–C tech scale-ups",
+                  "AI scale-ups below the top tier",
+                  "Specialist finance and wealth",
+                  "Architecture, engineering, consulting",
+                  "International UK headquarters",
+                ].map((t, i) => (
+                  <li key={i} style={{paddingLeft: 16, position: 'relative'}}>
+                    <span style={{position: 'absolute', left: 0, color: 'var(--accent)'}}>—</span>
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <div className="mono" style={{fontSize: 11, color: 'var(--fg-dim)', letterSpacing: 0.04, marginTop: 'auto'}}>
+          <div className="mono" style={{fontSize: 11, color: 'var(--fg-dim)', letterSpacing: 0.04, marginTop: 16, paddingTop: 12, borderTop: '1px solid var(--rule-soft)'}}>
             Full workings — comparables, supply, tenant profiles, building-to-tenant match — on the <strong style={{color: 'var(--accent)'}}>500/600 · Who is the tenant?</strong> tab (top toolbar).
           </div>
         </div>
