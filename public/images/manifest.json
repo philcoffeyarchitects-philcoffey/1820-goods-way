@@ -1,0 +1,542 @@
+{
+  "crossing-canal-railway.jpg": {
+    "file": "images/crossing-canal-railway.jpg",
+    "v": 1779707490862,
+    "fit": "cover"
+  },
+  "the-canal.jpg": {
+    "file": "images/the-canal.jpg",
+    "v": 1779707484713,
+    "fit": "cover"
+  },
+  "the-redevelopment.jpg": {
+    "file": "images/the-redevelopment.jpg",
+    "v": 1779707501124,
+    "fit": "cover"
+  },
+  "the-crossing.jpg": {
+    "file": "images/the-crossing.jpg",
+    "v": 1779707506553,
+    "fit": "cover"
+  },
+  "site-01-from-towpath.jpg": {
+    "file": "images/site-01-from-towpath.jpg",
+    "v": 1779707536209,
+    "fit": "cover"
+  },
+  "site-02-bagley-walk.jpg": {
+    "file": "images/site-02-bagley-walk.jpg",
+    "v": 1779707554280,
+    "fit": "cover"
+  },
+  "site-of-the-canal.jpg": {
+    "file": "images/site-of-the-canal.jpg",
+    "v": 1779708048238,
+    "fit": "cover"
+  },
+  "site-brick-context.jpg": {
+    "file": "images/site-brick-context.jpg",
+    "v": 1779708058030,
+    "fit": "cover"
+  },
+  "site-in-full-view.jpg": {
+    "file": "images/site-in-full-view.jpg",
+    "v": 1779708079222,
+    "fit": "cover"
+  },
+  "site-heavy-and-light.jpg": {
+    "file": "images/site-heavy-and-light.jpg",
+    "v": 1779708092613,
+    "fit": "cover"
+  },
+  "scheme-a-central-core.jpg": {
+    "file": "images/scheme-a-central-core.jpg",
+    "v": 1779708442640,
+    "fit": "contain"
+  },
+  "scheme-b-eccentric-core.jpg": {
+    "file": "images/scheme-b-eccentric-core.jpg",
+    "v": 1779708458140,
+    "fit": "contain"
+  },
+  "scheme-a-private-roof.jpg": {
+    "file": "images/scheme-a-private-roof.jpg",
+    "v": 1779708512434,
+    "fit": "contain"
+  },
+  "scheme-b-public-roof.jpg": {
+    "file": "images/scheme-b-public-roof.png",
+    "v": 1779708531064,
+    "fit": "contain"
+  },
+  "legacy-george-iv-monument.jpg": {
+    "file": "images/legacy-george-iv-monument.png",
+    "v": 1779722692582,
+    "fit": "contain"
+  },
+  "legacy-rocque-1746.jpg": {
+    "file": "images/legacy-rocque-1746.png",
+    "v": 1779723904738,
+    "fit": "contain"
+  },
+  "legacy-canal-1820.jpg": {
+    "file": "images/legacy-canal-1820.png",
+    "v": 1779722850421,
+    "fit": "contain"
+  },
+  "legacy-goods-yard.jpg": {
+    "file": "images/legacy-goods-yard.png",
+    "v": 1779724203857,
+    "fit": "contain"
+  },
+  "legacy-goodsyard-1851.jpg": {
+    "file": "images/legacy-goodsyard-1851.png",
+    "v": 1779723338955,
+    "fit": "contain"
+  },
+  "legacy-derelict-1990.jpg": {
+    "file": "images/legacy-derelict-1990.png",
+    "v": 1779723480218,
+    "fit": "cover"
+  },
+  "legacy-clubs-bagleys.jpg": {
+    "file": "images/legacy-clubs-bagleys.png",
+    "v": 1779723492547,
+    "fit": "cover"
+  },
+  "legacy-clubs-flyers.jpg": {
+    "file": "images/legacy-clubs-flyers.png",
+    "v": 1779724028179,
+    "fit": "cover"
+  },
+  "legacy-fleet-route.jpg": {
+    "file": "images/legacy-fleet-route.png",
+    "v": 1779724003672,
+    "fit": "cover"
+  },
+  "legacy-battle-bridge.jpg": {
+    "file": "images/legacy-battle-bridge.png",
+    "v": 1779724008427,
+    "fit": "contain"
+  },
+  "legacy-masterplan.jpg": {
+    "file": "images/legacy-masterplan.png",
+    "v": 1779724083254,
+    "fit": "cover"
+  },
+  "canal-walk-02.jpg": {
+    "file": "images/canal-walk-02.jpg",
+    "v": 1779771719452,
+    "fit": "cover"
+  },
+  "canal-walk-01.jpg": {
+    "file": "images/canal-walk-01.png",
+    "v": 1779771725031,
+    "fit": "cover"
+  },
+  "canal-walk-03.jpg": {
+    "file": "images/canal-walk-03.jpg",
+    "v": 1779771698256,
+    "fit": "cover"
+  },
+  "canal-walk-04.jpg": {
+    "file": "images/canal-walk-04.jpg",
+    "v": 1779725406527,
+    "fit": "cover"
+  },
+  "sketch-06.jpg": {
+    "file": "images/sketch-06.png",
+    "v": 1779725837184,
+    "fit": "contain"
+  },
+  "intervention-01.jpg": {
+    "file": "images/intervention-01.jpg",
+    "v": 1779772314449,
+    "fit": "cover"
+  },
+  "intervention-02.jpg": {
+    "file": "images/intervention-02.jpg",
+    "v": 1779772318589,
+    "fit": "cover"
+  },
+  "intervention-03.jpg": {
+    "file": "images/intervention-03.jpg",
+    "v": 1779772322009,
+    "fit": "cover"
+  },
+  "intervention-04.jpg": {
+    "file": "images/intervention-04.jpg",
+    "v": 1779772328207,
+    "fit": "cover"
+  },
+  "intervention-05.jpg": {
+    "file": "images/intervention-05.jpg",
+    "v": 1779772331980,
+    "fit": "cover"
+  },
+  "intervention-06.jpg": {
+    "file": "images/intervention-06.jpg",
+    "v": 1779772335337,
+    "fit": "cover"
+  },
+  "intervention-07.jpg": {
+    "file": "images/intervention-07.jpg",
+    "v": 1779772342201,
+    "fit": "cover"
+  },
+  "intervention-08.jpg": {
+    "file": "images/intervention-08.jpg",
+    "v": 1779772347031,
+    "fit": "cover"
+  },
+  "intervention-09.jpg": {
+    "file": "images/intervention-09.jpg",
+    "v": 1779772353656,
+    "fit": "cover"
+  },
+  "intervention-10.jpg": {
+    "file": "images/intervention-10.jpg",
+    "v": 1779772360139,
+    "fit": "cover"
+  },
+  "intervention-11.jpg": {
+    "file": "images/intervention-11.jpg",
+    "v": 1779772365696,
+    "fit": "cover"
+  },
+  "intervention-12.jpg": {
+    "file": "images/intervention-12.jpg",
+    "v": 1779772372510,
+    "fit": "cover"
+  },
+  "intervention-13.jpg": {
+    "file": "images/intervention-13.jpg",
+    "v": 1779772378295,
+    "fit": "cover"
+  },
+  "intervention-14.jpg": {
+    "file": "images/intervention-14.jpg",
+    "v": 1779772382431,
+    "fit": "cover"
+  },
+  "intervention-15.jpg": {
+    "file": "images/intervention-15.jpg",
+    "v": 1779772385525,
+    "fit": "cover"
+  },
+  "intervention-16.jpg": {
+    "file": "images/intervention-16.jpg",
+    "v": 1779772396061,
+    "fit": "cover"
+  },
+  "intervention-17.jpg": {
+    "file": "images/intervention-17.jpg",
+    "v": 1779772882372,
+    "fit": "cover"
+  },
+  "intervention-18.jpg": {
+    "file": "images/intervention-18.jpg",
+    "v": 1779772893754,
+    "fit": "cover"
+  },
+  "intervention-19.jpg": {
+    "file": "images/intervention-19.jpg",
+    "v": 1779772417092,
+    "fit": "cover"
+  },
+  "intervention-20.jpg": {
+    "file": "images/intervention-20.jpg",
+    "v": 1779772927043,
+    "fit": "cover"
+  },
+  "intervention-21.jpg": {
+    "file": "images/intervention-21.jpg",
+    "v": 1779772953952,
+    "fit": "cover"
+  },
+  "intervention-22.jpg": {
+    "file": "images/intervention-22.jpg",
+    "v": 1779772431424,
+    "fit": "cover"
+  },
+  "intervention-23.jpg": {
+    "file": "images/intervention-23.jpg",
+    "v": 1779772435568,
+    "fit": "cover"
+  },
+  "intervention-24.jpg": {
+    "file": "images/intervention-24.jpg",
+    "v": 1779772962982,
+    "fit": "cover"
+  },
+  "intervention-25.jpg": {
+    "file": "images/intervention-25.jpg",
+    "v": 1779772969423,
+    "fit": "cover"
+  },
+  "intervention-26.jpg": {
+    "file": "images/intervention-26.jpg",
+    "v": 1779772453096,
+    "fit": "cover"
+  },
+  "intervention-27.jpg": {
+    "file": "images/intervention-27.jpg",
+    "v": 1779773286359,
+    "fit": "cover"
+  },
+  "intervention-28.jpg": {
+    "file": "images/intervention-28.jpg",
+    "v": 1779772989687,
+    "fit": "cover"
+  },
+  "intervention-29.jpg": {
+    "file": "images/intervention-29.jpg",
+    "v": 1779772474023,
+    "fit": "cover"
+  },
+  "intervention-30.jpg": {
+    "file": "images/intervention-30.jpg",
+    "v": 1779773001876,
+    "fit": "cover"
+  },
+  "intervention-31.jpg": {
+    "file": "images/intervention-31.jpg",
+    "v": 1779773012546,
+    "fit": "cover"
+  },
+  "intervention-32.jpg": {
+    "file": "images/intervention-32.jpg",
+    "v": 1779773025375,
+    "fit": "cover"
+  },
+  "intervention-33.jpg": {
+    "file": "images/intervention-33.jpg",
+    "v": 1779772500514,
+    "fit": "cover"
+  },
+  "intervention-34.jpg": {
+    "file": "images/intervention-34.jpg",
+    "v": 1779772509536,
+    "fit": "cover"
+  },
+  "intervention-35.jpg": {
+    "file": "images/intervention-35.jpg",
+    "v": 1779772514566,
+    "fit": "cover"
+  },
+  "intervention-36.jpg": {
+    "file": "images/intervention-36.jpg",
+    "v": 1779772522250,
+    "fit": "cover"
+  },
+  "intervention-37.jpg": {
+    "file": "images/intervention-37.jpg",
+    "v": 1779772528355,
+    "fit": "cover"
+  },
+  "intervention-38.jpg": {
+    "file": "images/intervention-38.jpg",
+    "v": 1779773036931,
+    "fit": "cover"
+  },
+  "intervention-39.jpg": {
+    "file": "images/intervention-39.jpg",
+    "v": 1779773046695,
+    "fit": "cover"
+  },
+  "intervention-40.jpg": {
+    "file": "images/intervention-40.jpg",
+    "v": 1779772549231,
+    "fit": "cover"
+  },
+  "intervention-41.jpg": {
+    "file": "images/intervention-41.jpg",
+    "v": 1779772554468,
+    "fit": "cover"
+  },
+  "intervention-42.jpg": {
+    "file": "images/intervention-42.jpg",
+    "v": 1779773055913,
+    "fit": "cover"
+  },
+  "intervention-43.jpg": {
+    "file": "images/intervention-43.jpg",
+    "v": 1779773066219,
+    "fit": "cover"
+  },
+  "intervention-44.jpg": {
+    "file": "images/intervention-44.jpg",
+    "v": 1779773105198,
+    "fit": "cover"
+  },
+  "intervention-45.jpg": {
+    "file": "images/intervention-45.jpg",
+    "v": 1779772577170,
+    "fit": "cover"
+  },
+  "intervention-46.jpg": {
+    "file": "images/intervention-46.jpg",
+    "v": 1779772584077,
+    "fit": "cover"
+  },
+  "intervention-47.jpg": {
+    "file": "images/intervention-47.jpg",
+    "v": 1779773344012,
+    "fit": "cover"
+  },
+  "intervention-48.jpg": {
+    "file": "images/intervention-48.jpg",
+    "v": 1779773354718,
+    "fit": "cover"
+  },
+  "intervention-49.jpg": {
+    "file": "images/intervention-49.jpg",
+    "v": 1779773369278,
+    "fit": "cover"
+  },
+  "intervention-50.jpg": {
+    "file": "images/intervention-50.jpg",
+    "v": 1779773371984,
+    "fit": "cover"
+  },
+  "intervention-51.jpg": {
+    "file": "images/intervention-51.jpg",
+    "v": 1779772666900,
+    "fit": "cover"
+  },
+  "intervention-52.jpg": {
+    "file": "images/intervention-52.jpg",
+    "v": 1779773388627,
+    "fit": "cover"
+  },
+  "intervention-53.jpg": {
+    "file": "images/intervention-53.jpg",
+    "v": 1779773481103,
+    "fit": "cover"
+  },
+  "intervention-54.jpg": {
+    "file": "images/intervention-54.jpg",
+    "v": 1779772718859,
+    "fit": "cover"
+  },
+  "intervention-55.jpg": {
+    "file": "images/intervention-55.jpg",
+    "v": 1779772745492,
+    "fit": "cover"
+  },
+  "intervention-56.jpg": {
+    "file": "images/intervention-56.jpg",
+    "v": 1779772767026,
+    "fit": "cover"
+  },
+  "intervention-57.jpg": {
+    "file": "images/intervention-57.jpg",
+    "v": 1779772772757,
+    "fit": "cover"
+  },
+  "intervention-58.jpg": {
+    "file": "images/intervention-58.jpg",
+    "v": 1779772779427,
+    "fit": "cover"
+  },
+  "intervention-59.jpg": {
+    "file": "images/intervention-59.jpg",
+    "v": 1779773451248,
+    "fit": "cover"
+  },
+  "intervention-60.jpg": {
+    "file": "images/intervention-60.jpg",
+    "v": 1779772796327,
+    "fit": "cover"
+  },
+  "viability-q2-extended-floor-plate-support-or-hang.jpg": {
+    "file": "images/viability-q2-extended-floor-plate-support-or-hang.jpg",
+    "v": 1779904739159,
+    "fit": "contain"
+  },
+  "viability-q3-basement.jpg": {
+    "file": "images/viability-q3-basement.jpg",
+    "v": 1779904749806,
+    "fit": "cover"
+  },
+  "viability-q4-build-to-the-canal-wall.jpg": {
+    "file": "images/viability-q4-build-to-the-canal-wall.jpg",
+    "v": 1779904760963,
+    "fit": "cover"
+  },
+  "viability-q5-two-staircases-height-versus-efficiency.jpg": {
+    "file": "images/viability-q5-two-staircases-height-versus-efficiency.jpg",
+    "v": 1779904772047,
+    "fit": "cover"
+  },
+  "too-long-square.jpg": {
+    "file": "images/too-long-square.jpg",
+    "v": 1779904962306,
+    "fit": "cover"
+  },
+  "family-canopy-concept.jpg": {
+    "file": "images/family-canopy-concept.jpg",
+    "v": 1779906287065,
+    "fit": "cover"
+  },
+  "family-terrace-concept.jpg": {
+    "file": "images/family-terrace-concept.png",
+    "v": 1779906293790,
+    "fit": "cover"
+  },
+  "family-signal-box-concept-photo.jpg": {
+    "file": "images/family-signal-box-concept-photo.jpg",
+    "v": 1779906304502,
+    "fit": "cover"
+  },
+  "family-carve-concept.jpg": {
+    "file": "images/family-carve-concept.jpg",
+    "v": 1779906314034,
+    "fit": "cover"
+  },
+  "family-roofline-concept.jpg": {
+    "file": "images/family-roofline-concept.png",
+    "v": 1779906406206,
+    "fit": "cover"
+  },
+  "signal-box-study-plan.jpg": {
+    "file": "images/signal-box-study-plan.jpg",
+    "v": 1779905481346,
+    "fit": "cover"
+  },
+  "canopy-plan.jpg": {
+    "file": "images/canopy-plan.jpg",
+    "v": 1779906484508,
+    "fit": "cover"
+  },
+  "viability-q1-eccentric-core.jpg": {
+    "file": "images/viability-q1-eccentric-core.png",
+    "v": 1779906723090,
+    "fit": "cover"
+  },
+  "two-directions-sketch.jpg": {
+    "file": "images/two-directions-sketch.png",
+    "v": 1779907238189,
+    "fit": "cover"
+  },
+  "constraints-diagram.jpg": {
+    "file": "images/constraints-diagram.png",
+    "v": 1779907506107,
+    "fit": "contain"
+  },
+  "signage-01-brick-1820-recessed.jpg": {
+    "file": "images/signage-01-brick-1820-recessed.png",
+    "v": 1779907599074,
+    "fit": "cover"
+  },
+  "signage-02-aluminium-1820-perforated.jpg": {
+    "file": "images/signage-02-aluminium-1820-perforated.png",
+    "v": 1779907599074,
+    "fit": "cover"
+  },
+  "family-signal-box-concept-sketch.jpg": {
+    "file": "images/family-signal-box-concept-sketch.png",
+    "v": 1779907613286,
+    "fit": "cover"
+  }
+}

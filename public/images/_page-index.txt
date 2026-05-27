@@ -1,0 +1,127 @@
+THE WATER CAME FIRST — IMAGE PAGE INDEX
+========================================
+156 pages total. This is just a reference for what's on each page.
+(Snapshot — page numbers shift if pages are added or removed.)
+
+HOW TO PLACE IMAGES (drag & drop)
+  1. Run the deck locally:   npm run dev   (http://localhost:4321)
+  2. Navigate to a page and DRAG an image file from your computer straight
+     onto the placeholder. It saves automatically into this folder + manifest.
+  3. Hover the image to choose "Fit all" (whole image shown) or "Fill"
+     (fills the frame, crops overflow), or ✕ to remove it.
+  4. Commit the changes (public/images/*) to GitHub — the images then show
+     for everyone, on any clone or deploy. (Drag-drop editing only works in
+     local `npm run dev`; the deployed site is view-only.)
+
+  No file-naming needed — dropping onto a placeholder targets that exact slot.
+  Pages marked "2 / 3 / 5" below have multiple slots; drop onto each one.
+  Formats: .jpg / .png / .webp / .gif / .svg. Large images are auto-downscaled.
+
+"text" pages have no image — skip them.
+
+----------------------------------------------------------------------------
+PAGE  SECTION                  TITLE                                    IMAGES
+----------------------------------------------------------------------------
+  1   Cover                    Cover                                    1
+  2   Cover                    What's in this conversation              text
+  3   The Legacy               The Crossing (title)                     text
+  4   The Legacy               The word (etymology)                     text
+  5   The Legacy               A name that stuck                        1
+  6   The Legacy               Before that, a crossing                  2  (Battle Bridge + Fleet route, portrait)
+  7   The Legacy               Crossings on crossings                   2  (canal 1820 + goods-yard 1851)
+  8   The Legacy               The yard                                 1
+  9   The Legacy               Then the lights went out                 1
+ 10   The Legacy               The cross becomes something else         2  (clubs / flyers)
+ 11   The Legacy               Closing time                             1
+ 12   The Legacy               The masterplan                           1
+ 13   The Legacy               A new public realm                       2  (Granary Sq + Coal Drops Yard)
+ 14   The Legacy               The site                                 1
+ 15   The Legacy               The last building                        1
+ 16   The Legacy               Why the name                             text
+ 17   The Water Came First     Premise                                  text
+ 18   The Water Came First     Canal, 1820                              1
+ 19   The Water Came First     The crossing                             text
+ 20   The Water Came First     The Canal                                1  (opening sketch 1/4)
+ 21   The Water Came First     The Canal and railway                    1  (opening sketch 2/4)
+ 22   The Water Came First     The redevelopment                        1  (opening sketch 3/4)
+ 23   The Water Came First     The Crossing                             1  (opening sketch 4/4)
+ 24   The Water Came First     Mark the crossing                        text
+ 25   The Site                 Intro (reading the site)                 text
+ 26   The Site                 Of the Canal                             1  (site sketch 1/4)
+ 27   The Site                 Brick context                            1  (site sketch 2/4)
+ 28   The Site                 In full view                             1  (site sketch 3/4)
+ 29   The Site                 Heavy and light                          1  (site sketch 4/4)
+ 30   Constraints              Structural section                       1
+----------------------------------------------------------------------------
+ 31–90  A Considered Intervention   Intervention 01 – 60                1 each
+        (60 site photographs you've sketched over — one per page.
+         Drop a photo onto each; titles to be added once they're in.
+         Slot keys: intervention-01.jpg … intervention-60.jpg)
+----------------------------------------------------------------------------
+ 91   Vision                   Narrowing the concept (act break)        text
+ 92   Vision                   Eastern threshold                        text
+ 93   Five Options             Overview                                 5  (all five options together)
+ 94   Five Options             The pure extrusion                       1
+ 95   Five Options             The cantilevered stack                   1
+ 96   Five Options             The raking section                       1
+ 97   Five Options             The articulated plinth                   1
+ 98   Five Options             The signal house family                  1
+ 99   Signal house             Intro                                    text
+100   Signal house             The signal box as type                   1
+101   Signal house             The lookout                              2  (your sketch + Varini precedent)
+102   Signal house             The inversion — offset, not centred      1
+103   Signal house             The pitched roof as archetype            1
+104   Signal house             Bright metal in contrast to dark brick   1
+105   Why Signal House         What the family offers                   text
+106   Three Variants           Overview                                 3  (centred / offset / stepped)
+107   Three Variants           Centred signal house                     1
+108   Three Variants           Offset signal house                      1
+109   Three Variants           Stepped signal house                     1
+110   Three Variants           Our preferred — the offset variant       1
+111   Three Variants           The 1820 — what sits at the top          1
+112   Three Variants           What could the 1820 be?                  text
+113   Four Questions           The four questions (act break)           text
+114   Four Questions           Q1 · Massing · A                         1  (Scheme A)
+115   Four Questions           Q1 · Massing · B                         1  (Scheme B)
+116   Four Questions           Q1 · Massing · Summary                   2  (A + B)
+117   Four Questions           Q2 · Core · A                            1  (Scheme A)
+118   Four Questions           Q2 · Core · B                            1  (Scheme B)
+119   Four Questions           Q2 · Core · Summary                      2  (A + B)
+120   Four Questions           Q3 · Substructure · A                    1  (Scheme A)
+121   Four Questions           Q3 · Substructure · B                    1  (Scheme B)
+122   Four Questions           Q3 · Substructure · Summary              2  (A + B)
+123   Four Questions           Q4 · The 1820 · A                        1  (Scheme A)
+124   Four Questions           Q4 · The 1820 · B                        1  (Scheme B)
+125   Four Questions           Q4 · The 1820 · Summary                  2  (A + B)
+126   Four Questions           Two ends of the spectrum                 text
+127   Four Questions           Where our instinct lands                 text
+128   Four Questions           The planning trade-off                   text
+129   Recommended Scheme       What the building is (act break)         text
+130   Recommended Scheme       From the opposite towpath (A vs B)       2  (CGI A + B)
+131   Recommended Scheme       Arrival from Goods Way (A vs B)          2  (CGI A + B)
+132   Recommended Scheme       Within the King's Cross context (A vs B) 2  (CGI A + B)
+133   Recommended Scheme       Interior — eccentric core (A vs B)       2  (CGI A + B)
+134   Recommended Scheme       Our preferred — at scale                 1  (hero CGI)
+135   Materials                Intro                                    text
+136   Materials                Brick sample                             1
+137   Materials                Perforated aluminium detail              1
+138   Materials                The building speaks twice                2  (brick signage + aluminium signage)
+139   Viability                Viability & the offer (act break)        text
+140   Viability                Area is the question                     text
+141   Viability                Ground floor — A vs B                    2  (plan A + B)
+142   Viability                Typical floor — A vs B                   2  (plan A + B)
+143   Viability                Roof / 1820 — A vs B                     2  (plan A + B)
+144   Viability                Scheme A · area schedule                 text
+145   Viability                Scheme B · area schedule (preferred)     text
+146   Viability                The opportunity at 1820                  text
+147   Viability                The café at canal level                  1
+148   Viability                The lobby — 6 m clear                    1
+149   Viability                The 5,000 sqft floor plate               1
+150   Viability                The 1820 belvedere                       1
+151   Closing                  Closing (act break)                      text
+152   Closing                  Sustainability & our approach            text
+153   Closing                  Cost & our approach                      text
+154   Closing                  Value & our approach                     text
+155   Closing                  What we have designed                    text
+156   Closing                  The preferred scheme at night            1
+----------------------------------------------------------------------------

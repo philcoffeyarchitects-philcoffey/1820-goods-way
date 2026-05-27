@@ -1,0 +1,20 @@
+{
+  "name": "the-water-came-first",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "The crossing — 1820 Goods Way, King's Cross. Pitch deck, report, viability calculator and tenant research. Coffey Architects.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.11"
+  }
+}
