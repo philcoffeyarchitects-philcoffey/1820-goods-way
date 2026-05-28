@@ -1,4 +1,4 @@
-// placeholder.jsx — striped image placeholders + helpers.
+// placeholder.jsx, striped image placeholders + helpers.
 //
 // CRITICAL: the same aspect ratio MUST render at the same shape in both
 // presentation and report. The naive `aspect-ratio` + `max-width/height`
@@ -9,7 +9,7 @@
 //
 // Each placeholder is also a drag-drop target (in dev): drop an image to
 // place it, and toggle "Fit all" (contain) vs "Fill" (cover) per image. See
-// imageStore.js — drops are saved into public/images/ + manifest.json and
+// imageStore.js, drops are saved into public/images/ + manifest.json and
 // committed to git so they render anywhere.
 
 import React from "react";
@@ -24,7 +24,7 @@ function parseAspect(ar) {
   return [w || 3, h || 2];
 }
 
-// AspectFit — keeps an aspect-ratio'd child fit inside its parent.
+// AspectFit, keeps an aspect-ratio'd child fit inside its parent.
 // Uses container queries (cqw / cqh) for reliable sizing in any flex/grid.
 function AspectFit({ ratio, align = "center", className = "", children }) {
   const [w, h] = parseAspect(ratio);
@@ -36,7 +36,7 @@ function AspectFit({ ratio, align = "center", className = "", children }) {
   );
 }
 
-// Default aspect ratio per image variant — keeps both views in lock-step
+// Default aspect ratio per image variant, keeps both views in lock-step
 // even when individual pages don't pass one.
 const DEFAULT_ASPECTS = {
   sketch:   "4/3",
@@ -51,7 +51,7 @@ const DEFAULT_ASPECTS = {
   default:  "3/2",
 };
 
-// DropZone — wraps a placeholder's content (dev only). Accepts an image drop,
+// DropZone, wraps a placeholder's content (dev only). Accepts an image drop,
 // downscales + saves it to the slot, and offers per-image fit + remove controls.
 function DropZone({ slot, hasImage, fit, children }) {
   const [over, setOver] = React.useState(false);
@@ -117,7 +117,7 @@ function Placeholder({
   const resolvedSrc = entry && entry.file ? `${entry.file}?v=${entry.v || 0}` : src;
   const fit = (entry && entry.fit) || "cover";
 
-  // The visual content — always 100% × 100% of its (possibly aspect-locked) parent.
+  // The visual content, always 100% × 100% of its (possibly aspect-locked) parent.
   // With a placed image we show it (object-fit per the chosen mode); otherwise
   // the striped placeholder.
   const content = resolvedSrc ? (
@@ -163,7 +163,7 @@ function Eyebrow({ children }) {
   return <div className="h-eyebrow">{children}</div>;
 }
 
-// Coffey | Architects logo — PT Serif Caption with accent pipe
+// Coffey | Architects logo. PT Serif Caption with accent pipe
 function Logo({ size = "md", onDark = false, className = "" }) {
   const cls = `logo logo--${size}${onDark ? " logo--on-dark" : ""} ${className}`;
   return (

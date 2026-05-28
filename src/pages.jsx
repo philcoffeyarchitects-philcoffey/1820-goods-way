@@ -1,6 +1,6 @@
 // pages.jsx
 // All pages of "The Water Came First". Each page has a fixed 1280×905
-// frame and carries TWO renderers — `presentation` (image-led, sparse) and
+// frame and carries TWO renderers, `presentation` (image-led, sparse) and
 // `report` (text-led, descriptive). Navigation moves between pages; the
 // P/R toggle swaps which renderer fills the body of the current page.
 
@@ -113,7 +113,7 @@ function uniqId(base, counts) {
 
 // helper: build a section of pages with shared metadata
 function sectionPages(meta, pages) {
-  // Section id — explicit override > slugified label > slugified title
+  // Section id, explicit override > slugified label > slugified title
   const baseSectionId = slugify(meta.sectionId || meta.sectionLabel || meta.sectionTitle || `section-${meta.sectionNum}`);
   const sectionId = uniqId(baseSectionId, _sectionIdCount);
   ALL_SECTIONS_BY_ID[sectionId] = {
@@ -124,7 +124,7 @@ function sectionPages(meta, pages) {
   };
 
   return pages.map((p, i) => {
-    // Page id — explicit override > sectionId + slug(label) > sectionId + index
+    // Page id, explicit override > sectionId + slug(label) > sectionId + index
     const baseLabel = p.id ? p.id : (p.label ? `${sectionId}-${slugify(typeof p.label === "string" ? p.label : `page-${i+1}`)}` : `${sectionId}-p${i+1}`);
     const id = uniqId(baseLabel, _pageIdCount);
     const obj = {
@@ -145,7 +145,7 @@ function sectionPages(meta, pages) {
   });
 }
 
-// ── Divider + TOC components — act breaks, chrome hidden ─────────────────
+// ── Divider + TOC components, act breaks, chrome hidden ─────────────────
 function Divider({ range, title, sub }) {
   return (
     <div className="divider">
@@ -161,7 +161,7 @@ const TOC_ROWS = [
   ["§§ 03–05",  "Site & origin"],
   ["§06",       "Site Walk"],
   ["§§ 07–09",  "Challenge · Families · Viability Qs"],
-  ["§§ 10–11",  "Crossing tension · Two Directions"],
+  ["§§ 10–11",  "Crossing tension · Two studies"],
   ["§§ 12–13",  "Canopy · Signal Box"],
   ["§14",       "Our Direction"],
   ["§15",       "Materials · Sustainability · Cost"],
@@ -198,7 +198,7 @@ const S01 = sectionPages(
       presentation: () => (
         <PresCover
           filename="cover.jpg"
-          caption="Bagley Walk retaining wall — full bleed, low overcast light, documentary"
+          caption="Bagley Walk retaining wall, full bleed, low overcast light, documentary"
           overlay={
             <>
               <Logo size="md" />
@@ -214,7 +214,7 @@ const S01 = sectionPages(
           <div className="report-cover__media">
             <Placeholder
               filename="cover.jpg"
-              caption="Bagley Walk retaining wall — front cover of bound document"
+              caption="Bagley Walk retaining wall, front cover of bound document"
               variant="photo"
               fill
             />
@@ -242,7 +242,7 @@ const S01 = sectionPages(
               </div>
               <div className="report-cover__meta-row">
                 <span className="mono report-cover__meta-lbl">Document</span>
-                <span className="report-cover__meta-val">Design proposition — Report</span>
+                <span className="report-cover__meta-val">Design proposition. Report</span>
               </div>
               <div className="report-cover__meta-row">
                 <span className="mono report-cover__meta-lbl">Date</span>
@@ -251,7 +251,7 @@ const S01 = sectionPages(
             </div>
             <div className="report-cover__foot">
               <span className="mono">Coffey Architects · 70 Cowcross Street · London EC1M 6EJ</span>
-              <span className="mono">— C/A · 2026 —</span>
+              <span className="mono">· C/A · 2026 ·</span>
             </div>
           </div>
         </div>
@@ -272,7 +272,7 @@ const S01 = sectionPages(
               "We bring our own thinking on context, history, response, sustainability, viability.",
               "These ideas are not yet fully formed.",
               "The deck is set up to enable decisions, made together.",
-              "The start of the conversation — through planning, through viability, ultimately built.",
+              "The start of the conversation, through planning, through viability, ultimately built.",
               "To mark two legacies: the last site at King's Cross, and the first crossing.",
             ].map((t, i) => (
               <li className="numlist__item" key={i}>
@@ -288,7 +288,7 @@ const S01 = sectionPages(
           <Eyebrow>§01 · Cover · The sentiment of this deck</Eyebrow>
           <h2 className="h-title" style={{marginBottom: 8}}>A conversation, not a conclusion.</h2>
           <div className="prose tight" style={{maxWidth: '78ch'}}>
-            <p>This presentation does not arrive at a conclusion. It is the start of a longer conversation — set up to put the right decisions on the table at the right time, and to invite you into making them with us.</p>
+            <p>This presentation does not arrive at a conclusion. It is the start of a longer conversation, set up to put the right decisions on the table at the right time, and to invite you into making them with us.</p>
             <p>We bring our own thinking, openly. On context, history, response, sustainability, and viability. <em>Each is sketched here; none is finished.</em> The pages that follow are sequenced as questions, options, and trade-offs, not as recommendations. Where we have an instinct, we name it; where we are still listening, we say so.</p>
             <p>The site is the last plot of the Argent King's Cross masterplan, and a working crossing marked since 1820 by the canal that gave the building its name. <strong>The ambition is to make a building that earns its place as the last layer of the masterplan, and the latest layer of a working crossing the water made.</strong> We would rather have the conversation properly than arrive with answers that haven't been earned.</p>
           </div>
@@ -305,7 +305,7 @@ const S01 = sectionPages(
 );
 
 // ════════════════════════════════════════════════════════════════════════
-// §02 THE LEGACY (14 pages) — opening narrative: the history of the crossing
+// §02 THE LEGACY (14 pages), opening narrative: the history of the crossing
 // ════════════════════════════════════════════════════════════════════════
 const SLegacy = sectionPages(
   { sectionNum: 2, sectionTitle: "The Legacy", sectionLabel: "The Legacy" },
@@ -391,7 +391,7 @@ const SLegacy = sectionPages(
         <div className="lookout-pair">
           <div className="lookout-pair__col">
             <div className="lookout-pair__media">
-              <Placeholder filename="legacy-battle-bridge.jpg" caption="Battle Bridge — historical map, sketched over. Portrait." variant="archive" aspect="3/4" />
+              <Placeholder filename="legacy-battle-bridge.jpg" caption="Battle Bridge, historical map, sketched over. Portrait." variant="archive" aspect="3/4" />
             </div>
             <div className="lookout-pair__cap">
               <span className="idx mono">Battle Bridge</span>
@@ -413,7 +413,7 @@ const SLegacy = sectionPages(
         <div className="lookout-pair lookout-pair--report">
           <div className="lookout-pair__col">
             <div className="lookout-pair__media">
-              <Placeholder filename="legacy-battle-bridge.jpg" caption="Battle Bridge — historical map" variant="archive" aspect="3/4" />
+              <Placeholder filename="legacy-battle-bridge.jpg" caption="Battle Bridge, historical map" variant="archive" aspect="3/4" />
             </div>
             <div className="lookout-pair__caption mono"><b>Battle Bridge</b>A crossing of the Fleet.</div>
           </div>
@@ -544,7 +544,7 @@ const SLegacy = sectionPages(
         <div className="lookout-pair">
           <div className="lookout-pair__col">
             <div className="lookout-pair__media">
-              <Placeholder filename="legacy-clubs-bagleys.jpg" caption="Bagley's interior at peak — crowd, lasers, warehouse scale. Source: Curious London / Naki / Time Out (licence required)." variant="photo" aspect="4/3" />
+              <Placeholder filename="legacy-clubs-bagleys.jpg" caption="Bagley's interior at peak, crowd, lasers, warehouse scale. Source: Curious London / Naki / Time Out (licence required)." variant="photo" aspect="4/3" />
             </div>
             <div className="lookout-pair__cap">
               <span className="idx mono">1990s</span>
@@ -592,7 +592,7 @@ const SLegacy = sectionPages(
       presentation: () => (
         <PresImage
           filename="legacy-masterplan.jpg"
-          caption="Argent / Allies and Morrison masterplan diagram — 67-acre site, retained historic structures, new plot pattern. Plan view, full-bleed landscape. Source: Allies and Morrison / Argent press."
+          caption="Argent / Allies and Morrison masterplan diagram, 67-acre site, retained historic structures, new plot pattern. Plan view, full-bleed landscape. Source: Allies and Morrison / Argent press."
           variant="CGI"
           capIdx="Masterplan"
           capTitle="The masterplan."
@@ -620,7 +620,7 @@ const SLegacy = sectionPages(
       presentation: () => (
         <PresImage
           filename="legacy-scheme-reveal.jpg"
-          caption="Coffey's scheme — first reveal. Source: Coffey Architects design team."
+          caption="Coffey's scheme, first reveal. Source: Coffey Architects design team."
           variant="CGI"
           capIdx="The scheme"
           capTitle="A moment not to be missed."
@@ -630,7 +630,7 @@ const SLegacy = sectionPages(
       report: () => (
         <ReportImageText
           filename="legacy-scheme-reveal.jpg"
-          caption="The proposed scheme — first reveal"
+          caption="The proposed scheme, first reveal"
           variant="CGI"
           capIdx="The scheme"
           capTitle="A moment not to be missed."
@@ -732,7 +732,7 @@ const S02 = sectionPages(
           body={<>
             <p>The Regent's Canal of 1820.<br/>The railway of 1852.</p>
             <p>Two centuries ago. Two systems of moving the city. Both still in use.</p>
-            <p>And here — at exactly this point — they cross.</p>
+            <p>And here, at exactly this point, they cross.</p>
             <p><em>Our building sits on the canal. Beside the railway. It cannot ignore the crossing.<br/>The crossing is its subject.</em></p>
           </>}
         />
@@ -742,8 +742,8 @@ const S02 = sectionPages(
           kicker="§03 · The crossing"
           title="The canal and the railway meet here."
           body={<>
-            <p>The Regent's Canal opened in 1820, connecting Paddington to Limehouse. The Great Northern Railway opened in 1852, throwing iron between London and the north. They are the two great pieces of Victorian infrastructure that made King's Cross — and they meet, almost orthogonally, at this single point.</p>
-            <p>The site sits in that meeting. It is bordered on one side by the canal towpath and the Bagley Walk retaining wall; on another by the safeguarded tube and Thameslink lines beneath. The crossing of water and rail is not a feature of the site — <strong>it is the site's defining geometric fact.</strong></p>
+            <p>The Regent's Canal opened in 1820, connecting Paddington to Limehouse. The Great Northern Railway opened in 1852, throwing iron between London and the north. They are the two great pieces of Victorian infrastructure that made King's Cross, and they meet, almost orthogonally, at this single point.</p>
+            <p>The site sits in that meeting. It is bordered on one side by the canal towpath and the Bagley Walk retaining wall; on another by the safeguarded tube and Thameslink lines beneath. The crossing of water and rail is not a feature of the site, <strong>it is the site's defining geometric fact.</strong></p>
             <p>Any building here must answer to both: to the water that came first and to the railway that came second. <em>Our proposal takes the crossing as its subject.</em></p>
           </>}
         />
@@ -869,8 +869,8 @@ const S02 = sectionPages(
           title="So how do we mark it?"
           body={<>
             <p>The crossing deserves to be marked.<br/>Not blocked. Marked.</p>
-            <p><em>Possibly something low</em> — a public space at canal level, where the city can meet the water.</p>
-            <p><em>Possibly something high</em> — visible from across the basin, naming the place that has been overlooked for too long.</p>
+            <p><em>Possibly something low</em>, a public space at canal level, where the city can meet the water.</p>
+            <p><em>Possibly something high</em>, visible from across the basin, naming the place that has been overlooked for too long.</p>
             <p>And between them, the building stays calm. The crossing must remain clear to be seen.</p>
             <p><em>These are the questions the rest of this document answers.</em></p>
           </>}
@@ -881,9 +881,9 @@ const S02 = sectionPages(
           kicker="§03 · Mark the crossing"
           title="The crossing deserves to be marked. How?"
           body={<>
-            <p>The crossing is the most important piece of city at this end of King's Cross. It deserves to be marked — but not blocked. A building that fights the crossing with mass, with cantilevered floor plates, fills the air the crossing needs to be seen; the geometry of the meeting is lost behind the geometry of the building. We don't think that is right.</p>
-            <p>So the question of how to mark the crossing — without fighting it — becomes the architectural subject of the proposal. <strong>Possibly something low</strong>, where the building meets the canal and the water-going public. <strong>Possibly something high</strong>, visible at distance, naming the place. <strong>And between them, the building stays calm</strong> — slender enough that the air around the crossing stays clear, the meeting still legible from the bridges.</p>
-            <p>The pages that follow are the working-out of these questions: how the building grows from the canal, what typology marks the crossing best, and where on the spectrum between heavy and slender, public and private, the building finally lands. <em>This conviction — to mark the crossing without fighting it — is the conviction that the four design questions later in the document all follow from.</em></p>
+            <p>The crossing is the most important piece of city at this end of King's Cross. It deserves to be marked, but not blocked. A building that fights the crossing with mass, with cantilevered floor plates, fills the air the crossing needs to be seen; the geometry of the meeting is lost behind the geometry of the building. We don't think that is right.</p>
+            <p>So the question of how to mark the crossing, without fighting it, becomes the architectural subject of the proposal. <strong>Possibly something low</strong>, where the building meets the canal and the water-going public. <strong>Possibly something high</strong>, visible at distance, naming the place. <strong>And between them, the building stays calm</strong>, slender enough that the air around the crossing stays clear, the meeting still legible from the bridges.</p>
+            <p>The pages that follow are the working-out of these questions: how the building grows from the canal, what typology marks the crossing best, and where on the spectrum between heavy and slender, public and private, the building finally lands. <em>This conviction, to mark the crossing without fighting it, is the conviction that the four design questions later in the document all follow from.</em></p>
           </>}
         />
       ),
@@ -1005,18 +1005,18 @@ const S03 = sectionPages(
 );
 
 // ════════════════════════════════════════════════════════════════════════
-// §09 SKETCHES — STAGE TWO (6 pages)
+// §09 SKETCHES. STAGE TWO (6 pages)
 // ════════════════════════════════════════════════════════════════════════
 const stage2 = [
   { t: "The signal box as type",
-    pres: "Small, elevated, pitched roof, generous glazing — the working architecture of infrastructure.",
-    body: <p>The Victorian and early twentieth-century signal box is a defined architectural type — a small elevated structure, typically with a pitched or hipped roof, clad in metal or timber, with generous glazing for the operator's visibility. <strong>One of the most legible pieces of working infrastructure in the British railway and canal tradition.</strong></p> },
+    pres: "Small, elevated, pitched roof, generous glazing, the working architecture of infrastructure.",
+    body: <p>The Victorian and early twentieth-century signal box is a defined architectural type, a small elevated structure, typically with a pitched or hipped roof, clad in metal or timber, with generous glazing for the operator's visibility. <strong>One of the most legible pieces of working infrastructure in the British railway and canal tradition.</strong></p> },
   { t: "The lookout",
     pres: "The upper floors are the lookout.",
-    body: <p>The typological function is to look out. From a signal box, the operator surveys the network. As an architectural metaphor for the upper levels of a contemporary canal-side building, this is unusually apt — the upper floors are the lookout, the place from which the city and canal are observed.</p> },
-  { t: "The inversion — offset, not centred",
-    pres: "Not a crown on top of the brick mass — a contemporary addition stuck to the side.",
-    body: <p>Rather than placing a small signal house centred on top of the brick mass — a classical composition, a heritage gesture — we propose offsetting it to one flank. <strong>The signal house becomes a contemporary addition stuck to the side of the infrastructure, not a crown sitting on top of it.</strong></p> },
+    body: <p>The typological function is to look out. From a signal box, the operator surveys the network. As an architectural metaphor for the upper levels of a contemporary canal-side building, this is unusually apt, the upper floors are the lookout, the place from which the city and canal are observed.</p> },
+  { t: "The inversion, offset, not centred",
+    pres: "Not a crown on top of the brick mass, a contemporary addition stuck to the side.",
+    body: <p>Rather than placing a small signal house centred on top of the brick mass, a classical composition, a heritage gesture, we propose offsetting it to one flank. <strong>The signal house becomes a contemporary addition stuck to the side of the infrastructure, not a crown sitting on top of it.</strong></p> },
   { t: "The pitched roof as archetype",
     pres: "The archetypal silhouette of working infrastructure architecture.",
     body: <p>The pitched roof is retained. It is the archetypal silhouette of working infrastructure architecture, and it differentiates the signal house unmistakably from a contemporary penthouse. A flat-roofed upper volume would read as a different building type entirely.</p> },
@@ -1026,7 +1026,7 @@ const stage2 = [
 ];
 
 // ════════════════════════════════════════════════════════════════════════
-// Shared helper — a family section of 14 pages, same structure for both
+// Shared helper, a family section of 14 pages, same structure for both
 // Terraced (§09) and Signal Box (§10):
 //   1     sketch + landscape image (two-up, lookout-pair format)
 //   2     further concept drawing (single image + body)
@@ -1050,7 +1050,7 @@ const OfferList = ({ items }) => (
   </ol>
 );
 
-// Two-up lookout-pair page — used for page 1 of either family.
+// Two-up lookout-pair page, used for page 1 of either family.
 // Either pane can be a sketch or a photograph.
 function familyPage1({ sectionNum, sectionLabel, slug,
                        leftFilename, leftIdx, leftTitle, leftCaption, leftVariant,
@@ -1170,7 +1170,7 @@ function familyOffersPage({ sectionNum, sectionLabel, kickerLine, leadPres, lead
   };
 }
 
-// Site context pages 10-14 — single full-bleed photographic placeholder per page.
+// Site context pages 10-14, single full-bleed photographic placeholder per page.
 function familySitePage({ sectionNum, sectionLabel, idx, slug }) {
   const kicker = `§${String(sectionNum).padStart(2,'0')} · ${sectionLabel} · in context · ${idx} of 5`;
   return {
@@ -1202,7 +1202,7 @@ function familySitePage({ sectionNum, sectionLabel, idx, slug }) {
   };
 }
 
-// Placeholder area-schedule page — appended at the end of each family
+// Placeholder area-schedule page, appended at the end of each family
 // section (Terraced / Signal Box). Renders the empty schedule shape that
 // will be populated once the geometry is finalised in the calculator.
 function familySchedulePage({ sectionNum, sectionLabel }) {
@@ -1223,17 +1223,17 @@ function familySchedulePage({ sectionNum, sectionLabel }) {
         {rows.map((lvl) => (
           <tr key={lvl}>
             <th>{lvl}</th>
-            <td className="dim">—</td>
-            <td className="dim">—</td>
-            <td className="dim">—</td>
+            <td className="dim">, </td>
+            <td className="dim">, </td>
+            <td className="dim">, </td>
             <td className="dim">TBD</td>
           </tr>
         ))}
         <tr className="schedule__total">
           <th>Total</th>
-          <td className="dim">—</td>
-          <td className="dim">—</td>
-          <td className="dim">—</td>
+          <td className="dim">, </td>
+          <td className="dim">, </td>
+          <td className="dim">, </td>
           <td></td>
         </tr>
       </tbody>
@@ -1247,7 +1247,7 @@ function familySchedulePage({ sectionNum, sectionLabel }) {
           <Eyebrow>{kicker}</Eyebrow>
           <h2 className="h-sub">{sectionLabel} family · indicative area schedule.</h2>
           <div className="prose tight" style={{maxWidth: '78ch', marginTop: 2}}>
-            Placeholder — to follow once geometry is finalised in the calculator.
+            Placeholder, to follow once geometry is finalised in the calculator.
           </div>
         </div>
         {table}
@@ -1259,7 +1259,7 @@ function familySchedulePage({ sectionNum, sectionLabel }) {
           <Eyebrow>{kicker}</Eyebrow>
           <h2 className="h-sub">{sectionLabel} family · indicative area schedule.</h2>
           <div className="prose tight" style={{maxWidth: '78ch', marginTop: 2}}>
-            <p>An indicative area schedule for the {sectionLabel.toLowerCase()} family — GIA, NIA, efficiency and brief notes per level. To follow, once the geometry of this family variant is settled and plugged into the design-side carbon + cost calculator.</p>
+            <p>An indicative area schedule for the {sectionLabel.toLowerCase()} family. GIA, NIA, efficiency and brief notes per level. To follow, once the geometry of this family variant is settled and plugged into the design-side carbon + cost calculator.</p>
           </div>
         </div>
         {table}
@@ -1269,7 +1269,7 @@ function familySchedulePage({ sectionNum, sectionLabel }) {
 }
 
 // ════════════════════════════════════════════════════════════════════════
-// §09 TERRACED — 14 pages
+// §09 TERRACED, 14 pages
 // ════════════════════════════════════════════════════════════════════════
 const terracedOfferings = [
   ["Continuous landscape",
@@ -1296,7 +1296,7 @@ const terracedAxoSteps = [
 const STerraced = sectionPages(
   { sectionNum: 17, sectionTitle: "Terraced", sectionLabel: "Terraced" },
   [
-    // 0 — title page (section opener / act break)
+    // 0, title page (section opener / act break)
     {
       label: "Terraced",
       presentation: () => (
@@ -1320,37 +1320,37 @@ const STerraced = sectionPages(
         </div>
       ),
     },
-    // 1 — sketch + landscape image
+    // 1, sketch + landscape image
     familyPage1({
       sectionNum: 17, sectionLabel: "Terraced", slug: "terraced",
       leftFilename: "terraced-concept-01.jpg",
       leftIdx: "Concept · 1",
       leftTitle: "The building as terraced garden.",
-      leftCaption: "Concept sketch — the roof read as continuous landscape.",
+      leftCaption: "Concept sketch, the roof read as continuous landscape.",
       leftVariant: "sketch",
       rightFilename: "terraced-precedent-01.jpg",
       rightIdx: "Precedent",
       rightTitle: "Planted roofscapes as precedent.",
-      rightCaption: "Photographic precedent — a planted, terraced building as reference.",
+      rightCaption: "Photographic precedent, a planted, terraced building as reference.",
       rightVariant: "photo",
-      reportTitle: "Terraced — the building as garden.",
+      reportTitle: "Terraced, the building as garden.",
       reportBody: <>
         <p>The terraced family treats the building as an extension of the landscape rather than a frame for it. The roof is not a flat cap nor a sculpted gesture; it is a stepped, planted surface that continues the public realm of King's Cross up and over the building.</p>
         <p>The opening pages of this section pair our concept sketch with a photographic precedent, before the axonometric pages develop the build-up of the section in six stages.</p>
       </>,
     }),
-    // 2 — further concept drawing
+    // 2, further concept drawing
     familyImagePage({
       sectionNum: 17, sectionLabel: "Terraced", idx: 2, of: 14,
       filename: "terraced-concept-02.jpg",
       variant: "sketch",
       capIdx: "Concept · 2",
       capTitle: "The terraced section.",
-      caption: "Further concept drawing — the section taken through the terraced roof.",
+      caption: "Further concept drawing, the section taken through the terraced roof.",
       reportTitle: "The section that lets the garden up.",
       reportBody: <p>A section study through the building. The horizontal terraces are read as receivers of soil and planting; the stepped geometry is set by the building's contextual edges, not by an arbitrary gesture.</p>,
     }),
-    // 3-8 — axonometric build-up
+    // 3-8, axonometric build-up
     ...terracedAxoSteps.map((step, i) => familyImagePage({
       sectionNum: 17, sectionLabel: "Terraced", idx: i + 3, of: 14,
       filename: `terraced-axo-0${i+1}.jpg`,
@@ -1361,24 +1361,24 @@ const STerraced = sectionPages(
       reportTitle: step.capTitle,
       reportBody: step.body,
     })),
-    // 9 — what this family offers
+    // 9, what this family offers
     familyOffersPage({
       sectionNum: 17, sectionLabel: "Terraced", kickerLine: "What this family offers",
       leadPres: "What planting up and over the building gives the architecture and the city.",
       leadReport: <p>Before we leave the terraced family, the architectural argument: <em>why planting carries the building, what the gesture buys, where it lands lightly.</em></p>,
       offerings: terracedOfferings,
     }),
-    // 10-14 — site context images
+    // 10-14, site context images
     ...[1,2,3,4,5].map((n) => familySitePage({
       sectionNum: 17, sectionLabel: "Terraced", idx: n, slug: "terraced",
     })),
-    // 15 — placeholder area schedule
+    // 15, placeholder area schedule
     familySchedulePage({ sectionNum: 17, sectionLabel: "Terraced" }),
   ]
 );
 
 // ════════════════════════════════════════════════════════════════════════
-// §10 SIGNAL BOX — 14 pages
+// §10 SIGNAL BOX, 14 pages
 //   (Existing typology bodies from `stage2` are reused inline as the body
 //    text for the relevant axonometric stages; the §11 "Why Signal House"
 //    page is folded in here as page 9.)
@@ -1387,9 +1387,9 @@ const signalBoxOfferings = [
   ["Two voices, not one",
    "A heavy brick body that belongs to the canal, and a lightweight 1820 above. The contrast carries the contextual reading; neither part dilutes the other."],
   ["A legible top",
-   "Every King's Cross neighbour has a distinctive crown — the Gasholders, the Granary, Coal Drops Yard. This one says signal box. Read from the bridges and across the basin."],
+   "Every King's Cross neighbour has a distinctive crown, the Gasholders, the Granary, Coal Drops Yard. This one says signal box. Read from the bridges and across the basin."],
   ["The lookout",
-   "Typologically, a signal box is a place to look out from. The upper room becomes a belvedere — naming the crossing it surveys."],
+   "Typologically, a signal box is a place to look out from. The upper room becomes a belvedere, naming the crossing it surveys."],
   ["Date as identity",
    "1820 names the building. The crown is the moniker; the building is the date the canal opened, carried into the city."],
   ["The right scale of expression",
@@ -1405,7 +1405,7 @@ const signalBoxOfferings = [
 const signalBoxAxoSteps = [
   { capTitle: "Brick body",                       body: <p>The plate begins as a heavy brick body, sized to the constraints and matching the canal context. Brick to the waterline; the building belongs to the canal before it does anything else.</p> },
   { capTitle: "Structural frame",                 body: <p>A lightweight upper frame is added to the brick mass. Vertical loads and lateral stability concentrate to the eastern edge where the ground beneath the site can take them.</p> },
-  { capTitle: "Offset signal-box volume",         body: stage2[2].body /* inversion — offset, not centred */ },
+  { capTitle: "Offset signal-box volume",         body: stage2[2].body /* inversion, offset, not centred */ },
   { capTitle: "Pitched roof",                     body: stage2[3].body /* pitched roof as archetype */ },
   { capTitle: "Bright aluminium cladding",        body: stage2[4].body /* bright metal in contrast to dark brick */ },
   { capTitle: "Assembled",                        body: <p>The completed assembly. Heavy brick body, offset signal-box volume, pitched roof, bright perforated aluminium cladding. The two parts read as two distinct architectural voices, held in deliberate contrast.</p> },
@@ -1414,7 +1414,7 @@ const signalBoxAxoSteps = [
 const S05 = sectionPages(
   { sectionNum: 18, sectionTitle: "Signal Box", sectionLabel: "Signal Box" },
   [
-    // 0 — title page (section opener / act break)
+    // 0, title page (section opener / act break)
     {
       label: "Signal Box",
       presentation: () => (
@@ -1438,27 +1438,27 @@ const S05 = sectionPages(
         </div>
       ),
     },
-    // 1 — sketch + landscape image (REUSE: our lookout sketch + Varini precedent)
+    // 1, sketch + landscape image (REUSE: our lookout sketch + Varini precedent)
     familyPage1({
       sectionNum: 18, sectionLabel: "Signal Box", slug: "signal-box",
       leftFilename: "sketch-07.jpg",
       leftIdx: "Sketch · 7",
-      leftTitle: "Our sketch — the upper floors as lookout.",
+      leftTitle: "Our sketch, the upper floors as lookout.",
       leftCaption: "The upper floors are the lookout.",
       leftVariant: "sketch",
       rightFilename: "varini-across-the-buildings.jpg",
       rightIdx: "Precedent · Varini, 2007",
-      rightTitle: "\"Across the Buildings\" — a lookout was here before.",
-      rightCaption: "Across the Buildings · Felice Varini, 2007 · King's Cross — anamorphic painting resolving from a single viewing platform",
+      rightTitle: "\"Across the Buildings\", a lookout was here before.",
+      rightCaption: "Across the Buildings · Felice Varini, 2007 · King's Cross, anamorphic painting resolving from a single viewing platform",
       rightVariant: "photo",
       reportTitle: "The upper floors as lookout.",
       reportBody: <>
-        {stage2[1].body /* the lookout — typological function is to look out */}
-        <p>King's Cross has done this before. <strong>"Across the Buildings"</strong> by the Swiss artist <strong>Felice Varini</strong> was an anamorphic installation commissioned by Argent in 2007 as part of the RELAY public art programme — silver and yellow geometric lines painted across multiple King's Cross facades, fragmented from most angles and resolving into a single coherent shape only from <em>one specific viewing point</em>. A platform was built to host that view.</p>
+        {stage2[1].body /* the lookout, typological function is to look out */}
+        <p>King's Cross has done this before. <strong>"Across the Buildings"</strong> by the Swiss artist <strong>Felice Varini</strong> was an anamorphic installation commissioned by Argent in 2007 as part of the RELAY public art programme, silver and yellow geometric lines painted across multiple King's Cross facades, fragmented from most angles and resolving into a single coherent shape only from <em>one specific viewing point</em>. A platform was built to host that view.</p>
         <p>The architectural conversation at King's Cross has form for distinctive, site-specific, infrastructure-engaging artworks. Our signal box continues that lineage. <strong>It is the legible viewing point the masterplan once had on loan.</strong></p>
       </>,
     }),
-    // 2 — further concept drawing (REUSE: the signal box as type)
+    // 2, further concept drawing (REUSE: the signal box as type)
     familyImagePage({
       sectionNum: 18, sectionLabel: "Signal Box", idx: 2, of: 14,
       filename: "sketch-06.jpg",
@@ -1469,7 +1469,7 @@ const S05 = sectionPages(
       reportTitle: "The signal box as type.",
       reportBody: stage2[0].body,
     }),
-    // 3-8 — axonometric build-up
+    // 3-8, axonometric build-up
     ...signalBoxAxoSteps.map((step, i) => familyImagePage({
       sectionNum: 18, sectionLabel: "Signal Box", idx: i + 3, of: 14,
       filename: `signal-box-axo-0${i+1}.jpg`,
@@ -1480,14 +1480,14 @@ const S05 = sectionPages(
       reportTitle: step.capTitle,
       reportBody: step.body,
     })),
-    // 9 — what this family offers (FOLDED IN from former §11)
+    // 9, what this family offers (FOLDED IN from former §11)
     familyOffersPage({
       sectionNum: 18, sectionLabel: "Signal Box", kickerLine: "What this family offers",
       leadPres: "Before we narrow to a variant, the architectural argument for the family.",
       leadReport: <p>Before we look at variants within the family, the architectural argument: <em>why this family of buildings, on this site, before any of the other three wider options.</em> Five things the signal box typology gives us that none of the alternatives can.</p>,
       offerings: signalBoxOfferings,
     }),
-    // 10 — The building speaks twice (RELOCATED from §13 Materials —
+    // 10. The building speaks twice (RELOCATED from §13 Materials,
     //       sits naturally with the Signal Box family argument since the
     //       two voices (brick body + aluminium signal house) are exactly
     //       what the signage makes literal.)
@@ -1502,7 +1502,7 @@ const S05 = sectionPages(
           <div className="signage__cols">
             <div className="signage__col">
               <div className="signage__media">
-                <Placeholder filename="signage-01-brick-1820-recessed.jpg" caption="1820 recessed and carved into the engineering brick at ground level — Victorian canal vocabulary, read at arm's reach" variant="material" number="01" />
+                <Placeholder filename="signage-01-brick-1820-recessed.jpg" caption="1820 recessed and carved into the engineering brick at ground level. Victorian canal vocabulary, read at arm's reach" variant="material" number="01" />
               </div>
               <div className="signage__caption">
                 <span className="signage__tag mono">At ground level · in the brick</span>
@@ -1512,7 +1512,7 @@ const S05 = sectionPages(
             </div>
             <div className="signage__col">
               <div className="signage__media">
-                <Placeholder filename="signage-02-aluminium-1820-perforated.jpg" caption="The water came first — perforated through the lightweight skin of the 1820 belvedere; a lantern at night" variant="material" number="02" />
+                <Placeholder filename="signage-02-aluminium-1820-perforated.jpg" caption="The water came first, perforated through the lightweight skin of the 1820 belvedere; a lantern at night" variant="material" number="02" />
               </div>
               <div className="signage__caption">
                 <span className="signage__tag mono">At the skyline · perforated through aluminium</span>
@@ -1526,7 +1526,7 @@ const S05 = sectionPages(
       report: () => (
         <div className="signage">
           <div className="signage__head">
-            <Eyebrow>§18 · Signage — the building speaks twice</Eyebrow>
+            <Eyebrow>§18 · Signage, the building speaks twice</Eyebrow>
             <h2 className="h-sub">The building speaks twice.</h2>
             <div className="prose tight" style={{maxWidth: '78ch', marginTop: 4}}>
               <p>Two pieces of signage, both worked into the material itself rather than applied to it. At the entrance, the building says <strong>where you are</strong>. At the skyline, <strong>why the building is here</strong>. The crossing is the silent context.</p>
@@ -1535,7 +1535,7 @@ const S05 = sectionPages(
           <div className="signage__cols">
             <div className="signage__col">
               <div className="signage__media">
-                <Placeholder filename="signage-01-brick-1820-recessed.jpg" caption="1820 Goods Way — recessed and carved into the brick at ground level" variant="material" number="01" />
+                <Placeholder filename="signage-01-brick-1820-recessed.jpg" caption="1820 Goods Way, recessed and carved into the brick at ground level" variant="material" number="01" />
               </div>
               <div className="signage__caption">
                 <span className="signage__tag mono">At ground level · embossed brick</span>
@@ -1545,29 +1545,29 @@ const S05 = sectionPages(
             </div>
             <div className="signage__col">
               <div className="signage__media">
-                <Placeholder filename="signage-02-aluminium-1820-perforated.jpg" caption="The water came first — perforated through the lightweight aluminium of the 1820 belvedere" variant="material" number="02" />
+                <Placeholder filename="signage-02-aluminium-1820-perforated.jpg" caption="The water came first, perforated through the lightweight aluminium of the 1820 belvedere" variant="material" number="02" />
               </div>
               <div className="signage__caption">
                 <span className="signage__tag mono">At the skyline · perforated aluminium</span>
                 <div className="signage__big">The water came first.</div>
-                <div className="signage__sub">Cut through the lightweight skin by perforation. By day, shadow and depth against bright metal. By night, the room glows from within — a soft lantern above the canal, legible from the bridges, St Pancras, Camley Street.</div>
+                <div className="signage__sub">Cut through the lightweight skin by perforation. By day, shadow and depth against bright metal. By night, the room glows from within, a soft lantern above the canal, legible from the bridges, St Pancras, Camley Street.</div>
               </div>
             </div>
           </div>
         </div>
       ),
     },
-    // 11-15 — site context images
+    // 11-15, site context images
     ...[1,2,3,4,5].map((n) => familySitePage({
       sectionNum: 18, sectionLabel: "Signal Box", idx: n, slug: "signal-box",
     })),
-    // 16 — placeholder area schedule
+    // 16, placeholder area schedule
     familySchedulePage({ sectionNum: 18, sectionLabel: "Signal Box" }),
   ]
 );
 
 // ════════════════════════════════════════════════════════════════════════
-// §07 VISION — SIX MOVES (3 pages)
+// §07 VISION. SIX MOVES (3 pages)
 // ════════════════════════════════════════════════════════════════════════
 const sixMoves = [
   ["Generous canal-side ground floor", "Sheltered colonnade, public threshold, café opening to the towpath."],
@@ -1598,8 +1598,8 @@ const S06 = sectionPages(
     {
       label: "Narrowing the concept (act break)",
       isDivider: true,
-      presentation: () => <Divider range="§§ 07–11" title="Narrowing the concept." sub="How the building meets the crossing at its western end — and the moves that balance value, cost, and sustainability." />,
-      report: () => <Divider range="§§ 07–11" title="Narrowing the concept." sub="How the building meets the crossing at its western end — and the moves that balance value, cost, and sustainability." />,
+      presentation: () => <Divider range="§§ 07–11" title="Narrowing the concept." sub="How the building meets the crossing at its western end, and the moves that balance value, cost, and sustainability." />,
+      report: () => <Divider range="§§ 07–11" title="Narrowing the concept." sub="How the building meets the crossing at its western end, and the moves that balance value, cost, and sustainability." />,
     },
     {
       label: "Eastern threshold",
@@ -1610,7 +1610,7 @@ const S06 = sectionPages(
           body={<>
             <p>The last building of the masterplan.<br/>The first building of the canal beyond it.</p>
             <p><em>It should do two things:</em></p>
-            <p>1 — Be unmistakably contextual.<br/>2 — Be generous.</p>
+            <p>1. Be unmistakably contextual.<br/>2. Be generous.</p>
           </>}
         />
       ),
@@ -1619,9 +1619,9 @@ const S06 = sectionPages(
           kicker="§07 · Vision"
           title="Two principles."
           body={<>
-            <p>The site is the eastern threshold of the King's Cross masterplan — the last building before the canal opens to Camley Street and the wider city beyond. Anything built here is the closing statement of one of the most significant pieces of urban regeneration in modern London.</p>
-            <p><strong>First, the building should be unmistakably contextual.</strong> The Bagley Walk wall, immediately adjacent, is the purest expression of the vocabulary. The building must answer to this context directly — as a continuation of canal infrastructure made habitable.</p>
-            <p><strong>Second, the building should be generous.</strong> The architectural moves at ground level — how the building meets the canal, what it gives back to the city — define whether the building is a tolerated commercial object or a genuine contributor to the place.</p>
+            <p>The site is the eastern threshold of the King's Cross masterplan, the last building before the canal opens to Camley Street and the wider city beyond. Anything built here is the closing statement of one of the most significant pieces of urban regeneration in modern London.</p>
+            <p><strong>First, the building should be unmistakably contextual.</strong> The Bagley Walk wall, immediately adjacent, is the purest expression of the vocabulary. The building must answer to this context directly, as a continuation of canal infrastructure made habitable.</p>
+            <p><strong>Second, the building should be generous.</strong> The architectural moves at ground level, how the building meets the canal, what it gives back to the city, define whether the building is a tolerated commercial object or a genuine contributor to the place.</p>
           </>}
         />
       ),
@@ -1653,7 +1653,7 @@ const S07 = sectionPages(
           caption="Structural section through site"
           variant="diagram"
           capIdx="Fig. 7.1"
-          capTitle="Structural section — lightweight frame strategy."
+          capTitle="Structural section, lightweight frame strategy."
           kicker="§05 · Engineering"
           title="The engineering follows the ground."
           body={<>
@@ -1760,9 +1760,9 @@ const signalHouseOfferings = [
   ["Two voices, not one",
    "A heavy brick body that belongs to the canal, and a lightweight 1820 above. The contrast carries the contextual reading; neither part dilutes the other."],
   ["A legible top",
-   "Every King's Cross neighbour has a distinctive crown — the Gasholders, the Granary, Coal Drops Yard. This one says signal box. Read from the bridges and across the basin."],
+   "Every King's Cross neighbour has a distinctive crown, the Gasholders, the Granary, Coal Drops Yard. This one says signal box. Read from the bridges and across the basin."],
   ["The lookout",
-   "Typologically, a signal box is a place to look out from. The upper room becomes a belvedere — naming the crossing it surveys."],
+   "Typologically, a signal box is a place to look out from. The upper room becomes a belvedere, naming the crossing it surveys."],
   ["Date as identity",
    "1820 names the building. The crown is the moniker; the building is the date the canal opened, carried into the city."],
   ["The right scale of expression",
@@ -1819,33 +1819,33 @@ const signalHouseVariants = [
   {
     slug: "centred",
     t: "Centred signal house",
-    pres: "Classical composition — symmetric signal box centred on top of the brick mass",
-    body: <p>The classical composition. A symmetrical centred signal house reads as a heritage gesture, a quiet completion — a crown. But the gesture asks little of the building; the signal house becomes ornament rather than architecture.</p>,
+    pres: "Classical composition, symmetric signal box centred on top of the brick mass",
+    body: <p>The classical composition. A symmetrical centred signal house reads as a heritage gesture, a quiet completion, a crown. But the gesture asks little of the building; the signal house becomes ornament rather than architecture.</p>,
   },
   {
     slug: "offset",
     t: "Offset signal house",
-    pres: "Contemporary inversion — signal house attached to one flank of the brick mass",
+    pres: "Contemporary inversion, signal house attached to one flank of the brick mass",
     body: <p><strong>Our preferred variant.</strong> A contemporary inversion of the classical composition. The signal house becomes a contemporary <em>addition</em> stuck to one flank of the brick infrastructure, not a crown sitting on top of it. The two parts do not reconcile. <strong>The architectural intelligence is in the precision of their unrelatedness.</strong></p>,
     preferred: true,
   },
   {
     slug: "stepped",
     t: "Stepped signal house",
-    pres: "Multi-volume — a cluster of stepped signal-house elements along the roofline",
-    body: <p>A more articulated answer. Multiple signal-house volumes step along the roofline, suggesting a small village of working elements. Reads as more domestic and busy than the single offset gesture — less disciplined, less legible at distance.</p>,
+    pres: "Multi-volume, a cluster of stepped signal-house elements along the roofline",
+    body: <p>A more articulated answer. Multiple signal-house volumes step along the roofline, suggesting a small village of working elements. Reads as more domestic and busy than the single offset gesture, less disciplined, less legible at distance.</p>,
   },
 ];
 
 const S10_new = sectionPages(
-  { sectionNum: 19, sectionTitle: "The 1820 — the marker", sectionLabel: "The 1820" },
+  { sectionNum: 19, sectionTitle: "The 1820, the marker", sectionLabel: "The 1820" },
   [
     {
-      label: "The 1820 — what sits at the top",
+      label: "The 1820, what sits at the top",
       presentation: () => (
         <PresCover
           filename="the-1820-room.jpg"
-          caption="The 1820 — the cantilevered room at the top, lit at night, seen from the canal, the station and the parks"
+          caption="The 1820, the cantilevered room at the top, lit at night, seen from the canal, the station and the parks"
           overlay={
             <>
               <span className="mono" style={{color: 'var(--accent)', letterSpacing: '0.22em', fontWeight: 500}}>The marker</span>
@@ -1858,11 +1858,11 @@ const S10_new = sectionPages(
       report: () => (
         <ReportImageText
           filename="the-1820-room.jpg"
-          caption="The 1820 — the cantilevered room at the top"
+          caption="The 1820, the cantilevered room at the top"
           variant="CGI"
           number="1820"
           capIdx="Fig. 10.1"
-          capTitle="The 1820 — the marker."
+          capTitle="The 1820, the marker."
           kicker="§19 · The marker"
           title="The 1820."
           body={<p>The cantilevered room at the top. Lit at night, visible from the canal, the station and the parks. The building's marker, and the subject of the four design questions that follow.</p>}
@@ -1877,10 +1877,10 @@ const S10_new = sectionPages(
           title="What could the 1820 be?"
           body={<>
             <p>Lit at night. Seen from the canal, from the station, from Camley Street.<br/>And from it, you see all of King's Cross.</p>
-            <p><em>Maybe</em> a small museum — telling the history of the canal, the railway, the place.</p>
+            <p><em>Maybe</em> a small museum, telling the history of the canal, the railway, the place.</p>
             <p><em>Maybe</em> a terrace, open to the air. We sense it wants to be outside, not internal.</p>
             <p><em>Maybe</em> the last generous move the building makes to the city.</p>
-            <p>If public — incredible.<br/>If private — wonderful for tenants. A draw. A place.</p>
+            <p>If public, incredible.<br/>If private, wonderful for tenants. A draw. A place.</p>
             <p><em>But this is open. A wonderful opportunity to discuss.</em></p>
           </>}
         />
@@ -1890,10 +1890,10 @@ const S10_new = sectionPages(
           kicker="§19 · The marker, before the questions"
           title="What could the 1820 be?"
           body={<>
-            <p>The 1820 is the building's marker. What it <em>is</em> is fixed — a cantilevered room at the top, lit at night, visible from the canal, the station, Camley Street, and Coal Drops Yard. From it, you see King's Cross. <strong>What it does</strong> — its programme, its public-ness, its content — is open.</p>
-            <p>It could be a small museum of the canal and the railway, telling the story of the place that made King's Cross — a generous gesture from the building to the public realm that surrounds it. It could be a terrace, simply, open to the air; we sense it wants to be outside rather than internal, the air around the crossing rather than a glazed room. It could carry an inscription cut into its lightweight skin — text legible by day through shadow and depth, glowing as a soft lantern at night.</p>
-            <p>If public, it is incredible — a free roof for the city, the only one of its kind at King's Cross. If private, it is wonderful for the building's tenants — a draw at the top, a place, a piece of identity money cannot easily buy. <em>The decision between these is one of the four questions that follow — but the 1820 itself, as the building's marker, is not in question.</em></p>
-            <p>Before the four questions, then: a clear statement that <strong>the 1820 is the poetic engine of the building, but the building below is also an office, and it has to work.</strong> The four questions that follow are where the office part gets resolved — without compromising the marker.</p>
+            <p>The 1820 is the building's marker. What it <em>is</em> is fixed, a cantilevered room at the top, lit at night, visible from the canal, the station, Camley Street, and Coal Drops Yard. From it, you see King's Cross. <strong>What it does</strong>, its programme, its public-ness, its content, is open.</p>
+            <p>It could be a small museum of the canal and the railway, telling the story of the place that made King's Cross, a generous gesture from the building to the public realm that surrounds it. It could be a terrace, simply, open to the air; we sense it wants to be outside rather than internal, the air around the crossing rather than a glazed room. It could carry an inscription cut into its lightweight skin, text legible by day through shadow and depth, glowing as a soft lantern at night.</p>
+            <p>If public, it is incredible, a free roof for the city, the only one of its kind at King's Cross. If private, it is wonderful for the building's tenants, a draw at the top, a place, a piece of identity money cannot easily buy. <em>The decision between these is one of the four questions that follow, but the 1820 itself, as the building's marker, is not in question.</em></p>
+            <p>Before the four questions, then: a clear statement that <strong>the 1820 is the poetic engine of the building, but the building below is also an office, and it has to work.</strong> The four questions that follow are where the office part gets resolved, without compromising the marker.</p>
           </>}
         />
       ),
@@ -1963,7 +1963,7 @@ function QuestionOptionPage({ n, topic, question, opt, abIdx, pick, view, varian
           Option {abIdx} of 2{pick ? " · OUR INSTINCT" : ""}
         </div>
         <h3 className="q-opt-page__title">{opt.title}</h3>
-        <div className="q-opt-page__sub mono">{opt.tag} — {opt.cap}</div>
+        <div className="q-opt-page__sub mono">{opt.tag}, {opt.cap}</div>
       </div>
     </div>
   );
@@ -1975,18 +1975,18 @@ const fourQuestions = [
     topic: "Massing",
     variant: "model",
     question: "Wider and shorter, or slender and taller?",
-    intro: <p>Both options carry the offset 1820 belvedere at the top. The question is whether the floor plates <em>below</em> also cantilever outward — recovering area at the cost of structure and carbon — or sit cleanly on the easy ground and add storeys instead.</p>,
+    intro: <p>Both options carry the offset 1820 belvedere at the top. The question is whether the floor plates <em>below</em> also cantilever outward, recovering area at the cost of structure and carbon, or sit cleanly on the easy ground and add storeys instead.</p>,
     pickIdx: "B",
     optA: {
       tag: "Option A · G+7",
       title: "Cantilevered plates.",
       fn: "scheme-a-cantilever.jpg",
-      cap: "G+7 with full-floor cantilever toward the canal — wider, shorter",
+      cap: "G+7 with full-floor cantilever toward the canal, wider, shorter",
       num: "A",
       points: [
-        <>~6,000 sqft per floor — every plate reaches over the hard piece</>,
+        <>~6,000 sqft per floor, every plate reaches over the hard piece</>,
         <><b>Significant</b> structural transfer at ground level</>,
-        <>Heavier embodied carbon — transfer is the carbon villain</>,
+        <>Heavier embodied carbon, transfer is the carbon villain</>,
         <>Building presses outward; reads heavier on a tight site</>,
         <>Costlier per sqm of NIA</>,
       ],
@@ -1995,35 +1995,35 @@ const fourQuestions = [
       tag: "Option B · G+8 / G+9",
       title: "Simple extrusion.",
       fn: "scheme-b-extrusion.jpg",
-      cap: "G+8/9 clean stack — only The 1820 cantilevers",
+      cap: "G+8/9 clean stack, only The 1820 cantilevers",
       num: "B",
       points: [
-        <>~5,000 sqft per floor — clean stacked structure</>,
-        <>No transfer structure — honest, regular grid</>,
+        <>~5,000 sqft per floor, clean stacked structure</>,
+        <>No transfer structure, honest, regular grid</>,
         <>Lower embodied carbon, lighter on ground</>,
         <>Building presses upward, reads slender</>,
-        <>Only <b>one</b> cantilever in the building — The 1820</>,
+        <>Only <b>one</b> cantilever in the building. The 1820</>,
         <>Cheaper per sqm but more façade per sqm of NIA</>,
       ],
     },
-    instinct: <>Option <b>B</b>. The 1820 is the only cantilever the building needs — repeating the gesture nine times below dilutes it.</>,
+    instinct: <>Option <b>B</b>. The 1820 is the only cantilever the building needs, repeating the gesture nine times below dilutes it.</>,
   },
   {
     topic: "Core",
     variant: "diagram",
     question: "Perimeter space, or one large coherent space?",
-    intro: <p>A plan-level question about the <em>shape</em> of the lettable space, not whether it can be split — <strong>both options can be split</strong>. The core's position determines whether tenants occupy a doughnut of perimeter space around services in the middle, or a single coherent room with services pushed to one flank.</p>,
+    intro: <p>A plan-level question about the <em>shape</em> of the lettable space, not whether it can be split, <strong>both options can be split</strong>. The core's position determines whether tenants occupy a doughnut of perimeter space around services in the middle, or a single coherent room with services pushed to one flank.</p>,
     pickIdx: "B",
     optA: {
       tag: "Option A · Central core",
       title: "Perimeter space.",
       fn: "scheme-a-central-core.jpg",
-      cap: "Central core — a doughnut of perimeter space around services in the middle; splittable into 2–3 tenancies",
+      cap: "Central core, a doughnut of perimeter space around services in the middle; splittable into 2–3 tenancies",
       num: "A",
       points: [
-        <>Lettable space wraps the core — <b>perimeter daylight</b> on all four sides</>,
+        <>Lettable space wraps the core, <b>perimeter daylight</b> on all four sides</>,
         <>Splittable: 1, 2 or 3 tenants per floor</>,
-        <>Services break the perimeter — visible from outside</>,
+        <>Services break the perimeter, visible from outside</>,
         <>Hits the splittable sub-2,500 sqft segment as well as whole-floor</>,
         <>The conventional plan logic</>,
       ],
@@ -2032,23 +2032,23 @@ const fourQuestions = [
       tag: "Option B · Eccentric core",
       title: "One large coherent space.",
       fn: "scheme-b-eccentric-core.jpg",
-      cap: "Eccentric core to one flank — single coherent room with daylight on three sides; equally splittable",
+      cap: "Eccentric core to one flank, single coherent room with daylight on three sides; equally splittable",
       num: "B",
       points: [
-        <>A single coherent open volume — <b>three-sided daylight</b></>,
-        <>Equally splittable — we can still take 2–3 tenants per floor</>,
-        <>Cleaner facade — services contained to one flank</>,
+        <>A single coherent open volume, <b>three-sided daylight</b></>,
+        <>Equally splittable, we can still take 2–3 tenants per floor</>,
+        <>Cleaner facade, services contained to one flank</>,
         <>Hits the boutique whole-floor 5,000 sqft segment <em>and</em> the splittable market</>,
         <>The distinctive plan logic</>,
       ],
     },
-    instinct: <>Option <b>B</b>. We can split both — so the question is really which <em>shape</em> of space the building should offer. A single coherent room with three-sided daylight is more architecturally generous, more flexible for occupiers, and produces a cleaner elevation. <em>The eccentric core gives up nothing on splittability.</em></>,
+    instinct: <>Option <b>B</b>. We can split both, so the question is really which <em>shape</em> of space the building should offer. A single coherent room with three-sided daylight is more architecturally generous, more flexible for occupiers, and produces a cleaner elevation. <em>The eccentric core gives up nothing on splittability.</em></>,
   },
   {
     topic: "Substructure",
     variant: "diagram",
     question: "Basement, or 6 m ground floor?",
-    intro: <p>Where does the plant live? The basement keeps it hidden but costs in capex, carbon and programme. Lifting plant to a mezzanine frees the ground floor to be 6 m tall — a different kind of building at street level.</p>,
+    intro: <p>Where does the plant live? The basement keeps it hidden but costs in capex, carbon and programme. Lifting plant to a mezzanine frees the ground floor to be 6 m tall, a different kind of building at street level.</p>,
     pickIdx: "B",
     optA: {
       tag: "Option A · With basement",
@@ -2057,34 +2057,34 @@ const fourQuestions = [
       cap: "Basement plant, standard 3.5–4 m ground floor",
       num: "A",
       points: [
-        <>Plant below ground — hidden from the public realm</>,
+        <>Plant below ground, hidden from the public realm</>,
         <>Standard 3.5–4 m ground floor height</>,
-        <>Higher capex — excavation, waterproofing, tube-line interface</>,
-        <>More embodied carbon — concrete-heavy substructure</>,
-        <>Longer programme — substructure on critical path</>,
+        <>Higher capex, excavation, waterproofing, tube-line interface</>,
+        <>More embodied carbon, concrete-heavy substructure</>,
+        <>Longer programme, substructure on critical path</>,
       ],
     },
     optB: {
       tag: "Option B · No basement",
       title: "6 m generous ground floor.",
       fn: "scheme-b-no-basement.jpg",
-      cap: "Mezzanine plant, double-height 6 m ground floor — café, lobby, deeper daylight",
+      cap: "Mezzanine plant, double-height 6 m ground floor, café, lobby, deeper daylight",
       num: "B",
       points: [
-        <>Plant on mezzanine — expressed, honest</>,
-        <><b>6 m double-height ground</b> — café, lobby, daylight reaches deeper</>,
+        <>Plant on mezzanine, expressed, honest</>,
+        <><b>6 m double-height ground</b>, café, lobby, daylight reaches deeper</>,
         <>Lower capex, faster programme</>,
-        <>Materially lower embodied carbon — possibly decisive on LETI 2030</>,
+        <>Materially lower embodied carbon, possibly decisive on LETI 2030</>,
         <>Building reads taller and more present at street level</>,
       ],
     },
-    instinct: <>Option <b>B</b>. The 6 m ground floor is a better building — cheaper, lower-carbon, faster, more generous at the canal threshold. The most consequential single lever in the sub-structure decision tree.</>,
+    instinct: <>Option <b>B</b>. The 6 m ground floor is a better building, cheaper, lower-carbon, faster, more generous at the canal threshold. The most consequential single lever in the sub-structure decision tree.</>,
   },
   {
     topic: "The 1820",
     variant: "CGI",
     question: "Tenant-only, or public?",
-    intro: <p>The 1820 belvedere is fixed — it is the building's reason for being. The question is who gets to stand on it. A private tenant amenity, or King's Cross's first free public roof.</p>,
+    intro: <p>The 1820 belvedere is fixed, it is the building's reason for being. The question is who gets to stand on it. A private tenant amenity, or King's Cross's first free public roof.</p>,
     pickIdx: "B",
     optA: {
       tag: "Option A · Tenant-only",
@@ -2093,10 +2093,10 @@ const fourQuestions = [
       cap: "The 1820 as private tenant terrace at the top",
       num: "A",
       points: [
-        <>Full NIA preserved — no public lift, no public entrance</>,
+        <>Full NIA preserved, no public lift, no public entrance</>,
         <>~£0 incremental capex / opex</>,
-        <>Simple operation — no visitor management, no covenant</>,
-        <>Building reads private — strong tenant amenity</>,
+        <>Simple operation, no visitor management, no covenant</>,
+        <>Building reads private, strong tenant amenity</>,
         <>Conventional planning case</>,
       ],
     },
@@ -2104,22 +2104,22 @@ const fourQuestions = [
       tag: "Option B · Public",
       title: "King's Cross's first free public roof.",
       fn: "scheme-b-public-roof.jpg",
-      cap: "The 1820 with public lift and entrance — civic belvedere",
+      cap: "The 1820 with public lift and entrance, civic belvedere",
       num: "B",
       points: [
         <>~5–8% NIA loss for public lift and entrance</>,
         <>~£1.1m incremental capex / ~£165k p.a. opex</>,
-        <><b>£150–300k p.a. event income</b> — opex pays for itself</>,
+        <><b>£150–300k p.a. event income</b>, opex pays for itself</>,
         <><b>Place premium £5–15/sqft</b> = £225–675k p.a. additional rent</>,
         <>Planning hook under London Plan D9(D) + Camden draft KQ1</>,
-        <>Building is civic — visible from inside <em>and</em> outside</>,
+        <>Building is civic, visible from inside <em>and</em> outside</>,
       ],
     },
-    instinct: <>Option <b>B</b>. The 1820 is wasted if it is only seen by tenants. The whole point of marking the crossing is that the city can stand on it — and the economics work: opex pays for itself in event income, the rental premium funds the capex back inside ten years.</>,
+    instinct: <>Option <b>B</b>. The 1820 is wasted if it is only seen by tenants. The whole point of marking the crossing is that the city can stand on it, and the economics work: opex pays for itself in event income, the rental premium funds the capex back inside ten years.</>,
   },
 ];
 
-// ── Q5 Materials data — mirrors the calculator's HEAVY / LIGHT lists ─────
+// ── Q5 Materials data, mirrors the calculator's HEAVY / LIGHT lists ─────
 // Used by QMaterialPage. The "chosen" entry is the proposed material; the
 // rest are alternatives presented for the sustainability + cost discussion.
 const heavyMaterials = [
@@ -2132,8 +2132,8 @@ const heavyMaterials = [
 ];
 
 const lightMaterials = [
-  { slug: "al-recycled",    label: "Aluminium — recycled (CIRCAL 75R)", carbon:  75, cost:  720, note: "75% recycled content. Embodied carbon 75–85% lower than primary aluminium.", chosen: true },
-  { slug: "al-primary",     label: "Aluminium — primary",         carbon: 310, cost:  650, note: "Standard cassette; ~12 kgCO₂e/kg. Cheaper, but four times the carbon." },
+  { slug: "al-recycled",    label: "Aluminium, recycled (CIRCAL 75R)", carbon:  75, cost:  720, note: "75% recycled content. Embodied carbon 75–85% lower than primary aluminium.", chosen: true },
+  { slug: "al-primary",     label: "Aluminium, primary",         carbon: 310, cost:  650, note: "Standard cassette; ~12 kgCO₂e/kg. Cheaper, but four times the carbon." },
   { slug: "stainless",      label: "Corrugated stainless",        carbon: 180, cost:  825, note: "316 grade, marine-suitable. Heavier carbon and cost; different patina." },
   { slug: "corten",         label: "Weathering steel (Corten)",   carbon:  95, cost:  580, note: "Self-finishing patina; low-process steel. Reads agricultural, not signal-box." },
   { slug: "zinc",           label: "Zinc standing seam",          carbon: 105, cost:  850, note: "Pre-weathered VMZinc. Sympathetic, but reads domestic at this scale." },
@@ -2165,7 +2165,7 @@ function QMaterialPage({ slot, image, imageCaption, lead, materials, view, kicke
           </div>
         </div>
         <div className="q-mat__alts">
-          <div className="q-mat__alts-hd mono">Alternatives — for sustainability + cost discussion</div>
+          <div className="q-mat__alts-hd mono">Alternatives, for sustainability + cost discussion</div>
           <table className="q-mat__table">
             <thead>
               <tr>
@@ -2238,11 +2238,11 @@ function SpectrumPage({ view }) {
 // ── Recap (used by §12 page 6) ───────────────────────────────────────────
 function RecapPage({ view }) {
   const rows = [
-    ["01 · Massing",      "B — Simple extrusion",   "Only The 1820 cantilevers."],
-    ["02 · Core",         "B — Eccentric",          "Boutique whole-floor lettings; daylight three sides."],
-    ["03 · Substructure", "B — No basement",        "6 m generous ground floor; the lowest-carbon path."],
-    ["04 · The 1820",     "B — Public",             "King's Cross's first free public roof; sound economics."],
-    ["— · Floor plate",   "5,000 sqft",             "The plate that lets every other choice stay simple."],
+    ["01 · Massing",      "B. Simple extrusion",   "Only The 1820 cantilevers."],
+    ["02 · Core",         "B. Eccentric",          "Boutique whole-floor lettings; daylight three sides."],
+    ["03 · Substructure", "B. No basement",        "6 m generous ground floor; the lowest-carbon path."],
+    ["04 · The 1820",     "B. Public",             "King's Cross's first free public roof; sound economics."],
+    ["05 · Floor plate",  "5,000 sqft",            "The plate that lets every other choice stay simple."],
   ];
   return (
     <div className="q-recap">
@@ -2251,7 +2251,7 @@ function RecapPage({ view }) {
         <h2 className="h-title">Where our instinct lands.</h2>
         {view === "report" ? (
           <div className="prose" style={{maxWidth:'78ch', marginTop: 4}}>
-            <p>Each choice individually is defensible at either end. Taken together, our instinct lands consistently on B — a slender, simple, generous, civic building. But this is an interim conversation, not a verdict.</p>
+            <p>Each choice individually is defensible at either end. Taken together, our instinct lands consistently on B, a slender, simple, generous, civic building. But this is an interim conversation, not a verdict.</p>
           </div>
         ) : null}
       </div>
@@ -2265,7 +2265,7 @@ function RecapPage({ view }) {
         ))}
       </div>
       <div className="q-recap__foot">
-        We are presenting these openly because we want your <b>steer</b> on which axis matters most to you — and where the red lines are before the final interview.
+        We are presenting these openly because we want your <b>steer</b> on which axis matters most to you, and where the red lines are before the final interview.
       </div>
     </div>
   );
@@ -2277,8 +2277,8 @@ const S09 = sectionPages(
     {
       label: "The five questions (act break)",
       isDivider: true,
-      presentation: () => <Divider range="§20" title="The five questions." sub="From the poetic to the prosaic. This is also an office building — and it has to work." />,
-      report: () => <Divider range="§20" title="The five questions." sub="From the poetic to the prosaic. This is also an office building — and it has to work." />,
+      presentation: () => <Divider range="§20" title="The five questions." sub="From the poetic to the prosaic. This is also an office building, and it has to work." />,
+      report: () => <Divider range="§20" title="The five questions." sub="From the poetic to the prosaic. This is also an office building, and it has to work." />,
     },
     ...fourQuestions.flatMap((q, i) => {
       // Short titles shown on each question's title page.
@@ -2313,7 +2313,7 @@ const S09 = sectionPages(
         },
       ];
     }),
-    // ── Q5 · Materials — title + heavy + light ──────────────────────────
+    // ── Q5 · Materials, title + heavy + light ──────────────────────────
     {
       label: "Q5 · Title",
       isDivider: true,
@@ -2326,8 +2326,8 @@ const S09 = sectionPages(
         <QMaterialPage
           slot="heavy"
           image="material-01-brick-sample.jpg"
-          imageCaption="Staffordshire blue-brown engineering brick — the brick of Victorian canal and railway infrastructure"
-          lead={<p>The brick body is heavy by intent — it belongs to the canal. The proposed material is full engineering brick; the alternatives below are the heavy options we could discuss for sustainability and cost.</p>}
+          imageCaption="Staffordshire blue-brown engineering brick, the brick of Victorian canal and railway infrastructure"
+          lead={<p>The brick body is heavy by intent, it belongs to the canal. The proposed material is full engineering brick; the alternatives below are the heavy options we could discuss for sustainability and cost.</p>}
           materials={heavyMaterials}
           view="presentation"
         />
@@ -2336,7 +2336,7 @@ const S09 = sectionPages(
         <QMaterialPage
           slot="heavy"
           image="material-01-brick-sample.jpg"
-          imageCaption="Staffordshire blue-brown engineering brick — the brick of Victorian canal and railway infrastructure"
+          imageCaption="Staffordshire blue-brown engineering brick, the brick of Victorian canal and railway infrastructure"
           lead={<p>The brick body is heavy by intent. It is the contextual move: brick to the waterline, matching the canal vocabulary. The proposed material is full engineering brick. The table below sets out the heavy alternatives, with their embodied carbon and indicative cost, so the trade-offs are visible. <em>Numbers are indicative and align with the design-side carbon calculator.</em></p>}
           materials={heavyMaterials}
           view="report"
@@ -2349,8 +2349,8 @@ const S09 = sectionPages(
         <QMaterialPage
           slot="light"
           image="material-04-aluminium-detail.jpg"
-          imageCaption="Bright perforated recycled aluminium — Hydro CIRCAL 75R, lantern-like at dusk"
-          lead={<p>The signal-box volume is light by intent — bright, lantern-like, in contrast to the brick body. The proposed material is recycled aluminium (CIRCAL 75R); the alternatives below are the light options we could discuss.</p>}
+          imageCaption="Bright perforated recycled aluminium. Hydro CIRCAL 75R, lantern-like at dusk"
+          lead={<p>The signal-box volume is light by intent, bright, lantern-like, in contrast to the brick body. The proposed material is recycled aluminium (CIRCAL 75R); the alternatives below are the light options we could discuss.</p>}
           materials={lightMaterials}
           view="presentation"
         />
@@ -2359,8 +2359,8 @@ const S09 = sectionPages(
         <QMaterialPage
           slot="light"
           image="material-04-aluminium-detail.jpg"
-          imageCaption="Bright perforated recycled aluminium — Hydro CIRCAL 75R, lantern-like at dusk"
-          lead={<p>The signal-box volume is light by intent. Bright, lantern-like, in deliberate contrast to the brick body. The proposed material is Hydro CIRCAL 75R — 75% recycled aluminium with embodied carbon 75–85% lower than primary aluminium. The table below sets out the light alternatives, with embodied carbon and indicative cost. <em>Numbers are indicative and align with the design-side carbon calculator.</em></p>}
+          imageCaption="Bright perforated recycled aluminium. Hydro CIRCAL 75R, lantern-like at dusk"
+          lead={<p>The signal-box volume is light by intent. Bright, lantern-like, in deliberate contrast to the brick body. The proposed material is Hydro CIRCAL 75R, 75% recycled aluminium with embodied carbon 75–85% lower than primary aluminium. The table below sets out the light alternatives, with embodied carbon and indicative cost. <em>Numbers are indicative and align with the design-side carbon calculator.</em></p>}
           materials={lightMaterials}
           view="report"
         />
@@ -2384,12 +2384,12 @@ const S09 = sectionPages(
       report: () => (
         <ReportProse
           kicker="§20 · The planning trade-off"
-          title="One honest caveat — what believing in Path B asks of you."
+          title="One honest caveat, what believing in Path B asks of you."
           body={<>
-            <p>The G+8/9 scheme we recommend (Path B) sits <strong>outside the existing outline consent</strong>, which envelopes a G+7 building. Both Path A and Path B will require a new planning application — refurbishment is not on the table, and any new office building on this site needs a fresh determination. But the two paths are not equally easy to consent: Path A sits within the established envelope and is, in planning terms, a refinement of what is already known; Path B is a different and more ambitious building, and it asks the planning authority to accept a height greater than the original masterplan anticipated for this plot.</p>
-                <p>The argument for Path B at planning is urbanistic: a smaller ground footprint, more public realm at the canal threshold, lower embodied carbon, and full alignment with the King's Cross masterplan's established grain of tall slim buildings on a fine-grained public realm (the Granary Building, R7, R8, the Gasholders apartments). The case is strong, and we believe it will be won — but it is a real piece of work that introduces programme risk.</p>
-                <p>Indicatively, that risk costs <strong>9–15 months</strong> of additional design and consenting time at the front of the programme, compared with a Path A application that would move more directly through the King's Cross DRP route. The construction time saving and the cost / carbon savings of Path B compound during build — but the planning time has to be paid up front.</p>
-                <p><em>This is not a hidden issue. It is the trade-off the four questions implicitly resolve. We recommend Path B, openly, knowing the cost — because the architectural and sustainability gain is, in our view, materially better than the alternative.</em> The decision is the panel's.</p>
+            <p>The G+8/9 scheme we recommend (Path B) sits <strong>outside the existing outline consent</strong>, which envelopes a G+7 building. Both Path A and Path B will require a new planning application, refurbishment is not on the table, and any new office building on this site needs a fresh determination. But the two paths are not equally easy to consent: Path A sits within the established envelope and is, in planning terms, a refinement of what is already known; Path B is a different and more ambitious building, and it asks the planning authority to accept a height greater than the original masterplan anticipated for this plot.</p>
+                <p>The argument for Path B at planning is urbanistic: a smaller ground footprint, more public realm at the canal threshold, lower embodied carbon, and full alignment with the King's Cross masterplan's established grain of tall slim buildings on a fine-grained public realm (the Granary Building, R7, R8, the Gasholders apartments). The case is strong, and we believe it will be won, but it is a real piece of work that introduces programme risk.</p>
+                <p>Indicatively, that risk costs <strong>9–15 months</strong> of additional design and consenting time at the front of the programme, compared with a Path A application that would move more directly through the King's Cross DRP route. The construction time saving and the cost / carbon savings of Path B compound during build, but the planning time has to be paid up front.</p>
+                <p><em>This is not a hidden issue. It is the trade-off the four questions implicitly resolve. We recommend Path B, openly, knowing the cost, because the architectural and sustainability gain is, in our view, materially better than the alternative.</em> The decision is the panel's.</p>
           </>}
         />
       ),
@@ -2403,14 +2403,14 @@ const S09 = sectionPages(
 const cgis = [
   { fn: "cgi-01-canal-view.jpg", t: "From the opposite towpath",
     pres: "Dark brick mass rising from the towpath, signal house to one flank, Bagley Walk behind",
-    body: <p>The public reading of the building. The dark engineering brick mass rises from the towpath as a continuation of the Bagley Walk wall. The signal house in bright perforated aluminium is visible to one flank — the contemporary contrast, the distinctive silhouette on the King's Cross skyline.</p> },
+    body: <p>The public reading of the building. The dark engineering brick mass rises from the towpath as a continuation of the Bagley Walk wall. The signal house in bright perforated aluminium is visible to one flank, the contemporary contrast, the distinctive silhouette on the King's Cross skyline.</p> },
   { fn: "cgi-02-approach.jpg", t: "Arrival from Goods Way",
     pres: "Gable end revealing the relationship between brick mass and offset signal house",
     body: <p>From the pedestrian approach, the building announces itself as a piece of engineered brick infrastructure. The gable end reveals the relationship between the brick mass and the offset signal house. The stippling and carved brick signage at the base register at close range.</p> },
   { fn: "cgi-03-context.jpg", t: "Within the King's Cross context",
     pres: "Gasholders, Coal Drops Yard, the Granary completing the architectural company",
     body: <p>The wider view places the building among its neighbours. The Gasholders apartments to the north-west, with their perforated metal screens, are the closest contemporary cousins to our signal house. Coal Drops Yard and the Granary beyond complete the architectural company.</p> },
-  { fn: "cgi-04-interior.jpg", t: "Interior — eccentric core",
+  { fn: "cgi-04-interior.jpg", t: "Interior, eccentric core",
     pres: "Single coherent open volume with daylight from three sides",
     body: <p>The view from inside the lettable space demonstrates the architectural consequence of the eccentric core arrangement. The plate reads as a single coherent open volume. Daylight reaches across the floor from three sides. The canal is visible across the full canal-facing elevation.</p> },
 ];
@@ -2421,8 +2421,8 @@ const S10 = sectionPages(
     {
       label: "What the building is (act break)",
       isDivider: true,
-      presentation: () => <Divider range="§§ 13–14" title="What the building is." sub="The recommended scheme — visualised, materialised." />,
-      report: () => <Divider range="§§ 13–14" title="What the building is." sub="The recommended scheme — visualised, materialised." />,
+      presentation: () => <Divider range="§§ 13–14" title="What the building is." sub="The recommended scheme, visualised, materialised." />,
+      report: () => <Divider range="§§ 13–14" title="What the building is." sub="The recommended scheme, visualised, materialised." />,
     },
     ...cgis.map((c, i) => ({
       label: `${c.t} (A vs B)`,
@@ -2435,7 +2435,7 @@ const S10 = sectionPages(
           <div className="cgi-compare__cols">
             <div className="cgi-compare__col">
               <div className="cgi-compare__media">
-                <Placeholder filename={c.fn.replace(".jpg", "-A.jpg")} caption={`${c.pres} — Scheme A (G+7 cantilevered)`} variant="CGI" number="A" />
+                <Placeholder filename={c.fn.replace(".jpg", "-A.jpg")} caption={`${c.pres}. Scheme A (G+7 cantilevered)`} variant="CGI" number="A" />
               </div>
               <div className="cgi-compare__lbl mono">
                 <span className="cgi-compare__tag">Scheme A</span>
@@ -2444,7 +2444,7 @@ const S10 = sectionPages(
             </div>
             <div className="cgi-compare__col cgi-compare__col--pick">
               <div className="cgi-compare__media">
-                <Placeholder filename={c.fn} caption={`${c.pres} — Scheme B (G+8/9 simple extrusion)`} variant="CGI" number="B" />
+                <Placeholder filename={c.fn} caption={`${c.pres}. Scheme B (G+8/9 simple extrusion)`} variant="CGI" number="B" />
               </div>
               <div className="cgi-compare__lbl mono">
                 <span className="cgi-compare__tag cgi-compare__tag--pick">Scheme B · our preferred</span>
@@ -2464,7 +2464,7 @@ const S10 = sectionPages(
           <div className="cgi-compare__cols">
             <div className="cgi-compare__col">
               <div className="cgi-compare__media">
-                <Placeholder filename={c.fn.replace(".jpg", "-A.jpg")} caption={`${c.pres} — Scheme A (G+7 cantilevered)`} variant="CGI" number="A" />
+                <Placeholder filename={c.fn.replace(".jpg", "-A.jpg")} caption={`${c.pres}. Scheme A (G+7 cantilevered)`} variant="CGI" number="A" />
               </div>
               <div className="cgi-compare__lbl mono">
                 <span className="cgi-compare__tag">Scheme A</span>
@@ -2473,7 +2473,7 @@ const S10 = sectionPages(
             </div>
             <div className="cgi-compare__col cgi-compare__col--pick">
               <div className="cgi-compare__media">
-                <Placeholder filename={c.fn} caption={`${c.pres} — Scheme B (G+8/9 simple extrusion)`} variant="CGI" number="B" />
+                <Placeholder filename={c.fn} caption={`${c.pres}. Scheme B (G+8/9 simple extrusion)`} variant="CGI" number="B" />
               </div>
               <div className="cgi-compare__lbl mono">
                 <span className="cgi-compare__tag cgi-compare__tag--pick">Scheme B · our preferred</span>
@@ -2485,11 +2485,11 @@ const S10 = sectionPages(
       ),
     })),
     {
-      label: "Our preferred — at scale",
+      label: "Our preferred, at scale",
       presentation: () => (
         <PresCover
           filename="cgi-hero-preferred.jpg"
-          caption="The preferred scheme — G+8/9 simple extrusion with offset signal house — final hero view"
+          caption="The preferred scheme. G+8/9 simple extrusion with offset signal house, final hero view"
           overlay={
             <>
               <span className="mono" style={{color: 'var(--accent)', letterSpacing: '0.22em', fontWeight: 500}}>Our preferred</span>
@@ -2506,12 +2506,12 @@ const S10 = sectionPages(
           variant="CGI"
           number="hero"
           capIdx="Hero view"
-          capTitle="The preferred scheme — at scale."
+          capTitle="The preferred scheme, at scale."
           kicker="§21 · Preferred scheme"
           title="G+8/9 simple extrusion with offset signal house."
           body={<>
             <p>The hero view of the preferred scheme. The dark engineering brick mass rises from the towpath as a continuation of Bagley Walk; the lightweight aluminium signal house sits offset to one flank, marking the crossing. The four questions on the previous pages tune the variant; the building shown here is what BBBB looks like.</p>
-            <p><strong>This is the building we believe in — but openly, awaiting your steer on the four questions.</strong></p>
+            <p><strong>This is the building we believe in, but openly, awaiting your steer on the four questions.</strong></p>
           </>}
         />
       ),
@@ -2537,8 +2537,8 @@ const carbonChart = (
     </div>
     <div className="bars">
       {[
-        { lbl: "Path B — recommended", val: 435, range: "380–490", accent: true },
-        { lbl: "Path A — cantilevered", val: 650, range: "580–720" },
+        { lbl: "Path B, recommended", val: 435, range: "380–490", accent: true },
+        { lbl: "Path A, cantilevered", val: 650, range: "580–720" },
         { lbl: "Conventional baseline", val: 835, range: "720–950" },
       ].map((r, i) => (
         <div className="bars__row" key={i}>
@@ -2590,7 +2590,7 @@ const S12 = sectionPages(
           kicker="§21 · Whole-life carbon"
           title="No part of the facade is intended for replacement."
           body={<>
-            <p>Engineering brick — 100–150+ years.<br/>Steel and CLT — 100+ years.<br/>Recycled aluminium — 80+ years, infinitely recyclable.</p>
+            <p>Engineering brick, 100–150+ years.<br/>Steel and CLT, 100+ years.<br/>Recycled aluminium, 80+ years, infinitely recyclable.</p>
             <p><em>The building is, in principle, fully recoverable at end of life.</em></p>
           </>}
         />
@@ -2616,9 +2616,9 @@ const S12 = sectionPages(
 );
 
 // ════════════════════════════════════════════════════════════════════════
-// §15 VIABILITY & THE OFFER (13 pages — area first, then opportunity, then images)
+// §15 VIABILITY & THE OFFER (13 pages, area first, then opportunity, then images)
 // No numbers / costings here; the calculator (topbar button) handles those
-// quantitatively. This section is qualitative — what the area question
+// quantitatively. This section is qualitative, what the area question
 // produces architecturally.
 // ════════════════════════════════════════════════════════════════════════
 
@@ -2627,7 +2627,7 @@ const planComparisons = [
     type: "Ground floor",
     planA: {
       fn: "plan-gf-A.jpg",
-      cap: "G+7 ground — larger footprint, central core, basement plant below",
+      cap: "G+7 ground, larger footprint, central core, basement plant below",
       areas: [
         ["Footprint", "~700 m²"],
         ["Cafe + threshold", "~110 m²"],
@@ -2639,7 +2639,7 @@ const planComparisons = [
     },
     planB: {
       fn: "plan-gf-B.jpg",
-      cap: "G+8/9 ground — smaller footprint, eccentric core, generous 6 m clear height",
+      cap: "G+8/9 ground, smaller footprint, eccentric core, generous 6 m clear height",
       areas: [
         ["Footprint", "~550 m²"],
         ["Cafe + threshold", "~150 m²"],
@@ -2654,7 +2654,7 @@ const planComparisons = [
     type: "Typical floor",
     planA: {
       fn: "plan-typ-A.jpg",
-      cap: "G+7 typical — larger plate via cantilever, central core",
+      cap: "G+7 typical, larger plate via cantilever, central core",
       areas: [
         ["GIA per floor", "~620 m²"],
         ["NIA per floor", "~540 m²"],
@@ -2665,7 +2665,7 @@ const planComparisons = [
     },
     planB: {
       fn: "plan-typ-B.jpg",
-      cap: "G+8/9 typical — smaller plate, eccentric core, three-sided daylight",
+      cap: "G+8/9 typical, smaller plate, eccentric core, three-sided daylight",
       areas: [
         ["GIA per floor", "~510 m²"],
         ["NIA per floor", "~460 m²"],
@@ -2679,7 +2679,7 @@ const planComparisons = [
     type: "Roof / 1820",
     planA: {
       fn: "plan-roof-A.jpg",
-      cap: "G+7 roof — private 1820 amenity, tenant-only",
+      cap: "G+7 roof, private 1820 amenity, tenant-only",
       areas: [
         ["1820 room area", "~80 m²"],
         ["Private terrace", "~140 m²"],
@@ -2690,7 +2690,7 @@ const planComparisons = [
     },
     planB: {
       fn: "plan-roof-B.jpg",
-      cap: "G+8/9 roof — public 1820 belvedere, civic gift",
+      cap: "G+8/9 roof, public 1820 belvedere, civic gift",
       areas: [
         ["1820 room area", "~80 m²"],
         ["Public terrace", "~140 m²"],
@@ -2742,7 +2742,7 @@ function PlanComparePage({ idx, total, comp }) {
 }
 
 const scheduleA = {
-  scheme: "Scheme A — G+7 cantilevered · central core",
+  scheme: "Scheme A. G+7 cantilevered · central core",
   rows: [
     { level: "Roof / 1820",  gia: 340, nia:  80, note: "Tenant-only amenity + plant" },
     { level: "L7",           gia: 620, nia: 540, note: "Central core · 2 tenants possible" },
@@ -2770,7 +2770,7 @@ const scheduleB = {
     { level: "L2",             gia: 510, nia: 460, note: "" },
     { level: "L1",             gia: 510, nia: 460, note: "" },
     { level: "Ground (6 m)",   gia: 550, nia: 200, note: "Cafe, lobby, public route, public 1820 entrance" },
-    { level: "Mezz plant",     gia: 180, nia:   0, note: "Mech + MEP — no basement" },
+    { level: "Mezz plant",     gia: 180, nia:   0, note: "Mech + MEP, no basement" },
   ],
 };
 [scheduleA, scheduleB].forEach(s => {
@@ -2784,7 +2784,7 @@ function SchedulePage({ schedule, pickAccent }) {
         <Eyebrow>§21 · Area schedule</Eyebrow>
         <h2 className="h-sub">{schedule.scheme}</h2>
         <div className="prose tight" style={{maxWidth: '78ch', marginTop: 2}}>
-          Indicative — to be plugged into the calculator once finalised.
+          Indicative, to be plugged into the calculator once finalised.
         </div>
       </div>
       <table className={"schedule__table" + (pickAccent ? " schedule__table--pick" : "")}>
@@ -2799,12 +2799,12 @@ function SchedulePage({ schedule, pickAccent }) {
         </thead>
         <tbody>
           {schedule.rows.map((r, i) => {
-            const eff = r.nia && r.gia ? Math.round((r.nia / r.gia) * 100) + "%" : "—";
+            const eff = r.nia && r.gia ? Math.round((r.nia / r.gia) * 100) + "%" : ", ";
             return (
               <tr key={i}>
                 <th>{r.level}</th>
                 <td>{r.gia.toLocaleString()}</td>
-                <td>{r.nia ? r.nia.toLocaleString() : "—"}</td>
+                <td>{r.nia ? r.nia.toLocaleString() : ", "}</td>
                 <td>{eff}</td>
                 <td>{r.note || ""}</td>
               </tr>
@@ -2827,14 +2827,14 @@ const opportunityPillars = [
   ["The 5,000 sqft floor plate",
    "The boutique whole-floor segment King's Cross is structurally short of. Single coherent open volume, daylight from three sides, the canal across the full canal-facing elevation."],
   ["A generous 6 m ground floor",
-   "Cafe opens to the towpath. Lobby reads as civic, not commercial. Double-height — daylight reaches deep into the plate. The most consequential single decision in the substructure tree."],
+   "Cafe opens to the towpath. Lobby reads as civic, not commercial. Double-height, daylight reaches deep into the plate. The most consequential single decision in the substructure tree."],
   ["A canal-side public threshold",
-   "The building gives back to the city as much as it takes. A café, a route from Goods Way to the towpath, a place to dwell on the water. Not a tolerated commercial object — a contributor."],
-  ["The 1820 — a public roof",
+   "The building gives back to the city as much as it takes. A café, a route from Goods Way to the towpath, a place to dwell on the water. Not a tolerated commercial object, a contributor."],
+  ["The 1820, a public roof",
    "King's Cross's first free public roof. A belvedere, a function room, a small civic gift. The whole point of marking the crossing is that the city can stand on it."],
 ];
 
-// closingImages (4 offer pages — café / lobby / floor plate / 1820 belvedere)
+// closingImages (4 offer pages, café / lobby / floor plate / 1820 belvedere)
 // removed; the offer is summarised by the area schedule and the §15 Closing
 // section. The image set lived here for §14 page-end.
 
@@ -2868,46 +2868,46 @@ const S13 = sectionPages(
           kicker="§21 · The question"
           title="Area first. On a small site, inefficiency is unforgiving."
           body={<>
-            <p>The site is tight, and tightly priced — both on the way in (cost per m² is roughly fixed) and on the way out (rent per m² is roughly fixed). Inefficiency compounds against you both ways. The first viability question, before cost, carbon, or programme, is therefore <strong>area</strong>: how much usable area does the scheme produce, and how efficiently is it produced.</p>
-                <p>The pages that follow are the area story for both schemes — ground, typical, and roof plans side-by-side, with indicative areas annotated; then a per-scheme area schedule. The cost and carbon implications of these areas are quantified in the calculator (top-right of the toolbar), which can be re-run with these areas once finalised.</p>
+            <p>The site is tight, and tightly priced, both on the way in (cost per m² is roughly fixed) and on the way out (rent per m² is roughly fixed). Inefficiency compounds against you both ways. The first viability question, before cost, carbon, or programme, is therefore <strong>area</strong>: how much usable area does the scheme produce, and how efficiently is it produced.</p>
+                <p>The pages that follow are the area story for both schemes, ground, typical, and roof plans side-by-side, with indicative areas annotated; then a per-scheme area schedule. The cost and carbon implications of these areas are quantified in the calculator (top-right of the toolbar), which can be re-run with these areas once finalised.</p>
           </>}
         />
       ),
     },
     {
-      label: "The plan — hugging the boundary",
+      label: "The plan, hugging the boundary",
       presentation: () => (
         <PresImage
           filename="viability-plan-sketch.jpg"
-          caption="Plan sketch — the building hugs the site boundary, no chamfers, no setbacks"
+          caption="Plan sketch, the building hugs the site boundary, no chamfers, no setbacks"
           variant="sketch"
           capIdx="The plan"
           capTitle="The plan hugs the site boundary."
-          capMeta="No chamfers, no setbacks — area maximised by geometry alone."
+          capMeta="No chamfers, no setbacks, area maximised by geometry alone."
         />
       ),
       report: () => (
         <ReportImageText
           filename="viability-plan-sketch.jpg"
-          caption="Plan sketch — the building hugs the site boundary, no chamfers, no setbacks"
+          caption="Plan sketch, the building hugs the site boundary, no chamfers, no setbacks"
           variant="sketch"
           capIdx="Fig. 13.0"
           capTitle="The plan hugs the site boundary."
           kicker="§21 · The plan"
           title="The plan maximises area by simply hugging the boundary."
           body={<>
-            <p>The plan does the simplest possible thing the site allows. <strong>It follows the site boundary edge-for-edge</strong> — no chamfers, no setbacks, no formal gestures that subtract usable floor area. The geometry alone earns the area; no architectural performance is asked of the plan itself.</p>
+            <p>The plan does the simplest possible thing the site allows. <strong>It follows the site boundary edge-for-edge</strong>, no chamfers, no setbacks, no formal gestures that subtract usable floor area. The geometry alone earns the area; no architectural performance is asked of the plan itself.</p>
             <p>Discipline at the plan level lets every other choice in the building (the section, the structure, the signal house above) stay simple and legible. The boundary <em>is</em> the figure.</p>
           </>}
         />
       ),
     },
     {
-      label: "The section — simple office, lightweight crown",
+      label: "The section, simple office, lightweight crown",
       presentation: () => (
         <PresImage
           filename="viability-section-sketch.jpg"
-          caption="Section sketch — a simple office building below; a lightweight expression on the roof"
+          caption="Section sketch, a simple office building below; a lightweight expression on the roof"
           variant="sketch"
           capIdx="The section"
           capTitle="A simple office. A lightweight crown."
@@ -2917,21 +2917,21 @@ const S13 = sectionPages(
       report: () => (
         <ReportImageText
           filename="viability-section-sketch.jpg"
-          caption="Section sketch — a simple office building below; a lightweight expression on the roof"
+          caption="Section sketch, a simple office building below; a lightweight expression on the roof"
           variant="sketch"
           capIdx="Fig. 13.1"
           capTitle="A simple office below, a lightweight crown above."
           kicker="§21 · The section"
           title="A simple office building, with a lightweight roof speaking to the city."
           body={<>
-            <p>In section, the building is disciplined to two things. Below: <strong>a simple office building</strong> — clean stacked plates, regular grid, no transfer structure. Above: <strong>a lightweight expression on the roof</strong> — the signal-box volume that speaks to the city and to the crossing the building is named for.</p>
+            <p>In section, the building is disciplined to two things. Below: <strong>a simple office building</strong>, clean stacked plates, regular grid, no transfer structure. Above: <strong>a lightweight expression on the roof</strong>, the signal-box volume that speaks to the city and to the crossing the building is named for.</p>
             <p>The poetry lives at the top. The plates below quietly earn their area. The two work because they are not asked to do each other's job.</p>
           </>}
         />
       ),
     },
     ...planComparisons.map((comp, i) => ({
-      label: `${comp.type} — A vs B`,
+      label: `${comp.type}. A vs B`,
       presentation: () => <PlanComparePage idx={i+1} total={planComparisons.length} comp={comp} />,
       report: () => <PlanComparePage idx={i+1} total={planComparisons.length} comp={comp} />,
     })),
@@ -2941,11 +2941,11 @@ const S13 = sectionPages(
       presentation: () => <SchedulePage schedule={scheduleB} pickAccent={true} />,
       report: () => <SchedulePage schedule={scheduleB} pickAccent={true} />,
     },
-    // "The opportunity at 1820" page removed — content folded into the Urban
+    // "The opportunity at 1820" page removed, content folded into the Urban
     // page below (tenant / building / city) to avoid duplication.
     // The four "offer" pages (café / lobby / floor plate / 1820 belvedere) removed.
     // ─────────────────────────────────────────────────────────────────────
-    //  THE FINALE — sustainable / efficient / urban / poetic, then the
+    //  THE FINALE, sustainable / efficient / urban / poetic, then the
     //  image crescendo. The first mark on this site was the canal, 1820;
     //  the final mark is the 1820 lookout standing over the crossing.
     // ─────────────────────────────────────────────────────────────────────
@@ -2970,8 +2970,8 @@ const S13 = sectionPages(
           kicker="§21 · Sustainable · 1820 Goods Way"
           title="1820 Goods Way is sustainable because of its discipline, not in spite of it."
           body={<>
-            <p>The building does not add sustainability to itself. It is sustainable because the design moves it makes are the right ones for <em>this site</em>. The slender extrusion avoids the transfer structure a cantilever would require above the Northern, Piccadilly, Victoria and Thameslink lines below. The absence of a basement removes the carbon-heaviest single line of the build, and respects the loading caps and the proximity of the canal wall. The brick is the same family that built King's Cross, with a design life over a hundred years. The signal house above is recycled aluminium — Hydro CIRCAL 75R, 75% recycled, embodied carbon a fraction of primary aluminium.</p>
-            <p>The numbers: ~<strong>380–490 kgCO₂e/m² GIA</strong> against a conventional baseline of 720–950 — LETI 2030 territory and comfortably within RIBA 2030. Every primary material has a defined recovery route. Brick recoverable through lime mortar. Aluminium infinitely recyclable. CLT reusable or biomass-recoverable. Steel at over 90% recycled-content recovery.</p>
+            <p>The building does not add sustainability to itself. It is sustainable because the design moves it makes are the right ones for <em>this site</em>. The slender extrusion avoids the transfer structure a cantilever would require above the Northern, Piccadilly, Victoria and Thameslink lines below. The absence of a basement removes the carbon-heaviest single line of the build, and respects the loading caps and the proximity of the canal wall. The brick is the same family that built King's Cross, with a design life over a hundred years. The signal house above is recycled aluminium. Hydro CIRCAL 75R, 75% recycled, embodied carbon a fraction of primary aluminium.</p>
+            <p>The numbers: ~<strong>380–490 kgCO₂e/m² GIA</strong> against a conventional baseline of 720–950. LETI 2030 territory and comfortably within RIBA 2030. Every primary material has a defined recovery route. Brick recoverable through lime mortar. Aluminium infinitely recyclable. CLT reusable or biomass-recoverable. Steel at over 90% recycled-content recovery.</p>
             <p>The first mark on this site was the canal, dug in 1820 for the working life of a city. The last mark is a building designed not to need replacing in our lifetime. <em>1820 Goods Way is sustainable because of the way it sits on this site, not because we added sustainability to it.</em></p>
           </>}
         />
@@ -2998,8 +2998,8 @@ const S13 = sectionPages(
           kicker="§21 · Efficient · 1820 Goods Way"
           title="1820 Goods Way earns its area through discipline, not architectural performance."
           body={<>
-            <p>On a tight site, every square metre has to work twice. Once on the way in: each square metre costs roughly the same to build. Once on the way out: each square metre that does not let earns nothing for the life of the building. The plan is the first thing to get right, and on this scheme the plan does the simplest possible thing — it follows the site boundary edge for edge, no chamfers, no formal gestures that subtract usable area. The boundary <em>is</em> the figure.</p>
-            <p>Above the plan, the section is a simple stacked extrusion. No transfer structure, no cantilever below the signal house. The eccentric core produces a single coherent floor plate without service breaks on the perimeter — daylight from three sides, the canal visible across the full canal elevation. The no-basement substructure removes the carbon-heaviest single line of the build and the longest item on the programme. The interactive calculator at the top of the toolbar quantifies the consequence of each of these moves, with a ±10% sensitivity band reflecting RIBA Stage 2 typical uncertainty.</p>
+            <p>On a tight site, every square metre has to work twice. Once on the way in: each square metre costs roughly the same to build. Once on the way out: each square metre that does not let earns nothing for the life of the building. The plan is the first thing to get right, and on this scheme the plan does the simplest possible thing, it follows the site boundary edge for edge, no chamfers, no formal gestures that subtract usable area. The boundary <em>is</em> the figure.</p>
+            <p>Above the plan, the section is a simple stacked extrusion. No transfer structure, no cantilever below the signal house. The eccentric core produces a single coherent floor plate without service breaks on the perimeter, daylight from three sides, the canal visible across the full canal elevation. The no-basement substructure removes the carbon-heaviest single line of the build and the longest item on the programme. The interactive calculator at the top of the toolbar quantifies the consequence of each of these moves, with a ±10% sensitivity band reflecting RIBA Stage 2 typical uncertainty.</p>
             <p>The efficiency is not a value-engineering compromise. <em>It is the design.</em></p>
           </>}
         />
@@ -3033,7 +3033,7 @@ const S13 = sectionPages(
               <span className="numlist__num">03</span>
               <div>
                 <div className="numlist__title">To the city</div>
-                <div className="numlist__desc">A café opens to the towpath. A 6 m ground floor reads as civic, not commercial. A route from Goods Way to the water. And above it all, King's Cross's first free public roof — a lookout from which the crossing of the canal of 1820 and the railway of 1852 can be read in one view.</div>
+                <div className="numlist__desc">A café opens to the towpath. A 6 m ground floor reads as civic, not commercial. A route from Goods Way to the water. And above it all, King's Cross's first free public roof, a lookout from which the crossing of the canal of 1820 and the railway of 1852 can be read in one view.</div>
               </div>
             </li>
           </ol>
@@ -3044,7 +3044,7 @@ const S13 = sectionPages(
           <Eyebrow>§21 · Urban · 1820 Goods Way</Eyebrow>
           <h2 className="h-title" style={{marginBottom: 8}}>1820 Goods Way gives back to the city it stands in.</h2>
           <div className="prose" style={{maxWidth: '78ch', marginBottom: 8}}>
-            <p>A building on this site can either occupy King's Cross or contribute to it. 1820 Goods Way is built around the second. The case is made in three ascending layers — what the building gives the tenant, what it gives itself, and what it gives the city — and the three layers reinforce each other rather than compete. <em>Not a tolerated commercial object. A contributor.</em></p>
+            <p>A building on this site can either occupy King's Cross or contribute to it. 1820 Goods Way is built around the second. The case is made in three ascending layers, what the building gives the tenant, what it gives itself, and what it gives the city, and the three layers reinforce each other rather than compete. <em>Not a tolerated commercial object. A contributor.</em></p>
           </div>
           <ol className="numlist">
             <li className="numlist__item">
@@ -3058,14 +3058,14 @@ const S13 = sectionPages(
               <span className="numlist__num">02</span>
               <div>
                 <div className="numlist__title">To the building</div>
-                <div className="numlist__desc">The 1820 belvedere is the building's moniker. The date the canal opened, written into the address itself. Address quality, rental tone, and planning hook all earned by a single small object at the top. Place premium £5–15/sqft = £225–675k p.a. of additional rent — capex recovered inside ten years, on London Plan D9(D) precedents.</div>
+                <div className="numlist__desc">The 1820 belvedere is the building's moniker. The date the canal opened, written into the address itself. Address quality, rental tone, and planning hook all earned by a single small object at the top. Place premium £5–15/sqft = £225–675k p.a. of additional rent, capex recovered inside ten years, on London Plan D9(D) precedents.</div>
               </div>
             </li>
             <li className="numlist__item">
               <span className="numlist__num">03</span>
               <div>
                 <div className="numlist__title">To the city</div>
-                <div className="numlist__desc">At canal level, a café opens to the towpath and a 6 m double-height ground floor reads as civic, not commercial — a public threshold rather than a corporate lobby. A direct route from Goods Way to the water passes through the building. Above, the 1820 belvedere is King's Cross's first free public roof — the lookout the masterplan once had on loan from Felice Varini's "Across the Buildings" (RELAY, 2007), now made permanent. A marker from which the crossing of the canal of 1820 and the railway of 1852 can be read in a single view. The small civic gift that turns a regeneration into a place.</div>
+                <div className="numlist__desc">At canal level, a café opens to the towpath and a 6 m double-height ground floor reads as civic, not commercial, a public threshold rather than a corporate lobby. A direct route from Goods Way to the water passes through the building. Above, the 1820 belvedere is King's Cross's first free public roof, the lookout the masterplan once had on loan from Felice Varini's "Across the Buildings" (RELAY, 2007), now made permanent. A marker from which the crossing of the canal of 1820 and the railway of 1852 can be read in a single view. The small civic gift that turns a regeneration into a place.</div>
               </div>
             </li>
           </ol>
@@ -3092,16 +3092,16 @@ const S13 = sectionPages(
           title="The last mark on the crossing the water made."
           body={<>
             <p>Every layer of this site has been a mark on a crossing. Battle Bridge over the River Fleet was the first. The canal, cut in 1820, gave the place its shape, its industry, and its name. The railway came in 1852 and crossed the canal in turn. The goods yard followed, then the lights going out, then the clubs and the long quiet, then Argent's masterplan and the slow re-knitting of the place. 1820 Goods Way is the last move on the last plot of that masterplan. The last mark.</p>
-            <p>The building is named for the first mark. The brick at canal level carries <em>1820 Goods Way</em>, recessed and carved into the engineering brick, read at arm's reach as you arrive on foot — the address as Victorian canal vocabulary. The aluminium at the skyline carries <em>the water came first</em>, perforated through the lightweight skin of the lookout — by day shadow and depth against bright metal, by night a soft lantern above the canal, legible from the bridges, the station, and Camley Street.</p>
-            <p>Two voices. One says where you are. The other says why the building is here. They do not reconcile and they are not meant to. The building speaks twice because the site has spoken to it twice — first as the crossing the water made, then as the city that grew around the water. 1820 Goods Way carries both into one quiet object.</p>
+            <p>The building is named for the first mark. The brick at canal level carries <em>1820 Goods Way</em>, recessed and carved into the engineering brick, read at arm's reach as you arrive on foot, the address as Victorian canal vocabulary. The aluminium at the skyline carries <em>the water came first</em>, perforated through the lightweight skin of the lookout, by day shadow and depth against bright metal, by night a soft lantern above the canal, legible from the bridges, the station, and Camley Street.</p>
+            <p>Two voices. One says where you are. The other says why the building is here. They do not reconcile and they are not meant to. The building speaks twice because the site has spoken to it twice, first as the crossing the water made, then as the city that grew around the water. 1820 Goods Way carries both into one quiet object.</p>
             <p><em>A simple, contextual office building, with a public offering of space. The last mark on the crossing the water made.</em></p>
           </>}
         />
       ),
     },
-    // ── IMAGE CRESCENDO — five views, building toward the climax ────────
+    // ── IMAGE CRESCENDO, five views, building toward the climax ────────
     //    01 distant · 02 wider · 03 approach · 04 lantern · 05 from the 1820
-    // Night CGI page removed — its overlay ("water came first / building
+    // Night CGI page removed, its overlay ("water came first / building
     // came last") restated the Poetic page on the previous slide, and the
     // atmospheric night view is now carried by the "At dusk, the lookout
     // lit" placeholder below.
@@ -3110,7 +3110,7 @@ const S13 = sectionPages(
       { slug: "02", view: "Within the King's Cross context.",                 sub: "Among the Gasholders, the Granary, Coal Drops Yard." },
       { slug: "03", view: "Arrival from Goods Way.",                          sub: "Brick at ground. 1820 Goods Way, carved into the wall." },
       { slug: "04", view: "At dusk, the lookout lit.",                        sub: "The water came first, perforated through the aluminium." },
-      { slug: "05", view: "From the 1820 — the crossing, in every direction.", sub: "Standing on the building. The city, in eyeshot." },
+      { slug: "05", view: "From the 1820, the crossing, in every direction.", sub: "Standing on the building. The city, in eyeshot." },
     ].map((s, i) => ({
       label: `1820 Goods Way · ${s.view}`,
       presentation: () => (
@@ -3136,7 +3136,7 @@ const S13 = sectionPages(
           capTitle={s.view}
           kicker={`§21 · 1820 Goods Way · final view ${i+1} of 5`}
           title={s.view}
-          body={<p>{s.sub} Placeholder — drop a final CGI / hero render onto the slot to populate.</p>}
+          body={<p>{s.sub} Placeholder, drop a final CGI / hero render onto the slot to populate.</p>}
         />
       ),
     })),
@@ -3144,7 +3144,7 @@ const S13 = sectionPages(
 );
 
 // ════════════════════════════════════════════════════════════════════════
-// §16 WORKING WITH US (consolidated — open questions, next steps, practice)
+// §16 WORKING WITH US (consolidated, open questions, next steps, practice)
 // 2 pages: one outlines what's next + what's open; one is the practice CV.
 // Positioned BEFORE the closing arc so the presentation doesn't fade out.
 // ════════════════════════════════════════════════════════════════════════
@@ -3153,7 +3153,7 @@ const workingOpenList = (
     {[
       ["Land cost & acquisition", "The commercial framework that determines what the site is worth."],
       ["Finance, rent, yield, tax", "The appraisal that converts the design proposition into a viable development."],
-      ["Detailed planning strategy", "Formal Camden and King's Cross DRP route — not yet pursued."],
+      ["Detailed planning strategy", "Formal Camden and King's Cross DRP route, not yet pursued."],
       ["Full viability appraisal", "QS appointment at RIBA Stage 2 and full cost plan."],
     ].map(([t, d], i) => (
       <li className="numlist__item" key={i}>
@@ -3188,9 +3188,9 @@ const workingNextSteps = (
 
 const awards = (
   <ul className="awards">
-    <li>British Homes Awards 2025 — four trophies, dual Architect of the Year</li>
-    <li>RIBA House of the Year — shortlisted three times</li>
-    <li>Stephen Lawrence Prize — shortlisted three times</li>
+    <li>British Homes Awards 2025, four trophies, dual Architect of the Year</li>
+    <li>RIBA House of the Year, shortlisted three times</li>
+    <li>Stephen Lawrence Prize, shortlisted three times</li>
     <li>BD Individual House Architect of the Year 2023</li>
   </ul>
 );
@@ -3241,7 +3241,7 @@ const S14 = sectionPages(
           <div className="two-col">
             <div className="prose tight">
               <p>Coffey Architects is a London-based practice founded in 2005, working across residential, cultural, and commercial sectors. Led by Founding Director Phil Coffey alongside Lee Marsden, Director of Delivery and Operations.</p>
-              <p>The practice has a portfolio of canal-side, infrastructure-adjacent and contextually sensitive projects across London — Holland Park Gate, 22 Handyside Street, The Tannery Bermondsey and Rich Estate among them.</p>
+              <p>The practice has a portfolio of canal-side, infrastructure-adjacent and contextually sensitive projects across London. Holland Park Gate, 22 Handyside Street, The Tannery Bermondsey and Rich Estate among them.</p>
               <p>We approach every project from the position that the site comes first.</p>
             </div>
             <div>
@@ -3265,11 +3265,11 @@ const S14 = sectionPages(
   ]
 );
 
-// S15 (Closing/1820 Goods Way) removed — content folded into S13 above.
+// S15 (Closing/1820 Goods Way) removed, content folded into S13 above.
 
 
 // ════════════════════════════════════════════════════════════════════════
-// §20 PARKING LOT (3 pages — pulled out earlier sections, kept for reference)
+// §20 PARKING LOT (3 pages, pulled out earlier sections, kept for reference)
 // ════════════════════════════════════════════════════════════════════════
 const S18 = sectionPages(
   { sectionNum: 20, sectionTitle: "Parking lot", sectionLabel: "Parking" },
@@ -3279,10 +3279,10 @@ const S18 = sectionPages(
       presentation: () => (
         <PresImage
           filename="six-moves-diagram.jpg"
-          caption="The single most important image of the pitch — to be hand-drawn"
+          caption="The single most important image of the pitch, to be hand-drawn"
           variant="diagram"
           capIdx="Fig. 6.0"
-          capTitle="Six architectural moves — diagrammatic section."
+          capTitle="Six architectural moves, diagrammatic section."
           capMeta="Parked · originally §07"
         />
       ),
@@ -3292,12 +3292,12 @@ const S18 = sectionPages(
           caption="Six architectural moves diagram"
           variant="diagram"
           capIdx="Fig. 6.0"
-          capTitle="Six architectural moves — diagrammatic section."
+          capTitle="Six architectural moves, diagrammatic section."
           kicker="§19 · Parked from §07 · Diagrammatic section"
           title="Six moves, located on the section."
           body={<>
             <p>Each move is the architectural consequence of the two principles. Together they make the building a contributor to King's Cross, not just an occupant of it.</p>
-            <p>The diagram on the left locates each move within the section of the building — from the public colonnade at canal level to the shared signal house lookout at the top.</p>
+            <p>The diagram on the left locates each move within the section of the building, from the public colonnade at canal level to the shared signal house lookout at the top.</p>
           </>}
         />
       ),
@@ -3326,9 +3326,9 @@ const S18 = sectionPages(
           <Eyebrow>§19 · Parked from §05 · Engineering</Eyebrow>
           <h2 className="h-title" style={{marginBottom: 12}}>Lightweight steel and CLT.</h2>
           <div className="pres-copy">
-            <p>— Tube lines below. Loading caps apply.</p>
-            <p>— Canal wall cannot carry load.</p>
-            <p>— Core concentrated on the eastern edge.</p>
+            <p>Tube lines below. Loading caps apply.</p>
+            <p>Canal wall cannot carry load.</p>
+            <p>Core concentrated on the eastern edge.</p>
             <p><em>The architecture follows the engineering.</em></p>
           </div>
         </div>
@@ -3336,15 +3336,15 @@ const S18 = sectionPages(
       report: () => (
         <ReportProse
           kicker="§19 · Parked from §05 · Lightweight frame"
-          title="Steel and CLT — the only realistic strategy."
+          title="Steel and CLT, the only realistic strategy."
           body={<>
             <ul>
-              <li><strong>Weight</strong> — 40–50% lighter than reinforced concrete, within achievable loading envelope above tube structures.</li>
-              <li><strong>Speed</strong> — 1.5–2 storeys/week, vs 1 storey/week for concrete; 12–16 week programme saving.</li>
-              <li><strong>Embodied carbon</strong> — 280–350 kgCO2e/m² GIA structure, vs 500–650 for RC; CLT provides biogenic sequestration.</li>
-              <li><strong>Acoustic + fire</strong> — modern CLT specifications meet all commercial office requirements with appropriate topping, sprinkler protection, and non-combustible cladding.</li>
+              <li><strong>Weight</strong>, 40–50% lighter than reinforced concrete, within achievable loading envelope above tube structures.</li>
+              <li><strong>Speed</strong>, 1.5–2 storeys/week, vs 1 storey/week for concrete; 12–16 week programme saving.</li>
+              <li><strong>Embodied carbon</strong>, 280–350 kgCO2e/m² GIA structure, vs 500–650 for RC; CLT provides biogenic sequestration.</li>
+              <li><strong>Acoustic + fire</strong>, modern CLT specifications meet all commercial office requirements with appropriate topping, sprinkler protection, and non-combustible cladding.</li>
             </ul>
-            <p>This produces the <strong>eccentric core</strong> arrangement that defines the architectural plan — the lettable plate to the west is freed as a single coherent open volume.</p>
+            <p>This produces the <strong>eccentric core</strong> arrangement that defines the architectural plan, the lettable plate to the west is freed as a single coherent open volume.</p>
           </>}
         />
       ),
@@ -3353,7 +3353,7 @@ const S18 = sectionPages(
 );
 
 // ════════════════════════════════════════════════════════════════════════
-// §06 A CONSIDERED INTERVENTION (60 pages) — site photographs, sketched over
+// §06 A CONSIDERED INTERVENTION (60 pages), site photographs, sketched over
 // ════════════════════════════════════════════════════════════════════════
 
 // Small per-photo titles, sitting where "Title to follow" used to be.
@@ -3419,7 +3419,7 @@ const INTERVENTION_TITLES = {
   60: "Boats and trees beneath the glass.",
 };
 
-// §06 — Site Walk (was "A Considered Intervention" + standalone Site Walk;
+// §06. Site Walk (was "A Considered Intervention" + standalone Site Walk;
 // merged into a single section: title page + 58 site-walk photographs +
 // the "What we learnt" closer). The Vision section (was §07) is gone.
 const SInter = sectionPages(
@@ -3459,7 +3459,7 @@ const SInter = sectionPages(
       ),
     };
   }),
-    // Closer — "What we learnt from the site walk" (was the §08 Site Walk
+    // Closer, "What we learnt from the site walk" (was the §08 Site Walk
     // section's second page; folded in here at the end of the sequence).
     {
       label: "What we learnt from the site walk",
@@ -3472,7 +3472,7 @@ const SInter = sectionPages(
               "The building sits alone. It is distinct.",
               "We see the building firstly as an artifact of the canal, not of the street.",
               "The canal life and boats can bring real activity to the ground plane.",
-              "The building can act as a hinge — improving the canal to the east and the undercroft of the bridge.",
+              "The building can act as a hinge, improving the canal to the east and the undercroft of the bridge.",
               "The top of the building is highly visible. It can be seen from far away.",
             ].map((t, i) => (
               <li className="numlist__item" key={i}>
@@ -3495,7 +3495,7 @@ const SInter = sectionPages(
               "The building sits alone. It is distinct.",
               "We see the building firstly as an artifact of the canal, not of the street.",
               "The canal life and boats can bring real activity to the ground plane.",
-              "The building can act as a hinge — improving the canal to the east and the undercroft of the bridge.",
+              "The building can act as a hinge, improving the canal to the east and the undercroft of the bridge.",
               "The top of the building is highly visible. It can be seen from far away.",
             ].map((t, i) => (
               <li className="numlist__item" key={i}>
@@ -3511,7 +3511,7 @@ const SInter = sectionPages(
 );
 
 // ═══════════════════════════════════════════════════════════════════════
-// NEW SEQUENCE (§08–§16) — inserted between §07 Vision and the existing
+// NEW SEQUENCE (§08–§16), inserted between §07 Vision and the existing
 // "Family options" section. These nine sections present the studio's
 // process and the two preferred directions. Existing sections from
 // "Family options" onwards retain their content but were renumbered +9.
@@ -3538,7 +3538,7 @@ const SSiteWalk = sectionPages(
               "The building sits alone. It is distinct.",
               "We see the building firstly as an artifact of the canal, not of the street.",
               "The canal life and boats can bring real activity to the ground plane.",
-              "The building can act as a hinge — improving the canal to the east and the undercroft of the bridge.",
+              "The building can act as a hinge, improving the canal to the east and the undercroft of the bridge.",
               "The top of the building is highly visible. It can be seen from far away.",
             ].map((t, i) => (
               <li className="numlist__item" key={i}>
@@ -3561,7 +3561,7 @@ const SSiteWalk = sectionPages(
               "The building sits alone. It is distinct.",
               "We see the building firstly as an artifact of the canal, not of the street.",
               "The canal life and boats can bring real activity to the ground plane.",
-              "The building can act as a hinge — improving the canal to the east and the undercroft of the bridge.",
+              "The building can act as a hinge, improving the canal to the east and the undercroft of the bridge.",
               "The top of the building is highly visible. It can be seen from far away.",
             ].map((t, i) => (
               <li className="numlist__item" key={i}>
@@ -3587,7 +3587,7 @@ const SChallenge = sectionPages(
       report:       () => <Divider range="§07" title="The Challenge." sub="What this building is being asked to do." />,
     },
     {
-      label: "The Challenge — statement",
+      label: "The Challenge, statement",
       presentation: () => (
         <PresStatement
           kicker="§07 · The Challenge"
@@ -3605,7 +3605,7 @@ const SChallenge = sectionPages(
           title="A boutique, simple, viable office building with meaning."
           body={<>
             <p>The brief, in a single sentence: to make a boutique, simple, viable office building that has meaning and brings joy to its tenants and to the public, on this important site where the canal and railways cross. To honour a sensitive and important place.</p>
-            <p>Every word in that sentence carries weight. <em>Boutique</em> — the segment the building is built for, where every square metre has to earn itself. <em>Simple</em> — discipline at the plan, no architectural gymnastics. <em>Viable</em> — the numbers have to work. <em>Meaning</em> — the building has to be more than a frame for rent. <em>Joy</em> — for the tenant inside, and the city outside. <em>Honour</em> — to a site that has been a working crossing since 1820, and a part of London's history far longer than that.</p>
+            <p>Every word in that sentence carries weight. <em>Boutique</em>, the segment the building is built for, where every square metre has to earn itself. <em>Simple</em>, discipline at the plan, no architectural gymnastics. <em>Viable</em>, the numbers have to work. <em>Meaning</em>, the building has to be more than a frame for rent. <em>Joy</em>, for the tenant inside, and the city outside. <em>Honour</em>, to a site that has been a working crossing since 1820, and a part of London's history far longer than that.</p>
           </>}
         />
       ),
@@ -3624,12 +3624,12 @@ const SChallenge = sectionPages(
             Whole floor. 500/600 m².
           </div>
           <div style={{flex: 1, minHeight: 0, display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 36, alignItems: 'start'}}>
-            {/* LEFT — three stat tiles stacked vertically */}
+            {/* LEFT, three stat tiles stacked vertically */}
             <div style={{display: 'flex', flexDirection: 'column', gap: 14}}>
               {[
-                { v: "~50%",       l: "of central London supply is sub-5,000 sqft", s: "Savills, Q4 2025 — the boutique segment is structurally short." },
+                { v: "~50%",       l: "of central London supply is sub-5,000 sqft", s: "Savills, Q4 2025, the boutique segment is structurally short." },
                 { v: "£200–296",   l: "per sqft on fully-managed boutique floors",   s: "170 Piccadilly, 141 Wardour, GPE H2 2025 deals." },
-                { v: "450k sqft",  l: "AI lettings in London — May 2026 alone",      s: ">10× the 2025 monthly average. King's Cross is the cluster." },
+                { v: "450k sqft",  l: "AI lettings in London. May 2026 alone",      s: ">10× the 2025 monthly average. King's Cross is the cluster." },
               ].map((s, i) => (
                 <div key={i} style={{borderLeft: '2px solid var(--accent)', paddingLeft: 14, display: 'flex', flexDirection: 'column', gap: 4}}>
                   <div className="mono" style={{fontSize: 22, color: 'var(--accent)', fontWeight: 500, letterSpacing: 0.02}}>{s.v}</div>
@@ -3638,7 +3638,7 @@ const SChallenge = sectionPages(
                 </div>
               ))}
             </div>
-            {/* RIGHT — segment list */}
+            {/* RIGHT, segment list */}
             <div style={{display: 'flex', flexDirection: 'column', gap: 10}}>
               <div className="mono" style={{fontSize: 11, color: 'var(--accent)', letterSpacing: 0.18, textTransform: 'uppercase'}}>Who's in the segment</div>
               <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8, fontSize: 13, color: 'var(--fg)', lineHeight: 1.4}}>
@@ -3651,7 +3651,7 @@ const SChallenge = sectionPages(
                   "International UK headquarters",
                 ].map((t, i) => (
                   <li key={i} style={{paddingLeft: 16, position: 'relative'}}>
-                    <span style={{position: 'absolute', left: 0, color: 'var(--accent)'}}>—</span>
+                    <span style={{position: 'absolute', left: 0, color: 'var(--accent)'}}>, </span>
                     {t}
                   </li>
                 ))}
@@ -3659,7 +3659,7 @@ const SChallenge = sectionPages(
             </div>
           </div>
           <div className="mono" style={{fontSize: 11, color: 'var(--fg-dim)', letterSpacing: 0.04, marginTop: 16, paddingTop: 12, borderTop: '1px solid var(--rule-soft)'}}>
-            Full workings — comparables, supply, tenant profiles, building-to-tenant match — on the <strong style={{color: 'var(--accent)'}}>500/600 · Who is the tenant?</strong> tab (top toolbar).
+            Full workings, comparables, supply, tenant profiles, building-to-tenant match, on the <strong style={{color: 'var(--accent)'}}>500/600 · Who is the tenant?</strong> tab (top toolbar).
           </div>
         </div>
       ),
@@ -3668,12 +3668,12 @@ const SChallenge = sectionPages(
           <Eyebrow>§07 · The Challenge · Who is the tenant?</Eyebrow>
           <h2 className="h-title" style={{marginBottom: 8}}>Whole floor. 500–600 m².</h2>
           <div className="prose tight" style={{maxWidth: '78ch'}}>
-            <p>The tenant case sits behind every floor-plate decision the building makes. Both directions on the pages that follow — Canopy at ~600 m², Signal Box at ~500 m² — land in the same lettable segment. <em>The choice between them is design-led, not market-led.</em></p>
-            <p><strong>The segment is structurally short.</strong> Sub-5,000 sqft accounts for roughly half of central London's office supply (Savills Q4 2025) — and whole-floor boutique is the part of that share that's hardest to find. Best-in-class fully-managed deals in the boutique band are clearing at £200–£296 / sqft (170 Piccadilly, 141 Wardour, GPE H2 2025) — premium per-sqft tolerance from tenants who value a floor of their own.</p>
-            <p><strong>King's Cross is the cluster.</strong> AI lettings in London reached 450,000 sqft in May 2026 alone — more than ten times the 2025 monthly average — and OpenAI's first permanent UK office (88,500 sqft) opened here in April. The boutique floors sit underneath the very-large lettings: the Series B–C tech, the AI scale-ups below the top tier, the creative practices that brand the building as theirs. Plus the older boutique tenants — specialist finance, architecture, design, international UK HQs — who want the character without the floor count.</p>
-            <p>Both 500 m² and 600 m² satisfy the same fundamentals: whole-floor letting, three-sided daylight, a coherent open plate, a building that reads as a place. The 600 m² Canopy version trades structural complexity for area; the 500 m² Signal Box version trades area for slenderness and a simpler section. <em>The market answer is the same in both — the architectural answer is what we are here to discuss.</em></p>
+            <p>The tenant case sits behind every floor-plate decision the building makes. Both directions on the pages that follow. Canopy at ~600 m², Signal Box at ~500 m², land in the same lettable segment. <em>The choice between them is design-led, not market-led.</em></p>
+            <p><strong>The segment is structurally short.</strong> Sub-5,000 sqft accounts for roughly half of central London's office supply (Savills Q4 2025), and whole-floor boutique is the part of that share that's hardest to find. Best-in-class fully-managed deals in the boutique band are clearing at £200–£296 / sqft (170 Piccadilly, 141 Wardour, GPE H2 2025), premium per-sqft tolerance from tenants who value a floor of their own.</p>
+            <p><strong>King's Cross is the cluster.</strong> AI lettings in London reached 450,000 sqft in May 2026 alone, more than ten times the 2025 monthly average, and OpenAI's first permanent UK office (88,500 sqft) opened here in April. The boutique floors sit underneath the very-large lettings: the Series B–C tech, the AI scale-ups below the top tier, the creative practices that brand the building as theirs. Plus the older boutique tenants, specialist finance, architecture, design, international UK HQs, who want the character without the floor count.</p>
+            <p>Both 500 m² and 600 m² satisfy the same fundamentals: whole-floor letting, three-sided daylight, a coherent open plate, a building that reads as a place. The 600 m² Canopy version trades structural complexity for area; the 500 m² Signal Box version trades area for slenderness and a simpler section. <em>The market answer is the same in both, the architectural answer is what we are here to discuss.</em></p>
             <p className="mono" style={{fontSize: 11, color: 'var(--fg-dim)', letterSpacing: 0.04, marginTop: 12}}>
-              Full workings — comparables, supply data, tenant profiles, building-to-tenant matching — on the <strong style={{color: 'var(--accent)'}}>500/600 · Who is the tenant?</strong> tab in the top toolbar.
+              Full workings, comparables, supply data, tenant profiles, building-to-tenant matching, on the <strong style={{color: 'var(--accent)'}}>500/600 · Who is the tenant?</strong> tab in the top toolbar.
             </p>
           </div>
         </div>
@@ -3703,7 +3703,7 @@ const SFiveFamilies = sectionPages(
       report:       () => <Divider range="§08" title="Five Families." sub="Five conceptual directions, each tested in physical model." />,
     },
     ...fiveFamilies.flatMap((f, i) => {
-      // Concept page — single landscape image by default. Some families
+      // Concept page, single landscape image by default. Some families
       // get a paired layout instead (photo + sketch side-by-side). The
       // pairConfig sets WHICH slot sits on which side per family.
       //   Signal Box: photo left,  sketch right
@@ -3717,10 +3717,10 @@ const SFiveFamilies = sectionPages(
       const renderPair = () => (
         <div style={{flex: 1, minHeight: 0, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18}}>
           <div style={{display: 'flex', minHeight: 0, minWidth: 0}}>
-            <Placeholder filename={`family-${f.slug}-concept-${pair.left}.jpg`} caption={`${f.title.replace('.', '')} — ${pair.left} (landscape, left of pair)`} variant={pair.left} aspect="3/2" />
+            <Placeholder filename={`family-${f.slug}-concept-${pair.left}.jpg`} caption={`${f.title.replace('.', '')}, ${pair.left} (landscape, left of pair)`} variant={pair.left} aspect="3/2" />
           </div>
           <div style={{display: 'flex', minHeight: 0, minWidth: 0}}>
-            <Placeholder filename={`family-${f.slug}-concept-${pair.right}.jpg`} caption={`${f.title.replace('.', '')} — ${pair.right} (landscape, right of pair)`} variant={pair.right} aspect="3/2" />
+            <Placeholder filename={`family-${f.slug}-concept-${pair.right}.jpg`} caption={`${f.title.replace('.', '')}, ${pair.right} (landscape, right of pair)`} variant={pair.right} aspect="3/2" />
           </div>
         </div>
       );
@@ -3735,7 +3735,7 @@ const SFiveFamilies = sectionPages(
             </div>
             {isPair ? renderPair() : (
               <div style={{flex: 1, minHeight: 0, display: 'flex'}}>
-                <Placeholder filename={`family-${f.slug}-concept.jpg`} caption={`${f.title.replace('.', '')} — concept image (landscape)`} variant="photo" aspect="3/2" />
+                <Placeholder filename={`family-${f.slug}-concept.jpg`} caption={`${f.title.replace('.', '')}, concept image (landscape)`} variant="photo" aspect="3/2" />
               </div>
             )}
           </div>
@@ -3749,7 +3749,7 @@ const SFiveFamilies = sectionPages(
             </div>
             {isPair ? renderPair() : (
               <div style={{flex: 1, minHeight: 0, display: 'flex'}}>
-                <Placeholder filename={`family-${f.slug}-concept.jpg`} caption={`${f.title.replace('.', '')} — concept image (landscape)`} variant="photo" aspect="3/2" />
+                <Placeholder filename={`family-${f.slug}-concept.jpg`} caption={`${f.title.replace('.', '')}, concept image (landscape)`} variant="photo" aspect="3/2" />
               </div>
             )}
           </div>
@@ -3762,11 +3762,11 @@ const SFiveFamilies = sectionPages(
         presentation: () => (
           <div className="pc-stmt" style={{maxWidth: 'none', width: '100%'}}>
             <Eyebrow>§08 · Five Families · {i+1} of 5 · Models</Eyebrow>
-            <h2 className="h-sub" style={{marginBottom: 14}}>{f.title} <span style={{color: 'var(--fg-dim)', fontWeight: 400}}>— in model.</span></h2>
+            <h2 className="h-sub" style={{marginBottom: 14}}>{f.title} <span style={{color: 'var(--fg-dim)', fontWeight: 400}}>in model.</span></h2>
             <div style={{flex: 1, minHeight: 0, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14}}>
               {[1,2,3].map((n) => (
                 <div key={n} style={{display: 'flex', minHeight: 0, minWidth: 0}}>
-                  <Placeholder filename={`family-${f.slug}-model-0${n}.jpg`} caption={`${f.title.replace('.', '')} model ${n} of 3 — landscape photo`} variant="model" number={String(n)} aspect="3/2" />
+                  <Placeholder filename={`family-${f.slug}-model-0${n}.jpg`} caption={`${f.title.replace('.', '')} model ${n} of 3, landscape photo`} variant="model" number={String(n)} aspect="3/2" />
                 </div>
               ))}
             </div>
@@ -3775,11 +3775,11 @@ const SFiveFamilies = sectionPages(
         report: () => (
           <div className="pc-stmt" style={{maxWidth: 'none', width: '100%'}}>
             <Eyebrow>§08 · Five Families · {i+1} of 5 · Models</Eyebrow>
-            <h2 className="h-sub" style={{marginBottom: 12}}>{f.title} <span style={{color: 'var(--fg-dim)', fontWeight: 400}}>— in model.</span></h2>
+            <h2 className="h-sub" style={{marginBottom: 12}}>{f.title} <span style={{color: 'var(--fg-dim)', fontWeight: 400}}>in model.</span></h2>
             <div style={{flex: 1, minHeight: 0, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14}}>
               {[1,2,3].map((n) => (
                 <div key={n} style={{display: 'flex', minHeight: 0, minWidth: 0}}>
-                  <Placeholder filename={`family-${f.slug}-model-0${n}.jpg`} caption={`${f.title.replace('.', '')} model ${n} of 3 — landscape photo`} variant="model" number={String(n)} aspect="3/2" />
+                  <Placeholder filename={`family-${f.slug}-model-0${n}.jpg`} caption={`${f.title.replace('.', '')} model ${n} of 3, landscape photo`} variant="model" number={String(n)} aspect="3/2" />
                 </div>
               ))}
             </div>
@@ -3793,10 +3793,10 @@ const SFiveFamilies = sectionPages(
 // ── §11 Five Viability Questions ────────────────────────────────────────
 const viabilityQs = [
   { title: "Eccentric core.",                         sub: "One coherent plate, daylight from three sides." },
-  { title: "Extended floor plate — support or hang?", sub: "Cantilever from below, or suspend from above." },
+  { title: "Extended floor plate, support or hang?", sub: "Cantilever from below, or suspend from above." },
   { title: "Basement.",                               sub: "Plant below, or lift it to a mezzanine and free the ground." },
   { title: "Build to the canal wall.",                sub: "How far do we go? What does it mean for the towpath?" },
-  { title: "Two staircases — height versus efficiency.", sub: "Code-driven, but every metre of core costs lettable area." },
+  { title: "Two staircases, height versus efficiency.", sub: "Code-driven, but every metre of core costs lettable area." },
 ];
 
 const SViabilityQs = sectionPages(
@@ -3818,7 +3818,7 @@ const SViabilityQs = sectionPages(
             {q.sub}
           </div>
           <div style={{flex: 1, minHeight: 0, display: 'flex'}}>
-            <Placeholder filename={`viability-q${i+1}-${slugify(q.title)}.jpg`} caption={`Question ${i+1} — ${q.title.replace('.', '')} — diagram or study image`} variant="diagram" aspect="16/9" />
+            <Placeholder filename={`viability-q${i+1}-${slugify(q.title)}.jpg`} caption={`Question ${i+1}, ${q.title.replace('.', '')}, diagram or study image`} variant="diagram" aspect="16/9" />
           </div>
         </div>
       ),
@@ -3830,7 +3830,7 @@ const SViabilityQs = sectionPages(
             <p>{q.sub}</p>
           </div>
           <div style={{flex: 1, minHeight: 0, display: 'flex'}}>
-            <Placeholder filename={`viability-q${i+1}-${slugify(q.title)}.jpg`} caption={`Question ${i+1} — ${q.title.replace('.', '')} — diagram or study image`} variant="diagram" aspect="16/9" />
+            <Placeholder filename={`viability-q${i+1}-${slugify(q.title)}.jpg`} caption={`Question ${i+1}, ${q.title.replace('.', '')}, diagram or study image`} variant="diagram" aspect="16/9" />
           </div>
         </div>
       ),
@@ -3854,7 +3854,7 @@ const SBuildingTooLong = sectionPages(
       presentation: () => (
         <div style={{display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 1fr', gap: 36, height: '100%', minHeight: 0, alignItems: 'stretch'}}>
           <div style={{display: 'flex', minHeight: 0, minWidth: 0}}>
-            <Placeholder filename="too-long-square.jpg" caption="The Building is too long? — square image (sketch, model, diagram or photo of the crossing)" variant="sketch" aspect="1/1" />
+            <Placeholder filename="too-long-square.jpg" caption="The Building is too long?, square image (sketch, model, diagram or photo of the crossing)" variant="sketch" aspect="1/1" />
           </div>
           <div className="pc-stmt" style={{maxWidth: 'none', width: '100%', justifyContent: 'center'}}>
             <Eyebrow>§10 · The tension</Eyebrow>
@@ -3862,8 +3862,8 @@ const SBuildingTooLong = sectionPages(
             <div className="prose" style={{maxWidth: '46ch', fontSize: 16, color: 'var(--fg)', display: 'flex', flexDirection: 'column', gap: 10}}>
               <p>The site sits where the canal and railway cross. The building's job is to mark that crossing, not block it.</p>
               <p><em>How much do we fill the undercroft, and how much do we leave open?</em></p>
-              <p>The 1820 room and the public café — up high as a marker, or low at the ground as a threshold?</p>
-              <p>A public space at the building's foot — or under it.</p>
+              <p>Activate the crossing through public use.</p>
+              <p>Either a sheltered public space at the ground, or higher in the sky.</p>
             </div>
           </div>
         </div>
@@ -3871,15 +3871,15 @@ const SBuildingTooLong = sectionPages(
       report: () => (
         <div style={{display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 1fr', gap: 36, height: '100%', minHeight: 0, alignItems: 'stretch'}}>
           <div style={{display: 'flex', minHeight: 0, minWidth: 0}}>
-            <Placeholder filename="too-long-square.jpg" caption="The Building is too long? — square image (sketch, model, diagram or photo of the crossing)" variant="sketch" aspect="1/1" />
+            <Placeholder filename="too-long-square.jpg" caption="The Building is too long?, square image (sketch, model, diagram or photo of the crossing)" variant="sketch" aspect="1/1" />
           </div>
           <div className="pc-stmt" style={{maxWidth: 'none', width: '100%', justifyContent: 'center'}}>
-            <Eyebrow>§10 · The tension — marking without obstructing</Eyebrow>
+            <Eyebrow>§10 · The tension, marking without obstructing</Eyebrow>
             <h2 className="h-title" style={{marginBottom: 10}}>The building has to mark the crossing without obstructing it.</h2>
             <div className="prose tight" style={{maxWidth: '52ch'}}>
               <p>The client raised it directly; the planners echo the concern. The building sits at the point where the canal and the railway cross, and a long volume sitting on the full plot risks obstructing that crossing rather than marking it. The question, in design terms, is one of balance.</p>
-              <p>Three sub-questions follow. <strong>The undercroft</strong>: fill it, or leave it open as a public passage between Goods Way and the towpath? <strong>The 1820 room and the café</strong>: up high as a marker visible from the city, or low at the ground as a public threshold? <strong>The public space</strong>: at the building's foot, around it, or carved underneath it as a sheltered civic room?</p>
-              <p>The two directions on the pages that follow — Canopy and Signal Box — answer this question differently. Both mark the crossing. They differ in how they treat the space below.</p>
+              <p>Two sub-questions follow. <strong>The undercroft</strong>: fill it, or leave it open as a public passage between Goods Way and the towpath? <strong>Activating the crossing through public use</strong>: at the ground as a sheltered civic threshold, or higher in the sky as a public room that gives the building's height back to the city.</p>
+              <p>The two directions on the pages that follow, Canopy and Signal Box, answer this question differently. Both mark the crossing. They differ in how they treat the space, and where the public use sits.</p>
             </div>
           </div>
         </div>
@@ -3888,37 +3888,39 @@ const SBuildingTooLong = sectionPages(
   ]
 );
 
-// ── §13 Two Chosen Directions ───────────────────────────────────────────
+// ── §11 Two studies, further explored ──────────────────────────────────
+// Deliberately tentative framing, we are exploring two directions in
+// parallel, not committing to one. The "chosen" language was too strong.
 const STwoChosen = sectionPages(
-  { sectionNum: 11, sectionTitle: "Two Chosen Directions", sectionLabel: "Two Directions" },
+  { sectionNum: 11, sectionTitle: "Two studies, further explored", sectionLabel: "Two studies" },
   [
     {
-      label: "Two Chosen Directions (title)",
+      label: "Two studies, further explored (title)",
       isDivider: true,
-      presentation: () => <Divider range="§11" title="Two Chosen Directions." sub="Canopy and Signal Box. One brief. Two answers." />,
-      report:       () => <Divider range="§11" title="Two Chosen Directions." sub="Canopy and Signal Box. One brief. Two answers." />,
+      presentation: () => <Divider range="§11" title="Two studies, further explored." sub="Canopy and Signal Box. One brief. Two open answers." />,
+      report:       () => <Divider range="§11" title="Two studies, further explored." sub="Canopy and Signal Box. One brief. Two open answers." />,
     },
     {
-      label: "Two Directions — Canopy and Signal Box",
+      label: "Two Directions. Canopy and Signal Box",
       presentation: () => (
         <div style={{display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 1fr', gap: 36, height: '100%', minHeight: 0, alignItems: 'stretch'}}>
           <div style={{display: 'flex', minHeight: 0, minWidth: 0}}>
-            <Placeholder filename="two-directions-sketch.jpg" caption="Two directions — landscape sketch (Canopy reaching to the canal; Signal Box marking the crossing from above)" variant="sketch" aspect="4/3" />
+            <Placeholder filename="two-directions-sketch.jpg" caption="Two directions, landscape sketch (Canopy reaching to the canal; Signal Box marking the crossing from above)" variant="sketch" aspect="4/3" />
           </div>
           <div className="pc-stmt" style={{maxWidth: 'none', width: '100%', justifyContent: 'center'}}>
-            <Eyebrow>§11 · Two Directions</Eyebrow>
+            <Eyebrow>§11 · Two studies</Eyebrow>
             <h2 className="h-title" style={{marginBottom: 14}}>Two ways to mark the crossing.</h2>
             <div className="prose" style={{maxWidth: '48ch', fontSize: 15, color: 'var(--fg)', display: 'flex', flexDirection: 'column', gap: 12}}>
               <div>
                 <div className="mono" style={{fontSize: 11, letterSpacing: 0.18, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 4}}>Canopy</div>
-                <p>The building looks at the base. A canopy at canal level brings the building into relationship with canal life — boats, the towpath, the under-the-bridge crossing made navigable.</p>
+                <p>The building looks at the base. A canopy at canal level brings the building into relationship with canal life, boats, the towpath, the under-the-bridge crossing made navigable.</p>
               </div>
               <div>
                 <div className="mono" style={{fontSize: 11, letterSpacing: 0.18, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 4}}>Signal Box</div>
-                <p>The building looks up. A marker at the crossing — of the canal of 1820 and the railway of 1852 — but the public destination is high: the lookout above.</p>
+                <p>The building looks up. A marker at the crossing, of the canal of 1820 and the railway of 1852, but the public destination is high: the lookout above.</p>
               </div>
               <p className="mono" style={{fontSize: 11, color: 'var(--fg-dim)', letterSpacing: 0.04}}>
-                Beneath both: the same office. Eccentric core, two stairs, 80–83% efficient, 5,300–6,000 sqft plates, three-sided daylight.
+                Beneath both: the same office. Eccentric core, two stairs, ~80–81% efficient, 5,300–6,000 sqft plates, three-sided daylight.
               </p>
             </div>
           </div>
@@ -3927,15 +3929,15 @@ const STwoChosen = sectionPages(
       report: () => (
         <div style={{display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 1fr', gap: 36, height: '100%', minHeight: 0, alignItems: 'stretch'}}>
           <div style={{display: 'flex', minHeight: 0, minWidth: 0}}>
-            <Placeholder filename="two-directions-sketch.jpg" caption="Two directions — landscape sketch (Canopy reaching to the canal; Signal Box marking the crossing from above)" variant="sketch" aspect="4/3" />
+            <Placeholder filename="two-directions-sketch.jpg" caption="Two directions, landscape sketch (Canopy reaching to the canal; Signal Box marking the crossing from above)" variant="sketch" aspect="4/3" />
           </div>
           <div className="pc-stmt" style={{maxWidth: 'none', width: '100%', justifyContent: 'center'}}>
-            <Eyebrow>§11 · Two Directions</Eyebrow>
+            <Eyebrow>§11 · Two studies</Eyebrow>
             <h2 className="h-title" style={{marginBottom: 10}}>Two ways to mark the crossing.</h2>
             <div className="prose tight" style={{maxWidth: '52ch'}}>
-              <p>Beneath both directions is the same optimised office: eccentric core, two stairs, 80–83% efficient, 5,300–6,000 sqft plates, three-sided daylight. The office building is settled. <em>What changes is how the building activates the crossing it sits on.</em></p>
-              <p><strong>Canopy</strong> looks at the base. A canopy at canal level brings the building into relationship with canal life — the boats, the towpath, the under-the-bridge crossing made navigable. The destination is the ground.</p>
-              <p><strong>Signal Box</strong> looks up. A marker at the crossing of the canal of 1820 and the railway of 1852 — but the public destination is high: the lookout above, from which the whole crossing can be read in one view.</p>
+              <p>Beneath both directions is the same optimised office: eccentric core, two stairs, ~80–81% efficient, 5,300–6,000 sqft plates, three-sided daylight. The office building is settled. <em>What changes is how the building activates the crossing it sits on.</em></p>
+              <p><strong>Canopy</strong> looks at the base. A canopy at canal level brings the building into relationship with canal life, the boats, the towpath, the under-the-bridge crossing made navigable. The destination is the ground.</p>
+              <p><strong>Signal Box</strong> looks up. A marker at the crossing of the canal of 1820 and the railway of 1852, but the public destination is high: the lookout above, from which the whole crossing can be read in one view.</p>
               <p>The next two sections develop each in turn, on the same set of pages.</p>
             </div>
           </div>
@@ -3945,17 +3947,148 @@ const STwoChosen = sectionPages(
   ]
 );
 
+// ── Area schedule data ─────────────────────────────────────────────────
+// Drawn from the Stage 2 area schedules supplied by the team. Used by
+// §12 Canopy (G+6), §13 Signal Box study (G+8), §14 Our Direction
+// (G+10 both options) and §17 Appendix (previously consented scheme).
+// Ground floor sits at +22.98 m AOD on site; heights derive from there.
+const CANOPY_G6_SCHEDULE = {
+  totals: { gea: 7341, gia: 6119, nia: 4518, eff: "74%" },
+  rows: [
+    { lvl: "Roof",      gea: 837, gia: 776, nia: 316, eff: null,  use: "Amenities & plant" },
+    { lvl: "6F",        gea: 837, gia: 776, nia: 629, eff: "81%", use: "Office" },
+    { lvl: "5F",        gea: 837, gia: 776, nia: 629, eff: "81%", use: "Office" },
+    { lvl: "4F",        gea: 837, gia: 776, nia: 629, eff: "81%", use: "Office" },
+    { lvl: "3F",        gea: 837, gia: 776, nia: 629, eff: "81%", use: "Office" },
+    { lvl: "2F",        gea: 837, gia: 776, nia: 629, eff: "81%", use: "Office" },
+    { lvl: "1F",        gea: 837, gia: 776, nia: 629, eff: "81%", use: "Office" },
+    { lvl: "Mezzanine", gea: 741, gia: null, nia: null, eff: null, use: "Plant" },
+    { lvl: "Ground",    gea: 741, gia: 687, nia: 428, eff: "62%", use: "Lobby" },
+  ],
+  note: "G+6. No basement. Roof at 54.53 m AOD (31.55 m from ground).",
+};
+const SIGNAL_BOX_G8_SCHEDULE = {
+  totals: { gea: 7954, gia: 6731, nia: 4964, eff: "74%" },
+  rows: [
+    { lvl: "Roof",      gea: 872, gia: 804, nia: 355, eff: null,  use: "Amenities & plant" },
+    { lvl: "8F",        gea: 709, gia: 660, nia: 526, eff: "80%", use: "Office" },
+    { lvl: "7F",        gea: 709, gia: 660, nia: 526, eff: "80%", use: "Office" },
+    { lvl: "6F",        gea: 709, gia: 660, nia: 526, eff: "80%", use: "Office" },
+    { lvl: "5F",        gea: 709, gia: 660, nia: 526, eff: "80%", use: "Office" },
+    { lvl: "4F",        gea: 709, gia: 660, nia: 526, eff: "80%", use: "Office" },
+    { lvl: "3F",        gea: 709, gia: 660, nia: 526, eff: "80%", use: "Office" },
+    { lvl: "2F",        gea: 709, gia: 660, nia: 526, eff: "80%", use: "Office" },
+    { lvl: "1F",        gea: 709, gia: 660, nia: 526, eff: "80%", use: "Office" },
+    { lvl: "Mezzanine", gea: 705, gia: null, nia: null, eff: null, use: "Plant" },
+    { lvl: "Ground",    gea: 705, gia: 647, nia: 401, eff: null,  use: "Lobby" },
+  ],
+  note: "G+8 study. No basement. Roof at 58.18 m AOD (35.20 m from ground).",
+};
+const CANOPY_G10_SCHEDULE = {
+  totals: { gea: 9336, gia: 8002, nia: 5984, eff: "75%" },
+  rows: [
+    { lvl: "Roof",      gea: 714, gia: 665, nia: 256, eff: null,  use: "Amenities & plant" },
+    { lvl: "10F",       gea: 714, gia: 665, nia: 530, eff: "80%", use: "Office" },
+    { lvl: "9F",        gea: 714, gia: 665, nia: 530, eff: "80%", use: "Office" },
+    { lvl: "8F",        gea: 714, gia: 665, nia: 530, eff: "80%", use: "Office" },
+    { lvl: "7F",        gea: 714, gia: 665, nia: 530, eff: "80%", use: "Office" },
+    { lvl: "6F",        gea: 714, gia: 665, nia: 530, eff: "80%", use: "Office" },
+    { lvl: "5F",        gea: 714, gia: 665, nia: 530, eff: "80%", use: "Office" },
+    { lvl: "4F",        gea: 714, gia: 665, nia: 530, eff: "80%", use: "Office" },
+    { lvl: "3F",        gea: 714, gia: 665, nia: 530, eff: "80%", use: "Office" },
+    { lvl: "2F",        gea: 714, gia: 665, nia: 530, eff: "80%", use: "Office" },
+    { lvl: "1F",        gea: 714, gia: 665, nia: 530, eff: "80%", use: "Office" },
+    { lvl: "Mezzanine", gea: 741, gia: null, nia: null, eff: null, use: "Plant" },
+    { lvl: "Ground",    gea: 741, gia: 687, nia: 428, eff: "62%", use: "Lobby" },
+  ],
+  note: "G+10 hybrid. Parapet apex 71.33 m AOD (48.35 m from ground). Under the 73.2 m Kenwood House view line.",
+};
+const SIGNAL_BOX_G10_SCHEDULE = {
+  totals: { gea: 9372, gia: 8051, nia: 6016, eff: "75%" },
+  rows: [
+    { lvl: "Roof",      gea: 872, gia: 804, nia: 355, eff: null,  use: "Amenities & plant" },
+    { lvl: "10F",       gea: 709, gia: 660, nia: 526, eff: "80%", use: "Office" },
+    { lvl: "9F",        gea: 709, gia: 660, nia: 526, eff: "80%", use: "Office" },
+    { lvl: "8F",        gea: 709, gia: 660, nia: 526, eff: "80%", use: "Office" },
+    { lvl: "7F",        gea: 709, gia: 660, nia: 526, eff: "80%", use: "Office" },
+    { lvl: "6F",        gea: 709, gia: 660, nia: 526, eff: "80%", use: "Office" },
+    { lvl: "5F",        gea: 709, gia: 660, nia: 526, eff: "80%", use: "Office" },
+    { lvl: "4F",        gea: 709, gia: 660, nia: 526, eff: "80%", use: "Office" },
+    { lvl: "3F",        gea: 709, gia: 660, nia: 526, eff: "80%", use: "Office" },
+    { lvl: "2F",        gea: 709, gia: 660, nia: 526, eff: "80%", use: "Office" },
+    { lvl: "1F",        gea: 709, gia: 660, nia: 526, eff: "80%", use: "Office" },
+    { lvl: "Mezzanine", gea: 705, gia: null, nia: null, eff: null, use: "Plant" },
+    { lvl: "Ground",    gea: 705, gia: 647, nia: 401, eff: null,  use: "Lobby" },
+  ],
+  note: "G+10. Apex of roof 71.98 m AOD (49.00 m from ground). Under the 73.2 m Kenwood House view line.",
+};
+const PREVIOUS_CONSENTED_SCHEDULE = {
+  totals: { gea: 5836, gia: 5252, nia: 3797, eff: "72%" },
+  rows: [
+    { lvl: "Roof",     gea: null, gia: null, nia: null, eff: null,  use: "Plant" },
+    { lvl: "6F",       gea: 733, gia: 676, nia: 535, eff: "79%", use: "Office" },
+    { lvl: "5F",       gea: 764, gia: 692, nia: 563, eff: "81%", use: "Office" },
+    { lvl: "4F",       gea: 764, gia: 692, nia: 563, eff: "81%", use: "Office" },
+    { lvl: "3F",       gea: 762, gia: 691, nia: 561, eff: "81%", use: "Office" },
+    { lvl: "2F",       gea: 762, gia: 691, nia: 561, eff: "81%", use: "Office" },
+    { lvl: "1F",       gea: 744, gia: 679, nia: 517, eff: "76%", use: "Office & retail" },
+    { lvl: "Ground",   gea: 733, gia: 685, nia: 432, eff: "63%", use: "Lobby & retail" },
+    { lvl: "Basement", gea: 574, gia: 446, nia:  65, eff: "15%", use: "Plant & retail BOH" },
+  ],
+  note: "Stage 5 consented planning scheme. G+6 with basement. Roof plant at 49.66 m AOD.",
+};
+
+// Renders a single area-schedule table. Use null in any numeric cell to
+// show an en-dash; "use" column is optional.
+function AreaSchedule({ data, compact = false }) {
+  const fmt = (n) => (n == null ? "–" : n.toLocaleString("en-GB"));
+  return (
+    <table className={"schedule__table" + (compact ? " schedule__table--compact" : "")}>
+      <thead>
+        <tr>
+          <th>Level</th>
+          <th>GEA (m²)</th>
+          <th>GIA (m²)</th>
+          <th>NIA (m²)</th>
+          <th>Eff.</th>
+          {!compact ? <th>Use</th> : null}
+        </tr>
+      </thead>
+      <tbody>
+        {data.rows.map((r) => (
+          <tr key={r.lvl}>
+            <th>{r.lvl}</th>
+            <td className={r.gea == null ? "dim" : ""}>{fmt(r.gea)}</td>
+            <td className={r.gia == null ? "dim" : ""}>{fmt(r.gia)}</td>
+            <td className={r.nia == null ? "dim" : ""}>{fmt(r.nia)}</td>
+            <td className={r.eff == null ? "dim" : ""}>{r.eff || "–"}</td>
+            {!compact ? <td className={r.use ? "" : "dim"}>{r.use || "–"}</td> : null}
+          </tr>
+        ))}
+        <tr className="schedule__total">
+          <th>Total</th>
+          <td>{fmt(data.totals.gea)}</td>
+          <td>{fmt(data.totals.gia)}</td>
+          <td>{fmt(data.totals.nia)}</td>
+          <td>{data.totals.eff || "–"}</td>
+          {!compact ? <td></td> : null}
+        </tr>
+      </tbody>
+    </table>
+  );
+}
+
 // ── Helper for §14 Canopy and §15 Signal Box (16-page study structures) ─
-function studyDesignPages({ sectionNum, sectionLabel, slug, displayName, conceptNote }) {
+function studyDesignPages({ sectionNum, sectionLabel, slug, displayName, conceptNote, scheduleData }) {
   const sectStr = String(sectionNum).padStart(2, '0');
   return [
-    // 1 — full-bleed image with title overlay
+    // 1, full-bleed image with title overlay
     {
       label: `${displayName} · Hero`,
       presentation: () => (
         <PresCover
           filename={`${slug}-hero.jpg`}
-          caption={`${displayName} — full-bleed hero image`}
+          caption={`${displayName}, full-bleed hero image`}
           overlay={
             <>
               <span className="mono" style={{color: 'var(--accent)', letterSpacing: '0.22em', fontWeight: 500}}>§{sectStr} · {sectionLabel}</span>
@@ -3968,7 +4101,7 @@ function studyDesignPages({ sectionNum, sectionLabel, slug, displayName, concept
       report: () => (
         <PresCover
           filename={`${slug}-hero.jpg`}
-          caption={`${displayName} — full-bleed hero image`}
+          caption={`${displayName}, full-bleed hero image`}
           overlay={
             <>
               <span className="mono" style={{color: 'var(--accent)', letterSpacing: '0.22em', fontWeight: 500}}>§{sectStr} · {sectionLabel}</span>
@@ -3979,28 +4112,55 @@ function studyDesignPages({ sectionNum, sectionLabel, slug, displayName, concept
         />
       ),
     },
-    // 2 — concept sketch
+    // 1b, detailed physical model (large landscape image, no overlay,
+    //      sits between the section hero and the concept sketch).
+    {
+      label: `${displayName} · Detailed model`,
+      presentation: () => (
+        <PresImage
+          filename={`${slug}-detailed-model.jpg`}
+          caption={`${displayName}, detailed physical model, large landscape photograph`}
+          variant="model"
+          capIdx="Model"
+          capTitle={`${displayName}, in detail.`}
+          capMeta={`Physical model${displayName === "Signal Box" ? ", G+8 scheme" : ""}.`}
+          aspect="16/9"
+        />
+      ),
+      report: () => (
+        <PresImage
+          filename={`${slug}-detailed-model.jpg`}
+          caption={`${displayName}, detailed physical model, large landscape photograph`}
+          variant="model"
+          capIdx="Model"
+          capTitle={`${displayName}, in detail.`}
+          capMeta={`Physical model${displayName === "Signal Box" ? ", G+8 scheme" : ""}.`}
+          aspect="16/9"
+        />
+      ),
+    },
+    // 2, concept sketch
     {
       label: `${displayName} · Concept sketch`,
       presentation: () => (
         <PresImage
           filename={`${slug}-concept-sketch.jpg`}
-          caption={`${displayName} — concept sketch (landscape)`}
+          caption={`${displayName}, concept sketch (landscape)`}
           variant="sketch"
           capIdx="Concept"
-          capTitle={`${displayName} — the idea, in a sketch.`}
+          capTitle={`${displayName}, the idea, in a sketch.`}
           capMeta={conceptNote.headline}
         />
       ),
       report: () => (
         <ReportImageText
           filename={`${slug}-concept-sketch.jpg`}
-          caption={`${displayName} — concept sketch (landscape)`}
+          caption={`${displayName}, concept sketch (landscape)`}
           variant="sketch"
           capIdx="Concept"
-          capTitle={`${displayName} — the idea, in a sketch.`}
+          capTitle={`${displayName}, the idea, in a sketch.`}
           kicker={`§${sectStr} · ${sectionLabel} · Concept`}
-          title={`${displayName} — the idea.`}
+          title={`${displayName}, the idea.`}
           body={<>
             <p>{conceptNote.headline}</p>
             {conceptNote.body}
@@ -4008,46 +4168,46 @@ function studyDesignPages({ sectionNum, sectionLabel, slug, displayName, concept
         />
       ),
     },
-    // 3–7 — axonometric build-up (5 stages)
+    // 3–7, axonometric build-up (5 stages)
     ...[1, 2, 3, 4, 5].map((n) => ({
       label: `${displayName} · Axo · stage ${n}`,
       presentation: () => (
         <PresImage
           filename={`${slug}-axo-${String(n).padStart(2,'0')}.jpg`}
-          caption={`${displayName} — axonometric build-up · stage ${n} of 5`}
+          caption={`${displayName}, axonometric build-up · stage ${n} of 5`}
           variant="diagram"
           number={String(n)}
           capIdx={`Axo · ${n} of 5`}
           capTitle={`Stage ${n}.`}
-          capMeta={`${displayName} — axonometric, stage ${n} of 5.`}
+          capMeta={`${displayName}, axonometric, stage ${n} of 5.`}
         />
       ),
       report: () => (
         <ReportImageText
           filename={`${slug}-axo-${String(n).padStart(2,'0')}.jpg`}
-          caption={`${displayName} — axonometric build-up · stage ${n} of 5`}
+          caption={`${displayName}, axonometric build-up · stage ${n} of 5`}
           variant="diagram"
           number={String(n)}
           capIdx={`Axo · ${n} of 5`}
           capTitle={`Stage ${n}.`}
           kicker={`§${sectStr} · ${sectionLabel} · Axonometric · stage ${n} of 5`}
-          title={`Axonometric — stage ${n}.`}
+          title={`Axonometric, stage ${n}.`}
           body={<p>Placeholder for axonometric stage {n} of 5. Drop a render or diagram onto the slot to populate.</p>}
         />
       ),
     })),
-    // 8 — plan (single 16:9 plan image at full body width; labels in a
+    // 8, plan (single 16:9 plan image at full body width; labels in a
     //     JetBrains Mono box directly beneath the plans, full body width)
     (() => {
       const renderPlanPage = () => (
         <div className="pc-stmt" style={{maxWidth: 'none', width: '100%'}}>
           <Eyebrow>§{sectStr} · {sectionLabel} · Plan</Eyebrow>
-          <h2 className="h-sub" style={{marginBottom: 14}}>{displayName} — plan.</h2>
-          {/* Image area — fills the remaining vertical space, keeps 16:9 */}
+          <h2 className="h-sub" style={{marginBottom: 14}}>{displayName}, plan.</h2>
+          {/* Image area, fills the remaining vertical space, keeps 16:9 */}
           <div style={{flex: 1, minHeight: 0, display: 'flex'}}>
-            <Placeholder filename={`${slug}-plan.jpg`} caption={`${displayName} — plan drawing (composite: Ground Floor · Typical Plan · Roof Plan, side-by-side)`} variant="diagram" aspect="16/9" />
+            <Placeholder filename={`${slug}-plan.jpg`} caption={`${displayName}, plan drawing (composite: Ground Floor · Typical Plan · Roof Plan, side-by-side)`} variant="diagram" aspect="16/9" />
           </div>
-          {/* Label strip — directly beneath the plans, JetBrains Mono */}
+          {/* Label strip, directly beneath the plans, JetBrains Mono */}
           <div style={{
             marginTop: 10,
             borderTop: '1px solid var(--rule)',
@@ -4070,131 +4230,94 @@ function studyDesignPages({ sectionNum, sectionLabel, slug, displayName, concept
         report: renderPlanPage,
       };
     })(),
-    // 12–15 — townscape images (4 pages)
+    // 12–15, townscape images (4 pages)
     ...[1, 2, 3, 4].map((n) => ({
       label: `${displayName} · Townscape ${n}`,
       presentation: () => (
         <PresImage
           filename={`${slug}-townscape-${String(n).padStart(2,'0')}.jpg`}
-          caption={`${displayName} — townscape ${n} of 4`}
+          caption={`${displayName}, townscape ${n} of 4`}
           variant="photo"
           number={String(n)}
           capIdx={`Townscape · ${n} of 4`}
           capTitle={`Townscape ${n}.`}
-          capMeta={`${displayName} — townscape placeholder.`}
+          capMeta={`${displayName}, townscape placeholder.`}
         />
       ),
       report: () => (
         <ReportImageText
           filename={`${slug}-townscape-${String(n).padStart(2,'0')}.jpg`}
-          caption={`${displayName} — townscape ${n} of 4`}
+          caption={`${displayName}, townscape ${n} of 4`}
           variant="photo"
           number={String(n)}
           capIdx={`Townscape · ${n} of 4`}
           capTitle={`Townscape ${n}.`}
           kicker={`§${sectStr} · ${sectionLabel} · Townscape · ${n} of 4`}
           title={`Townscape ${n}.`}
-          body={<p>Placeholder — drop the townscape image onto the slot.</p>}
+          body={<p>Placeholder, drop the townscape image onto the slot.</p>}
         />
       ),
     })),
-    // 16 — area schedule (placeholder)
+    // 16, area schedule. Uses real data when scheduleData is provided;
+    //     otherwise renders a placeholder table.
     {
       label: `${displayName} · Area schedule`,
-      presentation: () => {
-        const rows = ["1820 room", "L9", "L8", "L7", "L6", "L5", "L4", "L3", "L2", "L1", "Ground", "Plant"];
-        return (
-          <div className="schedule">
-            <div className="schedule__head">
-              <Eyebrow>§{sectStr} · {sectionLabel} · Area schedule</Eyebrow>
-              <h2 className="h-sub">{displayName} — indicative area schedule.</h2>
-              <div className="prose tight" style={{maxWidth: '78ch', marginTop: 2}}>
-                Placeholder — numbers to follow.
+      presentation: () => (
+        <div className="schedule">
+          <div className="schedule__head">
+            <Eyebrow>§{sectStr} · {sectionLabel} · Area schedule</Eyebrow>
+            <h2 className="h-sub">{displayName}, indicative area schedule.</h2>
+            {scheduleData ? (
+              <div className="prose tight" style={{maxWidth: '78ch', marginTop: 2, fontSize: 13, color: 'var(--fg-dim)'}}>
+                {scheduleData.note}
               </div>
-            </div>
+            ) : (
+              <div className="prose tight" style={{maxWidth: '78ch', marginTop: 2}}>
+                Placeholder, numbers to follow.
+              </div>
+            )}
+          </div>
+          {scheduleData ? <AreaSchedule data={scheduleData} /> : (
             <table className="schedule__table">
-              <thead>
-                <tr>
-                  <th>Level</th>
-                  <th>GIA (m²)</th>
-                  <th>NIA (m²)</th>
-                  <th>NIA : GIA</th>
-                  <th>Notes</th>
-                </tr>
-              </thead>
+              <thead><tr><th>Level</th><th>GIA (m²)</th><th>NIA (m²)</th><th>NIA : GIA</th><th>Notes</th></tr></thead>
               <tbody>
-                {rows.map((lvl) => (
-                  <tr key={lvl}>
-                    <th>{lvl}</th>
-                    <td className="dim">—</td>
-                    <td className="dim">—</td>
-                    <td className="dim">—</td>
-                    <td className="dim">TBD</td>
-                  </tr>
+                {["Roof", "Top", "Mid", "Lower", "Ground", "Basement"].map((lvl) => (
+                  <tr key={lvl}><th>{lvl}</th><td className="dim">–</td><td className="dim">–</td><td className="dim">–</td><td className="dim">TBD</td></tr>
                 ))}
-                <tr className="schedule__total">
-                  <th>Total</th>
-                  <td className="dim">—</td>
-                  <td className="dim">—</td>
-                  <td className="dim">—</td>
-                  <td></td>
-                </tr>
               </tbody>
             </table>
-          </div>
-        );
-      },
-      report: () => {
-        const rows = ["1820 room", "L9", "L8", "L7", "L6", "L5", "L4", "L3", "L2", "L1", "Ground", "Plant"];
-        return (
-          <div className="schedule">
-            <div className="schedule__head">
-              <Eyebrow>§{sectStr} · {sectionLabel} · Area schedule</Eyebrow>
-              <h2 className="h-sub">{displayName} — indicative area schedule.</h2>
-              <div className="prose tight" style={{maxWidth: '78ch', marginTop: 2}}>
-                <p>An indicative area schedule for the {displayName} direction — GIA, NIA, efficiency, brief notes per level. Numbers to follow.</p>
-              </div>
+          )}
+        </div>
+      ),
+      report: () => (
+        <div className="schedule">
+          <div className="schedule__head">
+            <Eyebrow>§{sectStr} · {sectionLabel} · Area schedule</Eyebrow>
+            <h2 className="h-sub">{displayName}, indicative area schedule.</h2>
+            <div className="prose tight" style={{maxWidth: '78ch', marginTop: 2}}>
+              {scheduleData ? <p>{scheduleData.note}</p> : <p>Indicative area schedule for the {displayName} direction. Numbers to follow.</p>}
             </div>
+          </div>
+          {scheduleData ? <AreaSchedule data={scheduleData} /> : (
             <table className="schedule__table">
-              <thead>
-                <tr>
-                  <th>Level</th>
-                  <th>GIA (m²)</th>
-                  <th>NIA (m²)</th>
-                  <th>NIA : GIA</th>
-                  <th>Notes</th>
-                </tr>
-              </thead>
+              <thead><tr><th>Level</th><th>GIA (m²)</th><th>NIA (m²)</th><th>NIA : GIA</th><th>Notes</th></tr></thead>
               <tbody>
-                {rows.map((lvl) => (
-                  <tr key={lvl}>
-                    <th>{lvl}</th>
-                    <td className="dim">—</td>
-                    <td className="dim">—</td>
-                    <td className="dim">—</td>
-                    <td className="dim">TBD</td>
-                  </tr>
+                {["Roof", "Top", "Mid", "Lower", "Ground", "Basement"].map((lvl) => (
+                  <tr key={lvl}><th>{lvl}</th><td className="dim">–</td><td className="dim">–</td><td className="dim">–</td><td className="dim">TBD</td></tr>
                 ))}
-                <tr className="schedule__total">
-                  <th>Total</th>
-                  <td className="dim">—</td>
-                  <td className="dim">—</td>
-                  <td className="dim">—</td>
-                  <td></td>
-                </tr>
               </tbody>
             </table>
-          </div>
-        );
-      },
+          )}
+        </div>
+      ),
     },
   ];
 }
 
-// ── Offerings — used by Canopy and Signal Box study closers ─────────────
+// ── Offerings, used by Canopy and Signal Box study closers ─────────────
 const canopyOfferings = [
   ["Activates the canal",
-   "A sheltered civic room at the building's foot — a public passage between Goods Way and the towpath, not a wall to walk past."],
+   "A sheltered civic room at the building's foot, a public passage between Goods Way and the towpath, not a wall to walk past."],
   ["The undercroft as gift",
    "Connecting the upper path and the lower canal path through the building. The crossing the planners worried about, made navigable."],
   ["Hung floors, wider plates",
@@ -4219,7 +4342,7 @@ const signalBoxStudyOfferings = [
 ];
 
 // ── §12 Materials ───────────────────────────────────────────────────────
-//   Heavy and light. Both schemes share the same material logic — brick body
+//   Heavy and light. Both schemes share the same material logic, brick body
 //   to the canal, lightweight expression at the top. Alternatives below each
 //   image map to the choices in the calculator (top toolbar) so the cost +
 //   sustainability conversation is quantified, not assumed.
@@ -4234,15 +4357,15 @@ const SMaterials = sectionPages(
       report:       () => <Divider range="§15" title="Materials. Sustainability. Cost." sub="Heavy and light. Both quantified in the calculator." />,
     },
     {
-      label: "Heavy — brick + alternatives",
+      label: "Heavy, brick + alternatives",
       presentation: () => (
         <QMaterialPage
           slot="heavy"
           kicker="§15 · Materials · Heavy"
-          title="Heavy — the brick body."
+          title="Heavy, the brick body."
           image="material-01-brick-sample.jpg"
-          imageCaption="Staffordshire blue-brown engineering brick — the brick of Victorian canal and railway infrastructure"
-          lead={<p>The brick body is heavy by intent: it belongs to the canal. The same in either scheme — Canopy or Signal Box — brick to the waterline. The alternatives below sit in the calculator; sustainability and cost are quantified, not assumed.</p>}
+          imageCaption="Staffordshire blue-brown engineering brick, the brick of Victorian canal and railway infrastructure"
+          lead={<p>The brick body is heavy by intent: it belongs to the canal. The same in either scheme. Canopy or Signal Box, brick to the waterline. The alternatives below sit in the calculator; sustainability and cost are quantified, not assumed.</p>}
           materials={heavyMaterials}
           view="presentation"
         />
@@ -4251,25 +4374,25 @@ const SMaterials = sectionPages(
         <QMaterialPage
           slot="heavy"
           kicker="§15 · Materials · Heavy"
-          title="Heavy — the brick body."
+          title="Heavy, the brick body."
           image="material-01-brick-sample.jpg"
-          imageCaption="Staffordshire blue-brown engineering brick — the brick of Victorian canal and railway infrastructure"
-          lead={<p>The brick body is heavy by intent. Brick to the waterline; the building belongs to the canal before it does anything else. Both directions — Canopy and Signal Box — share this body. The table below sets out the heavy alternatives the calculator quantifies, with embodied carbon and indicative cost per square metre of facade. <em>Numbers align with the design-side carbon + cost calculator (top toolbar).</em></p>}
+          imageCaption="Staffordshire blue-brown engineering brick, the brick of Victorian canal and railway infrastructure"
+          lead={<p>The brick body is heavy by intent. Brick to the waterline; the building belongs to the canal before it does anything else. Both directions. Canopy and Signal Box, share this body. The table below sets out the heavy alternatives the calculator quantifies, with embodied carbon and indicative cost per square metre of facade. <em>Numbers align with the design-side carbon + cost calculator (top toolbar).</em></p>}
           materials={heavyMaterials}
           view="report"
         />
       ),
     },
     {
-      label: "Light — aluminium + alternatives",
+      label: "Light, aluminium + alternatives",
       presentation: () => (
         <QMaterialPage
           slot="light"
           kicker="§15 · Materials · Light"
-          title="Light — the lantern."
+          title="Light, the lantern."
           image="material-04-aluminium-detail.jpg"
-          imageCaption="Bright perforated recycled aluminium — Hydro CIRCAL 75R, lantern-like at dusk"
-          lead={<p>The lightweight expression contrasts the brick. In the Signal Box it sits at the top as a lookout; in the Canopy it sits below as a sheltered public room. Either way, bright, perforated, lantern-like — the building's second voice.</p>}
+          imageCaption="Bright perforated recycled aluminium. Hydro CIRCAL 75R, lantern-like at dusk"
+          lead={<p>The lightweight expression contrasts the brick. In the Signal Box it sits at the top as a lookout; in the Canopy it sits below as a sheltered public room. Either way, bright, perforated, lantern-like, the building's second voice.</p>}
           materials={lightMaterials}
           view="presentation"
         />
@@ -4278,10 +4401,10 @@ const SMaterials = sectionPages(
         <QMaterialPage
           slot="light"
           kicker="§15 · Materials · Light"
-          title="Light — the lantern."
+          title="Light, the lantern."
           image="material-04-aluminium-detail.jpg"
-          imageCaption="Bright perforated recycled aluminium — Hydro CIRCAL 75R, lantern-like at dusk"
-          lead={<p>The lightweight expression contrasts the brick. <strong>Where it sits depends on the scheme</strong> — at the top in the Signal Box (the 1820 lookout), at the canopy below in the Canopy (the sheltered public room). The material logic is the same in both: bright, perforated, lantern-like, the building's second voice. The table below sets out the light alternatives the calculator quantifies. <em>Numbers align with the design-side carbon + cost calculator (top toolbar).</em></p>}
+          imageCaption="Bright perforated recycled aluminium. Hydro CIRCAL 75R, lantern-like at dusk"
+          lead={<p>The lightweight expression contrasts the brick. <strong>Where it sits depends on the scheme</strong>, at the top in the Signal Box (the 1820 lookout), at the canopy below in the Canopy (the sheltered public room). The material logic is the same in both: bright, perforated, lantern-like, the building's second voice. The table below sets out the light alternatives the calculator quantifies. <em>Numbers align with the design-side carbon + cost calculator (top toolbar).</em></p>}
           materials={lightMaterials}
           view="report"
         />
@@ -4302,13 +4425,14 @@ const SCanopy = sectionPages(
       conceptNote: {
         headline: "Low and wide. G+6. The building reaches out to the canal.",
         body: <>
-          <p>The Canopy direction activates the canal. It creates a sheltered point at the building's foot connecting the upper path and the lower canal towpath — a small civic room beneath the building's mass.</p>
+          <p>The Canopy direction activates the canal. It creates a sheltered point at the building's foot connecting the upper path and the lower canal towpath, a small civic room beneath the building's mass.</p>
           <p>Cantilevers earn the area; heavy structure is required for them. Hanging the floors gives roughly 80 m² extra per floor. The challenge: is that area worth it, and is the urbanistic outcome arguably worse for it?</p>
           <p><strong>Only NMA planning required.</strong> Quicker programme.</p>
         </>,
       },
+      scheduleData: CANOPY_G6_SCHEDULE,
     }),
-    // Closer — what the Canopy scheme offers
+    // Closer, what the Canopy scheme offers
     familyOffersPage({
       sectionNum: 12, sectionLabel: "Canopy",
       kickerLine: "What the scheme offers",
@@ -4332,11 +4456,12 @@ const _signalBoxStudyBase = studyDesignPages({
   conceptNote: {
     headline: "Tall and slender. G+8/9. A lightweight lookout marks the crossing.",
     body: <>
-      <p>The Signal Box direction activates the wider public realm by marking the crossing from above. The 1820 room sits at the top — the building's reason for being and the place from which "the water came first" is read into the skyline.</p>
+      <p>The Signal Box direction activates the wider public realm by marking the crossing from above. The 1820 room sits at the top, the building's reason for being and the place from which "the water came first" is read into the skyline.</p>
       <p>The building is simply supported. No cantilevers, no transfer structure. Lighter on the ground, more discipline at the plan.</p>
-      <p><strong>G+8/9 — new planning application required.</strong> Longer programme.</p>
+      <p><strong>G+8/9, new planning application required.</strong> Longer programme.</p>
     </>,
   },
+  scheduleData: SIGNAL_BOX_G8_SCHEDULE,
 });
 const _signalBoxStudySchedulePage = _signalBoxStudyBase[_signalBoxStudyBase.length - 1];
 const _signalBoxStudyPagesExcludingSchedule = _signalBoxStudyBase.slice(0, -1);
@@ -4359,7 +4484,7 @@ const SSignalBoxStudy = sectionPages(
           <div className="signage__cols">
             <div className="signage__col">
               <div className="signage__media">
-                <Placeholder filename="signage-01-brick-1820-recessed.jpg" caption="1820 recessed and carved into the engineering brick at ground level — Victorian canal vocabulary, read at arm's reach" variant="material" number="01" />
+                <Placeholder filename="signage-01-brick-1820-recessed.jpg" caption="1820 recessed and carved into the engineering brick at ground level. Victorian canal vocabulary, read at arm's reach" variant="material" number="01" />
               </div>
               <div className="signage__caption">
                 <span className="signage__tag mono">At ground level · in the brick</span>
@@ -4369,7 +4494,7 @@ const SSignalBoxStudy = sectionPages(
             </div>
             <div className="signage__col">
               <div className="signage__media">
-                <Placeholder filename="signage-02-aluminium-1820-perforated.jpg" caption="The water came first — perforated through the lightweight skin of the 1820 belvedere; a lantern at night" variant="material" number="02" />
+                <Placeholder filename="signage-02-aluminium-1820-perforated.jpg" caption="The water came first, perforated through the lightweight skin of the 1820 belvedere; a lantern at night" variant="material" number="02" />
               </div>
               <div className="signage__caption">
                 <span className="signage__tag mono">At the skyline · perforated through aluminium</span>
@@ -4383,7 +4508,7 @@ const SSignalBoxStudy = sectionPages(
       report: () => (
         <div className="signage">
           <div className="signage__head">
-            <Eyebrow>§13 · Signal Box (study) · Signage — the building speaks twice</Eyebrow>
+            <Eyebrow>§13 · Signal Box (study) · Signage, the building speaks twice</Eyebrow>
             <h2 className="h-sub">The building speaks twice.</h2>
             <div className="prose tight" style={{maxWidth: '78ch', marginTop: 4}}>
               <p>Two pieces of signage, both worked into the material itself rather than applied to it. At the entrance, the building says <strong>where you are</strong>. At the skyline, <strong>why the building is here</strong>. The crossing is the silent context.</p>
@@ -4392,7 +4517,7 @@ const SSignalBoxStudy = sectionPages(
           <div className="signage__cols">
             <div className="signage__col">
               <div className="signage__media">
-                <Placeholder filename="signage-01-brick-1820-recessed.jpg" caption="1820 Goods Way — recessed and carved into the brick at ground level" variant="material" number="01" />
+                <Placeholder filename="signage-01-brick-1820-recessed.jpg" caption="1820 Goods Way, recessed and carved into the brick at ground level" variant="material" number="01" />
               </div>
               <div className="signage__caption">
                 <span className="signage__tag mono">At ground level · embossed brick</span>
@@ -4402,12 +4527,12 @@ const SSignalBoxStudy = sectionPages(
             </div>
             <div className="signage__col">
               <div className="signage__media">
-                <Placeholder filename="signage-02-aluminium-1820-perforated.jpg" caption="The water came first — perforated through the lightweight aluminium of the 1820 belvedere" variant="material" number="02" />
+                <Placeholder filename="signage-02-aluminium-1820-perforated.jpg" caption="The water came first, perforated through the lightweight aluminium of the 1820 belvedere" variant="material" number="02" />
               </div>
               <div className="signage__caption">
                 <span className="signage__tag mono">At the skyline · perforated aluminium</span>
                 <div className="signage__big">The water came first.</div>
-                <div className="signage__sub">Cut through the lightweight skin by perforation. By day, shadow and depth against bright metal. By night, the room glows from within — a soft lantern above the canal, legible from the bridges, St Pancras, Camley Street.</div>
+                <div className="signage__sub">Cut through the lightweight skin by perforation. By day, shadow and depth against bright metal. By night, the room glows from within, a soft lantern above the canal, legible from the bridges, St Pancras, Camley Street.</div>
               </div>
             </div>
           </div>
@@ -4416,7 +4541,7 @@ const SSignalBoxStudy = sectionPages(
     },
     // Area schedule (was the last page of the base study)
     _signalBoxStudySchedulePage,
-    // Closer — what the Signal Box scheme offers
+    // Closer, what the Signal Box scheme offers
     familyOffersPage({
       sectionNum: 13, sectionLabel: "Signal Box (study)",
       kickerLine: "What the scheme offers",
@@ -4429,17 +4554,17 @@ const SSignalBoxStudy = sectionPages(
   ]
 );
 
-// ── §17 Closing — four scheme-agnostic prose pages ─────────────────────
+// ── §17 Closing, four scheme-agnostic prose pages ─────────────────────
 //    Sustainable · Efficient · Urban · Poetic.
-//    Each page argues the scheme as a whole — works for Canopy or Signal Box.
+//    Each page argues the scheme as a whole, works for Canopy or Signal Box.
 const SClosing = sectionPages(
   { sectionId: "closing-new", sectionNum: 16, sectionTitle: "Closing", sectionLabel: "Closing" },
   [
     {
       label: "Closing (title)",
       isDivider: true,
-      presentation: () => <Divider range="§16" title="Closing." sub="What this scheme is — whether Canopy or Signal Box." />,
-      report:       () => <Divider range="§16" title="Closing." sub="What this scheme is — whether Canopy or Signal Box." />,
+      presentation: () => <Divider range="§16" title="Closing." sub="What this scheme is, whether Canopy or Signal Box." />,
+      report:       () => <Divider range="§16" title="Closing." sub="What this scheme is, whether Canopy or Signal Box." />,
     },
     // ─────────────────────────────────────────────────────────────────────
     //  Two paired-claim pages. Page 1: Sustainable + Efficient (the
@@ -4464,7 +4589,7 @@ const SClosing = sectionPages(
                   <><em>The form does the work. No additions, no offsets.</em></>,
                 ].map((t, i) => (
                   <li key={i} style={{paddingLeft: 16, position: 'relative'}}>
-                    <span style={{position: 'absolute', left: 0, color: 'var(--accent)'}}>—</span>
+                    <span style={{position: 'absolute', left: 0, color: 'var(--accent)'}}>, </span>
                     {t}
                   </li>
                 ))}
@@ -4474,14 +4599,14 @@ const SClosing = sectionPages(
               <div className="mono" style={{fontSize: 11, letterSpacing: 0.18, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 10}}>Efficient</div>
               <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14, lineHeight: 1.4}}>
                 {[
-                  <>The plan hugs the boundary — both schemes. No setbacks.</>,
+                  <>The plan hugs the boundary, both schemes. No setbacks.</>,
                   <>Eccentric core. Two stairs.</>,
-                  <><strong>80–83% efficient</strong>. 5,300–6,000 sqft plates.</>,
+                  <><strong>~80–81% efficient</strong>. 5,300–6,000 sqft plates.</>,
                   <>32–36k sqft total. Three-sided daylight.</>,
                   <><em>Discipline at the plan. The rest follows.</em></>,
                 ].map((t, i) => (
                   <li key={i} style={{paddingLeft: 16, position: 'relative'}}>
-                    <span style={{position: 'absolute', left: 0, color: 'var(--accent)'}}>—</span>
+                    <span style={{position: 'absolute', left: 0, color: 'var(--accent)'}}>, </span>
                     {t}
                   </li>
                 ))}
@@ -4497,16 +4622,78 @@ const SClosing = sectionPages(
           <div className="prose tight" style={{maxWidth: '78ch', display: 'flex', flexDirection: 'column', gap: 14}}>
             <div>
               <div className="mono" style={{fontSize: 11, letterSpacing: 0.18, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 6}}>Sustainable</div>
-              <p>We have chosen to make a sustainable building. That choice is then balanced — against cost, because the building has to be built; against context, because the brick body and the lightweight upper are not arbitrary, they are the canal and the railway retold; against viability, because the panel needs a building that lets. Both schemes are sustainable for the same fundamental reason: the decisions that make either Canopy or Signal Box work are the decisions that make either sustainable. The Signal Box is simply supported. The Canopy avoids a basement. No transfer, no cantilever, no buried concrete the city has to pay for in carbon. <em>Sustainability is the form, not an addition to it. No offsets, no greenwash, no afterthought.</em></p>
+              <p>We have chosen to make a sustainable building. That choice is then balanced, against cost, because the building has to be built; against context, because the brick body and the lightweight upper are not arbitrary, they are the canal and the railway retold; against viability, because the panel needs a building that lets. Both schemes are sustainable for the same fundamental reason: the decisions that make either Canopy or Signal Box work are the decisions that make either sustainable. The Signal Box is simply supported. The Canopy avoids a basement. No transfer, no cantilever, no buried concrete the city has to pay for in carbon. <em>Sustainability is the form, not an addition to it. No offsets, no greenwash, no afterthought.</em></p>
             </div>
             <div>
               <div className="mono" style={{fontSize: 11, letterSpacing: 0.18, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 6}}>Efficient</div>
-              <p>The plan does the same thing in both schemes. It follows the site boundary edge for edge, no setbacks, no chamfers, no formal gestures that subtract usable area. From there, the eccentric core and two stairs produce a coherent floor plate with daylight from three sides. The Signal Box is a slim G+8/9 extrusion at ~5,300 sqft per floor; the Canopy is wider and lower at G+6, ~6,000 sqft via hung floors. Both 32,000–36,000 sqft total, 80–83% efficient. Quantified in the calculator with ±10% RIBA Stage 2 sensitivity. <em>The efficiency is not a value-engineering compromise. It is the design.</em></p>
+              <p>The plan does the same thing in both schemes. It follows the site boundary edge for edge, no setbacks, no chamfers, no formal gestures that subtract usable area. From there, the eccentric core and two stairs produce a coherent floor plate with daylight from three sides. The Signal Box is a slim G+8/9 extrusion at ~5,300 sqft per floor; the Canopy is wider and lower at G+6, ~6,000 sqft via hung floors. Both 32,000–36,000 sqft total, ~80–81% efficient. Quantified in the calculator with ±10% RIBA Stage 2 sensitivity. <em>The efficiency is not a value-engineering compromise. It is the design.</em></p>
             </div>
           </div>
         </div>
       ),
     },
+    // ───────────────────────────────────────────────────────────────────
+    //  Headline numbers comparison. Five schemes side by side: the
+    //  previously consented (Stage 5) and our four directions. Overall
+    //  figures only (GEA / GIA / NIA / Eff), no floor-by-floor data,
+    //  with a small model thumbnail on the left of each row. Sits
+    //  between "Sustainable. Efficient." and "Urban. Poetic." so the
+    //  rational case (numbers) lands before the emotional close.
+    // ───────────────────────────────────────────────────────────────────
+    (() => {
+      const fmt = (n) => (n == null ? "–" : Number(n).toLocaleString("en-GB"));
+      const schemes = [
+        { name: "Previously consented",  note: "By others. Stage 5. G+6 with basement.", image: "appendix-previous-scheme-model.jpg",    totals: PREVIOUS_CONSENTED_SCHEDULE.totals },
+        { name: "Canopy",                note: "G+6. Original Canopy study.",            image: "canopy-detailed-model.jpg",             totals: CANOPY_G6_SCHEDULE.totals },
+        { name: "Signal Box",            note: "G+8. Original Signal Box study.",        image: "signal-box-study-detailed-model.jpg",   totals: SIGNAL_BOX_G8_SCHEDULE.totals },
+        { name: "Canopy",                note: "G+10. Hybrid. Our direction.",           image: "our-direction-canopy-g10.jpg",          totals: CANOPY_G10_SCHEDULE.totals },
+        { name: "Signal Box",            note: "G+10. Our direction.",                   image: "our-direction-signal-box-g10.jpg",      totals: SIGNAL_BOX_G10_SCHEDULE.totals },
+      ];
+      const COLS = "100px 1.6fr 1fr 1fr 1fr 0.55fr";
+      const renderRow = (s, i) => (
+        <div key={i} style={{display: 'grid', gridTemplateColumns: COLS, gap: 14, alignItems: 'center', borderBottom: '1px solid var(--rule-soft)', padding: '6px 0'}}>
+          <div style={{display: 'flex', minWidth: 0, aspectRatio: '4/3'}}>
+            <Placeholder filename={s.image} caption={`Model thumbnail, ${s.name} ${s.note}`} variant="model" />
+          </div>
+          <div style={{display: 'flex', flexDirection: 'column', gap: 1, minWidth: 0}}>
+            <span style={{fontFamily: 'var(--ff-display)', fontSize: 15, fontWeight: 500, color: 'var(--fg)', lineHeight: 1.1}}>{s.name}</span>
+            <span className="mono" style={{fontSize: 10, letterSpacing: 0.08, color: 'var(--fg-soft)'}}>{s.note}</span>
+          </div>
+          <span style={{textAlign: 'right', fontVariantNumeric: 'tabular-nums', fontSize: 13, color: 'var(--fg-soft)'}}>{fmt(s.totals.gea)}</span>
+          <span style={{textAlign: 'right', fontVariantNumeric: 'tabular-nums', fontSize: 13, color: 'var(--fg)'}}>{fmt(s.totals.gia)}</span>
+          <span style={{textAlign: 'right', fontVariantNumeric: 'tabular-nums', fontSize: 13, color: 'var(--fg)', fontWeight: 500}}>{fmt(s.totals.nia)}</span>
+          <span style={{textAlign: 'right', fontFamily: 'var(--ff-mono)', fontSize: 10.5, color: 'var(--fg-soft)'}}>{s.totals.eff || "–"}</span>
+        </div>
+      );
+      const renderHeader = () => (
+        <div className="mono" style={{display: 'grid', gridTemplateColumns: COLS, gap: 14, fontSize: 9.5, letterSpacing: 0.16, color: 'var(--fg-dim)', textTransform: 'uppercase', paddingBottom: 6, borderBottom: '1px solid var(--rule)'}}>
+          <span></span>
+          <span>Scheme</span>
+          <span style={{textAlign: 'right'}}>GEA (m²)</span>
+          <span style={{textAlign: 'right'}}>GIA (m²)</span>
+          <span style={{textAlign: 'right'}}>NIA (m²)</span>
+          <span style={{textAlign: 'right'}}>Eff.</span>
+        </div>
+      );
+      const renderPage = () => (
+        <div className="pc-stmt" style={{maxWidth: 'none', width: '100%'}}>
+          <Eyebrow>§16 · Closing · By the numbers</Eyebrow>
+          <h2 className="h-sub" style={{marginBottom: 4}}>By the numbers.</h2>
+          <div className="prose" style={{maxWidth: '78ch', fontSize: 13, color: 'var(--fg-soft)', marginBottom: 12}}>
+            Five schemes, headline totals only. The previously consented baseline alongside our four directions.
+          </div>
+          <div style={{display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0}}>
+            {renderHeader()}
+            {schemes.map(renderRow)}
+          </div>
+        </div>
+      );
+      return {
+        label: "By the numbers — five schemes compared",
+        presentation: renderPage,
+        report: renderPage,
+      };
+    })(),
     {
       label: "Urban. Poetic.",
       presentation: () => (
@@ -4518,14 +4705,14 @@ const SClosing = sectionPages(
               <div className="mono" style={{fontSize: 11, letterSpacing: 0.18, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 10}}>Urban</div>
               <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14, lineHeight: 1.4}}>
                 {[
-                  <>The building gives back to the city — either way.</>,
+                  <>The building gives back to the city, either way.</>,
                   <><strong>Tenant.</strong> A boutique whole-floor plate.</>,
-                  <><strong>Building.</strong> The 1820 belvedere — at the sky (Signal Box) or at the foot (Canopy).</>,
-                  <><strong>City.</strong> A public room — King's Cross's first free public roof, or a sheltered civic threshold.</>,
+                  <><strong>Building.</strong> The 1820 belvedere, at the sky (Signal Box) or at the foot (Canopy).</>,
+                  <><strong>City.</strong> A public room. King's Cross's first free public roof, or a sheltered civic threshold.</>,
                   <><em>Not a tolerated object. A contributor.</em></>,
                 ].map((t, i) => (
                   <li key={i} style={{paddingLeft: 16, position: 'relative'}}>
-                    <span style={{position: 'absolute', left: 0, color: 'var(--accent)'}}>—</span>
+                    <span style={{position: 'absolute', left: 0, color: 'var(--accent)'}}>, </span>
                     {t}
                   </li>
                 ))}
@@ -4538,11 +4725,11 @@ const SClosing = sectionPages(
                   <>The first mark on this site was the canal. <strong>1820.</strong></>,
                   <>The building is named for it.</>,
                   <>Brick at canal level says <strong>where you are</strong>.</>,
-                  <>Aluminium — at the sky or at the foot — says <strong>why the building is here</strong>: the water came first.</>,
+                  <>Aluminium, at the sky or at the foot, says <strong>why the building is here</strong>: the water came first.</>,
                   <><em>The last mark on the crossing the water made.</em></>,
                 ].map((t, i) => (
                   <li key={i} style={{paddingLeft: 16, position: 'relative'}}>
-                    <span style={{position: 'absolute', left: 0, color: 'var(--accent)'}}>—</span>
+                    <span style={{position: 'absolute', left: 0, color: 'var(--accent)'}}>, </span>
                     {t}
                   </li>
                 ))}
@@ -4558,11 +4745,11 @@ const SClosing = sectionPages(
           <div className="prose tight" style={{maxWidth: '78ch', display: 'flex', flexDirection: 'column', gap: 14}}>
             <div>
               <div className="mono" style={{fontSize: 11, letterSpacing: 0.18, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 6}}>Urban</div>
-              <p>A building on this site can occupy King's Cross or contribute to it. Both schemes are built around the second; the civic gift is real in both, only its location changes. <strong>To the tenant</strong>, a 5,300–6,000 sqft whole-floor plate — the boutique segment King's Cross is structurally short of, three-sided daylight, the canal across the elevation. <strong>To the building</strong>, the 1820 belvedere — the date of the canal written into the address, at the sky in the Signal Box, at the foot in the Canopy. <strong>To the city</strong>, a public room — either King's Cross's first free public roof, or a sheltered civic threshold between Goods Way and the towpath, the crossing the planners worried about made navigable. <em>Not a tolerated commercial object. A contributor.</em></p>
+              <p>A building on this site can occupy King's Cross or contribute to it. Both schemes are built around the second; the civic gift is real in both, only its location changes. <strong>To the tenant</strong>, a 5,300–6,000 sqft whole-floor plate, the boutique segment King's Cross is structurally short of, three-sided daylight, the canal across the elevation. <strong>To the building</strong>, the 1820 belvedere, the date of the canal written into the address, at the sky in the Signal Box, at the foot in the Canopy. <strong>To the city</strong>, a public room, either King's Cross's first free public roof, or a sheltered civic threshold between Goods Way and the towpath, the crossing the planners worried about made navigable. <em>Not a tolerated commercial object. A contributor.</em></p>
             </div>
             <div>
               <div className="mono" style={{fontSize: 11, letterSpacing: 0.18, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 6}}>Poetic</div>
-              <p>Every layer of this site has been a mark on a crossing. Battle Bridge over the River Fleet was the first. The canal, cut in 1820, gave the place its shape, its industry, and its name. The railway came in 1852 and crossed the canal in turn. 1820 Goods Way is the last move on the last plot of Argent's masterplan — the last mark. The brick at canal level carries <em>1820 Goods Way</em>, recessed and carved into the engineering brick, the address as Victorian canal vocabulary. The lightweight aluminium — at the skyline in the Signal Box, at the canal threshold in the Canopy — carries <em>the water came first</em>, by day shadow and depth, by night a soft lantern. Two voices: one says where you are, the other says why the building is here. <em>A simple, contextual office building, with a public offering of space. The last mark on the crossing the water made.</em></p>
+              <p>Every layer of this site has been a mark on a crossing. Battle Bridge over the River Fleet was the first. The canal, cut in 1820, gave the place its shape, its industry, and its name. The railway came in 1852 and crossed the canal in turn. 1820 Goods Way is the last move on the last plot of Argent's masterplan, the last mark. The brick at canal level carries <em>1820 Goods Way</em>, recessed and carved into the engineering brick, the address as Victorian canal vocabulary. The lightweight aluminium, at the skyline in the Signal Box, at the canal threshold in the Canopy, carries <em>the water came first</em>, by day shadow and depth, by night a soft lantern. Two voices: one says where you are, the other says why the building is here. <em>A simple, contextual office building, with a public offering of space. The last mark on the crossing the water made.</em></p>
             </div>
           </div>
         </div>
@@ -4574,7 +4761,7 @@ const SClosing = sectionPages(
       presentation: () => (
         <PresCover
           filename="thank-you.jpg"
-          caption="Full-bleed closing image — landscape — King's Cross / 1820 Goods Way at twilight, or the canal, or a hero CGI"
+          caption="Full-bleed closing image, landscape. King's Cross / 1820 Goods Way at twilight, or the canal, or a hero CGI"
           overlay={
             <>
               <span className="mono" style={{color: 'var(--accent)', letterSpacing: '0.22em', fontWeight: 500}}>1820 Goods Way · The water came first</span>
@@ -4587,7 +4774,7 @@ const SClosing = sectionPages(
       report: () => (
         <PresCover
           filename="thank-you.jpg"
-          caption="Full-bleed closing image — landscape — King's Cross / 1820 Goods Way at twilight, or the canal, or a hero CGI"
+          caption="Full-bleed closing image, landscape. King's Cross / 1820 Goods Way at twilight, or the canal, or a hero CGI"
           overlay={
             <>
               <span className="mono" style={{color: 'var(--accent)', letterSpacing: '0.22em', fontWeight: 500}}>1820 Goods Way · The water came first</span>
@@ -4606,12 +4793,12 @@ const SOurDirection = sectionPages(
   { sectionNum: 14, sectionTitle: "Our Direction", sectionLabel: "Our Direction" },
   [
     {
-      label: "Our Direction — Canopy tall and slender",
+      label: "Our Direction. Canopy tall and slender",
       presentation: () => (
         <div className="lookout-pair">
           <div className="lookout-pair__col">
             <div className="lookout-pair__media">
-              <Placeholder filename="our-direction-model.jpg" caption="Our direction — landscape model photo of the preferred move" variant="model" aspect="4/3" />
+              <Placeholder filename="our-direction-model.jpg" caption="Our direction, landscape model photo of the preferred move" variant="model" aspect="4/3" />
             </div>
             <div className="lookout-pair__cap">
               <span className="idx mono">Our direction</span>
@@ -4623,8 +4810,9 @@ const SOurDirection = sectionPages(
               <Eyebrow>§14 · Our direction</Eyebrow>
               <h2 className="h-sub" style={{marginBottom: 10}}>Perhaps we go tall and slender. And activate the canal.</h2>
               <div className="prose tight">
-                <p>Mark the crossing with a canopied public space at the building's foot. Take the slender, simple office above. Pair them.</p>
-                <p><strong>Canopy, tall and slender.</strong> Simple. Dynamic. Marks the space. Activates the canal. Simple and buildable.</p>
+                <p>Mark the crossing with a canopied public space at the foot. Above it, a slender office. Pair them.</p>
+                <p>An alternative structural approach holds the small footprint and bridges the Piccadilly line below. The eccentric core lets us go higher.</p>
+                <p><strong>G+10. ~72 m AOD.</strong> Just below the Kenwood House view line at 73.2 m. More area. More presence. The building earns its height by giving the ground back.</p>
               </div>
             </div>
           </div>
@@ -4634,17 +4822,18 @@ const SOurDirection = sectionPages(
         <div className="lookout-pair lookout-pair--report">
           <div className="lookout-pair__col">
             <div className="lookout-pair__media">
-              <Placeholder filename="our-direction-model.jpg" caption="Our direction — landscape model photo of the preferred move" variant="model" aspect="4/3" />
+              <Placeholder filename="our-direction-model.jpg" caption="Our direction, landscape model photo of the preferred move" variant="model" aspect="4/3" />
             </div>
             <div className="lookout-pair__caption mono"><b>Our direction</b>Canopy, tall and slender.</div>
           </div>
           <div className="lookout-pair__col" style={{justifyContent: 'center'}}>
             <div className="lookout-pair__text" style={{padding: '0 8px'}}>
               <Eyebrow>§14 · Our direction</Eyebrow>
-              <h2 className="h-sub" style={{marginBottom: 10}}>Perhaps we go tall and slender — and activate the canal.</h2>
+              <h2 className="h-sub" style={{marginBottom: 10}}>Perhaps we go tall and slender, and activate the canal.</h2>
               <div className="prose">
-                <p>The two directions on the previous sections are both defensible, both architecturally honest. But there is a third move, a hybrid, that may serve the brief better than either taken alone: <strong>take the tall and slender office of the Signal Box study, and pair it with the canopied public space of the Canopy study at the building's foot.</strong></p>
-                <p>The result marks the crossing in the city's silhouette (the slender form, the lightweight lookout at the top) and at the same time activates the canal beneath the building (the sheltered, generous public threshold connecting Goods Way to the towpath).</p>
+                <p>The two directions on the previous sections are both defensible, both architecturally honest. But there is a third move, a hybrid, that may serve the brief better than either taken alone: <strong>hold the slender footprint of the Signal Box study, pair it with the canopied public space of the Canopy study at the foot, and unlock its height with an alternative structural approach.</strong></p>
+                <p>The structure bridges over the Piccadilly line below the site, transferring load away from the tube tunnels to ground that can take it. The eccentric core, already part of both schemes, becomes the spine of the move: it stabilises the slender plate, and it lets the building rise higher than either of the two earlier studies suggested.</p>
+                <p><strong>G+10 at roughly 72 m AOD, sitting just under the Kenwood House view line at 73.2 m.</strong> The Signal Box option lands at 71.98 m AOD (49.00 m from ground); the Canopy / hybrid option at 71.33 m AOD (48.35 m from ground). Both gain more area on the lettable plates and more presence on the King's Cross silhouette, without breaching the protected strategic view that runs south from Kenwood across the city. The building marks the crossing in the city skyline and activates the canal beneath, all from a footprint smaller than either of the two studies on their own.</p>
                 <p><em>Canopy, tall and slender.</em> Simple. Dynamic. Marks the space. Activates the canal. Simple and buildable.</p>
               </div>
             </div>
@@ -4652,8 +4841,166 @@ const SOurDirection = sectionPages(
         </div>
       ),
     },
+    // ───────────────────────────────────────────────────────────────────
+    //  Page 2 of §14 — both G+10 options shown side by side.
+    //  Max height, ground given back, crossing marked. Either as a
+    //  shed (canopy, industrial past) or a signal box (railway,
+    //  public roof). Full circle.
+    // ───────────────────────────────────────────────────────────────────
+    {
+      label: "Our Direction. Either way at maximum height",
+      presentation: () => (
+        <div className="pc-stmt" style={{maxWidth: 'none', width: '100%'}}>
+          <Eyebrow>§14 · Our direction · At maximum height</Eyebrow>
+          <h2 className="h-title" style={{marginBottom: 14}}>Either way, at maximum height.</h2>
+          <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, marginBottom: 20}}>
+            <div style={{display: 'flex', flexDirection: 'column', gap: 8, minWidth: 0}}>
+              {/* Fixed aspect-ratio wrapper so both images always render at the
+                  same size regardless of how much caption text sits below. */}
+              <div style={{aspectRatio: '3/2', display: 'flex', minWidth: 0}}>
+                <Placeholder filename="our-direction-signal-box-g10.jpg" caption="G+10 Signal Box option, 73.2 m AOD, lookout marking the crossing in the silhouette (landscape)" variant="photo" aspect="3/2" />
+              </div>
+              <div className="mono" style={{fontSize: 11, letterSpacing: 0.18, color: 'var(--accent)', textTransform: 'uppercase'}}>G+10 · Signal Box · 71.98 m AOD</div>
+              <div style={{fontSize: 14, lineHeight: 1.4}}><strong>A signal box.</strong> A marker. The railway that crossed the canal, lifted into the silhouette. <em>Public on the roof.</em></div>
+            </div>
+            <div style={{display: 'flex', flexDirection: 'column', gap: 8, minWidth: 0}}>
+              <div style={{aspectRatio: '3/2', display: 'flex', minWidth: 0}}>
+                <Placeholder filename="our-direction-canopy-g10.jpg" caption="G+10 Canopy option, 73.2 m AOD, shed-form crowning the building (landscape)" variant="photo" aspect="3/2" />
+              </div>
+              <div className="mono" style={{fontSize: 11, letterSpacing: 0.18, color: 'var(--accent)', textTransform: 'uppercase'}}>G+10 · Canopy · 71.33 m AOD</div>
+              <div style={{fontSize: 14, lineHeight: 1.4}}><strong>A canopy.</strong> A shed. The industrial past, retold for the city now. <em>The ground given back.</em></div>
+            </div>
+          </div>
+          <div className="prose tight" style={{maxWidth: '76ch', fontSize: 14, lineHeight: 1.5}}>
+            <p>Both options give the ground back to the crossing. Both mark the skyline with meaning. Both sit just under the <strong>Kenwood House view line at 73.2 m AOD</strong>, the protected sightline that runs south across the city. If the signal box is public, going high becomes an argument for everyone, a public room on the roof, the final gesture to King's Cross.</p>
+            <p><em>A fine legacy of placemaking and meaning. Full circle.</em></p>
+          </div>
+        </div>
+      ),
+      report: () => (
+        <div className="pc-stmt" style={{maxWidth: 'none', width: '100%'}}>
+          <Eyebrow>§14 · Our direction · At maximum height</Eyebrow>
+          <h2 className="h-title" style={{marginBottom: 12}}>Either way, at maximum height.</h2>
+          <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, marginBottom: 18}}>
+            <div style={{display: 'flex', flexDirection: 'column', gap: 6}}>
+              <div style={{display: 'flex'}}>
+                <Placeholder filename="our-direction-signal-box-g10.jpg" caption="G+10 Signal Box option, 73.2 m AOD, lookout marking the crossing in the silhouette" variant="photo" aspect="3/2" />
+              </div>
+              <div className="mono" style={{fontSize: 10.5, letterSpacing: 0.16, color: 'var(--accent)', textTransform: 'uppercase'}}>G+10 · Signal Box · 71.98 m AOD</div>
+            </div>
+            <div style={{display: 'flex', flexDirection: 'column', gap: 6}}>
+              <div style={{display: 'flex'}}>
+                <Placeholder filename="our-direction-canopy-g10.jpg" caption="G+10 Canopy option, 73.2 m AOD, shed-form crowning the building" variant="photo" aspect="3/2" />
+              </div>
+              <div className="mono" style={{fontSize: 10.5, letterSpacing: 0.16, color: 'var(--accent)', textTransform: 'uppercase'}}>G+10 · Canopy · 71.33 m AOD</div>
+            </div>
+          </div>
+          <div className="prose tight" style={{maxWidth: '76ch'}}>
+            <p>Both directions take the building to G+10 at roughly 72 m AOD, sitting just under the Kenwood House protected view line at 73.2 m. The Signal Box option apex of roof at 71.98 m AOD (49.00 m from ground); the Canopy hybrid apex of parapet at 71.33 m AOD (48.35 m from ground). Both give the ground back to the city, a sheltered public threshold at the foot, marking the crossing where Goods Way meets the towpath.</p>
+            <p>The two options carry different meanings at the top. <strong>The Canopy</strong> reads as a shed, the architectural vocabulary of the industrial past, retold for the city now, and made civic. <strong>The Signal Box</strong> reads as a marker, the language of the railway that crossed the canal in 1852, lifted into the silhouette.</p>
+            <p>If the Signal Box is opened to the public, the height argument becomes simpler. Going high is no longer a commercial demand on the city, it is a civic gift in return. A public room on the roof, an outlook from the highest point on the crossing, the final gesture in the last plot of the masterplan.</p>
+            <p><em>A fine legacy of placemaking and meaning. Full circle.</em></p>
+          </div>
+        </div>
+      ),
+    },
+    // ───────────────────────────────────────────────────────────────────
+    //  Four streetview-comparison pages. Each shows the same vantage
+    //  point with both G+10 options side by side (Signal Box left,
+    //  Canopy right). Drop matching pairs of renders into the slots.
+    // ───────────────────────────────────────────────────────────────────
+    ...[
+      { n: 1, label: "From the opposite towpath",      sub: "Across the canal that named the building." },
+      { n: 2, label: "Arrival from Goods Way",         sub: "On approach, the building at ground." },
+      { n: 3, label: "Within the King's Cross context", sub: "Among the Gasholders, the Granary, Coal Drops Yard." },
+      { n: 4, label: "At dusk",                        sub: "The lookout lit. The skyline marked." },
+    ].map((view) => {
+      const num = String(view.n).padStart(2, "0");
+      const renderPage = () => (
+        <div className="pc-stmt" style={{maxWidth: 'none', width: '100%'}}>
+          <Eyebrow>§14 · Our direction · Streetview · {view.n} of 4</Eyebrow>
+          <h2 className="h-sub" style={{marginBottom: 4}}>{view.label}.</h2>
+          <div className="prose" style={{maxWidth: '78ch', fontSize: 13, color: 'var(--fg-soft)', marginBottom: 10}}>
+            {view.sub}
+          </div>
+          <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18, flex: 1, minHeight: 0}}>
+            <div style={{display: 'flex', flexDirection: 'column', gap: 8, minHeight: 0, minWidth: 0}}>
+              <div style={{flex: 1, display: 'flex', minHeight: 0, minWidth: 0}}>
+                <Placeholder filename={`our-direction-streetview-${num}-signal-box.jpg`} caption={`Streetview ${view.n} — ${view.label} — Signal Box G+10 (landscape)`} variant="photo" aspect="3/2" />
+              </div>
+              <div className="mono" style={{fontSize: 10.5, letterSpacing: 0.18, color: 'var(--accent)', textTransform: 'uppercase'}}>Signal Box · G+10</div>
+            </div>
+            <div style={{display: 'flex', flexDirection: 'column', gap: 8, minHeight: 0, minWidth: 0}}>
+              <div style={{flex: 1, display: 'flex', minHeight: 0, minWidth: 0}}>
+                <Placeholder filename={`our-direction-streetview-${num}-canopy.jpg`} caption={`Streetview ${view.n} — ${view.label} — Canopy G+10 (landscape)`} variant="photo" aspect="3/2" />
+              </div>
+              <div className="mono" style={{fontSize: 10.5, letterSpacing: 0.18, color: 'var(--accent)', textTransform: 'uppercase'}}>Canopy · G+10</div>
+            </div>
+          </div>
+        </div>
+      );
+      return {
+        label: `Our Direction. Streetview ${view.n} (${view.label})`,
+        presentation: renderPage,
+        report: renderPage,
+      };
+    }),
+    // ───────────────────────────────────────────────────────────────────
+    //  Final page of §14 — both G+10 area schedules side by side, the
+    //  numeric payoff to page 143. Both options give similar area
+    //  (~8,000 m² GIA, ~6,000 m² NIA); the choice is design-led.
+    // ───────────────────────────────────────────────────────────────────
+    {
+      label: "Our Direction. G+10 area schedules",
+      presentation: () => (
+        <div className="pc-stmt" style={{maxWidth: 'none', width: '100%'}}>
+          <Eyebrow>§14 · Our direction · Area schedules</Eyebrow>
+          <h2 className="h-sub" style={{marginBottom: 4}}>Two options. The same area.</h2>
+          <div className="prose" style={{maxWidth: '78ch', fontSize: 13, color: 'var(--fg-soft)', marginBottom: 10}}>
+            Both G+10 schemes deliver ~8,000 m² GIA and ~6,000 m² NIA. The choice is design-led, not market-led.
+          </div>
+          <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18, flex: 1, minHeight: 0, alignItems: 'start'}}>
+            <div className="schedule" style={{margin: 0, gap: 6}}>
+              <div className="mono" style={{fontSize: 10, letterSpacing: 0.18, color: 'var(--accent)', textTransform: 'uppercase'}}>G+10 · Signal Box · 71.98 m AOD</div>
+              <AreaSchedule data={SIGNAL_BOX_G10_SCHEDULE} compact />
+            </div>
+            <div className="schedule" style={{margin: 0, gap: 6}}>
+              <div className="mono" style={{fontSize: 10, letterSpacing: 0.18, color: 'var(--accent)', textTransform: 'uppercase'}}>G+10 · Canopy · 71.33 m AOD</div>
+              <AreaSchedule data={CANOPY_G10_SCHEDULE} compact />
+            </div>
+          </div>
+        </div>
+      ),
+      report: () => (
+        <div className="pc-stmt" style={{maxWidth: 'none', width: '100%'}}>
+          <Eyebrow>§14 · Our direction · Area schedules</Eyebrow>
+          <h2 className="h-title" style={{marginBottom: 10}}>Two options. The same area.</h2>
+          <div className="prose tight" style={{maxWidth: '76ch', marginBottom: 14}}>
+            <p>Both G+10 options deliver almost exactly the same lettable area, around 8,000 m² GIA and 6,000 m² NIA. The Signal Box version sits 36 m² above the Canopy hybrid at GIA; the Canopy hybrid sits 32 m² below at NIA. Within Stage 2 sensitivity, they are equivalent. The choice between them is therefore not driven by area gain; it is driven by what each says, at the canal, at the skyline, and to the city.</p>
+          </div>
+          <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18}}>
+            <div className="schedule" style={{margin: 0}}>
+              <div className="schedule__head">
+                <span className="mono" style={{fontSize: 10.5, letterSpacing: 0.16, color: 'var(--accent)', textTransform: 'uppercase'}}>G+10 · Signal Box · 71.98 m AOD</span>
+              </div>
+              <AreaSchedule data={SIGNAL_BOX_G10_SCHEDULE} compact />
+            </div>
+            <div className="schedule" style={{margin: 0}}>
+              <div className="schedule__head">
+                <span className="mono" style={{fontSize: 10.5, letterSpacing: 0.16, color: 'var(--accent)', textTransform: 'uppercase'}}>G+10 · Canopy · 71.33 m AOD</span>
+              </div>
+              <AreaSchedule data={CANOPY_G10_SCHEDULE} compact />
+            </div>
+          </div>
+        </div>
+      ),
+    },
   ]
 );
+
+// §17 Appendices section removed — the previously consented scheme is
+// now shown as one row of the §16 "By the numbers" comparison page, so
+// the standalone appendix is no longer needed.
 
 // ─── Authored source order ───────────────────────────────────────────────
 // This is the canonical order written into the file. The runtime order
@@ -4666,29 +5013,29 @@ const SOURCE_PAGES = [].concat(
   S03,        // §04 The Site (now includes the relocated sketches intro)
   S07,        // §05 Constraints
   SInter,          // §06 Site Walk (act break + 58 photos + "What we learnt")
-  // S06 (§07 Vision) — removed
-  // SSiteWalk (§08 Site Walk) — folded into §06 above
+  // S06 (§07 Vision), removed
+  // SSiteWalk (§08 Site Walk), folded into §06 above
   SChallenge,      // §07 The Challenge
   SFiveFamilies,   // §08 Five Families
   SViabilityQs,    // §09 Five Viability Questions
   SBuildingTooLong,// §10 The Building is too long?
-  STwoChosen,      // §11 Two Chosen Directions
+  STwoChosen,      // §11 Two studies, further explored
   SCanopy,         // §12 Canopy
   SSignalBoxStudy, // §13 Signal Box (study)
   SOurDirection,   // §14 Our Direction
-  SMaterials,      // §15 Materials — title + heavy + light, points at the calculator
-  SClosing         // §16 Closing — scheme-agnostic prose closer (deck ends here)
+  SMaterials,      // §15 Materials, title + heavy + light, points at the calculator
+  SClosing         // §16 Closing, scheme-agnostic prose closer (deck ends here)
   // ── Legacy sections removed ──────────────────────────────────────────
   // S07_new, STerraced, S05, S10_new, S09, S13 are no longer in the deck.
   // Their const definitions remain in this file for now (dead code) so
   // they can be re-added easily if needed; nothing renders them.
-  // S14 (Working with us) — removed
-  // S15 (Closing/1820 Goods Way) — folded into §13
-  // S16, S17 — folded into S15
-  // S18 (§20 Parking) — removed
+  // S14 (Working with us), removed
+  // S15 (Closing/1820 Goods Way), folded into §13
+  // S16, S17, folded into S15
+  // S18 (§20 Parking), removed
 );
 
-// Runtime PAGES — just the authored SOURCE_PAGES (with the same section
+// Runtime PAGES, just the authored SOURCE_PAGES (with the same section
 // context sectionPages() already baked in). The earlier JSON-driven
 // reorder/hide pipeline + thumbnail strip has been removed.
 const PAGES = SOURCE_PAGES;

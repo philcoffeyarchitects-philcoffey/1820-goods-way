@@ -1,4 +1,4 @@
-// app.jsx — top-level.
+// app.jsx, top-level.
 // Navigation: a flat array of pages. Arrow / rail nav advance pages.
 // The P/R toggle switches which view (presentation or report) renders
 // inside the CURRENT page. Both views share the same page chrome and
@@ -57,7 +57,7 @@ function App() {
   }, [t.type, t.palette, t.surround]);
 
   // Compute & apply page scale based on viewport size and fullscreen state.
-  // Both modes "contain" — the whole page (top and bottom) stays visible, no
+  // Both modes "contain", the whole page (top and bottom) stays visible, no
   // cropping. Windowed reserves room for the topbar + rail; fullscreen reserves
   // a top/bottom margin so the page clears the progress rail at the bottom.
   React.useEffect(() => {
@@ -70,7 +70,7 @@ function App() {
       const reserveH = fullscreen ? 132 : 110;
       const fitW = (w - reserveW) / PAGE_W;
       const fitH = (h - reserveH) / PAGE_H;
-      const scale = Math.min(fitW, fitH); // contain — fit the whole page on screen
+      const scale = Math.min(fitW, fitH); // contain, fit the whole page on screen
       document.documentElement.style.setProperty("--scale", String(scale));
     }
     recompute();
@@ -187,13 +187,13 @@ function App() {
               title="Report view (R)">R · Report</button>
           </div>
           <button className="print-btn" onClick={toggleFullscreen}
-            title="Fullscreen (F) — Esc to exit">⛶ Fullscreen</button>
+            title="Fullscreen (F). Esc to exit">⛶ Fullscreen</button>
           <button className="print-btn" onClick={doPrint}
-            title="Print / save PDF — A4 landscape">⎙ PDF</button>
+            title="Print / save PDF. A4 landscape">⎙ PDF</button>
           <button className="print-btn print-btn--accent" onClick={() => setCalcOpen(true)}
             title="Open the design-side viability calculator">∑ Calculator</button>
           <button className="print-btn print-btn--accent" onClick={() => setFootOpen(true)}
-            title="500/600 — the lettability research behind the floor plate">500/600 · Who is the tenant?</button>
+            title="500/600, the lettability research behind the floor plate">500/600 · Who is the tenant?</button>
         </div>
       </header>
 
@@ -226,7 +226,7 @@ function App() {
                   let state = "future";
                   if (globalIdx < idx) state = "visited";
                   else if (globalIdx === idx) state = "current";
-                  // Bars are visual progress indicators only — clicks bubble up
+                  // Bars are visual progress indicators only, clicks bubble up
                   // to the parent button (jumpToSection), so any click anywhere
                   // on the tick routes to the section's first slide.
                   return (
@@ -309,14 +309,14 @@ function App() {
 }
 
 function PageFrame({ page, view, pageIdx, total }) {
-  // The first page in report view is the printed-cover layout — chrome hidden.
+  // The first page in report view is the printed-cover layout, chrome hidden.
   const isReportCover = view === "report" && pageIdx === 0;
   const hideChrome = isReportCover || page.isDivider;
   return (
     <div
       className={"page-frame" + (isReportCover ? " page-frame--cover" : "") + (page.isDivider ? " page-frame--divider" : "")}
       data-page={page.id}
-      data-screen-label={`Page ${pageIdx+1} · ${page.sectionLabel} — ${page.label}`}
+      data-screen-label={`Page ${pageIdx+1} · ${page.sectionLabel}, ${page.label}`}
     >
       {!hideChrome ? (
         <div className="page-frame__top">

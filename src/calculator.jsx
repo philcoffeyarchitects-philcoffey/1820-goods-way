@@ -1,199 +1,247 @@
-// calculator.jsx — Design-side viability calculator (v2).
+// calculator.jsx — Design-side viability calculator (v3, mid-tender)
 //
-// Adds: scenario presets · best-in-category tags · sync A↔B ·
-//       carbon target gauge · whole-life carbon · sensitivity bands ·
-//       PDF print · summary comparison row.
+// Rebuilt around the deck's current scheme structure:
+//   Path A = Previously Consented Stage 5 (by others, locked, reference baseline)
+//   Path B = Coffey direction — picker over four variants:
+//            Canopy G+6, Signal Box G+8, Canopy G+10 (hybrid), Signal Box G+10
+//
+// Cost is shown RELATIVE to the consented baseline (percentages, not raw £/m²)
+// so the headline figures don't spook a non-technical reader. Raw figures
+// are kept in a small caveat line for the analytical reader.
+//
+// Carbon keeps its absolute value (because LETI 2030 / RIBA 2030 / RIBA 2025
+// thresholds are absolute), but the visual indicator is rebuilt: tier badge
+// at the top, then three target rows with tick/cross and the gap.
+//
+// Numbers are mid-tender illustrative — swap in real Stage 2 cost-plan
+// figures by editing the *_TOTAL_COST constants below.
 
 import React from "react";
 import { Logo, Eyebrow } from "./placeholder.jsx";
 
-// ─── DATA ──────────────────────────────────────────────────────────────
+// ─── MATERIAL DATA ─────────────────────────────────────────────────────
 const STRUCTURE = {
-  "steel-clt":         { label: "Steel + CLT",          carbon: 305, cost: 1200, biogenic:  -85, note: "Hybrid frame; biogenic CLT; lighter than RC. LETI exemplar." },
-  "steel-clt-reused":  { label: "Reused steel + CLT",   carbon: 165, cost: 1280, biogenic:  -85, note: "Reclaimed structural steel + CLT — ~70% lower steel carbon. Sourcing premium." },
-  "steel-comp":        { label: "Steel + composite",    carbon: 420, cost: 1050, biogenic:    0, note: "Steel frame + composite metal-deck slab." },
-  "rc":                { label: "RC concrete",          carbon: 575, cost:  950, biogenic:    0, note: "Reinforced concrete; CEM I cement, standard." },
-  "rc-ggbs":           { label: "RC + GGBS",            carbon: 395, cost:  985, biogenic:    0, note: "70% GGBS cement replacement; −30% carbon." },
-  "full-clt":          { label: "Full CLT",             carbon: 215, cost: 1550, biogenic: -170, note: "Mass timber throughout; large biogenic sequestration; premium." },
+  "steel-clt":         { label: "Steel + CLT",          carbon: 305, biogenic:  -85, note: "Hybrid frame; biogenic CLT. LETI exemplar. Coffey recommended." },
+  "steel-clt-reused":  { label: "Reused steel + CLT",   carbon: 165, biogenic:  -85, note: "Reclaimed structural steel + CLT. Sourcing premium." },
+  "steel-comp":        { label: "Steel + composite",    carbon: 420, biogenic:    0, note: "Steel frame + composite metal-deck slab." },
+  "rc":                { label: "RC concrete",          carbon: 575, biogenic:    0, note: "Reinforced concrete; CEM I cement, standard." },
+  "rc-ggbs":           { label: "RC + GGBS",            carbon: 395, biogenic:    0, note: "70% GGBS cement replacement; ~30% lower carbon." },
+  "full-clt":          { label: "Full CLT",             carbon: 215, biogenic: -170, note: "Mass timber throughout. Large biogenic sequestration; premium." },
 };
 
 const HEAVY = {
-  "brick":          { label: "Engineering brick",      carbon: 140, cost:  900, note: "Full bricks — proposed. Kiln-fired at ~1,100°C." },
-  "brick-slip":     { label: "Brick slip on rail",     carbon:  95, cost:  650, note: "20mm slips on mechanically-fixed carrier." },
-  "stone-portland": { label: "Portland limestone (UK)",carbon:  85, cost: 1300, note: "UK-quarried sedimentary; low energy." },
-  "stone-granite":  { label: "Granite (imported)",     carbon: 280, cost: 1550, note: "Imported, high-energy cutting + shipping." },
-  "precast":        { label: "Pre-cast concrete",      carbon: 240, cost:  750, note: "Reconstituted-stone PCC panels." },
-  "precast-ggbs":   { label: "Pre-cast + GGBS",        carbon: 145, cost:  800, note: "70% GGBS cement replacement." },
+  "brick":          { label: "Engineering brick",      carbon: 140, note: "Full bricks. The brick of Victorian canal infrastructure. Coffey recommended." },
+  "brick-slip":     { label: "Brick slip on rail",     carbon:  95, note: "20mm slips on a carrier. Lower carbon, less honest at close range." },
+  "stone-portland": { label: "Portland limestone",     carbon:  85, note: "UK-quarried sedimentary. Low energy. A different vocabulary." },
+  "stone-granite":  { label: "Granite (imported)",     carbon: 280, note: "Imported, high-energy cutting + shipping." },
+  "precast":        { label: "Pre-cast concrete",      carbon: 240, note: "Reconstituted-stone PCC panels. Faster, lower cost." },
+  "precast-ggbs":   { label: "Pre-cast + GGBS",        carbon: 145, note: "70% GGBS cement replacement." },
 };
 
 const LIGHT = {
-  "al-primary":     { label: "Aluminium — primary",       carbon: 310, cost:  650, note: "Standard cassette; ~12 kgCO₂e/kg." },
-  "al-recycled":    { label: "Aluminium — recycled",      carbon:  75, cost:  720, note: "CIRCAL 75R — 75% recycled. Proposed." },
-  "stainless":      { label: "Corrugated stainless",      carbon: 180, cost:  825, note: "316 grade, marine-suitable." },
-  "corten":         { label: "Weathering steel (Corten)", carbon:  95, cost:  580, note: "Self-finishing patina; low-process steel." },
-  "zinc":           { label: "Zinc standing seam",        carbon: 105, cost:  850, note: "Pre-weathered VMZinc." },
-  "al-mesh":        { label: "Aluminium mesh / perf",     carbon: 200, cost:  580, note: "Perforated screen; less aluminium per m²." },
+  "al-recycled":    { label: "Aluminium, recycled (CIRCAL 75R)", carbon:  75, note: "75% recycled content. Coffey recommended." },
+  "al-primary":     { label: "Aluminium, primary",                carbon: 310, note: "Standard cassette. Four times the embodied carbon of recycled." },
+  "stainless":      { label: "Corrugated stainless",              carbon: 180, note: "316 grade, marine-suitable." },
+  "corten":         { label: "Weathering steel (Corten)",         carbon:  95, note: "Self-finishing patina. Reads agricultural, not signal-box." },
+  "zinc":           { label: "Zinc standing seam",                carbon: 105, note: "Pre-weathered VMZinc. Reads domestic at scale." },
+  "al-mesh":        { label: "Aluminium mesh / perf",             carbon: 200, note: "Perforated screen. Less aluminium per m²." },
 };
 
-const BASEMENT = {
-  "none":           { label: "No basement",     carbon:   0, cost:    0, note: "Slab-on-grade." },
-  "single":         { label: "Single basement", carbon: 175, cost:  410, note: "+1 level plant + storage. Premium spread over GIA." },
-  "double":         { label: "Double basement", carbon: 350, cost:  850, note: "+2 levels. Heavy excavation + secant piling." },
-};
+// Rest-of-build adder (MEP, fit-out, externals, fees, prelims) — held
+// constant so the choices in this tool move structure + facade only.
+const REST_CARBON = 220;          // kgCO₂e/m² GIA
+const REST_COST   = 2400;         // £/m² GIA
 
-const REST = { carbon: 220, cost: 2400 };
-
-const SCHEMES = {
-  "A": {
-    key: "A", label: "Path A", long: "G+7 cantilevered",
-    GIA: 4340, heavyArea: 2200, lightArea: 350,
-    penalty: {
-      carbon: 100, cost: 85,
-      lbl: "Cantilever structural premium",
-      headerNote: "+100 kgCO₂e/m² · +£85/m² — ground-floor transfer structure carries cantilevered plates over the tube lines; upper plates thickened for the cantilever. Not free.",
-    },
-  },
-  "B": {
-    key: "B", label: "Path B", long: "G+8/9 simple extrusion",
-    GIA: 5150, heavyArea: 2800, lightArea: 420,
-    penalty: null,
-    headerNote: "No transfer structure — clean stacked frame. The cantilever penalty (Path A) does not apply.",
-  },
-};
-
-const BASELINE = { carbon: 1100, cost: 5400 };
-
-const TARGETS = [
-  { name: "LETI 2030",        threshold: 500,  kind: "best" },
-  { name: "RIBA 2030 Office", threshold: 750,  kind: "pass" },
-  { name: "RIBA 2025 Office", threshold: 970,  kind: "minimum" },
-];
-
-// Operational carbon — kgCO2e/m² GIA per year for typical Cat A office.
+// Operational carbon (kgCO₂e/m² GIA per year for a typical Cat A office)
+// and assumed building life used for whole-life carbon.
 const OPERATIONAL = { carbon: 28, life: 60 };
 
-// Sensitivity band — applied to cost as ± percentage.
+// Cost sensitivity band at RIBA Stage 2 (±10% typical).
 const SENSITIVITY = 0.10;
 
-// Quick scenarios.
-const PRESETS = {
-  "lowest-carbon":  { label: "Lowest carbon",     note: "Full CLT · Portland · recycled Al",       structure: "full-clt",  basement: "none",   heavyMat: "stone-portland", lightMat: "al-recycled" },
-  "lowest-cost":    { label: "Lowest cost",       note: "RC frame · brick slip · primary Al",       structure: "rc",        basement: "none",   heavyMat: "brick-slip",     lightMat: "al-primary"  },
-  "consented":      { label: "Consented baseline",note: "RC + basement · precast · primary Al",     structure: "steel-comp",basement: "single", heavyMat: "precast",        lightMat: "al-primary"  },
-  "recommended":    { label: "Coffey recommended",note: "Steel + CLT · brick · recycled Al",        structure: "steel-clt", basement: "none",   heavyMat: "brick",          lightMat: "al-recycled" },
+// ─── SCHEME DEFINITIONS ────────────────────────────────────────────────
+// The Stage 5 consented scheme is LOCKED. The Coffey directions are
+// editable on material choices but their geometry (GIA, NIA, facade areas)
+// is fixed.
+
+const CONSENTED = {
+  key: "consented",
+  label: "Previously consented",
+  long: "Stage 5 consent, by others",
+  note: "G+6 with basement. RC frame, precast facade, primary aluminium, single basement.",
+  gia: 5252,
+  nia: 3797,
+  heavyArea: 2200,
+  lightArea: 250,
+  basement: 175,                  // kgCO₂e/m² GIA (single basement)
+  basementCost: 410,              // £/m² GIA
+  // Locked spec — these are the materials the consented scheme used.
+  spec: { structure: "rc", heavy: "precast", light: "al-primary" },
+  // Mid-tender illustrative £/m² for the design-side scope only.
+  // Real Stage 2 cost-plan figures slot in here next week.
+  designSideCostPerM2: 2600,
 };
 
-const DEFAULT_STATE = {
-  A: { ...PRESETS["consented"] },
-  B: { ...PRESETS["recommended"] },
+const COFFEY_VARIANTS = {
+  "canopy-g6": {
+    key: "canopy-g6", label: "Canopy", long: "G+6 · Original Canopy study",
+    note: "Low and wide. Roof at 54.53 m AOD. No basement. NMA planning only.",
+    gia: 6119, nia: 4518,
+    heavyArea: 2400, lightArea: 320,
+  },
+  "signal-box-g8": {
+    key: "signal-box-g8", label: "Signal Box", long: "G+8 · Original Signal Box study",
+    note: "Tall and slender. Roof at 58.18 m AOD. No basement. New planning required.",
+    gia: 6731, nia: 4964,
+    heavyArea: 2600, lightArea: 380,
+  },
+  "canopy-g10": {
+    key: "canopy-g10", label: "Canopy", long: "G+10 · Hybrid · Our direction",
+    note: "Slender footprint with a canopy at the foot. Apex 71.33 m AOD, just under the Kenwood House view line at 73.2 m.",
+    gia: 8002, nia: 5984,
+    heavyArea: 2700, lightArea: 420,
+  },
+  "signal-box-g10": {
+    key: "signal-box-g10", label: "Signal Box", long: "G+10 · Our direction",
+    note: "Slender tower with the lookout marking the crossing. Apex 71.98 m AOD, just under the Kenwood House view line at 73.2 m.",
+    gia: 8051, nia: 6016,
+    heavyArea: 2800, lightArea: 420,
+  },
 };
-// Strip the meta keys so they don't pollute the state shape.
-["A","B"].forEach(k => { delete DEFAULT_STATE[k].label; delete DEFAULT_STATE[k].note; });
+
+// Industry carbon targets — RIBA / LETI thresholds, kgCO₂e/m² GIA.
+const TARGETS = [
+  { name: "LETI 2030",        full: "LETI 2030 Office",        threshold: 500, tier: "best",    label: "Exemplary" },
+  { name: "RIBA 2030",        full: "RIBA 2030 Office",        threshold: 750, tier: "pass",    label: "Pass"      },
+  { name: "RIBA 2025",        full: "RIBA 2025 Office",        threshold: 970, tier: "minimum", label: "Minimum"   },
+];
+
+// Defaults: Coffey's recommended materials.
+const COFFEY_DEFAULT_SPEC = { structure: "steel-clt", heavy: "brick", light: "al-recycled" };
 
 // ─── HELPERS ───────────────────────────────────────────────────────────
-function bestKey(options, field, mode = "min") {
-  let bestK = null, bestV = mode === "min" ? Infinity : -Infinity;
-  for (const k in options) {
-    const v = options[k][field];
-    if (v == null) continue;
-    if ((mode === "min" && v < bestV) || (mode === "max" && v > bestV)) {
-      bestV = v; bestK = k;
-    }
-  }
-  return bestK;
-}
-
-function calcScheme(state, schemeKey) {
-  const s = SCHEMES[schemeKey];
-  const str   = STRUCTURE[state.structure];
-  const bas   = BASEMENT[state.basement];
-  const heavy = HEAVY[state.heavyMat];
-  const light = LIGHT[state.lightMat];
-  const pen   = s.penalty || { carbon: 0, cost: 0, lbl: null };
-
-  const penCarbon = pen.carbon * s.GIA;
-  const penCost   = pen.cost   * s.GIA;
-
-  const dsCarbon =
-    str.carbon * s.GIA +
-    heavy.carbon * s.heavyArea +
-    light.carbon * s.lightArea +
-    bas.carbon * s.GIA +
-    penCarbon;
-  const biogenic = (str.biogenic || 0) * s.GIA;
-  const dsCost =
-    str.cost * s.GIA +
-    heavy.cost * s.heavyArea +
-    light.cost * s.lightArea +
-    bas.cost * s.GIA +
-    penCost;
-
-  const restCarbon = REST.carbon * s.GIA;
-  const restCost   = REST.cost   * s.GIA;
-
-  const carbonTotal = dsCarbon + restCarbon;
-  const costTotal   = dsCost + restCost;
-
-  const operationalLifetime = OPERATIONAL.carbon * OPERATIONAL.life * s.GIA;
-  const wholeLifeTotal = carbonTotal + operationalLifetime + biogenic;
-
-  const carbonPerM2 = carbonTotal / s.GIA;
-  const costPerM2   = costTotal / s.GIA;
-  const dsCarbonPerM2 = dsCarbon / s.GIA;
-  const wholeLifePerM2 = wholeLifeTotal / s.GIA;
-
+function calcCarbon(scheme, spec, hasBasement) {
+  const str = STRUCTURE[spec.structure];
+  const heavy = HEAVY[spec.heavy];
+  const light = LIGHT[spec.light];
+  const basementC = hasBasement ? scheme.basement : 0;
+  const designSide =
+    str.carbon * scheme.gia +
+    heavy.carbon * scheme.heavyArea +
+    light.carbon * scheme.lightArea +
+    basementC * scheme.gia;
+  const biogenic = (str.biogenic || 0) * scheme.gia;
+  const rest = REST_CARBON * scheme.gia;
+  const total = designSide + rest;
+  const operational = OPERATIONAL.carbon * OPERATIONAL.life * scheme.gia;
+  const wholeLife = total + operational + biogenic;
   return {
-    carbonTotal, carbonPerM2, dsCarbonPerM2,
-    costTotal, costPerM2,
-    biogenic, biogenicPerM2: biogenic / s.GIA,
-    operationalLifetime, operationalPerM2: operationalLifetime / s.GIA,
-    wholeLifeTotal, wholeLifePerM2,
-    sensitivityLow: costPerM2 * (1 - SENSITIVITY),
-    sensitivityHigh: costPerM2 * (1 + SENSITIVITY),
-    deltaCarbon: ((carbonPerM2 - BASELINE.carbon) / BASELINE.carbon) * 100,
-    deltaCost:   ((costPerM2   - BASELINE.cost)   / BASELINE.cost)   * 100,
+    designSidePerM2: designSide / scheme.gia,
+    totalPerM2: total / scheme.gia,
+    biogenicPerM2: biogenic / scheme.gia,
+    operationalPerM2: operational / scheme.gia,
+    wholeLifePerM2: wholeLife / scheme.gia,
     breakdown: {
-      structure: { lbl: str.label,   carbon: str.carbon * s.GIA,         cost: str.cost * s.GIA },
-      basement:  { lbl: bas.label,   carbon: bas.carbon * s.GIA,         cost: bas.cost * s.GIA },
-      heavy:     { lbl: heavy.label, carbon: heavy.carbon * s.heavyArea, cost: heavy.cost * s.heavyArea },
-      light:     { lbl: light.label, carbon: light.carbon * s.lightArea, cost: light.cost * s.lightArea },
-      penalty:   { lbl: pen.lbl || "—",                                  carbon: penCarbon,        cost: penCost },
-      biogenic:  { lbl: str.biogenic ? `Biogenic sequestration (CLT)` : "—", carbon: biogenic,        cost: 0 },
-      rest:      { lbl: "MEP, fit-out, externals, fees, prelims",            carbon: restCarbon,      cost: restCost },
+      structure: { lbl: str.label,   carbon: str.carbon * scheme.gia },
+      heavy:     { lbl: heavy.label, carbon: heavy.carbon * scheme.heavyArea },
+      light:     { lbl: light.label, carbon: light.carbon * scheme.lightArea },
+      basement:  { lbl: hasBasement ? "Single basement" : null, carbon: basementC * scheme.gia },
+      biogenic:  { lbl: str.biogenic ? "Biogenic sequestration (CLT)" : null, carbon: biogenic },
+      rest:      { lbl: "MEP, fit-out, externals, fees, prelims", carbon: rest },
     },
   };
 }
 
-function fmtMoney(n) {
-  if (n >= 1e6) return "£" + (n / 1e6).toFixed(2) + "m";
-  if (n >= 1e3) return "£" + (n / 1e3).toFixed(0) + "k";
-  return "£" + Math.round(n).toLocaleString();
+// Cost is held mid-tender illustrative. The consented scheme's £/m² is set
+// directly; Coffey variants derive from the consented per-m² rate plus a
+// modest design-side delta driven by structure + facade choices.
+function calcCost(scheme, spec, hasBasement, consentedPerM2) {
+  // Structural cost premium/discount per m² vs RC concrete baseline.
+  const STR_DELTA = {
+    "steel-clt":        250,    // hybrid frame
+    "steel-clt-reused": 330,    // reclaimed steel premium
+    "steel-comp":       100,    // steel + composite
+    "rc":               0,      // baseline
+    "rc-ggbs":          35,     // small premium for GGBS
+    "full-clt":         600,    // mass timber premium
+  };
+  const HEAVY_DELTA = {
+    "brick":          0,        // baseline
+    "brick-slip":    -250,
+    "stone-portland": 400,
+    "stone-granite":  650,
+    "precast":       -150,
+    "precast-ggbs":  -100,
+  };
+  const LIGHT_DELTA = {
+    "al-primary":     0,
+    "al-recycled":    70,
+    "stainless":      175,
+    "corten":        -70,
+    "zinc":           200,
+    "al-mesh":       -70,
+  };
+  // Heavy/light deltas are roughly per-m² of facade area, normalised to
+  // GIA via a typical facade-to-GIA ratio (~0.4 for these schemes).
+  const FACADE_TO_GIA = 0.4;
+  const strDelta   = STR_DELTA[spec.structure]   || 0;
+  const heavyDelta = (HEAVY_DELTA[spec.heavy]    || 0) * FACADE_TO_GIA;
+  const lightDelta = (LIGHT_DELTA[spec.light]    || 0) * FACADE_TO_GIA * 0.1;
+  const basementDelta = hasBasement ? 410 : 0;
+  const designSidePerM2 = consentedPerM2 + strDelta + heavyDelta + lightDelta + basementDelta;
+  const totalPerM2 = designSidePerM2 + REST_COST;
+  return {
+    designSidePerM2,
+    totalPerM2,
+    designSideTotal: designSidePerM2 * scheme.gia,
+    total:           totalPerM2     * scheme.gia,
+    sensLow:  totalPerM2 * (1 - SENSITIVITY),
+    sensHigh: totalPerM2 * (1 + SENSITIVITY),
+  };
 }
-function fmtMoneyPerM2(n) { return "£" + Math.round(n / 10) * 10; }
-function fmtMoneyTotal(n) {
-  if (n >= 1e6) return "£" + (Math.round(n / 1e5) / 10).toFixed(1) + "m";
-  if (n >= 1e3) return "£" + Math.round(n / 1e3).toLocaleString() + "k";
-  return "£" + Math.round(n).toLocaleString();
+
+// Round to a "tidy" percentage — nearest 5%, with " < 5%" cap for tiny deltas.
+function roundDelta(pct) {
+  const rounded = Math.round(pct / 5) * 5;
+  if (Math.abs(rounded) < 5) return "approximately the same";
+  return (rounded > 0 ? "+" : "") + rounded + "%";
 }
-function fmtSigned(n, suffix = "") {
-  const s = n >= 0 ? "+" : "";
-  const v = Math.abs(n) < 10 ? n.toFixed(1) : n.toFixed(0);
-  return s + v + suffix;
+function deltaSign(pct) {
+  if (Math.abs(pct) < 5) return "neutral";
+  return pct > 0 ? "up" : "down";
+}
+function fmtMoneyApprox(n) {
+  const abs = Math.abs(n);
+  if (abs >= 1e6) return (n < 0 ? "−" : "") + "~£" + (abs / 1e6).toFixed(1) + "m";
+  if (abs >= 1e3) return (n < 0 ? "−" : "") + "~£" + Math.round(abs / 1e3) + "k";
+  return (n < 0 ? "−" : "") + "~£" + Math.round(abs);
+}
+function fmtSqM(n) { return Math.round(n).toLocaleString("en-GB") + " m²"; }
+
+// Identify which tier a carbon value sits in.
+function tierFor(value) {
+  if (value <= TARGETS[0].threshold) return "best";
+  if (value <= TARGETS[1].threshold) return "pass";
+  if (value <= TARGETS[2].threshold) return "minimum";
+  return "fail";
+}
+function tierLabel(t) {
+  return { best: "LETI 2030 territory · exemplary",
+           pass: "RIBA 2030 met · pass",
+           minimum: "RIBA 2025 met · minimum",
+           fail: "Above 2025 threshold" }[t];
 }
 
 // ─── COMPONENTS ────────────────────────────────────────────────────────
 
-function MaterialButtons({ options, value, onChange }) {
+function MaterialButtons({ options, value, onChange, recommend }) {
   const keys = Object.keys(options);
-  const bestCarbonKey = bestKey(options, "carbon");
-  const bestCostKey   = bestKey(options, "cost");
   return (
     <div className="matgrid matgrid--c1">
       {keys.map((k) => {
         const o = options[k];
         const active = k === value;
-        const isLowC = k === bestCarbonKey;
-        const isLowCost = k === bestCostKey;
+        const isRec = k === recommend;
         return (
           <button
             key={k}
@@ -205,14 +253,12 @@ function MaterialButtons({ options, value, onChange }) {
             <div className="matbtn__row">
               <span className="matbtn__lbl">
                 {o.label}
-                {isLowC ? <span className="matbtn__tag matbtn__tag--c">Lowest C</span> : null}
-                {isLowCost ? <span className="matbtn__tag matbtn__tag--cost">Lowest £</span> : null}
+                {isRec ? <span className="matbtn__tag matbtn__tag--rec">Recommended</span> : null}
               </span>
               <span className="matbtn__num">{o.carbon} <span className="matbtn__unit">kgCO₂e</span></span>
             </div>
             <div className="matbtn__row matbtn__row--sec">
               <span className="matbtn__note">{o.note}</span>
-              <span className="matbtn__cost">{fmtMoney(o.cost)} /m²</span>
             </div>
           </button>
         );
@@ -221,7 +267,7 @@ function MaterialButtons({ options, value, onChange }) {
   );
 }
 
-function CtrlGroup({ num, title, hint, options, selectedKey, onChange }) {
+function CtrlGroup({ num, title, hint, options, selectedKey, onChange, recommend }) {
   const sel = options[selectedKey];
   return (
     <details className="ctrl-group">
@@ -238,165 +284,243 @@ function CtrlGroup({ num, title, hint, options, selectedKey, onChange }) {
         <span className="ctrl-group__chev" aria-hidden="true">▸</span>
       </summary>
       <div className="ctrl-group__body">
-        <MaterialButtons options={options} value={selectedKey} onChange={onChange} />
+        <MaterialButtons options={options} value={selectedKey} onChange={onChange} recommend={recommend} />
       </div>
     </details>
   );
 }
 
-function ResultCard({ label, value, sub, accent }) {
+// New, clearer carbon target indicator: tier badge + three target rows
+// with tick/cross and the gap to threshold.
+function CarbonScorecard({ designSidePerM2, totalPerM2, consentedTotal, deltaText, deltaSignVal }) {
+  const tier = tierFor(designSidePerM2);
+  const headline = tierLabel(tier);
+  const v = Math.round(designSidePerM2);
   return (
-    <div className={"resultcard" + (accent ? " resultcard--accent" : "")}>
-      <div className="resultcard__lbl">{label}</div>
-      <div className="resultcard__val">{value}</div>
-      {sub ? <div className="resultcard__sub">{sub}</div> : null}
-    </div>
-  );
-}
-
-// Horizontal gauge showing the design-side carbon against thresholds.
-function CarbonGauge({ value, baseline, targets }) {
-  const max = Math.max(baseline, value) * 1.05;
-  const pct = Math.min(100, (value / max) * 100);
-  // Which target band are we in?
-  const sorted = [...targets].sort((a, b) => a.threshold - b.threshold);
-  let band = "fail";
-  if (value <= sorted[0].threshold) band = "best";
-  else if (value <= sorted[1].threshold) band = "pass";
-  else if (value <= sorted[2].threshold) band = "minimum";
-  return (
-    <div className={"gauge gauge--" + band}>
-      <div className="gauge__head">
-        <span className="gauge__title mono">Design-side carbon vs targets</span>
-        <span className="gauge__value">
-          <b>{Math.round(value)}</b><span className="mono">kgCO₂e/m²</span>
-        </span>
+    <div className={"target-card target-card--" + tier}>
+      <div className="target-card__head">
+        <div className="target-card__head-left">
+          <span className="target-card__big-num">{v}</span>
+          <span className="mono target-card__big-unit">kgCO₂e/m²</span>
+          <span className="target-card__tier">{headline}</span>
+        </div>
+        <div className={"target-card__delta target-card__delta--" + deltaSignVal}>
+          <span className="mono target-card__delta-lbl">vs consented</span>
+          <span className="target-card__delta-val">{deltaText}</span>
+        </div>
       </div>
-      <div className="gauge__track">
-        <div className="gauge__fill" style={{ width: pct + "%" }}></div>
-        {sorted.map((t) => {
-          const left = (t.threshold / max) * 100;
+      <ul className="target-card__rows">
+        {TARGETS.map((t) => {
+          const met = v <= t.threshold;
+          const gap = Math.abs(v - t.threshold);
           return (
-            <div key={t.name} className={"gauge__marker gauge__marker--" + t.kind} style={{ left: left + "%" }}>
-              <span className="gauge__marker-line"></span>
-              <span className="gauge__marker-lbl mono">{t.name}<br/>≤{t.threshold}</span>
-            </div>
+            <li key={t.name} className={"target-card__row target-card__row--" + (met ? "met" : "fail")}>
+              <span className={"target-card__check"}>{met ? "✓" : "✗"}</span>
+              <span className="target-card__name">{t.full}</span>
+              <span className="mono target-card__thresh">≤ {t.threshold} kgCO₂e/m²</span>
+              <span className={"target-card__status mono " + (met ? "is-met" : "is-fail")}>
+                {met ? `Met by ${gap}` : `Above by ${gap}`}
+              </span>
+            </li>
           );
         })}
-      </div>
-      <div className="gauge__status mono">
-        {band === "best"    && "✓ LETI 2030 met — exemplary"}
-        {band === "pass"    && "✓ RIBA 2030 met — passes target"}
-        {band === "minimum" && "✓ RIBA 2025 met — minimum"}
-        {band === "fail"    && "✗ Above RIBA 2025 threshold"}
+      </ul>
+      <div className="target-card__foot mono">
+        All-in (incl. fixed MEP / fit-out): {Math.round(totalPerM2)} kgCO₂e/m² · Whole-life over 60yr life included in detailed breakdown
       </div>
     </div>
   );
 }
 
-function SchemeCard({ schemeKey, state, setState, otherState, otherKey, onSync }) {
-  const s = SCHEMES[schemeKey];
-  const r = calcScheme(state, schemeKey);
-  const isB = schemeKey === "B";
-  const note = s.penalty ? s.penalty.headerNote : s.headerNote;
+// Relative cost block — no raw £/m² as headline. Always paired with area
+// gain so the panel reads "more area for similar/less cost per m²."
+function RelativeCost({ costDeltaPct, costDeltaTotal, areaDeltaPct, costPerM2, totalCost, sensLow, sensHigh }) {
+  const dText = roundDelta(costDeltaPct);
+  const dSign = deltaSign(costDeltaPct);
+  const tText = roundDelta(Math.round(costDeltaTotal / Math.abs(costDeltaTotal || 1) * 5) * 5);  // placeholder
+  const aText = roundDelta(areaDeltaPct);
   return (
-    <section className={"schemecard" + (isB ? " schemecard--recommended" : "")}>
+    <div className="costcard">
+      <div className="costcard__head">
+        <span className="costcard__lbl mono">COST</span>
+        <span className={"costcard__chip costcard__chip--" + dSign}>{dText} per m²</span>
+      </div>
+      <div className="costcard__lines">
+        <div className="costcard__line">
+          <span className="costcard__line-lbl">Per m²</span>
+          <span className="costcard__line-val">{dText} vs the consented scheme</span>
+        </div>
+        <div className="costcard__line">
+          <span className="costcard__line-lbl">Overall</span>
+          <span className="costcard__line-val">
+            {Math.abs(costDeltaTotal) < 200000 ? "approximately the same overall" : (costDeltaTotal > 0 ? "approximately +" : "approximately −") + fmtMoneyApprox(Math.abs(costDeltaTotal)).replace("~£", "£") + " overall"}
+            {" "}
+            <span className="costcard__line-note">for {aText} more lettable area</span>
+          </span>
+        </div>
+      </div>
+      <div className="costcard__foot mono">
+        Mid-tender illustrative · design-side scope · ±{Math.round(SENSITIVITY * 100)}% Stage 2 sensitivity ·
+        analytical: ~£{Math.round(costPerM2 / 10) * 10}/m² all-in, total ~{fmtMoneyApprox(totalCost)}
+      </div>
+    </div>
+  );
+}
+
+function SchemeTabs({ value, onChange }) {
+  const tabs = Object.values(COFFEY_VARIANTS);
+  return (
+    <div className="scheme-tabs">
+      <div className="scheme-tabs__lbl mono">Coffey direction</div>
+      <div className="scheme-tabs__list">
+        {tabs.map((v) => (
+          <button
+            key={v.key}
+            className={"scheme-tab" + (v.key === value ? " is-active" : "")}
+            onClick={() => onChange(v.key)}
+            title={v.note}
+          >
+            <span className="scheme-tab__lbl">{v.label}</span>
+            <span className="scheme-tab__sub mono">{v.long.split("·")[0].trim()}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ConsentedCard({ result, costResult }) {
+  return (
+    <section className="schemecard schemecard--locked">
       <header className="schemecard__head">
         <div>
           <div className="schemecard__key">
-            <span className="mono">{s.label}</span>
-            {isB ? <span className="mono schemecard__chip">Recommended</span> : null}
+            <span className="mono">Previously consented</span>
+            <span className="mono schemecard__chip schemecard__chip--locked">Locked · by others</span>
           </div>
-          <h3 className="schemecard__title">{s.long}</h3>
-          {note ? (
-            <div className={"schemecard__note" + (s.penalty ? " schemecard__note--penalty" : "")}>
-              {note}
-            </div>
-          ) : null}
+          <h3 className="schemecard__title">{CONSENTED.long}</h3>
+          <div className="schemecard__note">{CONSENTED.note}</div>
         </div>
         <div className="schemecard__gia">
-          <div className="mono">GIA</div>
-          <div className="schemecard__gia-val">{s.GIA.toLocaleString()}<span className="mono">m²</span></div>
-          <button className="schemecard__sync mono" onClick={onSync}
-            title={`Copy spec from Path ${otherKey} to Path ${schemeKey} — isolates the geometry-only difference.`}>
-            ⇄ Copy from {otherKey}
-          </button>
+          <div className="mono">GIA / NIA</div>
+          <div className="schemecard__gia-val">{CONSENTED.gia.toLocaleString()}<span className="mono"> m²</span></div>
+          <div className="mono schemecard__gia-nia">NIA {CONSENTED.nia.toLocaleString()} m²</div>
         </div>
       </header>
 
-      <div className="schemecard__controls">
-        <CtrlGroup num="01" title="Primary structure" hint="per m² GIA"
-          options={STRUCTURE} selectedKey={state.structure}
-          onChange={(v) => setState({ ...state, structure: v })} />
-        <CtrlGroup num="02" title="Basement" hint="per m² GIA"
-          options={BASEMENT} selectedKey={state.basement}
-          onChange={(v) => setState({ ...state, basement: v })} />
-        <CtrlGroup num="03" title="Heavy mass — facade" hint={`${s.heavyArea}m² facade`}
-          options={HEAVY} selectedKey={state.heavyMat}
-          onChange={(v) => setState({ ...state, heavyMat: v })} />
-        <CtrlGroup num="04" title="Light cladding — signal house" hint={`${s.lightArea}m² facade`}
-          options={LIGHT} selectedKey={state.lightMat}
-          onChange={(v) => setState({ ...state, lightMat: v })} />
+      <div className="schemecard__locked-spec">
+        <span className="mono">Specification:</span>
+        <span>{STRUCTURE[CONSENTED.spec.structure].label}</span>
+        <span className="dim">·</span>
+        <span>{HEAVY[CONSENTED.spec.heavy].label}</span>
+        <span className="dim">·</span>
+        <span>{LIGHT[CONSENTED.spec.light].label}</span>
+        <span className="dim">·</span>
+        <span>Single basement</span>
       </div>
 
       <div className="schemecard__results">
-        <div className="results-row">
-          <ResultCard
-            label="Embodied carbon · design-side"
-            value={<span><b>{Math.round(r.dsCarbonPerM2)}</b><span className="mono"> kgCO₂e/m²</span></span>}
-            sub={`Structure + facade + basement · all-in incl. MEP: ${Math.round(r.carbonPerM2)}`}
-            accent
-          />
-          <ResultCard
-            label="Construction cost · all-in"
-            value={<span><b>{fmtMoneyPerM2(r.costPerM2)}</b><span className="mono"> /m²</span></span>}
-            sub={`${fmtSigned(r.deltaCost, "%")} vs baseline · ${fmtMoneyTotal(r.costTotal)} total · range ${fmtMoneyPerM2(r.sensitivityLow)}–${fmtMoneyPerM2(r.sensitivityHigh)} (±10%)`}
-          />
+        <div className="consented-summary">
+          <div className="consented-summary__item">
+            <span className="mono">Embodied carbon</span>
+            <b>{Math.round(result.designSidePerM2)}</b>
+            <span className="mono">kgCO₂e/m² (design-side)</span>
+            <span className={"target-pill target-pill--" + tierFor(result.designSidePerM2)}>
+              {tierLabel(tierFor(result.designSidePerM2))}
+            </span>
+          </div>
+          <div className="consented-summary__item">
+            <span className="mono">Build cost (illustrative)</span>
+            <b>~£{Math.round(costResult.totalPerM2 / 10) * 10}</b>
+            <span className="mono">/m² all-in · ~{fmtMoneyApprox(costResult.total)} total</span>
+          </div>
         </div>
-        <div className="results-row">
-          <ResultCard
-            label={`Whole-life carbon · ${OPERATIONAL.life}yr life`}
-            value={<span><b>{Math.round(r.wholeLifePerM2)}</b><span className="mono"> kgCO₂e/m²</span></span>}
-            sub={`Embodied ${Math.round(r.carbonPerM2)} + operational ${Math.round(r.operationalPerM2)}${r.biogenicPerM2 ? " − biogenic " + Math.abs(Math.round(r.biogenicPerM2)) : ""}`}
-          />
-          <ResultCard
-            label="Biogenic sequestration"
-            value={r.biogenicPerM2 ? <span><b>{Math.round(r.biogenicPerM2)}</b><span className="mono"> kgCO₂e/m²</span></span> : <span style={{color: 'var(--fg-dim)', fontSize: 18}}>None — no timber structure</span>}
-            sub={r.biogenicPerM2 ? `Stored carbon in CLT, released only if burned. ${Math.abs(Math.round(r.biogenic / 1000)).toLocaleString()}t total.` : ""}
-          />
+      </div>
+    </section>
+  );
+}
+
+function CoffeyCard({ variantKey, setVariantKey, spec, setSpec, consentedCarbon, consentedCost, consentedScheme }) {
+  const scheme = COFFEY_VARIANTS[variantKey];
+  const carbon = calcCarbon(scheme, spec, false);
+  const cost   = calcCost(scheme, spec, false, CONSENTED.designSideCostPerM2);
+  const costDeltaPct   = ((cost.totalPerM2 - consentedCost.totalPerM2) / consentedCost.totalPerM2) * 100;
+  const costDeltaTotal = cost.total - consentedCost.total;
+  const areaDeltaPct   = ((scheme.nia - consentedScheme.nia) / consentedScheme.nia) * 100;
+  const carbonDeltaPct = ((carbon.designSidePerM2 - consentedCarbon.designSidePerM2) / consentedCarbon.designSidePerM2) * 100;
+
+  return (
+    <section className="schemecard schemecard--recommended">
+      <header className="schemecard__head">
+        <div>
+          <div className="schemecard__key">
+            <span className="mono">Coffey direction</span>
+            <span className="mono schemecard__chip">Editable</span>
+          </div>
+          <h3 className="schemecard__title">{scheme.long}</h3>
+          <div className="schemecard__note">{scheme.note}</div>
         </div>
+        <div className="schemecard__gia">
+          <div className="mono">GIA / NIA</div>
+          <div className="schemecard__gia-val">{scheme.gia.toLocaleString()}<span className="mono"> m²</span></div>
+          <div className="mono schemecard__gia-nia">NIA {scheme.nia.toLocaleString()} m²</div>
+        </div>
+      </header>
 
-        <CarbonGauge value={r.dsCarbonPerM2} baseline={BASELINE.carbon} targets={TARGETS} />
+      <SchemeTabs value={variantKey} onChange={setVariantKey} />
 
-        <details className="breakdown" open>
-          <summary className="breakdown__summary mono">Breakdown · contributions to embodied carbon</summary>
+      <div className="schemecard__controls">
+        <CtrlGroup num="01" title="Primary structure" hint="per m² GIA"
+          options={STRUCTURE} selectedKey={spec.structure} recommend={COFFEY_DEFAULT_SPEC.structure}
+          onChange={(v) => setSpec({ ...spec, structure: v })} />
+        <CtrlGroup num="02" title="Heavy mass · facade" hint={`${scheme.heavyArea} m² facade`}
+          options={HEAVY} selectedKey={spec.heavy} recommend={COFFEY_DEFAULT_SPEC.heavy}
+          onChange={(v) => setSpec({ ...spec, heavy: v })} />
+        <CtrlGroup num="03" title="Light cladding · lookout / canopy" hint={`${scheme.lightArea} m² facade`}
+          options={LIGHT} selectedKey={spec.light} recommend={COFFEY_DEFAULT_SPEC.light}
+          onChange={(v) => setSpec({ ...spec, light: v })} />
+      </div>
+
+      <div className="schemecard__results">
+        <CarbonScorecard
+          designSidePerM2={carbon.designSidePerM2}
+          totalPerM2={carbon.totalPerM2}
+          consentedTotal={consentedCarbon.totalPerM2}
+          deltaText={roundDelta(carbonDeltaPct)}
+          deltaSignVal={deltaSign(carbonDeltaPct)}
+        />
+
+        <RelativeCost
+          costDeltaPct={costDeltaPct}
+          costDeltaTotal={costDeltaTotal}
+          areaDeltaPct={areaDeltaPct}
+          costPerM2={cost.totalPerM2}
+          totalCost={cost.total}
+          sensLow={cost.sensLow}
+          sensHigh={cost.sensHigh}
+        />
+
+        <details className="breakdown">
+          <summary className="breakdown__summary mono">Detail · embodied carbon breakdown</summary>
           <table className="breakdown__table">
             <thead>
-              <tr>
-                <th>Component</th>
-                <th>Selection</th>
-                <th>kgCO₂e total</th>
-                <th>Cost total</th>
-              </tr>
+              <tr><th>Component</th><th>Selection</th><th>kgCO₂e total</th></tr>
             </thead>
             <tbody>
-              {["structure", "basement", "heavy", "light", "penalty", "biogenic", "rest"].map((k) => {
-                const b = r.breakdown[k];
-                if (k === "biogenic" && b.carbon === 0) return null;
-                if (k === "penalty" && b.carbon === 0) return null;
+              {["structure", "heavy", "light", "biogenic", "rest"].map((k) => {
+                const b = carbon.breakdown[k];
+                if (!b.lbl) return null;
                 return (
-                  <tr key={k} className={k === "rest" ? "breakdown__rest" : (k === "biogenic" ? "breakdown__biogenic" : (k === "penalty" ? "breakdown__penalty" : ""))}>
-                    <th>{({structure:"Primary structure",basement:"Basement",heavy:"Heavy facade",light:"Light cladding",penalty:"Cantilever premium",biogenic:"Biogenic sequestration",rest:"Rest of build (fixed)"})[k]}</th>
+                  <tr key={k} className={k === "rest" ? "breakdown__rest" : (k === "biogenic" ? "breakdown__biogenic" : "")}>
+                    <th>{({structure:"Primary structure",heavy:"Heavy facade",light:"Light cladding",biogenic:"Biogenic sequestration",rest:"Rest of build (fixed)"})[k]}</th>
                     <td>{b.lbl}</td>
                     <td>{Math.round(b.carbon).toLocaleString()}</td>
-                    <td>{b.cost === 0 ? "—" : fmtMoney(b.cost)}</td>
                   </tr>
                 );
               })}
               <tr className="breakdown__totals">
-                <th colSpan={2}>Total · embodied + biogenic + rest</th>
-                <td>{Math.round(r.carbonTotal + r.biogenic).toLocaleString()}</td>
-                <td>{fmtMoney(r.costTotal)}</td>
+                <th colSpan={2}>Whole-life over {OPERATIONAL.life}yr life (incl. operational)</th>
+                <td>{Math.round(carbon.wholeLifePerM2 * scheme.gia).toLocaleString()}</td>
               </tr>
             </tbody>
           </table>
@@ -406,106 +530,40 @@ function SchemeCard({ schemeKey, state, setState, otherState, otherKey, onSync }
   );
 }
 
-function CompareRow({ stateA, stateB }) {
-  const ra = calcScheme(stateA, "A");
-  const rb = calcScheme(stateB, "B");
-  const carbonDelta = ((rb.dsCarbonPerM2 - ra.dsCarbonPerM2) / ra.dsCarbonPerM2) * 100;
-  const costDelta   = ((rb.costPerM2 - ra.costPerM2) / ra.costPerM2) * 100;
-  const wlcDelta    = ((rb.wholeLifePerM2 - ra.wholeLifePerM2) / ra.wholeLifePerM2) * 100;
-  return (
-    <section className="compare">
-      <div className="compare__head">
-        <Eyebrow>Side-by-side</Eyebrow>
-        <h3 className="compare__title">Path A &nbsp;↔&nbsp; Path B</h3>
-      </div>
-      <div className="compare__grid">
-        <div className="compare__row">
-          <div className="compare__lbl mono">Design-side carbon</div>
-          <div className="compare__a">{Math.round(ra.dsCarbonPerM2)}<span className="mono"> kgCO₂e/m²</span></div>
-          <div className="compare__arrow mono">→</div>
-          <div className="compare__b">{Math.round(rb.dsCarbonPerM2)}<span className="mono"> kgCO₂e/m²</span></div>
-          <div className={"compare__delta " + (carbonDelta < 0 ? "is-better" : "is-worse")}>{fmtSigned(carbonDelta, "%")}</div>
-        </div>
-        <div className="compare__row">
-          <div className="compare__lbl mono">Construction cost</div>
-          <div className="compare__a">{fmtMoneyPerM2(ra.costPerM2)}<span className="mono"> /m²</span></div>
-          <div className="compare__arrow mono">→</div>
-          <div className="compare__b">{fmtMoneyPerM2(rb.costPerM2)}<span className="mono"> /m²</span></div>
-          <div className={"compare__delta " + (costDelta < 0 ? "is-better" : "is-worse")}>{fmtSigned(costDelta, "%")}</div>
-        </div>
-        <div className="compare__row">
-          <div className="compare__lbl mono">Whole-life carbon</div>
-          <div className="compare__a">{Math.round(ra.wholeLifePerM2)}<span className="mono"> kgCO₂e/m²</span></div>
-          <div className="compare__arrow mono">→</div>
-          <div className="compare__b">{Math.round(rb.wholeLifePerM2)}<span className="mono"> kgCO₂e/m²</span></div>
-          <div className={"compare__delta " + (wlcDelta < 0 ? "is-better" : "is-worse")}>{fmtSigned(wlcDelta, "%")}</div>
-        </div>
-        <div className="compare__row">
-          <div className="compare__lbl mono">Total construction cost</div>
-          <div className="compare__a">{fmtMoneyTotal(ra.costTotal)}</div>
-          <div className="compare__arrow mono">→</div>
-          <div className="compare__b">{fmtMoneyTotal(rb.costTotal)}</div>
-          <div className="compare__delta">over {SCHEMES.B.GIA - SCHEMES.A.GIA}m² more GIA</div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ScenarioBar({ state, setState }) {
-  function apply(presetKey, scheme) {
-    const p = PRESETS[presetKey];
-    const s = { structure: p.structure, basement: p.basement, heavyMat: p.heavyMat, lightMat: p.lightMat };
-    if (scheme === "both") setState({ A: s, B: s });
-    else if (scheme === "A") setState({ ...state, A: s });
-    else if (scheme === "B") setState({ ...state, B: s });
-  }
-  return (
-    <div className="scenarios">
-      <div className="scenarios__lbl mono">Scenario presets</div>
-      {Object.entries(PRESETS).map(([k, p]) => (
-        <div className="scenario" key={k}>
-          <div className="scenario__top">
-            <span className="scenario__name">{p.label}</span>
-            <span className="scenario__note mono">{p.note}</span>
-          </div>
-          <div className="scenario__actions">
-            <button className="scenario__btn" onClick={() => apply(k, "A")}>→ A</button>
-            <button className="scenario__btn" onClick={() => apply(k, "B")}>→ B</button>
-            <button className="scenario__btn scenario__btn--both" onClick={() => apply(k, "both")}>→ Both</button>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function Calculator({ onClose }) {
-  const [state, setStateRaw] = React.useState(() => {
-    try {
-      const s = JSON.parse(localStorage.getItem("twcf-calc") || "null");
-      if (s && s.A && s.B) return s;
-    } catch {}
-    return DEFAULT_STATE;
+  const [variantKey, setVariantKey] = React.useState(() => {
+    try { return localStorage.getItem("twcf-calc-variant") || "signal-box-g10"; } catch { return "signal-box-g10"; }
   });
-  const setState = (s) => {
-    setStateRaw(s);
-    try { localStorage.setItem("twcf-calc", JSON.stringify(s)); } catch {}
+  const [spec, setSpecRaw] = React.useState(() => {
+    try {
+      const s = JSON.parse(localStorage.getItem("twcf-calc-spec") || "null");
+      if (s && s.structure && s.heavy && s.light) return s;
+    } catch {}
+    return { ...COFFEY_DEFAULT_SPEC };
+  });
+  const setSpec = (s) => {
+    setSpecRaw(s);
+    try { localStorage.setItem("twcf-calc-spec", JSON.stringify(s)); } catch {}
   };
-  const setA = (a) => setState({ ...state, A: a });
-  const setB = (b) => setState({ ...state, B: b });
-  const syncFromB = () => setState({ ...state, A: { ...state.B } });
-  const syncFromA = () => setState({ ...state, B: { ...state.A } });
+  const setVariant = (k) => {
+    setVariantKey(k);
+    try { localStorage.setItem("twcf-calc-variant", k); } catch {}
+  };
+  const resetDefaults = () => {
+    setSpec({ ...COFFEY_DEFAULT_SPEC });
+    setVariant("signal-box-g10");
+  };
+  const doPrint = () => window.print();
 
-  function resetDefaults() { setState(DEFAULT_STATE); }
-  function doPrint() { window.print(); }
+  const consentedCarbon = calcCarbon(CONSENTED, CONSENTED.spec, true);
+  const consentedCost   = calcCost(CONSENTED, CONSENTED.spec, true, CONSENTED.designSideCostPerM2);
 
   return (
     <div className="calc">
       <header className="calc__head">
         <div className="calc__head-left">
           <Logo size="sm" />
-          <div className="calc__head-doc mono">1820 Goods Way · Design-Side Viability Calculator</div>
+          <div className="calc__head-doc mono">1820 Goods Way · Design-side viability calculator</div>
         </div>
         <div className="calc__head-right">
           <button className="calc__btn" onClick={doPrint} title="Print or save as PDF">⎙ PDF</button>
@@ -515,39 +573,36 @@ function Calculator({ onClose }) {
       </header>
 
       <section className="calc__intro">
-        <Eyebrow>§15 · Design-side viability tool</Eyebrow>
-        <h1 className="calc__title">Cost &amp; carbon comparison.</h1>
+        <Eyebrow>§15 · Design-side viability tool · mid-tender</Eyebrow>
+        <h1 className="calc__title">Cost &amp; carbon, anchored to the consented baseline.</h1>
         <p className="calc__sub">
-          A design-side study — not a financial viability appraisal. Switch primary structure, basement, heavy facade material and signal-house cladding for each scheme to see the resulting embodied carbon and construction cost, and whether they meet 2025 / 2030 industry carbon targets. The "rest of build" — MEP, fit-out, externals, prelims, professional fees — is held constant at an indicative central London office rate so the totals are realistic; the choices in this tool move structure, basement and facade only.
+          Compare the Coffey directions against the previously consented Stage 5 scheme. Cost is shown as a percentage versus that baseline rather than a raw £/m², because the relative move is what matters at this stage; absolute figures are included in small print for the analytical reader. Switch the Coffey direction with the tabs below, and toggle primary structure, heavy facade and light cladding to see how each choice moves the carbon scorecard. Real Stage 2 cost-plan figures replace the illustrative ones at the final presentation.
         </p>
         <div className="calc__sub-meta mono">
-          Baseline · {BASELINE.carbon.toLocaleString()} kgCO₂e/m² GIA · {fmtMoney(BASELINE.cost)} /m² · RC frame + unitised curtain wall + single basement
+          Baseline · the previously consented Stage 5 scheme (by others) · G+6 with basement · RC frame · precast facade · primary aluminium
         </div>
         <div className="calc__sub-meta mono" style={{color: 'var(--fg-dim)'}}>
-          Rest of build (fixed) · {REST.carbon} kgCO₂e/m² · {fmtMoney(REST.cost)} /m² · MEP, Cat A fit-out, externals, prelims, fees<br/>
-          Operational carbon · {OPERATIONAL.carbon} kgCO₂e/m²/yr · {OPERATIONAL.life}yr life · Cost shown with ±{Math.round(SENSITIVITY*100)}% sensitivity band
+          Rest of build (fixed) · {REST_CARBON} kgCO₂e/m² · ~£{(REST_COST / 1000).toFixed(1)}k/m² · MEP + Cat A fit-out + externals + prelims + fees · operational {OPERATIONAL.carbon} kgCO₂e/m²/yr over {OPERATIONAL.life}yr life
         </div>
       </section>
 
-      <ScenarioBar state={state} setState={setState} />
-
-      <section className="calc__grid">
-        <SchemeCard
-          schemeKey="A" state={state.A} setState={setA}
-          otherState={state.B} otherKey="B" onSync={syncFromB}
-        />
-        <SchemeCard
-          schemeKey="B" state={state.B} setState={setB}
-          otherState={state.A} otherKey="A" onSync={syncFromA}
+      <section className="calc__grid calc__grid--ab">
+        <ConsentedCard result={consentedCarbon} costResult={consentedCost} />
+        <CoffeyCard
+          variantKey={variantKey}
+          setVariantKey={setVariant}
+          spec={spec}
+          setSpec={setSpec}
+          consentedCarbon={consentedCarbon}
+          consentedCost={consentedCost}
+          consentedScheme={CONSENTED}
         />
       </section>
-
-      <CompareRow stateA={state.A} stateB={state.B} />
 
       <section className="calc__caveat">
         <Eyebrow>Caveats</Eyebrow>
         <p>
-          Indicative pre-planning estimates based on published embodied-carbon datasets (ICE, ECC, EPDs from named manufacturers) and current UK construction rates (Q2 2026). Figures show <strong>design-side scope</strong> — structure, basement, and primary facade systems — plus a fixed adder for MEP, fit-out, externals, prelims, and professional fees so the totals are realistic. Operational energy is an estimate based on typical Cat A office energy use intensity. Land cost, finance, rent, yield and tax are out of scope. Final figures will be subject to detailed design, contractor procurement, market conditions, and a formal cost plan at RIBA Stage 2. Path A and Path B are not directly comparable — they deliver different total GIA — so values are presented per m² GIA. Cost figures shown with ±{Math.round(SENSITIVITY*100)}% sensitivity band reflecting RIBA Stage 2 typical uncertainty.
+          Mid-tender illustrative numbers, based on published embodied-carbon datasets (ICE, ECC, EPDs) and indicative UK construction rates (Q2 2026). Cost figures show <strong>design-side scope</strong>, structure + facade + basement, plus a fixed adder for MEP, Cat A fit-out, externals, prelims, and fees. Operational energy is an estimate based on typical Cat A office EUI. Land cost, finance, rent, yield and tax are out of scope. Final figures will be subject to detailed design, contractor procurement and a formal cost plan at RIBA Stage 2; the values here are presented as relative deltas to the consented baseline because that is what is meaningful at this stage. Cost shown with ±{Math.round(SENSITIVITY * 100)}% sensitivity.
         </p>
       </section>
     </div>

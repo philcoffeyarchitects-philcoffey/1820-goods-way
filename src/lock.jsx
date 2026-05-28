@@ -1,10 +1,10 @@
 import React from "react";
 import { Logo } from "./placeholder.jsx";
 
-// lock.jsx — Password-gated landing splash. Shown until the correct
+// lock.jsx. Password-gated landing splash. Shown until the correct
 // password is entered, then dismisses for this device (localStorage).
 //
-// CHANGE THE PASSWORD HERE — keep it inside the EDITMODE markers so it's
+// CHANGE THE PASSWORD HERE, keep it inside the EDITMODE markers so it's
 // easy to find. The check is client-side only (this is a soft gate for a
 // pitch document, not a security boundary).
 
@@ -80,7 +80,7 @@ function LockScreen({ onUnlock }) {
               className={"lock__input" + (error ? " lock__input--error" : "")}
               value={value}
               onChange={onChange}
-              placeholder="—"
+              placeholder=", "
               autoComplete="off"
               spellCheck={false}
             />

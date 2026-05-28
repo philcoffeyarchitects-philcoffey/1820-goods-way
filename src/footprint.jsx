@@ -1,4 +1,4 @@
-// footprint.jsx — "500/600 · Who is the tenant?" research overlay.
+// footprint.jsx, "500/600 · Who is the tenant?" research overlay.
 // Chart-heavy presentation about the lettability of a 5,000-6,000 sqft
 // floorplate in central London, the premium rent it commands, the AI
 // demand pipeline at King's Cross, and how those map onto 1820 Goods Way.
@@ -10,7 +10,7 @@ import { Logo, Eyebrow } from "./placeholder.jsx";
 
 // ─── DATA ──────────────────────────────────────────────────────────────
 
-// Savills Central London Office Market Watch — sub-5,000 sqft share of supply.
+// Savills Central London Office Market Watch, sub-5,000 sqft share of supply.
 const SUPPLY_SERIES = [
   { q: "Q1 25", pct: 48 },
   { q: "Q2 25", pct: 53 },
@@ -19,7 +19,7 @@ const SUPPLY_SERIES = [
   { q: "Q1 26", pct: 51 },
 ];
 
-// GPE Fully Managed — H2 2025 / Q1 2026 disclosures.
+// GPE Fully Managed. H2 2025 / Q1 2026 disclosures.
 const PREMIUM_DEALS = [
   { name: "170 Piccadilly",     rent: 296, premium: null, floors: "0.8–4.5k sqft" },
   { name: "141 Wardour Street", rent: 279, premium: "+13.3% vs ERV", floors: "2.3–4.6k sqft" },
@@ -30,9 +30,9 @@ const PREMIUM_DEALS = [
   { name: "City Tower EC2",     rent: 186, premium: "+6.6% vs ERV", floors: "phase 1" },
 ];
 
-// AI demand at King's Cross — Knight Frank / CoStar / press, May 2026.
+// AI demand at King's Cross. Knight Frank / CoStar / press, May 2026.
 const AI_STATS = [
-  { val: "450k sqft", lbl: "AI lettings in London — May 2026", sub: ">10× the 2025 monthly average of 40k sqft" },
+  { val: "450k sqft", lbl: "AI lettings in London. May 2026", sub: ">10× the 2025 monthly average of 40k sqft" },
   { val: "1m sqft+",  lbl: "AI leases in London since Jan 2025", sub: "Knight Frank, May 2026" },
   { val: "88,500 sqft", lbl: "OpenAI's first permanent UK office", sub: "King's Cross · capacity for 544 people · Endurance Land, April 2026" },
 ];
@@ -45,26 +45,26 @@ const AI_TENANTS = [
 // Tenant profile cards.
 const TENANT_PROFILES = [
   { tag: "Boutique", name: "Creative + design agencies",
-    desc: "Brand, advertising, design studios — whole-floor identity is the product. 20–50 staff. £/sqft is justified by client-facing image." },
+    desc: "Brand, advertising, design studios, whole-floor identity is the product. 20–50 staff. £/sqft is justified by client-facing image." },
   { tag: "Tech",     name: "Mid-stage scale-ups",
     desc: "Series B–C, 30–80 people. Outgrowing co-working, not yet ready for a single 30k-sqft floor. King's Cross AI cluster gravity." },
   { tag: "AI",       name: "AI scale-ups below the top tier",
-    desc: "Synthesia / Wayve / Isomorphic-shaped — clustering near OpenAI/Anthropic/DeepMind. Need talent proximity, not compute infrastructure." },
+    desc: "Synthesia / Wayve / Isomorphic-shaped, clustering near OpenAI/Anthropic/DeepMind. Need talent proximity, not compute infrastructure." },
   { tag: "Finance",  name: "Specialist finance + wealth",
     desc: "Single-tenant privacy on a clean floor. Premium per-sqft tolerance. Likes a building with a strong address." },
   { tag: "Services", name: "Architecture, engineering, consulting",
     desc: "Practices that brand the building as theirs. Whole-floor identity, daylight on three sides, sustainability story for ESG." },
   { tag: "HQ",       name: "International UK headquarters",
-    desc: "European or US brand looking for a London identity floor — not a vast HQ, but a credible one. Character matters." },
+    desc: "European or US brand looking for a London identity floor, not a vast HQ, but a credible one. Character matters." },
 ];
 
 const MATCH_PAIRS = [
   ["Whole-floor identity",           "A single coherent plate per tenant. The floor reads as theirs, not as a sublet of someone else's space."],
   ["Light + air",                    "Daylight on multiple sides, generous ceiling heights, depth of view from inside."],
   ["Character",                      "Materials that age. An address with a story. A space worth being seen in."],
-  ["ESG / sustainability narrative", "Low embodied carbon, recycled materials, published EPDs — the building supports the tenant's own reporting."],
+  ["ESG / sustainability narrative", "Low embodied carbon, recycled materials, published EPDs, the building supports the tenant's own reporting."],
   ["Transport + amenity",            "Major termini at the door (St Pancras + King's Cross), walkable culture and food, the canal."],
-  ["A signature element",            "Something distinctive about the place — a roof, a room, a moment — that becomes part of the tenant's identity."],
+  ["A signature element",            "Something distinctive about the place, a roof, a room, a moment, that becomes part of the tenant's identity."],
 ];
 
 // ─── HELPERS ───────────────────────────────────────────────────────────
@@ -84,7 +84,7 @@ function FpStat({ val, lbl, sub, accent }) {
   );
 }
 
-// Bar chart — vertical bars of supply % by quarter.
+// Bar chart, vertical bars of supply % by quarter.
 function SupplyChart() {
   const max = 60; // y-axis ceiling
   return (
@@ -96,7 +96,7 @@ function SupplyChart() {
       <div className="fp-chart__bars">
         {/* horizontal threshold line at 50% */}
         <div className="fp-chart__threshold" style={{ bottom: `${(50 / max) * 100}%` }}>
-          <span className="mono">50% — half of all supply</span>
+          <span className="mono">50%, half of all supply</span>
         </div>
         {SUPPLY_SERIES.map((d, i) => (
           <div className="fp-bar-col" key={i}>
@@ -111,7 +111,7 @@ function SupplyChart() {
   );
 }
 
-// Bar chart — horizontal bars of £/sqft for GPE Fully Managed deals.
+// Bar chart, horizontal bars of £/sqft for GPE Fully Managed deals.
 function PremiumChart() {
   const max = 320;
   return (
@@ -151,13 +151,13 @@ function FpIntro() {
       <h1 className="fp-title">A 5,000–6,000 sqft floor is not the floor of big.<br/>It is the ceiling of small.</h1>
       <p className="fp-lead">
         A whole-floor plate of 5,000–6,000 sqft (~465–560 m²) sits at the apex of the
-        dominant segment of the central London market — and where the most consistently
+        dominant segment of the central London market, and where the most consistently
         growing rental story in London is happening right now.
       </p>
       <div className="fp-stats-row">
         <FpStat val="50%" lbl="of all central London office supply has sub-5,000 sqft floorplates" sub="Savills · five consecutive quarters" accent />
         <FpStat val="£186–296" lbl="per sqft achieved on GPE Fully Managed boutique floors" sub="6–13% above ERV · 74–112% cash uplift" />
-        <FpStat val="450k sqft" lbl="leased by AI tenants in London — May 2026 alone" sub=">10× the 2025 monthly average" />
+        <FpStat val="450k sqft" lbl="leased by AI tenants in London. May 2026 alone" sub=">10× the 2025 monthly average" />
       </div>
     </section>
   );
@@ -173,7 +173,7 @@ function FpMarket() {
       <SupplyChart />
       <div className="fp-prose">
         <p>
-          For five consecutive quarters — Q1 2025 to Q1 2026 — between <b>48% and 53%</b> of
+          For five consecutive quarters. Q1 2025 to Q1 2026, between <b>48% and 53%</b> of
           all central London office supply has been in floorplates under 5,000 sqft.
           A 5,000 sqft floor is therefore at the upper end of the largest single segment of
           the market, not below an institutional threshold.
@@ -182,7 +182,7 @@ function FpMarket() {
           And the segment is <em>letting</em>: <b>46% of the Q2 2025 sub-5k supply was already
           fitted</b>, reflecting demand for plug-and-play space.
           A 5,000 sqft whole-floor can let two ways: as a single coherent whole-floor occupation
-          (the premium identity product), or split <b>2 × 2,500 sqft</b> — landing squarely in
+          (the premium identity product), or split <b>2 × 2,500 sqft</b>, landing squarely in
           the heart of the smallest-tenant segment.
         </p>
       </div>
@@ -202,13 +202,13 @@ function FpPremium() {
         <p>
           Great Portland Estates' Fully Managed product, across <b>five buildings</b> and
           ~<b>70,000 sqft</b> of recent lettings in H2 2025 / Q1 2026, is letting boutique
-          whole-floors at <b>£186–296/sqft</b> — consistently <b>6–13% above ERV</b>, with
+          whole-floors at <b>£186–296/sqft</b>, consistently <b>6–13% above ERV</b>, with
           cash-flow uplifts of <b>74–112%</b> versus equivalent Ready-to-Fit leases.
         </p>
         <p>
           The structural premium for a well-designed boutique floor is the most consistently
           growing rental story in central London right now.
-          <em> A 5,000 sqft floor — let whole, or fitted-and-managed on the top floors — is
+          <em> A 5,000 sqft floor, let whole, or fitted-and-managed on the top floors, is
           exactly the product GPE has been demonstrating commands this premium.</em>
         </p>
       </div>
@@ -221,7 +221,7 @@ function FpAI() {
     <section className="fp-section">
       <div className="fp-section__head">
         <Eyebrow>The demand</Eyebrow>
-        <h2 className="fp-h2">The AI cluster at King's Cross is the demand pipeline — at exactly this scale.</h2>
+        <h2 className="fp-h2">The AI cluster at King's Cross is the demand pipeline, at exactly this scale.</h2>
       </div>
       <div className="fp-stats-row fp-stats-row--ai">
         {AI_STATS.map((s, i) => (
@@ -237,7 +237,7 @@ function FpAI() {
         </p>
         <p className="fp-callout">
           <b>Critically</b>, Knight Frank confirmed: <em>"AI tenants are not asking for
-          unusual infrastructure requirements — power capacity, cooling, connectivity. The
+          unusual infrastructure requirements, power capacity, cooling, connectivity. The
           compute is elsewhere, in data centres rather than central London floors."</em>
           The "AI needs big floors and heavy services" objection is dismantled by the actual
           market data.
@@ -251,7 +251,7 @@ function FpAI() {
           ))}
         </div>
         <div className="fp-tenants__note mono">
-          * Anthropic's 158k commitment is at One Triton Square (Regent's Place) — part of
+          * Anthropic's 158k commitment is at One Triton Square (Regent's Place), part of
           the wider Knowledge Quarter cluster around Euston/King's Cross, not the King's Cross
           Central estate proper.
         </div>
@@ -315,7 +315,7 @@ function FpCaveats() {
         <li>Savills · Central London Office Market Watch · Q1 2025 → Q1 2026 (supply-side floorplate distribution)</li>
         <li>Great Portland Estates · 2025 / 2026 trading and full-year disclosures (Fully Managed achieved rents and ERV deltas)</li>
         <li>Knight Frank · HotMinute, May 2026 (AI office leasing aggregate and infrastructure note)</li>
-        <li>CoStar · UK office data, May 2026 — quoted in SEC Newgate and BBC News</li>
+        <li>CoStar · UK office data, May 2026, quoted in SEC Newgate and BBC News</li>
         <li>Endurance Land · April 2026 announcement of OpenAI King's Cross office (88,500 sqft)</li>
         <li>British Land · Q4 FY2026 trading update, 29 April 2026 (Anthropic at One Triton Square)</li>
         <li>The Architects' Journal · review of R7 Handyside Street, Morris+Company (structural commentary)</li>
