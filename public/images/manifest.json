@@ -535,8 +535,8 @@
     "fit": "cover"
   },
   "family-signal-box-concept-sketch.jpg": {
-    "file": "images/family-signal-box-concept-sketch.png",
-    "v": 1779907613286,
+    "file": "images/family-signal-box-concept-sketch.jpg",
+    "v": 1779955570513,
     "fit": "cover"
   },
   "material-01-brick-sample.jpg": {
@@ -547,6 +547,36 @@
   "material-04-aluminium-detail.jpg": {
     "file": "images/material-04-aluminium-detail.png",
     "v": 1779908635941,
+    "fit": "cover"
+  },
+  "signal-box-study-concept-sketch.jpg": {
+    "file": "images/signal-box-study-concept-sketch.jpg",
+    "v": 1779954940817,
+    "fit": "cover"
+  },
+  "canopy-concept-sketch.jpg": {
+    "file": "images/canopy-concept-sketch.jpg",
+    "v": 1779955001822,
+    "fit": "cover"
+  },
+  "signal-box-study-hero.jpg": {
+    "file": "images/signal-box-study-hero.jpg",
+    "v": 1779955416174,
+    "fit": "cover"
+  },
+  "canopy-hero.jpg": {
+    "file": "images/canopy-hero.jpg",
+    "v": 1779955325408,
+    "fit": "cover"
+  },
+  "family-canopy-concept-sketch.jpg": {
+    "file": "images/family-canopy-concept.jpg",
+    "v": 1779955672217,
+    "fit": "cover"
+  },
+  "family-canopy-concept-photo.jpg": {
+    "file": "images/family-canopy-concept-photo.jpg",
+    "v": 1779955673834,
     "fit": "cover"
   }
 }

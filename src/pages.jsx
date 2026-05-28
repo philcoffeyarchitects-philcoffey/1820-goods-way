@@ -3703,9 +3703,27 @@ const SFiveFamilies = sectionPages(
       report:       () => <Divider range="§08" title="Five Families." sub="Five conceptual directions, each tested in physical model." />,
     },
     ...fiveFamilies.flatMap((f, i) => {
-      // Concept page — single landscape image, EXCEPT Signal Box which
-      // keeps the photo + sketch pair side-by-side.
-      const isPair = f.slug === "signal-box";
+      // Concept page — single landscape image by default. Some families
+      // get a paired layout instead (photo + sketch side-by-side). The
+      // pairConfig sets WHICH slot sits on which side per family.
+      //   Signal Box: photo left,  sketch right
+      //   Canopy:     sketch left,  photo (image) right
+      const pairConfig = {
+        "signal-box": { left: "photo",  right: "sketch" },
+        "canopy":     { left: "sketch", right: "photo"  },
+      };
+      const pair = pairConfig[f.slug];
+      const isPair = !!pair;
+      const renderPair = () => (
+        <div style={{flex: 1, minHeight: 0, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18}}>
+          <div style={{display: 'flex', minHeight: 0, minWidth: 0}}>
+            <Placeholder filename={`family-${f.slug}-concept-${pair.left}.jpg`} caption={`${f.title.replace('.', '')} — ${pair.left} (landscape, left of pair)`} variant={pair.left} aspect="3/2" />
+          </div>
+          <div style={{display: 'flex', minHeight: 0, minWidth: 0}}>
+            <Placeholder filename={`family-${f.slug}-concept-${pair.right}.jpg`} caption={`${f.title.replace('.', '')} — ${pair.right} (landscape, right of pair)`} variant={pair.right} aspect="3/2" />
+          </div>
+        </div>
+      );
       const conceptPage = {
         label: `${f.title.replace('.', '')} · Concept`,
         presentation: () => (
@@ -3715,16 +3733,7 @@ const SFiveFamilies = sectionPages(
             <div className="prose" style={{maxWidth: '64ch', fontSize: 18, color: 'var(--fg-soft)', marginBottom: 18}}>
               {f.sub}
             </div>
-            {isPair ? (
-              <div style={{flex: 1, minHeight: 0, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18}}>
-                <div style={{display: 'flex', minHeight: 0, minWidth: 0}}>
-                  <Placeholder filename={`family-${f.slug}-concept-photo.jpg`} caption={`${f.title.replace('.', '')} — photograph (landscape, left of pair)`} variant="photo" aspect="3/2" />
-                </div>
-                <div style={{display: 'flex', minHeight: 0, minWidth: 0}}>
-                  <Placeholder filename={`family-${f.slug}-concept-sketch.jpg`} caption={`${f.title.replace('.', '')} — concept sketch (landscape, right of pair)`} variant="sketch" aspect="3/2" />
-                </div>
-              </div>
-            ) : (
+            {isPair ? renderPair() : (
               <div style={{flex: 1, minHeight: 0, display: 'flex'}}>
                 <Placeholder filename={`family-${f.slug}-concept.jpg`} caption={`${f.title.replace('.', '')} — concept image (landscape)`} variant="photo" aspect="3/2" />
               </div>
@@ -3738,16 +3747,7 @@ const SFiveFamilies = sectionPages(
             <div className="prose tight" style={{maxWidth: '78ch', marginBottom: 12}}>
               <p>{f.sub}</p>
             </div>
-            {isPair ? (
-              <div style={{flex: 1, minHeight: 0, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18}}>
-                <div style={{display: 'flex', minHeight: 0, minWidth: 0}}>
-                  <Placeholder filename={`family-${f.slug}-concept-photo.jpg`} caption={`${f.title.replace('.', '')} — photograph (landscape, left of pair)`} variant="photo" aspect="3/2" />
-                </div>
-                <div style={{display: 'flex', minHeight: 0, minWidth: 0}}>
-                  <Placeholder filename={`family-${f.slug}-concept-sketch.jpg`} caption={`${f.title.replace('.', '')} — concept sketch (landscape, right of pair)`} variant="sketch" aspect="3/2" />
-                </div>
-              </div>
-            ) : (
+            {isPair ? renderPair() : (
               <div style={{flex: 1, minHeight: 0, display: 'flex'}}>
                 <Placeholder filename={`family-${f.slug}-concept.jpg`} caption={`${f.title.replace('.', '')} — concept image (landscape)`} variant="photo" aspect="3/2" />
               </div>
@@ -4457,11 +4457,11 @@ const SClosing = sectionPages(
               <div className="mono" style={{fontSize: 11, letterSpacing: 0.18, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 10}}>Sustainable</div>
               <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14, lineHeight: 1.4}}>
                 {[
-                  <>The form does the work — in either scheme.</>,
-                  <>Brick to the canal. Recycled aluminium above.</>,
-                  <>Steel + CLT structure. No basement.</>,
-                  <><strong>~380–490 kgCO₂e/m² GIA</strong> · vs 720–950 baseline · LETI 2030.</>,
-                  <><em>Sustainability is the form, not an addition to it.</em></>,
+                  <>We have chosen to make a sustainable building.</>,
+                  <>We balance that against <strong>cost</strong>.</>,
+                  <>Against <strong>context</strong>.</>,
+                  <>Against <strong>viability</strong>.</>,
+                  <><em>The form does the work. No additions, no offsets.</em></>,
                 ].map((t, i) => (
                   <li key={i} style={{paddingLeft: 16, position: 'relative'}}>
                     <span style={{position: 'absolute', left: 0, color: 'var(--accent)'}}>—</span>
@@ -4497,7 +4497,7 @@ const SClosing = sectionPages(
           <div className="prose tight" style={{maxWidth: '78ch', display: 'flex', flexDirection: 'column', gap: 14}}>
             <div>
               <div className="mono" style={{fontSize: 11, letterSpacing: 0.18, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 6}}>Sustainable</div>
-              <p>Both schemes are sustainable for the same fundamental reason: the decisions that make either Canopy or Signal Box work are the decisions that make either sustainable. The Signal Box is simply supported — no transfer, no cantilever, light on the ground. The Canopy earns its wider area through hung floors but avoids a basement and lands the same material contrast at lower height. Both honest about what they ask of the structure. ~<strong>380–490 kgCO₂e/m² GIA</strong> against a conventional baseline of 720–950 — LETI 2030 territory in either direction. Every primary material has a defined recovery route. <em>Sustainability is the form, not an addition to it.</em></p>
+              <p>We have chosen to make a sustainable building. That choice is then balanced — against cost, because the building has to be built; against context, because the brick body and the lightweight upper are not arbitrary, they are the canal and the railway retold; against viability, because the panel needs a building that lets. Both schemes are sustainable for the same fundamental reason: the decisions that make either Canopy or Signal Box work are the decisions that make either sustainable. The Signal Box is simply supported. The Canopy avoids a basement. No transfer, no cantilever, no buried concrete the city has to pay for in carbon. <em>Sustainability is the form, not an addition to it. No offsets, no greenwash, no afterthought.</em></p>
             </div>
             <div>
               <div className="mono" style={{fontSize: 11, letterSpacing: 0.18, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 6}}>Efficient</div>
