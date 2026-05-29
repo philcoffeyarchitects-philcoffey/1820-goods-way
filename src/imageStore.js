@@ -38,6 +38,7 @@ export function useImageEntry(slot) {
   return React.useSyncExternalStore(subscribe, get, get);
 }
 
+
 // Downscale a dropped image on the client (no server-side image deps).
 // SVGs are passed through untouched. Returns { dataUrl, ext }.
 export function fileToDataUrl(file, maxW = 2400) {

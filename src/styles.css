@@ -931,6 +931,21 @@ body {
   color: var(--fg);
 }
 
+/* Mini overlay variant: smaller plate so a full-bleed CGI dominates the
+   page. Used on the §16 closing tempters and the thank-you. */
+.pc-cover__overlay--mini {
+  left: 36px; bottom: 36px;
+  max-width: 320px;
+  padding: 14px 18px 16px;
+  gap: 6px;
+  border-top-width: 2px;
+}
+.pc-cover__overlay--mini .mono {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+}
+
+
 /* Statement / Intro page (presentation): big text */
 .pc-stmt {
   flex: 1;
@@ -2134,9 +2149,9 @@ html[data-surround="white"] .topbar__logo .topbar__doc {
   font-family: var(--ff-mono);
 }
 
-@media print {
-  .fp { display: none !important; }
-}
+/* (Footprint modal: no print-hide rule. .fp is only in the DOM when the
+   modal is open, in which case the user wants to print it; when it's
+   closed, nothing to hide.) */
 
 /* ═══════════════════════════════════════════════════════════════
    CALCULATOR — design-side viability tool
@@ -3536,10 +3551,15 @@ html[data-surround="white"] .topbar__logo .topbar__doc {
      Page 2 — compare row · breakdown tables · caveats
    No tables split across pages. Generous font sizes (printable). */
 @media print {
-  @page { size: A4 landscape; margin: 12mm 14mm; }
-
-  /* Hide the deck */
-  .stage, .topbar, .nav-arrow, .rail, .twk-panel, .fs-hint { display: none !important; }
+  /* Calculator print rules — scoped to when the .calc modal is actually
+     open. Without :has() scoping, the .stage hide would also fire when
+     printing the deck and break that PDF. */
+  html:has(.calc) .stage,
+  html:has(.calc) .topbar,
+  html:has(.calc) .nav-arrow,
+  html:has(.calc) .rail,
+  html:has(.calc) .twk-panel,
+  html:has(.calc) .fs-hint { display: none !important; }
 
   html, body {
     background: white !important;
@@ -4435,6 +4455,14 @@ html[data-surround="white"] .topbar__logo .topbar__doc {
     background: white !important;
     overflow: visible !important;
     width: 297mm;
+    /* Force backgrounds and images to print; some browsers strip them
+       by default in print mode. */
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
   .topbar, .nav-arrow, .rail, .twk-panel, .print-btn, .fs-hint { display: none !important; }
 

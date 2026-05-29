@@ -9,11 +9,11 @@ import { Placeholder, Eyebrow, Cap, Logo, DEFAULT_ASPECTS } from "./placeholder.
 
 // ─── small layout helpers ──────────────────────────────────────────────
 
-function PresCover({ filename, caption, overlay, src }) {
+function PresCover({ filename, caption, overlay, src, overlayMode }) {
   return (
     <div className="pc-cover">
       <Placeholder filename={filename} caption={caption} variant="photo" fill src={src} />
-      <div className="pc-cover__overlay">{overlay}</div>
+      <div className={"pc-cover__overlay" + (overlayMode === "mini" ? " pc-cover__overlay--mini" : "")}>{overlay}</div>
     </div>
   );
 }
@@ -616,15 +616,15 @@ const SLegacy = sectionPages(
       ),
     },
     {
-      label: "The last building",
+      label: "The Last Site",
       presentation: () => (
         <PresImage
           filename="legacy-scheme-reveal.jpg"
           caption="Coffey's scheme, first reveal. Source: Coffey Architects design team."
           variant="CGI"
           capIdx="The scheme"
-          capTitle="A moment not to be missed."
-          capMeta="The final crossing, in a long history of crossings"
+          capTitle="The Last Site. The Placemaking Legacy."
+          capMeta="The water came first. Full circle."
         />
       ),
       report: () => (
@@ -633,10 +633,11 @@ const SLegacy = sectionPages(
           caption="The proposed scheme, first reveal"
           variant="CGI"
           capIdx="The scheme"
-          capTitle="A moment not to be missed."
-          kicker="§02 · The last building"
-          title="The final moment in a history of crossings."
+          capTitle="The Last Site. The Placemaking Legacy."
+          kicker="§02 · The Last Site"
+          title="The Last Site. The Placemaking Legacy."
           body={<>
+            <p><em>The water came first. Full circle.</em></p>
             <p>This is the last building in the masterplan… and the final moment in an incredible history of crossings. A moment not to be missed: the chance to create and dignify this place.</p>
             <p>An incredible site that deserves a strong and generous response, while also making an attractive and viable commercial building.</p>
           </>}
@@ -723,32 +724,7 @@ const S02 = sectionPages(
         </div>
       ),
     },
-    {
-      label: "The crossing",
-      presentation: () => (
-        <PresStatement
-          kicker="§03 · The crossing"
-          title="An incredible crossing."
-          body={<>
-            <p>The Regent's Canal of 1820.<br/>The railway of 1852.</p>
-            <p>Two centuries ago. Two systems of moving the city. Both still in use.</p>
-            <p>And here, at exactly this point, they cross.</p>
-            <p><em>Our building sits on the canal. Beside the railway. It cannot ignore the crossing.<br/>The crossing is its subject.</em></p>
-          </>}
-        />
-      ),
-      report: () => (
-        <ReportProse
-          kicker="§03 · The crossing"
-          title="The canal and the railway meet here."
-          body={<>
-            <p>The Regent's Canal opened in 1820, connecting Paddington to Limehouse. The Great Northern Railway opened in 1852, throwing iron between London and the north. They are the two great pieces of Victorian infrastructure that made King's Cross, and they meet, almost orthogonally, at this single point.</p>
-            <p>The site sits in that meeting. It is bordered on one side by the canal towpath and the Bagley Walk retaining wall; on another by the safeguarded tube and Thameslink lines beneath. The crossing of water and rail is not a feature of the site, <strong>it is the site's defining geometric fact.</strong></p>
-            <p>Any building here must answer to both: to the water that came first and to the railway that came second. <em>Our proposal takes the crossing as its subject.</em></p>
-          </>}
-        />
-      ),
-    },
+    // "The crossing" statement page removed.
     {
       label: "The Canal",
       presentation: () => (
@@ -3459,21 +3435,56 @@ const SInter = sectionPages(
       ),
     };
   }),
-    // Closer, "What we learnt from the site walk" (was the §08 Site Walk
-    // section's second page; folded in here at the end of the sequence).
+    // Closer, "What we learnt from the site walk". Reframed around the
+    // two distinct experiences encountered on the walk: canal level
+    // (intimate, short view) and the masterplan level above (civic,
+    // long view). The brief that follows is to talk to both.
     {
       label: "What we learnt from the site walk",
       presentation: () => (
         <div className="pc-stmt" style={{maxWidth: 'none', width: '100%'}}>
-          <Eyebrow>§06 · Site Walk</Eyebrow>
-          <h2 className="h-title" style={{marginBottom: 6}}>What we learnt from the site walk.</h2>
-          <ol className="numlist" style={{marginTop: 18}}>
+          <Eyebrow>§06 · Site Walk · What we learnt</Eyebrow>
+          <h2 className="h-title" style={{marginBottom: 6}}>Two walks. Two scales.</h2>
+          <div className="prose" style={{maxWidth: '64ch', fontSize: 18, color: 'var(--fg-soft)', marginBottom: 22}}>
+            The canal life below, the masterplan life above. The building has to talk to both.
+          </div>
+          <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, marginBottom: 22}}>
+            <div>
+              <div className="mono" style={{fontSize: 11, letterSpacing: 0.18, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 10}}>At canal level · the intimate, short view</div>
+              <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14, lineHeight: 1.4}}>
+                {[
+                  <>The water, the boats, the towpath, the bridges.</>,
+                  <>Eye-level. Touch-distance. The brick reads.</>,
+                  <>A working, pedestrian scale.</>,
+                ].map((t, i) => (
+                  <li key={i} style={{paddingLeft: 16, position: 'relative'}}>
+                    <span style={{position: 'absolute', left: 0, color: 'var(--accent)'}}>·</span>
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <div className="mono" style={{fontSize: 11, letterSpacing: 0.18, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 10}}>At masterplan level · the civic, long view</div>
+              <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14, lineHeight: 1.4}}>
+                {[
+                  <>The crossing, King's Cross, the skyline.</>,
+                  <>Read from the bridges, the towers, from afar.</>,
+                  <>A civic, silhouette scale.</>,
+                ].map((t, i) => (
+                  <li key={i} style={{paddingLeft: 16, position: 'relative'}}>
+                    <span style={{position: 'absolute', left: 0, color: 'var(--accent)'}}>·</span>
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <ol className="numlist">
             {[
-              "The building sits alone. It is distinct.",
-              "We see the building firstly as an artifact of the canal, not of the street.",
-              "The canal life and boats can bring real activity to the ground plane.",
-              "The building can act as a hinge, improving the canal to the east and the undercroft of the bridge.",
-              "The top of the building is highly visible. It can be seen from far away.",
+              "The two walks are distinct experiences. Each has its own evidence.",
+              "Connecting them, and talking to both, is the building's job.",
+              "Material at canal level for touch; form at masterplan level for the silhouette.",
             ].map((t, i) => (
               <li className="numlist__item" key={i}>
                 <span className="numlist__num">{String(i+1).padStart(2,"0")}</span>
@@ -3486,17 +3497,16 @@ const SInter = sectionPages(
       report: () => (
         <div className="pc-stmt" style={{maxWidth: 'none', width: '100%'}}>
           <Eyebrow>§06 · Site Walk · What we learnt</Eyebrow>
-          <h2 className="h-title" style={{marginBottom: 8}}>What we learnt from the site walk.</h2>
-          <div className="prose tight" style={{maxWidth: '78ch', marginBottom: 8}}>
-            <p>Five observations from walking the site. Each shaped the brief we set ourselves; each shows up in the design moves on the pages that follow.</p>
+          <h2 className="h-title" style={{marginBottom: 10}}>Two walks. Two scales.</h2>
+          <div className="prose tight" style={{maxWidth: '78ch', marginBottom: 16}}>
+            <p>The site walk gave us two distinct bodies of evidence. <strong>At canal level</strong>, the intimate scale: boats moving past, the towpath underfoot, the wall at arm's reach, the rhythm of brick. A working pedestrian scale. The building is read by surface, texture, doorway. <strong>At masterplan level</strong>, the civic scale: the crossing seen from the bridges, from the gasholders, from the towers across the masterplan. The building is read by its form, by its silhouette, by its presence on the skyline.</p>
+            <p><em>The brief that follows is to talk to both. Connecting the two experiences is the building's job.</em></p>
           </div>
           <ol className="numlist">
             {[
-              "The building sits alone. It is distinct.",
-              "We see the building firstly as an artifact of the canal, not of the street.",
-              "The canal life and boats can bring real activity to the ground plane.",
-              "The building can act as a hinge, improving the canal to the east and the undercroft of the bridge.",
-              "The top of the building is highly visible. It can be seen from far away.",
+              "The two walks are distinct experiences. Each has its own evidence and its own scale.",
+              "Connecting them, and talking to both, is the building's job — the brief follows from this.",
+              "Material at canal level for touch and texture; form at masterplan level for the silhouette.",
             ].map((t, i) => (
               <li className="numlist__item" key={i}>
                 <span className="numlist__num">{String(i+1).padStart(2,"0")}</span>
@@ -4168,36 +4178,66 @@ function studyDesignPages({ sectionNum, sectionLabel, slug, displayName, concept
         />
       ),
     },
-    // 3–7, axonometric build-up (5 stages)
-    ...[1, 2, 3, 4, 5].map((n) => ({
+    // 3–8, axonometric build-up (6 stages)
+    ...[1, 2, 3, 4, 5, 6].map((n) => ({
       label: `${displayName} · Axo · stage ${n}`,
       presentation: () => (
         <PresImage
           filename={`${slug}-axo-${String(n).padStart(2,'0')}.jpg`}
-          caption={`${displayName}, axonometric build-up · stage ${n} of 5`}
+          caption={`${displayName}, axonometric build-up · stage ${n} of 6`}
           variant="diagram"
           number={String(n)}
-          capIdx={`Axo · ${n} of 5`}
+          capIdx={`Axo · ${n} of 6`}
           capTitle={`Stage ${n}.`}
-          capMeta={`${displayName}, axonometric, stage ${n} of 5.`}
+          capMeta={`${displayName}, axonometric, stage ${n} of 6.`}
         />
       ),
       report: () => (
         <ReportImageText
           filename={`${slug}-axo-${String(n).padStart(2,'0')}.jpg`}
-          caption={`${displayName}, axonometric build-up · stage ${n} of 5`}
+          caption={`${displayName}, axonometric build-up · stage ${n} of 6`}
           variant="diagram"
           number={String(n)}
-          capIdx={`Axo · ${n} of 5`}
+          capIdx={`Axo · ${n} of 6`}
           capTitle={`Stage ${n}.`}
-          kicker={`§${sectStr} · ${sectionLabel} · Axonometric · stage ${n} of 5`}
+          kicker={`§${sectStr} · ${sectionLabel} · Axonometric · stage ${n} of 6`}
           title={`Axonometric, stage ${n}.`}
-          body={<p>Placeholder for axonometric stage {n} of 5. Drop a render or diagram onto the slot to populate.</p>}
+          body={<p>Placeholder for axonometric stage {n} of 6. Drop a render or diagram onto the slot to populate.</p>}
         />
       ),
     })),
-    // 8, plan (single 16:9 plan image at full body width; labels in a
-    //     JetBrains Mono box directly beneath the plans, full body width)
+    // 9, townscape (single page per study). Hero CGI showing the scheme
+    //    in its King's Cross context. Sits BEFORE the plan so the
+    //    reader sees the form first, then the plan.
+    {
+      label: `${displayName} · Townscape`,
+      presentation: () => (
+        <PresImage
+          filename={`${slug}-townscape-01.jpg`}
+          caption={`${displayName}, townscape CGI (landscape)`}
+          variant="photo"
+          capIdx="Townscape"
+          capTitle={`${displayName}, in townscape.`}
+          capMeta={`${displayName}, CGI placeholder.`}
+        />
+      ),
+      report: () => (
+        <ReportImageText
+          filename={`${slug}-townscape-01.jpg`}
+          caption={`${displayName}, townscape CGI (landscape)`}
+          variant="photo"
+          capIdx="Townscape"
+          capTitle={`${displayName}, in townscape.`}
+          kicker={`§${sectStr} · ${sectionLabel} · Townscape`}
+          title={`${displayName}, in townscape.`}
+          body={<p>Placeholder, drop the townscape CGI onto the slot.</p>}
+        />
+      ),
+    },
+    // 10, plan (single 16:9 plan image at full body width; labels in a
+    //     JetBrains Mono box directly beneath the plans, full body width).
+    //     Comes after the townscape so the reader has the silhouette in
+    //     mind before they look at the floor plates.
     (() => {
       const renderPlanPage = () => (
         <div className="pc-stmt" style={{maxWidth: 'none', width: '100%'}}>
@@ -4230,34 +4270,6 @@ function studyDesignPages({ sectionNum, sectionLabel, slug, displayName, concept
         report: renderPlanPage,
       };
     })(),
-    // 12–15, townscape images (4 pages)
-    ...[1, 2, 3, 4].map((n) => ({
-      label: `${displayName} · Townscape ${n}`,
-      presentation: () => (
-        <PresImage
-          filename={`${slug}-townscape-${String(n).padStart(2,'0')}.jpg`}
-          caption={`${displayName}, townscape ${n} of 4`}
-          variant="photo"
-          number={String(n)}
-          capIdx={`Townscape · ${n} of 4`}
-          capTitle={`Townscape ${n}.`}
-          capMeta={`${displayName}, townscape placeholder.`}
-        />
-      ),
-      report: () => (
-        <ReportImageText
-          filename={`${slug}-townscape-${String(n).padStart(2,'0')}.jpg`}
-          caption={`${displayName}, townscape ${n} of 4`}
-          variant="photo"
-          number={String(n)}
-          capIdx={`Townscape · ${n} of 4`}
-          capTitle={`Townscape ${n}.`}
-          kicker={`§${sectStr} · ${sectionLabel} · Townscape · ${n} of 4`}
-          title={`Townscape ${n}.`}
-          body={<p>Placeholder, drop the townscape image onto the slot.</p>}
-        />
-      ),
-    })),
     // 16, area schedule. Uses real data when scheduleData is provided;
     //     otherwise renders a placeholder table.
     {
@@ -4755,36 +4767,53 @@ const SClosing = sectionPages(
         </div>
       ),
     },
-    // Final full-bleed image with "Thank you" overlay.
-    {
-      label: "Thank you",
-      presentation: () => (
-        <PresCover
-          filename="thank-you.jpg"
-          caption="Full-bleed closing image, landscape. King's Cross / 1820 Goods Way at twilight, or the canal, or a hero CGI"
-          overlay={
-            <>
-              <span className="mono" style={{color: 'var(--accent)', letterSpacing: '0.22em', fontWeight: 500}}>1820 Goods Way · The water came first</span>
-              <h1 className="h-display" style={{fontSize: 64, lineHeight: 1, margin: 0}}>Thank you.</h1>
-              <span className="mono" style={{fontSize: 11, color: 'var(--fg-soft)', letterSpacing: '0.04em'}}>The conversation continues.</span>
-            </>
-          }
-        />
-      ),
-      report: () => (
-        <PresCover
-          filename="thank-you.jpg"
-          caption="Full-bleed closing image, landscape. King's Cross / 1820 Goods Way at twilight, or the canal, or a hero CGI"
-          overlay={
-            <>
-              <span className="mono" style={{color: 'var(--accent)', letterSpacing: '0.22em', fontWeight: 500}}>1820 Goods Way · The water came first</span>
-              <h1 className="h-display" style={{fontSize: 64, lineHeight: 1, margin: 0}}>Thank you.</h1>
-              <span className="mono" style={{fontSize: 11, color: 'var(--fg-soft)', letterSpacing: '0.04em'}}>The conversation continues.</span>
-            </>
-          }
-        />
-      ),
-    },
+    // ───────────────────────────────────────────────────────────────────
+    //  Closing finale, three full-bleed CGI pages with mini overlays so
+    //  the image sings. Canopy (the foot, public space, water-edge),
+    //  then Signal Box (high lookout from the 1820 room), then a
+    //  thank-you over a final hero image.
+    // ───────────────────────────────────────────────────────────────────
+    ...(() => {
+      const miniOverlay = (label, title, big) => (
+        <>
+          <span className="mono" style={{color: 'var(--accent)', fontWeight: 500}}>{label}</span>
+          <h1 className="h-display" style={{fontSize: big ? 56 : 28, lineHeight: 1.02, margin: 0}}>{title}</h1>
+        </>
+      );
+      const coverPage = ({ slot, caption, label, title, pageLabel, big }) => ({
+        label: pageLabel,
+        presentation: () => (
+          <PresCover filename={slot} caption={caption} overlayMode="mini" overlay={miniOverlay(label, title, big)} />
+        ),
+        report: () => (
+          <PresCover filename={slot} caption={caption} overlayMode="mini" overlay={miniOverlay(label, title, big)} />
+        ),
+      });
+      return [
+        coverPage({
+          pageLabel: "Closing CGI · The Canopy",
+          slot: "closing-cgi-canopy.jpg",
+          caption: "Full-bleed closing CGI, landscape. The Canopy at the building's foot, public space, canal threshold, the water came first.",
+          label: "§16 · Closing",
+          title: "The Canopy.",
+        }),
+        coverPage({
+          pageLabel: "Closing CGI · The Signal Box",
+          slot: "closing-cgi-signal-box.jpg",
+          caption: "Full-bleed closing CGI from height, landscape. View from the 1820 room at the top of the Signal Box, the lookout over the crossing.",
+          label: "§16 · Closing",
+          title: "The Signal Box.",
+        }),
+        coverPage({
+          pageLabel: "Thank you",
+          slot: "thank-you.jpg",
+          caption: "Full-bleed thank-you hero image, landscape. King's Cross / 1820 Goods Way at twilight, or the canal, or a final hero CGI.",
+          label: "1820 Goods Way · The water came first",
+          title: "Thank you.",
+          big: true,
+        }),
+      ];
+    })(),
   ]
 );
 
@@ -4810,9 +4839,9 @@ const SOurDirection = sectionPages(
               <Eyebrow>§14 · Our direction</Eyebrow>
               <h2 className="h-sub" style={{marginBottom: 10}}>Perhaps we go tall and slender. And activate the canal.</h2>
               <div className="prose tight">
-                <p>Mark the crossing with a canopied public space at the foot. Above it, a slender office. Pair them.</p>
-                <p>An alternative structural approach holds the small footprint and bridges the Piccadilly line below. The eccentric core lets us go higher.</p>
-                <p><strong>G+10. ~72 m AOD.</strong> Just below the Kenwood House view line at 73.2 m. More area. More presence. The building earns its height by giving the ground back.</p>
+                <p>An alternative structural approach holds the small footprint and bridges the Piccadilly line below. The eccentric core lets us go higher. Both directions can reach G+10.</p>
+                <p><strong>Two G+10 options.</strong> Both at ~72 m AOD. Both under the Kenwood House view line at 73.2 m. Both mark the crossing. Both activate the canal with public space, and both give the ground back.</p>
+                <p><em>The Signal Box, more expressive at height. The Canopy, more expressive at ground.</em></p>
               </div>
             </div>
           </div>
@@ -4831,10 +4860,10 @@ const SOurDirection = sectionPages(
               <Eyebrow>§14 · Our direction</Eyebrow>
               <h2 className="h-sub" style={{marginBottom: 10}}>Perhaps we go tall and slender, and activate the canal.</h2>
               <div className="prose">
-                <p>The two directions on the previous sections are both defensible, both architecturally honest. But there is a third move, a hybrid, that may serve the brief better than either taken alone: <strong>hold the slender footprint of the Signal Box study, pair it with the canopied public space of the Canopy study at the foot, and unlock its height with an alternative structural approach.</strong></p>
-                <p>The structure bridges over the Piccadilly line below the site, transferring load away from the tube tunnels to ground that can take it. The eccentric core, already part of both schemes, becomes the spine of the move: it stabilises the slender plate, and it lets the building rise higher than either of the two earlier studies suggested.</p>
-                <p><strong>G+10 at roughly 72 m AOD, sitting just under the Kenwood House view line at 73.2 m.</strong> The Signal Box option lands at 71.98 m AOD (49.00 m from ground); the Canopy / hybrid option at 71.33 m AOD (48.35 m from ground). Both gain more area on the lettable plates and more presence on the King's Cross silhouette, without breaching the protected strategic view that runs south from Kenwood across the city. The building marks the crossing in the city skyline and activates the canal beneath, all from a footprint smaller than either of the two studies on their own.</p>
-                <p><em>Canopy, tall and slender.</em> Simple. Dynamic. Marks the space. Activates the canal. Simple and buildable.</p>
+                <p>The two studies on the previous sections are both defensible, both architecturally honest. The next move, common to both, is an alternative structural approach that unlocks more height for either direction. The structure bridges over the Piccadilly line below the site, transferring load away from the tube tunnels to ground that can take it. The eccentric core, already part of both schemes, becomes the spine of the move: it stabilises the slender plate, and lets either direction rise higher than the earlier studies suggested.</p>
+                <p><strong>Two G+10 options, at roughly 72 m AOD, both sitting just under the Kenwood House view line at 73.2 m.</strong> The Signal Box at G+10 lands at 71.98 m AOD (49.00 m from ground); the Canopy at G+10 at 71.33 m AOD (48.35 m from ground). Both gain more area on the lettable plates and more presence on the King's Cross silhouette, without breaching the protected strategic view that runs south from Kenwood across the city.</p>
+                <p>Both options activate the canal with public space. Both mark the crossing. They differ in where the expressive move sits. <strong>The Signal Box is more expressive at height</strong>, a lightweight marker at the skyline, the lookout that reads the crossing in one view. <strong>The Canopy is more expressive at ground</strong>, a sheltered civic room at the foot, the threshold that brings the canal into the building.</p>
+                <p><em>Either way, tall and slender. Either way, the ground given back. Either way, the crossing marked.</em></p>
               </div>
             </div>
           </div>
@@ -4905,34 +4934,28 @@ const SOurDirection = sectionPages(
       ),
     },
     // ───────────────────────────────────────────────────────────────────
-    //  Four streetview-comparison pages. Each shows the same vantage
-    //  point with both G+10 options side by side (Signal Box left,
-    //  Canopy right). Drop matching pairs of renders into the slots.
+    //  Streetview comparison. ONE page showing the same vantage point
+    //  with both G+10 options side by side (Signal Box left, Canopy
+    //  right). Drop the matching pair of renders into the two slots.
     // ───────────────────────────────────────────────────────────────────
-    ...[
-      { n: 1, label: "From the opposite towpath",      sub: "Across the canal that named the building." },
-      { n: 2, label: "Arrival from Goods Way",         sub: "On approach, the building at ground." },
-      { n: 3, label: "Within the King's Cross context", sub: "Among the Gasholders, the Granary, Coal Drops Yard." },
-      { n: 4, label: "At dusk",                        sub: "The lookout lit. The skyline marked." },
-    ].map((view) => {
-      const num = String(view.n).padStart(2, "0");
+    (() => {
       const renderPage = () => (
         <div className="pc-stmt" style={{maxWidth: 'none', width: '100%'}}>
-          <Eyebrow>§14 · Our direction · Streetview · {view.n} of 4</Eyebrow>
-          <h2 className="h-sub" style={{marginBottom: 4}}>{view.label}.</h2>
+          <Eyebrow>§14 · Our direction · Streetview</Eyebrow>
+          <h2 className="h-sub" style={{marginBottom: 4}}>In townscape.</h2>
           <div className="prose" style={{maxWidth: '78ch', fontSize: 13, color: 'var(--fg-soft)', marginBottom: 10}}>
-            {view.sub}
+            The same vantage point, the two G+10 options side by side.
           </div>
           <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18, flex: 1, minHeight: 0}}>
             <div style={{display: 'flex', flexDirection: 'column', gap: 8, minHeight: 0, minWidth: 0}}>
               <div style={{flex: 1, display: 'flex', minHeight: 0, minWidth: 0}}>
-                <Placeholder filename={`our-direction-streetview-${num}-signal-box.jpg`} caption={`Streetview ${view.n} — ${view.label} — Signal Box G+10 (landscape)`} variant="photo" aspect="3/2" />
+                <Placeholder filename="our-direction-streetview-signal-box.jpg" caption="Streetview, Signal Box G+10 (landscape CGI)" variant="photo" aspect="3/2" />
               </div>
               <div className="mono" style={{fontSize: 10.5, letterSpacing: 0.18, color: 'var(--accent)', textTransform: 'uppercase'}}>Signal Box · G+10</div>
             </div>
             <div style={{display: 'flex', flexDirection: 'column', gap: 8, minHeight: 0, minWidth: 0}}>
               <div style={{flex: 1, display: 'flex', minHeight: 0, minWidth: 0}}>
-                <Placeholder filename={`our-direction-streetview-${num}-canopy.jpg`} caption={`Streetview ${view.n} — ${view.label} — Canopy G+10 (landscape)`} variant="photo" aspect="3/2" />
+                <Placeholder filename="our-direction-streetview-canopy.jpg" caption="Streetview, Canopy G+10 (landscape CGI)" variant="photo" aspect="3/2" />
               </div>
               <div className="mono" style={{fontSize: 10.5, letterSpacing: 0.18, color: 'var(--accent)', textTransform: 'uppercase'}}>Canopy · G+10</div>
             </div>
@@ -4940,11 +4963,11 @@ const SOurDirection = sectionPages(
         </div>
       );
       return {
-        label: `Our Direction. Streetview ${view.n} (${view.label})`,
+        label: "Our Direction. Streetview",
         presentation: renderPage,
         report: renderPage,
       };
-    }),
+    })(),
     // ───────────────────────────────────────────────────────────────────
     //  Final page of §14 — both G+10 area schedules side by side, the
     //  numeric payoff to page 143. Both options give similar area
