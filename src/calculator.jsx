@@ -30,12 +30,14 @@ const STRUCTURE = {
 };
 
 const HEAVY = {
-  "brick":          { label: "Engineering brick",      carbon: 140, note: "Full bricks. The brick of Victorian canal infrastructure. Coffey recommended." },
-  "brick-slip":     { label: "Brick slip on rail",     carbon:  95, note: "20mm slips on a carrier. Lower carbon, less honest at close range." },
-  "stone-portland": { label: "Portland limestone",     carbon:  85, note: "UK-quarried sedimentary. Low energy. A different vocabulary." },
-  "stone-granite":  { label: "Granite (imported)",     carbon: 280, note: "Imported, high-energy cutting + shipping." },
-  "precast":        { label: "Pre-cast concrete",      carbon: 240, note: "Reconstituted-stone PCC panels. Faster, lower cost." },
-  "precast-ggbs":   { label: "Pre-cast + GGBS",        carbon: 145, note: "70% GGBS cement replacement." },
+  "brick":                 { label: "Engineering brick",            carbon: 140, note: "Full bricks. The brick of Victorian canal infrastructure. Coffey recommended." },
+  "brick-slip":            { label: "Brick slip on rail",           carbon:  95, note: "20mm slips on a carrier. Lower carbon, less honest at close range." },
+  "stone-portland":        { label: "Portland limestone",           carbon:  85, note: "UK-quarried sedimentary. Low energy. A different vocabulary." },
+  "stone-granite":         { label: "Granite (imported)",           carbon: 280, note: "Imported, high-energy cutting + shipping." },
+  "precast":               { label: "Pre-cast concrete",            carbon: 240, note: "Reconstituted-stone PCC panels. Faster, lower cost." },
+  "precast-ggbs":          { label: "Pre-cast + GGBS",              carbon: 145, note: "70% GGBS cement replacement." },
+  "weathered-mild-steel":  { label: "Weathered mild steel",         carbon: 120, note: "Low-process mild steel patinated to a deep oxide finish. Reads heavy by colour, not mass." },
+  "coloured-aluminium":    { label: "Coloured aluminium (recycled)", carbon: 180, note: "Recycled aluminium cassette in a deep brick-toned anodised / PPC finish. Reads heavy from distance." },
 };
 
 const LIGHT = {
@@ -64,23 +66,10 @@ const SENSITIVITY = 0.10;
 // editable on material choices but their geometry (GIA, NIA, facade areas)
 // is fixed.
 
-const CONSENTED = {
-  key: "consented",
-  label: "Previously consented",
-  long: "Stage 5 consent, by others",
-  note: "G+6 with basement. RC frame, precast facade, primary aluminium, single basement.",
-  gia: 5252,
-  nia: 3797,
-  heavyArea: 2200,
-  lightArea: 250,
-  basement: 175,                  // kgCO₂e/m² GIA (single basement)
-  basementCost: 410,              // £/m² GIA
-  // Locked spec — these are the materials the consented scheme used.
-  spec: { structure: "rc", heavy: "precast", light: "al-primary" },
-  // Mid-tender illustrative £/m² for the design-side scope only.
-  // Real Stage 2 cost-plan figures slot in here next week.
-  designSideCostPerM2: 2600,
-};
+// Design-side £/m² baseline used by calcCost as the starting rate from
+// which structural and material premiums move. Mid-tender illustrative;
+// swap to a Stage-2 cost-plan figure next week.
+const CONSENTED_RATE = 2600;
 
 const COFFEY_VARIANTS = {
   "canopy-g6": {
@@ -166,12 +155,14 @@ function calcCost(scheme, spec, hasBasement, consentedPerM2) {
     "full-clt":         600,    // mass timber premium
   };
   const HEAVY_DELTA = {
-    "brick":          0,        // baseline
-    "brick-slip":    -250,
-    "stone-portland": 400,
-    "stone-granite":  650,
-    "precast":       -150,
-    "precast-ggbs":  -100,
+    "brick":                 0,        // baseline
+    "brick-slip":           -250,
+    "stone-portland":        400,
+    "stone-granite":         650,
+    "precast":              -150,
+    "precast-ggbs":         -100,
+    "weathered-mild-steel":  150,      // specialist patination + sourcing premium
+    "coloured-aluminium":    75,       // mid-range cassette + colour finish
   };
   const LIGHT_DELTA = {
     "al-primary":     0,
@@ -290,9 +281,9 @@ function CtrlGroup({ num, title, hint, options, selectedKey, onChange, recommend
   );
 }
 
-// New, clearer carbon target indicator: tier badge + three target rows
-// with tick/cross and the gap to threshold.
-function CarbonScorecard({ designSidePerM2, totalPerM2, consentedTotal, deltaText, deltaSignVal }) {
+// Carbon target scorecard: tier badge + three target rows with tick/cross
+// and the gap to threshold. Absolute kgCO₂e/m² only — no baseline comparison.
+function CarbonScorecard({ designSidePerM2, totalPerM2 }) {
   const tier = tierFor(designSidePerM2);
   const headline = tierLabel(tier);
   const v = Math.round(designSidePerM2);
@@ -300,13 +291,9 @@ function CarbonScorecard({ designSidePerM2, totalPerM2, consentedTotal, deltaTex
     <div className={"target-card target-card--" + tier}>
       <div className="target-card__head">
         <div className="target-card__head-left">
-          <span className="target-card__big-num">{v}</span>
+          <span className="target-card__big-num">~{v}</span>
           <span className="mono target-card__big-unit">kgCO₂e/m²</span>
           <span className="target-card__tier">{headline}</span>
-        </div>
-        <div className={"target-card__delta target-card__delta--" + deltaSignVal}>
-          <span className="mono target-card__delta-lbl">vs consented</span>
-          <span className="target-card__delta-val">{deltaText}</span>
         </div>
       </div>
       <ul className="target-card__rows">
@@ -326,44 +313,147 @@ function CarbonScorecard({ designSidePerM2, totalPerM2, consentedTotal, deltaTex
         })}
       </ul>
       <div className="target-card__foot mono">
-        All-in (incl. fixed MEP / fit-out): {Math.round(totalPerM2)} kgCO₂e/m² · Whole-life over 60yr life included in detailed breakdown
+        Approximate, mid-tender · all-in (incl. fixed MEP / fit-out): ~{Math.round(totalPerM2)} kgCO₂e/m²
       </div>
     </div>
   );
 }
 
-// Relative cost block — no raw £/m² as headline. Always paired with area
-// gain so the panel reads "more area for similar/less cost per m²."
-function RelativeCost({ costDeltaPct, costDeltaTotal, areaDeltaPct, costPerM2, totalCost, sensLow, sensHigh }) {
-  const dText = roundDelta(costDeltaPct);
-  const dSign = deltaSign(costDeltaPct);
-  const tText = roundDelta(Math.round(costDeltaTotal / Math.abs(costDeltaTotal || 1) * 5) * 5);  // placeholder
-  const aText = roundDelta(areaDeltaPct);
+// Cost is shown qualitatively only, against a fixed benchmark scheme. No
+// pound figures appear anywhere in the UI; just words. The benchmark
+// itself is a stable reference point but its cost is also not disclosed.
+//   Benchmark = the smallest Coffey variant (Canopy G+6) with the
+//   recommended materials (Steel + CLT, brick, recycled aluminium).
+const BENCHMARK_VARIANT_KEY = "canopy-g6";
+
+function costVsBenchmarkRel(per, benchmarkPer) {
+  const pct = ((per - benchmarkPer) / benchmarkPer) * 100;
+  const abs = Math.abs(pct);
+  if (abs < 5)  return { label: "Broadly the same as the benchmark", short: "On par",         tone: "neutral" };
+  if (pct < 0) {
+    if (abs < 15) return { label: "Slightly less expensive than the benchmark", short: "Slightly less expensive", tone: "down" };
+    if (abs < 30) return { label: "Less expensive than the benchmark",          short: "Less expensive",           tone: "down" };
+    return            { label: "Considerably less expensive than the benchmark", short: "Considerably less expensive", tone: "down" };
+  } else {
+    if (abs < 15) return { label: "Slightly more expensive than the benchmark", short: "Slightly more expensive", tone: "up" };
+    if (abs < 30) return { label: "More expensive than the benchmark",          short: "More expensive",           tone: "up" };
+    return            { label: "Considerably more expensive than the benchmark", short: "Considerably more expensive", tone: "up" };
+  }
+}
+
+// Qualitative cost block — never names a pound figure. Compares the
+// current option against the fixed benchmark above and prints one of
+// six qualitative descriptors. Designed so the panel reads "where this
+// sits relative to the cheapest sensible scheme" without ever seeing a
+// number that could spook them out of context.
+function CostVsBenchmark({ costPerM2, benchmarkCostPerM2, isBenchmark }) {
+  const rel = costVsBenchmarkRel(costPerM2, benchmarkCostPerM2);
+  const display = isBenchmark
+    ? { label: "This is the benchmark", short: "Benchmark", tone: "neutral" }
+    : rel;
   return (
     <div className="costcard">
       <div className="costcard__head">
-        <span className="costcard__lbl mono">COST</span>
-        <span className={"costcard__chip costcard__chip--" + dSign}>{dText} per m²</span>
+        <span className="costcard__lbl mono">COST · against the benchmark</span>
+        <span className={"costcard__chip costcard__chip--" + display.tone}>{display.short}</span>
       </div>
       <div className="costcard__lines">
         <div className="costcard__line">
-          <span className="costcard__line-lbl">Per m²</span>
-          <span className="costcard__line-val">{dText} vs the consented scheme</span>
-        </div>
-        <div className="costcard__line">
-          <span className="costcard__line-lbl">Overall</span>
-          <span className="costcard__line-val">
-            {Math.abs(costDeltaTotal) < 200000 ? "approximately the same overall" : (costDeltaTotal > 0 ? "approximately +" : "approximately −") + fmtMoneyApprox(Math.abs(costDeltaTotal)).replace("~£", "£") + " overall"}
-            {" "}
-            <span className="costcard__line-note">for {aText} more lettable area</span>
-          </span>
+          <span className="costcard__line-lbl">Headline</span>
+          <span className="costcard__line-val">{display.label}.</span>
         </div>
       </div>
       <div className="costcard__foot mono">
-        Mid-tender illustrative · design-side scope · ±{Math.round(SENSITIVITY * 100)}% Stage 2 sensitivity ·
-        analytical: ~£{Math.round(costPerM2 / 10) * 10}/m² all-in, total ~{fmtMoneyApprox(totalCost)}
+        Benchmark · Canopy G+6 with Coffey's recommended materials (Steel + CLT, brick, recycled aluminium). Mid-tender; deliberately qualitative.
       </div>
     </div>
+  );
+}
+
+// Bottom strip — all four Coffey options at a glance, each rendered with
+// its own stored material spec so the rows show genuinely independent
+// design proposals, not "same materials, four areas". Carbon is
+// absolute; cost is qualitative against the fixed benchmark.
+function OptionsComparison({ activeKey, onPick, specs }) {
+  // Compute the benchmark cost ONCE so every row compares against it.
+  const benchmark = COFFEY_VARIANTS[BENCHMARK_VARIANT_KEY];
+  const benchmarkCost = calcCost(benchmark, COFFEY_DEFAULT_SPEC, false, CONSENTED_RATE);
+  // Label per spec: short summary of the three material choices so the
+  // panel can see at a glance how a given row has been set up.
+  const specLabel = (s) => {
+    const isDefault = s.structure === COFFEY_DEFAULT_SPEC.structure
+      && s.heavy === COFFEY_DEFAULT_SPEC.heavy
+      && s.light === COFFEY_DEFAULT_SPEC.light;
+    if (isDefault) return "Coffey recommended";
+    return [STRUCTURE[s.structure]?.label, HEAVY[s.heavy]?.label, LIGHT[s.light]?.label]
+      .filter(Boolean).join(" · ");
+  };
+  return (
+    <section className="opts-cmp">
+      <div className="opts-cmp__head">
+        <Eyebrow>All four directions, at a glance</Eyebrow>
+        <h3 className="opts-cmp__title">Carbon and cost across the options.</h3>
+        <p className="opts-cmp__sub">
+          Each direction carries its own material specification, so the rows compare as independent design proposals. Switch any row's materials by clicking it (it becomes the active card) and using the controls above. Cost is shown qualitatively against a fixed benchmark (Canopy G+6 with Coffey's recommended materials).
+        </p>
+      </div>
+      <table className="opts-cmp__table">
+        <thead>
+          <tr>
+            <th>Direction</th>
+            <th>Height</th>
+            <th>GIA (m²)</th>
+            <th>NIA (m²)</th>
+            <th>Materials</th>
+            <th>Carbon (~kgCO₂e/m²)</th>
+            <th>Cost · vs benchmark</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.values(COFFEY_VARIANTS).map((v) => {
+            const rowSpec = specs[v.key] || COFFEY_DEFAULT_SPEC;
+            const c = calcCarbon(v, rowSpec, false);
+            const $ = calcCost(v, rowSpec, false, CONSENTED_RATE);
+            const tier = tierFor(c.designSidePerM2);
+            const active = v.key === activeKey;
+            const isBench = v.key === BENCHMARK_VARIANT_KEY;
+            // Benchmark row reads "Benchmark" only if it still carries
+            // the recommended spec; if the user has tweaked it, it falls
+            // back to a normal comparison against itself-as-default.
+            const benchAtDefault = v.key === BENCHMARK_VARIANT_KEY
+              && rowSpec.structure === COFFEY_DEFAULT_SPEC.structure
+              && rowSpec.heavy === COFFEY_DEFAULT_SPEC.heavy
+              && rowSpec.light === COFFEY_DEFAULT_SPEC.light;
+            const rel = benchAtDefault
+              ? { short: "Benchmark", tone: "neutral" }
+              : costVsBenchmarkRel($.totalPerM2, benchmarkCost.totalPerM2);
+            return (
+              <tr key={v.key}
+                  className={"opts-cmp__row" + (active ? " is-active" : "")}
+                  onClick={() => onPick(v.key)}
+                  title={`Make ${v.label} ${v.long.split('·')[0].trim()} the active card so you can edit its materials.`}
+              >
+                <th>
+                  <span className="opts-cmp__name">{v.label}</span>
+                  <span className="mono opts-cmp__note">{v.long.split("·").slice(1).join("·").trim() || v.long}</span>
+                </th>
+                <td className="mono">{v.long.split("·")[0].trim()}</td>
+                <td>{v.gia.toLocaleString()}</td>
+                <td>{v.nia.toLocaleString()}</td>
+                <td className="mono" style={{fontSize: 10, color: 'var(--fg-soft)', letterSpacing: 0.04, lineHeight: 1.4}}>{specLabel(rowSpec)}</td>
+                <td>
+                  ~{Math.round(c.designSidePerM2)}
+                  <span className={"target-pill target-pill--" + tier} style={{marginLeft: 8}}>{tierLabel(tier).split(' · ')[1] || tierLabel(tier)}</span>
+                </td>
+                <td>
+                  <span className={"costcard__chip costcard__chip--" + rel.tone} style={{fontSize: 12, padding: '2px 10px'}}>{rel.short}</span>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </section>
   );
 }
 
@@ -389,65 +479,14 @@ function SchemeTabs({ value, onChange }) {
   );
 }
 
-function ConsentedCard({ result, costResult }) {
-  return (
-    <section className="schemecard schemecard--locked">
-      <header className="schemecard__head">
-        <div>
-          <div className="schemecard__key">
-            <span className="mono">Previously consented</span>
-            <span className="mono schemecard__chip schemecard__chip--locked">Locked · by others</span>
-          </div>
-          <h3 className="schemecard__title">{CONSENTED.long}</h3>
-          <div className="schemecard__note">{CONSENTED.note}</div>
-        </div>
-        <div className="schemecard__gia">
-          <div className="mono">GIA / NIA</div>
-          <div className="schemecard__gia-val">{CONSENTED.gia.toLocaleString()}<span className="mono"> m²</span></div>
-          <div className="mono schemecard__gia-nia">NIA {CONSENTED.nia.toLocaleString()} m²</div>
-        </div>
-      </header>
-
-      <div className="schemecard__locked-spec">
-        <span className="mono">Specification:</span>
-        <span>{STRUCTURE[CONSENTED.spec.structure].label}</span>
-        <span className="dim">·</span>
-        <span>{HEAVY[CONSENTED.spec.heavy].label}</span>
-        <span className="dim">·</span>
-        <span>{LIGHT[CONSENTED.spec.light].label}</span>
-        <span className="dim">·</span>
-        <span>Single basement</span>
-      </div>
-
-      <div className="schemecard__results">
-        <div className="consented-summary">
-          <div className="consented-summary__item">
-            <span className="mono">Embodied carbon</span>
-            <b>{Math.round(result.designSidePerM2)}</b>
-            <span className="mono">kgCO₂e/m² (design-side)</span>
-            <span className={"target-pill target-pill--" + tierFor(result.designSidePerM2)}>
-              {tierLabel(tierFor(result.designSidePerM2))}
-            </span>
-          </div>
-          <div className="consented-summary__item">
-            <span className="mono">Build cost (illustrative)</span>
-            <b>~£{Math.round(costResult.totalPerM2 / 10) * 10}</b>
-            <span className="mono">/m² all-in · ~{fmtMoneyApprox(costResult.total)} total</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function CoffeyCard({ variantKey, setVariantKey, spec, setSpec, consentedCarbon, consentedCost, consentedScheme }) {
+function CoffeyCard({ variantKey, setVariantKey, spec, setSpec, onCopyToAll }) {
   const scheme = COFFEY_VARIANTS[variantKey];
   const carbon = calcCarbon(scheme, spec, false);
-  const cost   = calcCost(scheme, spec, false, CONSENTED.designSideCostPerM2);
-  const costDeltaPct   = ((cost.totalPerM2 - consentedCost.totalPerM2) / consentedCost.totalPerM2) * 100;
-  const costDeltaTotal = cost.total - consentedCost.total;
-  const areaDeltaPct   = ((scheme.nia - consentedScheme.nia) / consentedScheme.nia) * 100;
-  const carbonDeltaPct = ((carbon.designSidePerM2 - consentedCarbon.designSidePerM2) / consentedCarbon.designSidePerM2) * 100;
+  const cost   = calcCost(scheme, spec, false, CONSENTED_RATE);
+  // Benchmark cost (fixed: smallest Coffey variant + recommended materials).
+  // Computed for the qualitative cost comparison; the benchmark's own
+  // pound figure is never displayed.
+  const benchmarkCost = calcCost(COFFEY_VARIANTS[BENCHMARK_VARIANT_KEY], COFFEY_DEFAULT_SPEC, false, CONSENTED_RATE);
 
   return (
     <section className="schemecard schemecard--recommended">
@@ -464,6 +503,15 @@ function CoffeyCard({ variantKey, setVariantKey, spec, setSpec, consentedCarbon,
           <div className="mono">GIA / NIA</div>
           <div className="schemecard__gia-val">{scheme.gia.toLocaleString()}<span className="mono"> m²</span></div>
           <div className="mono schemecard__gia-nia">NIA {scheme.nia.toLocaleString()} m²</div>
+          {onCopyToAll ? (
+            <button
+              className="schemecard__sync mono"
+              onClick={onCopyToAll}
+              title="Copy this scheme's materials onto every other Coffey direction. Useful for an apples-to-apples comparison."
+            >
+              ⇄ Copy materials → all directions
+            </button>
+          ) : null}
         </div>
       </header>
 
@@ -485,19 +533,12 @@ function CoffeyCard({ variantKey, setVariantKey, spec, setSpec, consentedCarbon,
         <CarbonScorecard
           designSidePerM2={carbon.designSidePerM2}
           totalPerM2={carbon.totalPerM2}
-          consentedTotal={consentedCarbon.totalPerM2}
-          deltaText={roundDelta(carbonDeltaPct)}
-          deltaSignVal={deltaSign(carbonDeltaPct)}
         />
 
-        <RelativeCost
-          costDeltaPct={costDeltaPct}
-          costDeltaTotal={costDeltaTotal}
-          areaDeltaPct={areaDeltaPct}
+        <CostVsBenchmark
           costPerM2={cost.totalPerM2}
-          totalCost={cost.total}
-          sensLow={cost.sensLow}
-          sensHigh={cost.sensHigh}
+          benchmarkCostPerM2={benchmarkCost.totalPerM2}
+          isBenchmark={variantKey === BENCHMARK_VARIANT_KEY}
         />
 
         <details className="breakdown">
@@ -534,29 +575,51 @@ function Calculator({ onClose }) {
   const [variantKey, setVariantKey] = React.useState(() => {
     try { return localStorage.getItem("twcf-calc-variant") || "signal-box-g10"; } catch { return "signal-box-g10"; }
   });
-  const [spec, setSpecRaw] = React.useState(() => {
+  // Per-scheme material specs. Each Coffey variant remembers its own
+  // structure / heavy / light choices. Switching tabs swaps both the
+  // active card AND its stored spec. The comparison strip below uses
+  // each variant's own spec, so the four rows can be compared as
+  // genuinely different design proposals (not "same materials, four
+  // areas") if the user has set each one up that way.
+  const [specs, setSpecsRaw] = React.useState(() => {
+    const init = {};
+    Object.keys(COFFEY_VARIANTS).forEach((k) => { init[k] = { ...COFFEY_DEFAULT_SPEC }; });
     try {
-      const s = JSON.parse(localStorage.getItem("twcf-calc-spec") || "null");
-      if (s && s.structure && s.heavy && s.light) return s;
+      const s = JSON.parse(localStorage.getItem("twcf-calc-specs") || "null");
+      if (s && typeof s === "object") {
+        const valid = Object.keys(COFFEY_VARIANTS).every(
+          (k) => s[k] && s[k].structure && s[k].heavy && s[k].light
+        );
+        if (valid) return s;
+      }
     } catch {}
-    return { ...COFFEY_DEFAULT_SPEC };
+    return init;
   });
-  const setSpec = (s) => {
-    setSpecRaw(s);
-    try { localStorage.setItem("twcf-calc-spec", JSON.stringify(s)); } catch {}
+  const setSpecs = (s) => {
+    setSpecsRaw(s);
+    try { localStorage.setItem("twcf-calc-specs", JSON.stringify(s)); } catch {}
+  };
+  // Setter for just the active variant's spec.
+  const setActiveSpec = (s) => setSpecs({ ...specs, [variantKey]: s });
+  // "Copy active to all" — useful for resetting all four to the same spec
+  // so the user can see the area-only comparison again.
+  const copyActiveToAll = () => {
+    const active = specs[variantKey];
+    const next = {};
+    Object.keys(COFFEY_VARIANTS).forEach((k) => { next[k] = { ...active }; });
+    setSpecs(next);
   };
   const setVariant = (k) => {
     setVariantKey(k);
     try { localStorage.setItem("twcf-calc-variant", k); } catch {}
   };
   const resetDefaults = () => {
-    setSpec({ ...COFFEY_DEFAULT_SPEC });
+    const init = {};
+    Object.keys(COFFEY_VARIANTS).forEach((k) => { init[k] = { ...COFFEY_DEFAULT_SPEC }; });
+    setSpecs(init);
     setVariant("signal-box-g10");
   };
   const doPrint = () => window.print();
-
-  const consentedCarbon = calcCarbon(CONSENTED, CONSENTED.spec, true);
-  const consentedCost   = calcCost(CONSENTED, CONSENTED.spec, true, CONSENTED.designSideCostPerM2);
 
   return (
     <div className="calc">
@@ -574,35 +637,31 @@ function Calculator({ onClose }) {
 
       <section className="calc__intro">
         <Eyebrow>§15 · Design-side viability tool · mid-tender</Eyebrow>
-        <h1 className="calc__title">Cost &amp; carbon, anchored to the consented baseline.</h1>
+        <h1 className="calc__title">Carbon &amp; cost across the four Studies.</h1>
         <p className="calc__sub">
-          Compare the Coffey directions against the previously consented Stage 5 scheme. Cost is shown as a percentage versus that baseline rather than a raw £/m², because the relative move is what matters at this stage; absolute figures are included in small print for the analytical reader. Switch the Coffey direction with the tabs below, and toggle primary structure, heavy facade and light cladding to see how each choice moves the carbon scorecard. Real Stage 2 cost-plan figures replace the illustrative ones at the final presentation.
+          Switch direction with the tabs below; toggle primary structure, heavy facade and light cladding to see how each material choice moves the carbon scorecard. <strong>Carbon is shown in absolute terms</strong> against the LETI / RIBA targets that govern the procurement conversation. <strong>Cost is shown qualitatively against a fixed benchmark</strong> (the smallest Coffey direction with our recommended materials); pound figures are deliberately held back at this stage. The bottom table shows all four directions at a glance.
         </p>
-        <div className="calc__sub-meta mono">
-          Baseline · the previously consented Stage 5 scheme (by others) · G+6 with basement · RC frame · precast facade · primary aluminium
-        </div>
         <div className="calc__sub-meta mono" style={{color: 'var(--fg-dim)'}}>
-          Rest of build (fixed) · {REST_CARBON} kgCO₂e/m² · ~£{(REST_COST / 1000).toFixed(1)}k/m² · MEP + Cat A fit-out + externals + prelims + fees · operational {OPERATIONAL.carbon} kgCO₂e/m²/yr over {OPERATIONAL.life}yr life
+          Rest of build (fixed) · {REST_CARBON} kgCO₂e/m² · MEP + Cat A fit-out + externals + prelims + fees · operational {OPERATIONAL.carbon} kgCO₂e/m²/yr over {OPERATIONAL.life}yr life
         </div>
       </section>
 
-      <section className="calc__grid calc__grid--ab">
-        <ConsentedCard result={consentedCarbon} costResult={consentedCost} />
+      <section className="calc__grid calc__grid--single">
         <CoffeyCard
           variantKey={variantKey}
           setVariantKey={setVariant}
-          spec={spec}
-          setSpec={setSpec}
-          consentedCarbon={consentedCarbon}
-          consentedCost={consentedCost}
-          consentedScheme={CONSENTED}
+          spec={specs[variantKey]}
+          setSpec={setActiveSpec}
+          onCopyToAll={copyActiveToAll}
         />
       </section>
+
+      <OptionsComparison activeKey={variantKey} onPick={setVariant} specs={specs} />
 
       <section className="calc__caveat">
         <Eyebrow>Caveats</Eyebrow>
         <p>
-          Mid-tender illustrative numbers, based on published embodied-carbon datasets (ICE, ECC, EPDs) and indicative UK construction rates (Q2 2026). Cost figures show <strong>design-side scope</strong>, structure + facade + basement, plus a fixed adder for MEP, Cat A fit-out, externals, prelims, and fees. Operational energy is an estimate based on typical Cat A office EUI. Land cost, finance, rent, yield and tax are out of scope. Final figures will be subject to detailed design, contractor procurement and a formal cost plan at RIBA Stage 2; the values here are presented as relative deltas to the consented baseline because that is what is meaningful at this stage. Cost shown with ±{Math.round(SENSITIVITY * 100)}% sensitivity.
+          Mid-tender illustrative tool, based on published embodied-carbon datasets (ICE, ECC, EPDs) and indicative UK construction rates (Q2 2026). Carbon figures cover <strong>design-side scope</strong> (structure + facade) plus a fixed adder for MEP, Cat A fit-out, externals, prelims, and fees; operational energy is an estimate based on typical Cat A office EUI. Cost is shown qualitatively only against a fixed benchmark; absolute pound figures are held back at this stage. Land cost, finance, rent, yield and tax are out of scope.
         </p>
       </section>
     </div>

@@ -676,13 +676,13 @@
   },
   "canopy-detailed-model.jpg": {
     "file": "images/canopy-detailed-model.jpg",
-    "v": 1779991652759,
-    "fit": "cover"
+    "v": 1780047646766,
+    "fit": "contain"
   },
   "signal-box-study-detailed-model.jpg": {
     "file": "images/signal-box-study-detailed-model.jpg",
-    "v": 1779991678306,
-    "fit": "cover"
+    "v": 1780047667177,
+    "fit": "contain"
   },
   "canopy-axo-01.jpg": {
     "file": "images/canopy-axo-01.jpg",
@@ -711,7 +711,7 @@
   },
   "canopy-townscape-01.jpg": {
     "file": "images/canopy-townscape-01.jpg",
-    "v": 1780036395376,
+    "v": 1780044928482,
     "fit": "cover"
   },
   "canopy-axo-06.jpg": {
@@ -772,11 +772,46 @@
   "signal-box-study-townscape-01.jpg": {
     "file": "images/signal-box-study-townscape-01.jpg",
     "v": 1780039194512,
-    "fit": "cover"
+    "fit": "contain"
   },
   "thank-you.jpg": {
     "file": "images/thank-you.png",
     "v": 1780040554597,
+    "fit": "cover"
+  },
+  "across-the-buildings.jpg": {
+    "file": "images/across-the-buildings.avif",
+    "v": 1780044090633,
+    "fit": "cover"
+  },
+  "signal-box-on-site.jpg": {
+    "file": "images/signal-box-on-site.jpg",
+    "v": 1780044982171,
+    "fit": "cover"
+  },
+  "signal-box-study-townscape-02-dusk.jpg": {
+    "file": "images/signal-box-study-townscape-02-dusk.png",
+    "v": 1780046242164,
+    "fit": "contain"
+  },
+  "canopy-townscape-02-dusk.jpg": {
+    "file": "images/canopy-townscape-02-dusk.png",
+    "v": 1780046826610,
+    "fit": "cover"
+  },
+  "our-direction-canopy-g10.jpg": {
+    "file": "images/our-direction-canopy-g10.jpg",
+    "v": 1780047703669,
+    "fit": "contain"
+  },
+  "our-direction-signal-box-g10.jpg": {
+    "file": "images/our-direction-signal-box-g10.jpg",
+    "v": 1780047706915,
+    "fit": "contain"
+  },
+  "signal-box-study-townscape-03-platform.jpg": {
+    "file": "images/signal-box-study-townscape-03-platform.jpg",
+    "v": 1780047864238,
     "fit": "cover"
   }
 }

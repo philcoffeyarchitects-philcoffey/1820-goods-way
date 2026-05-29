@@ -2099,12 +2099,19 @@ const fourQuestions = [
 // Used by QMaterialPage. The "chosen" entry is the proposed material; the
 // rest are alternatives presented for the sustainability + cost discussion.
 const heavyMaterials = [
-  { slug: "brick",          label: "Engineering brick",           carbon: 140, cost:  900, note: "Full bricks. Kiln-fired at ~1,100°C. Same family of brick that built King's Cross.", chosen: true },
-  { slug: "brick-slip",     label: "Brick slip on rail",          carbon:  95, cost:  650, note: "20mm slips on a mechanically-fixed carrier. Lower carbon, less honest at close range." },
-  { slug: "stone-portland", label: "Portland limestone (UK)",     carbon:  85, cost: 1300, note: "UK-quarried sedimentary. Low energy, but a different vocabulary from the canal." },
-  { slug: "stone-granite",  label: "Granite (imported)",          carbon: 280, cost: 1550, note: "Imported, high-energy cutting and shipping. Highest carbon, highest cost." },
-  { slug: "precast",        label: "Pre-cast concrete",           carbon: 240, cost:  750, note: "Reconstituted-stone PCC panels. Faster to install, lower cost." },
-  { slug: "precast-ggbs",   label: "Pre-cast + GGBS",             carbon: 145, cost:  800, note: "70% GGBS cement replacement. Comparable carbon to brick at lower cost." },
+  { slug: "brick",                 label: "Engineering brick",                carbon: 140, cost:  900, note: "Full bricks. Kiln-fired at ~1,100°C. Same family of brick that built King's Cross.", chosen: true },
+  { slug: "brick-slip",            label: "Brick slip on rail",               carbon:  95, cost:  650, note: "20mm slips on a mechanically-fixed carrier. Lower carbon, less honest at close range." },
+  { slug: "stone-portland",        label: "Portland limestone (UK)",          carbon:  85, cost: 1300, note: "UK-quarried sedimentary. Low energy, but a different vocabulary from the canal." },
+  { slug: "stone-granite",         label: "Granite (imported)",               carbon: 280, cost: 1550, note: "Imported, high-energy cutting and shipping. Highest carbon, highest cost." },
+  { slug: "precast",               label: "Pre-cast concrete",                carbon: 240, cost:  750, note: "Reconstituted-stone PCC panels. Faster to install, lower cost." },
+  { slug: "precast-ggbs",          label: "Pre-cast + GGBS",                  carbon: 145, cost:  800, note: "70% GGBS cement replacement. Comparable carbon to brick at lower cost." },
+  // Materials that read as heavy by finish rather than mass: low-process
+  // steel with a deliberate weathered patina, or anodised / coloured
+  // aluminium cassettes in deep tones. Lighter than masonry, much lower
+  // carbon than full brick, but capable of carrying the same weight on
+  // the elevation through colour and surface depth.
+  { slug: "weathered-mild-steel",  label: "Weathered mild steel",             carbon: 120, cost: 1050, note: "Low-process mild steel allowed to patina to a deep oxide finish. Reads as heavy without the mass; lighter than brick on the structure." },
+  { slug: "coloured-aluminium",    label: "Coloured aluminium (recycled)",    carbon: 180, cost:  975, note: "Recycled aluminium cassette with a deep anodised or PPC finish in a brick-toned palette. Reads heavy from distance; lighter than brick on the structure; honest at close range." },
 ];
 
 const lightMaterials = [
@@ -3765,9 +3772,7 @@ const SFiveFamilies = sectionPages(
           </div>
         ),
       };
-      return [conceptPage,
-      // Three model photos page
-      {
+      const modelsPage = {
         label: `${f.title.replace('.', '')} · Models`,
         presentation: () => (
           <div className="pc-stmt" style={{maxWidth: 'none', width: '100%'}}>
@@ -3795,7 +3800,34 @@ const SFiveFamilies = sectionPages(
             </div>
           </div>
         ),
-      }];
+      };
+      // Inject a Felice Varini precedent page BEFORE the Signal Box
+      // family. The Varini "Across the Buildings" installation at
+      // Granary Square made a viewing lookout from a painted figure,
+      // a place to see King's Cross. The Signal Box family takes the
+      // same idea, the lookout at the top, a place to read the place.
+      const renderVariniPrecedent = () => (
+        <PresCover
+          filename="across-the-buildings.jpg"
+          caption="Felice Varini · 'Across the Buildings' (2007) · King's Cross. Full-bleed reference image."
+          overlayMode="mini"
+          overlay={
+            <>
+              <span className="mono" style={{color: 'var(--accent)', fontWeight: 500}}>§08 · Precedent · Signal Box</span>
+              <h1 className="h-display" style={{fontSize: 26, lineHeight: 1.05, margin: 0}}>A lookout. A place to see.</h1>
+              <span className="mono" style={{fontSize: 10, color: 'var(--fg-soft)', letterSpacing: 0.06, lineHeight: 1.5}}>
+                Felice Varini, <em>Across the Buildings</em>, 2007, King's Cross. The Swiss artist made a single vantage from which the painted geometry resolved, a place from which the city could be read in one view. The Signal Box family takes the same idea, the lookout at the top.
+              </span>
+            </>
+          }
+        />
+      );
+      const variniPage = f.slug === "signal-box" ? [{
+        label: "Precedent · Felice Varini · Across the Buildings",
+        presentation: renderVariniPrecedent,
+        report: renderVariniPrecedent,
+      }] : [];
+      return [conceptPage, ...variniPage, modelsPage];
     }),
   ]
 );
@@ -3845,7 +3877,46 @@ const SViabilityQs = sectionPages(
         </div>
       ),
     })),
-    // "What we learnt" closer page removed.
+    // ───────────────────────────────────────────────────────────────────
+    //  One last question, deliberately framed as a coda to the five.
+    //  Public roof, no truly public roof exists at King's Cross today.
+    //  Multi-tenanted building, the roof might suit a civic use. The
+    //  capex of a public roof (a lift, two stairs) is real but bounded.
+    //  Worth raising now because it folds into the height conversation
+    //  with planners later (taller can be defensible if the height
+    //  delivers a public benefit on the roof).
+    // ───────────────────────────────────────────────────────────────────
+    {
+      label: "Q6 · One last question. Public or Private Roof?",
+      presentation: () => (
+        <div className="pc-stmt" style={{maxWidth: 'none', width: '100%'}}>
+          <Eyebrow>§09 · A coda</Eyebrow>
+          <h1 className="h-display" style={{fontSize: 56, lineHeight: 1.02, margin: '4px 0 6px', letterSpacing: 'var(--tracking-display)'}}>One last question.</h1>
+          <h2 className="h-sub" style={{margin: '0 0 18px', fontStyle: 'italic', color: 'var(--accent)'}}>Public or Private Roof?</h2>
+          <div className="prose" style={{maxWidth: '64ch', fontSize: 17, color: 'var(--fg)', display: 'flex', flexDirection: 'column', gap: 12}}>
+            <p>There is no truly public roof at King's Cross. The building is likely to be multi-tenanted, so a shared, public-facing roof might suit it more than a single-tenant amenity ever could.</p>
+            <p>The capex is bounded: a dedicated lift, two stairs, the right population. Worth weighing.</p>
+            <p><em>The last final gesture to the city. A place to read the legacy of King's Cross from above.</em></p>
+            <p className="mono" style={{fontSize: 11, color: 'var(--fg-dim)', letterSpacing: 0.04, marginTop: 6}}>
+              Note for planning: a public roof helps the height conversation. Taller is easier to defend if the building gives the city a viewpoint in return.
+            </p>
+          </div>
+        </div>
+      ),
+      report: () => (
+        <div className="pc-stmt" style={{maxWidth: 'none', width: '100%'}}>
+          <Eyebrow>§09 · A coda</Eyebrow>
+          <h1 className="h-display" style={{fontSize: 52, lineHeight: 1.02, margin: '4px 0 6px', letterSpacing: 'var(--tracking-display)'}}>One last question.</h1>
+          <h2 className="h-sub" style={{margin: '0 0 14px', fontStyle: 'italic', color: 'var(--accent)'}}>Public or Private Roof?</h2>
+          <div className="prose" style={{maxWidth: '78ch', display: 'flex', flexDirection: 'column', gap: 12}}>
+            <p>One last question, not one of the five technical viability questions, but worth raising now because it shapes the brief and reaches into the planning conversation later.</p>
+            <p><strong>There is no truly public roof anywhere in the King's Cross masterplan.</strong> Coal Drops Yard, the Granary, the Gasholders, none of them gives the city an unticketed, unmediated viewpoint from the top. This building is likely to be multi-tenanted, which is the kind of building that suits a shared, public-facing roof more than a single-tenant amenity ever could.</p>
+            <p>The capex is real but bounded: a dedicated lift, a second stair for code-compliant occupancy on the roof, the right population planning. Set against the value, <em>a final civic gesture to the city, a place to read the legacy of King's Cross from above</em>, it is at least worth considering.</p>
+            <p>It also helps the height conversation with the planners. Going up at this site is easier to defend if the height delivers a public benefit in return. Taller, in that frame, becomes better.</p>
+          </div>
+        </div>
+      ),
+    },
   ]
 );
 
@@ -4089,7 +4160,10 @@ function AreaSchedule({ data, compact = false }) {
 }
 
 // ── Helper for §14 Canopy and §15 Signal Box (16-page study structures) ─
-function studyDesignPages({ sectionNum, sectionLabel, slug, displayName, conceptNote, scheduleData }) {
+// axoStages: optional array of 6 stage names (e.g. ["The Site", ...]).
+// Falls back to "Stage 1", "Stage 2", … if not provided.
+function studyDesignPages({ sectionNum, sectionLabel, slug, displayName, conceptNote, scheduleData, axoStages }) {
+  const stageName = (n) => (axoStages && axoStages[n - 1]) || `Stage ${n}`;
   const sectStr = String(sectionNum).padStart(2, '0');
   return [
     // 1, full-bleed image with title overlay
@@ -4178,34 +4252,39 @@ function studyDesignPages({ sectionNum, sectionLabel, slug, displayName, concept
         />
       ),
     },
-    // 3–8, axonometric build-up (6 stages)
-    ...[1, 2, 3, 4, 5, 6].map((n) => ({
-      label: `${displayName} · Axo · stage ${n}`,
-      presentation: () => (
-        <PresImage
-          filename={`${slug}-axo-${String(n).padStart(2,'0')}.jpg`}
-          caption={`${displayName}, axonometric build-up · stage ${n} of 6`}
-          variant="diagram"
-          number={String(n)}
-          capIdx={`Axo · ${n} of 6`}
-          capTitle={`Stage ${n}.`}
-          capMeta={`${displayName}, axonometric, stage ${n} of 6.`}
-        />
-      ),
-      report: () => (
-        <ReportImageText
-          filename={`${slug}-axo-${String(n).padStart(2,'0')}.jpg`}
-          caption={`${displayName}, axonometric build-up · stage ${n} of 6`}
-          variant="diagram"
-          number={String(n)}
-          capIdx={`Axo · ${n} of 6`}
-          capTitle={`Stage ${n}.`}
-          kicker={`§${sectStr} · ${sectionLabel} · Axonometric · stage ${n} of 6`}
-          title={`Axonometric, stage ${n}.`}
-          body={<p>Placeholder for axonometric stage {n} of 6. Drop a render or diagram onto the slot to populate.</p>}
-        />
-      ),
-    })),
+    // 3–8, axonometric build-up (6 stages). Each scheme passes its own
+    // axoStages so the per-stage titles (capTitle / report title) read
+    // as the build-up's narrative steps, not generic "Stage 1, Stage 2".
+    ...[1, 2, 3, 4, 5, 6].map((n) => {
+      const name = stageName(n);
+      return {
+        label: `${displayName} · Axo · ${n}. ${name}`,
+        presentation: () => (
+          <PresImage
+            filename={`${slug}-axo-${String(n).padStart(2,'0')}.jpg`}
+            caption={`${displayName}, axonometric build-up · ${n}. ${name} · stage ${n} of 6`}
+            variant="diagram"
+            number={String(n)}
+            capIdx={`Axo · ${n} of 6`}
+            capTitle={`${name}.`}
+            capMeta={`${displayName}, axonometric build-up, step ${n} of 6.`}
+          />
+        ),
+        report: () => (
+          <ReportImageText
+            filename={`${slug}-axo-${String(n).padStart(2,'0')}.jpg`}
+            caption={`${displayName}, axonometric build-up · ${n}. ${name} · stage ${n} of 6`}
+            variant="diagram"
+            number={String(n)}
+            capIdx={`Axo · ${n} of 6`}
+            capTitle={`${name}.`}
+            kicker={`§${sectStr} · ${sectionLabel} · Axonometric · ${n} of 6`}
+            title={`${name}.`}
+            body={<p>Placeholder for axonometric step {n} of 6, <em>{name.toLowerCase()}</em>. Drop a render or diagram onto the slot to populate.</p>}
+          />
+        ),
+      };
+    }),
     // 9, townscape (single page per study). Hero CGI showing the scheme
     //    in its King's Cross context. Sits BEFORE the plan so the
     //    reader sees the form first, then the plan.
@@ -4426,24 +4505,65 @@ const SMaterials = sectionPages(
 );
 
 // ── §13 Canopy ──────────────────────────────────────────────────────────
+// Build the base study then splice in a dusk-townscape companion page
+// just after the day-time townscape (same pattern used in §13 Signal Box).
+const _canopyBase = studyDesignPages({
+  sectionNum: 12,
+  sectionLabel: "Canopy",
+  slug: "canopy",
+  displayName: "Canopy",
+  conceptNote: {
+    headline: "Low and wide. G+6. The building reaches out to the canal.",
+    body: <>
+      <p>The Canopy direction activates the canal. It creates a sheltered point at the building's foot connecting the upper path and the lower canal towpath, a small civic room beneath the building's mass.</p>
+      <p>Cantilevers earn the area; heavy structure is required for them. Hanging the floors gives roughly 80 m² extra per floor. The challenge: is that area worth it, and is the urbanistic outcome arguably worse for it?</p>
+      <p><strong>Only NMA planning required.</strong> Quicker programme.</p>
+    </>,
+  },
+  scheduleData: CANOPY_G6_SCHEDULE,
+  axoStages: [
+    "The Site",
+    "The Activity",
+    "The Canopy",
+    "The Office",
+    "The Elegant Facade",
+    "The Landscape",
+  ],
+});
+// Split points inside _canopyBase:
+//   0–8  : hero, model, concept sketch, six axos
+//   9    : townscape (day)
+//   10–11: plan, schedule
+const _canopyThroughTownscape = _canopyBase.slice(0, 10);
+const _canopyFromPlan         = _canopyBase.slice(10);
+
+// "Canopy, in townscape at dusk" companion page. Slot:
+// `canopy-townscape-02-dusk.jpg`. Same PresImage variant/aspect as the
+// day-time townscape so the two placeholders render at identical size.
+const _canopyDuskPage = (() => {
+  const render = () => (
+    <PresImage
+      filename="canopy-townscape-02-dusk.jpg"
+      caption="Canopy in townscape at dusk; the public space at the foot lit, the canal in the foreground, King's Cross silhouettes behind. CGI."
+      variant="photo"
+      capIdx="Townscape · dusk"
+      capTitle="Canopy, in townscape at dusk."
+      capMeta="The canopy lit. The public room at the foot. The crossing activated, after dark."
+    />
+  );
+  return {
+    label: "Canopy · Townscape at dusk",
+    presentation: render,
+    report: render,
+  };
+})();
+
 const SCanopy = sectionPages(
   { sectionId: "canopy-study", sectionNum: 12, sectionTitle: "Canopy", sectionLabel: "Canopy" },
   [
-    ...studyDesignPages({
-      sectionNum: 12,
-      sectionLabel: "Canopy",
-      slug: "canopy",
-      displayName: "Canopy",
-      conceptNote: {
-        headline: "Low and wide. G+6. The building reaches out to the canal.",
-        body: <>
-          <p>The Canopy direction activates the canal. It creates a sheltered point at the building's foot connecting the upper path and the lower canal towpath, a small civic room beneath the building's mass.</p>
-          <p>Cantilevers earn the area; heavy structure is required for them. Hanging the floors gives roughly 80 m² extra per floor. The challenge: is that area worth it, and is the urbanistic outcome arguably worse for it?</p>
-          <p><strong>Only NMA planning required.</strong> Quicker programme.</p>
-        </>,
-      },
-      scheduleData: CANOPY_G6_SCHEDULE,
-    }),
+    ..._canopyThroughTownscape,
+    _canopyDuskPage,
+    ..._canopyFromPlan,
     // Closer, what the Canopy scheme offers
     familyOffersPage({
       sectionNum: 12, sectionLabel: "Canopy",
@@ -4474,14 +4594,99 @@ const _signalBoxStudyBase = studyDesignPages({
     </>,
   },
   scheduleData: SIGNAL_BOX_G8_SCHEDULE,
+  axoStages: [
+    "The Site",
+    "The Activity",
+    "The Constraints",
+    "The Office",
+    "The Elegant Facade",
+    "The Signal Box",
+  ],
 });
 const _signalBoxStudySchedulePage = _signalBoxStudyBase[_signalBoxStudyBase.length - 1];
 const _signalBoxStudyPagesExcludingSchedule = _signalBoxStudyBase.slice(0, -1);
+// Split points: insert custom pages between the studyDesignPages output.
+//   0–8  : hero, model, concept sketch, six axos
+//   9    : townscape (day)
+//   10   : plan
+//   11   : schedule (lives at the end via _signalBoxStudySchedulePage)
+const _signalBoxAfterAxos = _signalBoxStudyBase.slice(0, 9);
+const _signalBoxTownscape = _signalBoxStudyBase.slice(9, 10);
+const _signalBoxPlan      = _signalBoxStudyBase.slice(10, 11);
+
+// "Signal Box on the site model" page — the 3D-printed massing study sat
+// into the King's Cross context. Slot: `signal-box-on-site.jpg`.
+const _signalBoxOnSitePage = (() => {
+  const render = () => (
+    <PresImage
+      filename="signal-box-on-site.jpg"
+      caption="Signal Box, building model placed into the King's Cross 3D-printed site context model (top-down photograph)."
+      variant="model"
+      capIdx="Site model"
+      capTitle="Signal Box, on the site."
+      capMeta="The building seen in its King's Cross context."
+      aspect="4/3"
+    />
+  );
+  return {
+    label: "Signal Box · On the site model",
+    presentation: render,
+    report: render,
+  };
+})();
+
+// "Signal Box, in townscape at dusk" page — companion to the day-time
+// townscape. Slot: `signal-box-study-townscape-02-dusk.jpg`. Shows the
+// lookout lit, the 1820 room glowing, the crossing marked at night.
+const _signalBoxDuskPage = (() => {
+  const render = () => (
+    <PresImage
+      filename="signal-box-study-townscape-02-dusk.jpg"
+      caption="Signal Box in townscape at dusk; the lookout at the top lit from within, the canal in the foreground, King's Cross silhouettes behind. CGI."
+      variant="photo"
+      capIdx="Townscape · dusk"
+      capTitle="Signal Box, in townscape at dusk."
+      capMeta="The lookout lit. The 1820 room. The crossing marked, after dark."
+    />
+  );
+  return {
+    label: "Signal Box · Townscape at dusk",
+    presentation: render,
+    report: render,
+  };
+})();
+
+// "Signal Box, view from King's Cross Platform" page — the building seen
+// from inside the station, framed by a departing LNER service. Same
+// placeholder size as the other townscape pages (no aspect override,
+// variant="photo" default).
+const _signalBoxPlatformPage = (() => {
+  const render = () => (
+    <PresImage
+      filename="signal-box-study-townscape-03-platform.jpg"
+      caption="Signal Box seen from a King's Cross station platform, train in the foreground, the lookout at the skyline framed by the platform canopies and bridges. CGI."
+      variant="photo"
+      capIdx="Townscape · platform"
+      capTitle="View from King's Cross Platform."
+      capMeta="The crossing read from inside the station; the lookout above the platform canopy."
+    />
+  );
+  return {
+    label: "Signal Box · View from King's Cross Platform",
+    presentation: render,
+    report: render,
+  };
+})();
 
 const SSignalBoxStudy = sectionPages(
   { sectionId: "signal-box-study", sectionNum: 13, sectionTitle: "Signal Box", sectionLabel: "Signal Box (study)" },
   [
-    ...(_signalBoxStudyPagesExcludingSchedule),
+    ..._signalBoxAfterAxos,
+    _signalBoxOnSitePage,
+    ..._signalBoxTownscape,
+    _signalBoxDuskPage,
+    _signalBoxPlatformPage,
+    ..._signalBoxPlan,
     // ── The building speaks twice ────────────────────────────────────
     //   Two pieces of signage, worked into the materials themselves.
     //   1820 Goods Way at the brick. The water came first at the skyline.

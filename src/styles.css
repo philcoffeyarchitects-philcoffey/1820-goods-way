@@ -2267,6 +2267,90 @@ html[data-surround="white"] .topbar__logo .topbar__doc {
   grid-template-columns: 1fr 1fr;
   gap: 28px;
 }
+/* Single-card layout, used when the calculator shows just the active
+   Coffey direction (no consented-baseline column). */
+.calc__grid--single {
+  grid-template-columns: minmax(0, 980px);
+  justify-content: center;
+}
+
+/* ── OPTIONS COMPARISON STRIP ──────────────────────────────── */
+.opts-cmp {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 8px 48px 24px;
+}
+.opts-cmp__head {
+  display: flex; flex-direction: column; gap: 4px;
+  padding-bottom: 12px;
+}
+.opts-cmp__title {
+  font-family: var(--ff-display);
+  font-weight: var(--weight-display);
+  font-size: 22px;
+  letter-spacing: var(--tracking-display);
+  color: var(--fg);
+  margin: 0;
+}
+.opts-cmp__sub {
+  font-family: var(--ff-body);
+  font-size: 13px;
+  color: var(--fg-soft);
+  max-width: 78ch;
+  margin: 2px 0 0;
+}
+.opts-cmp__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--ff-body);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.opts-cmp__table th,
+.opts-cmp__table td {
+  text-align: left;
+  padding: 12px 16px;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.opts-cmp__table thead th {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  padding: 8px 16px;
+  background: var(--bg);
+}
+.opts-cmp__table tbody th {
+  display: flex; flex-direction: column; gap: 2px;
+  font-weight: 500;
+}
+.opts-cmp__name {
+  font-family: var(--ff-display);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+}
+.opts-cmp__note {
+  font-size: 10px;
+  color: var(--fg-dim);
+  letter-spacing: 0.06em;
+}
+.opts-cmp__row {
+  cursor: pointer;
+  transition: background-color 100ms ease-out;
+}
+.opts-cmp__row:hover {
+  background: var(--bg-soft);
+}
+.opts-cmp__row.is-active {
+  background: var(--accent-tint);
+}
+.opts-cmp__row.is-active th .opts-cmp__name {
+  color: var(--accent);
+}
 
 .calc__caveat {
   max-width: 1480px;
