@@ -4093,15 +4093,15 @@ const INTERVENTION_TITLES = {
 // as the family member we hope to be. Labels are best-guess where I'm
 // confident, marked "to confirm" where Phil should sharpen them.
 const CANAL_FAMILY = [
-  { fn: "canal-family-01.png", label: "Coal Drops, curved warehouse", note: "King's Cross" },
-  { fn: "canal-family-02.png", label: "Gasholder Park",                note: "King's Cross" },
-  { fn: "canal-family-03.png", label: "Canal warehouses",              note: "to confirm" },
-  { fn: "canal-family-04.png", label: "The Granary",                   note: "King's Cross" },
-  { fn: "canal-family-05.png", label: "Handyside Street canopies",     note: "King's Cross" },
-  { fn: "canal-family-06.png", label: "Pumping station",               note: "to confirm" },
-  { fn: "canal-family-07.png", label: "King's Cross train shed",       note: "King's Cross" },
-  { fn: "canal-family-08.png", label: "Regent's Wharf",                note: "Regent's Canal" },
-  { fn: "canal-family-09.png", label: "Coal Drops Yard",               note: "King's Cross" },
+  { fn: "canal-family-01.jpg", label: "Coal Drops, curved warehouse", note: "King's Cross" },
+  { fn: "canal-family-02.jpg", label: "Gasholder Park",                note: "King's Cross" },
+  { fn: "canal-family-03.jpg", label: "Canal warehouses",              note: "to confirm" },
+  { fn: "canal-family-04.jpg", label: "The Granary",                   note: "King's Cross" },
+  { fn: "canal-family-05.jpg", label: "Handyside Street canopies",     note: "King's Cross" },
+  { fn: "canal-family-06.jpg", label: "Pumping station",               note: "to confirm" },
+  { fn: "canal-family-07.jpg", label: "King's Cross train shed",       note: "King's Cross" },
+  { fn: "canal-family-08.jpg", label: "Regent's Wharf",                note: "Regent's Canal" },
+  { fn: "canal-family-09.jpg", label: "Coal Drops Yard",               note: "King's Cross" },
   // The tenth tile hides the proposed building. A discreet italic question
   // mark stands in its place; the building itself is revealed at the close
   // of the deck. Keeps the family arc intact without giving away the design.
@@ -7013,7 +7013,7 @@ const S_IV_FinalSummary = sectionPages(
 //    building should join the canal-and-railway family; the closing
 //    page shows it joining.
 const CANAL_FAMILY_REVEALED = CANAL_FAMILY.map((it) =>
-  it.mystery ? { fn: "canal-family-10.png", label: "The Crossing", note: "King's Cross", proposed: true } : it
+  it.mystery ? { fn: "canal-family-10.jpg", label: "The Crossing", note: "King's Cross", proposed: true } : it
 );
 
 const SClosing = sectionPages(
