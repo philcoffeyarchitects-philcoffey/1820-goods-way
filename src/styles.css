@@ -944,6 +944,13 @@ body {
   font-size: 10px;
   letter-spacing: 0.16em;
 }
+/* Right-anchored variant: same plate, but pinned to the right edge. */
+.pc-cover__overlay--right {
+  left: auto;
+  right: 36px;
+  align-items: flex-end;
+  text-align: right;
+}
 
 
 /* Statement / Intro page (presentation): big text */
@@ -4274,6 +4281,17 @@ html[data-surround="white"] .topbar__logo .topbar__doc {
   letter-spacing: var(--tracking-display);
   color: var(--fg);
 }
+/* Four-part roadmap: bold part rows, dimmed contents row beneath each. */
+.toc__list li.toc__under {
+  border-bottom: none;
+  padding-top: 2px;
+}
+.toc__list li.toc__under .toc__name {
+  font-size: 13px;
+  color: var(--fg-dim);
+  letter-spacing: 0.01em;
+}
+.toc__list li.toc__part .toc__num { color: var(--accent); }
 
 /* ──────────────────────────────────────────────────────────────────────
    §09 — THE FOUR QUESTIONS

@@ -9,11 +9,13 @@ import ReactDOM from "react-dom/client";
 import { Logo } from "./placeholder.jsx";
 import { useTweaks, TweaksPanel, TweakSection, TweakRadio } from "./tweaks-panel.jsx";
 import { LockScreen, isUnlocked } from "./lock.jsx";
-import { PAGES, SECTION_INDEX } from "./pages.jsx";
+import { PAGES as ALL_PAGES, SECTION_INDEX as FULL_SECTION_INDEX, buildSectionIndex } from "./pages.jsx";
+// PageFrame (declared outside App) reads the full section index for its
+// "§ NN / total" badge. App also computes its own (possibly filtered)
+// section index internally for the rail navigation.
+const SECTION_INDEX = FULL_SECTION_INDEX;
 import { Calculator } from "./calculator.jsx";
 import { Footprint500_600 } from "./footprint.jsx";
-
-const TOTAL = PAGES.length;
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "type": "editorial",
@@ -32,12 +34,30 @@ function App() {
     try { return localStorage.getItem("twcf-view") || "presentation"; }
     catch { return "presentation"; }
   });
+
+  // Curation toggle. Defaults to 'curated' on every load (no persistence).
+  // 'curated' = show only city/tenant walk slides marked inCurated; everything
+  // else always shows. 'all'     = show every page (full set).
+  const [curated, setCurated] = React.useState(true);
+
+  // Compute the active page list and section index from the toggle.
+  const PAGES = React.useMemo(() => {
+    if (!curated) return ALL_PAGES;
+    return ALL_PAGES.filter((p) => p.inCurated !== false);
+  }, [curated]);
+  const SECTION_INDEX = React.useMemo(() => buildSectionIndex(PAGES), [PAGES]);
+  const TOTAL = PAGES.length;
+
   const [idx, setIdx] = React.useState(() => {
     try {
       const v = parseInt(localStorage.getItem("twcf-idx") || "0", 10);
-      return Number.isFinite(v) ? clamp(v, 0, TOTAL - 1) : 0;
+      return Number.isFinite(v) ? Math.max(0, v) : 0;
     } catch { return 0; }
   });
+  // Keep idx in range when the page list shrinks (curated mode).
+  React.useEffect(() => {
+    setIdx((i) => clamp(i, 0, Math.max(0, TOTAL - 1)));
+  }, [TOTAL]);
   const [fullscreen, setFullscreen] = React.useState(false);
   const [calcOpen, setCalcOpen] = React.useState(false);
   const [footOpen, setFootOpen] = React.useState(false);
@@ -186,6 +206,12 @@ function App() {
             <button aria-pressed={view === "report"} onClick={() => setView("report")}
               title="Report view (R)">R · Report</button>
           </div>
+          <div className="modetoggle" role="tablist" aria-label="Image set">
+            <button aria-pressed={curated} onClick={() => setCurated(true)}
+              title="Curated set: show only the city/tenant walk images selected for presentation">Curated</button>
+            <button aria-pressed={!curated} onClick={() => setCurated(false)}
+              title="All images: show every city and tenant walk slide">All images</button>
+          </div>
           <button className="print-btn" onClick={toggleFullscreen}
             title="Fullscreen (F). Esc to exit">⛶ Fullscreen</button>
           <button className="print-btn" onClick={doPrint}
@@ -218,7 +244,7 @@ function App() {
               className="rail__tick"
               style={{ flex: s.pageCount }}
               onClick={() => jumpToSection(s.num)}
-              title={`§${pad2(s.num)} · ${s.label}`}
+              title={s.num >= 100 ? s.label : `§${pad2(s.num)} · ${s.label}`}
             >
               <div className="rail__bars">
                 {Array.from({ length: s.pageCount }).map((_, j) => {
@@ -238,15 +264,16 @@ function App() {
                 })}
               </div>
               <span className="rail__tick__label">
-                §{pad2(s.num)} · {s.label}
+                {s.num >= 100 ? s.label : <>§{pad2(s.num)} · {s.label}</>}
               </span>
             </button>
           ))}
         </div>
         <span className="rail__counter">
-          §{pad2(cur.sectionNum)} ·{" "}
-          <b>{pad2(cur.pageInSection)}</b>/{pad2(cur.totalInSection)}{" "}
-          · pg <b>{pad2(idx + 1)}</b>/{pad2(TOTAL)}
+          {cur.sectionNum >= 100
+            ? <>{cur.sectionLabel} · </>
+            : <>§{pad2(cur.sectionNum)} · <b>{pad2(cur.pageInSection)}</b>/{pad2(cur.totalInSection)} · </>}
+          pg <b>{pad2(idx + 1)}</b>/{pad2(TOTAL)}
         </span>
       </nav>
 
@@ -324,7 +351,9 @@ function PageFrame({ page, view, pageIdx, total }) {
             <Logo size="sm" />
           </div>
           <div className="pf-right">
-            <span>§{pad2(page.sectionNum)} / {pad2(SECTION_INDEX.length)}</span>
+            {page.sectionNum < 100
+              ? <span>§{pad2(page.sectionNum)} / {pad2(SECTION_INDEX.length)}</span>
+              : null}
             <span><b>{page.sectionTitle}</b></span>
           </div>
         </div>

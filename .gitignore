@@ -2,3 +2,18 @@ node_modules/
 dist/
 *.local
 .DS_Store
+
+# Local-only working folders (CGI source files, video stitch workspace,
+# research notes, agent state). These are large and unrelated to the
+# deployed deck — keep them off git and out of Netlify.
+CGIs/
+movie/
+_research/
+.claude/
+
+# Competition brief PDF (private). Keep local only.
+*Brief*.pdf
+KXG*.pdf
+
+# Stray uuid-named jpegs occasionally dropped at the repo root.
+/[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]-*.jpg

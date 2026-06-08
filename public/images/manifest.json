@@ -475,8 +475,8 @@
     "fit": "cover"
   },
   "family-canopy-concept.jpg": {
-    "file": "images/family-canopy-concept.jpg",
-    "v": 1779906287065,
+    "file": "images/family-canopy-concept.png",
+    "v": 1780585651072,
     "fit": "cover"
   },
   "family-terrace-concept.jpg": {
@@ -485,9 +485,9 @@
     "fit": "cover"
   },
   "family-signal-box-concept-photo.jpg": {
-    "file": "images/family-signal-box-concept-photo.jpg",
-    "v": 1779906304502,
-    "fit": "cover"
+    "file": "images/family-signal-box-concept-photo.png",
+    "v": 1780585637820,
+    "fit": "contain"
   },
   "family-carve-concept.jpg": {
     "file": "images/family-carve-concept.jpg",
@@ -812,6 +812,811 @@
   "signal-box-study-townscape-03-platform.jpg": {
     "file": "images/signal-box-study-townscape-03-platform.jpg",
     "v": 1780047864238,
+    "fit": "cover"
+  },
+  "canal-family-01.png": {
+    "file": "images/canal-family-01.png",
+    "v": 1780671835966,
+    "fit": "contain"
+  },
+  "canal-family-02.png": {
+    "file": "images/canal-family-02.png",
+    "v": 1780671835966,
+    "fit": "contain"
+  },
+  "canal-family-03.png": {
+    "file": "images/canal-family-03.png",
+    "v": 1780671835966,
+    "fit": "contain"
+  },
+  "canal-family-04.png": {
+    "file": "images/canal-family-04.png",
+    "v": 1780671835966,
+    "fit": "contain"
+  },
+  "canal-family-05.png": {
+    "file": "images/canal-family-05.png",
+    "v": 1780671835966,
+    "fit": "contain"
+  },
+  "canal-family-06.png": {
+    "file": "images/canal-family-06.png",
+    "v": 1780671835966,
+    "fit": "contain"
+  },
+  "canal-family-07.png": {
+    "file": "images/canal-family-07.png",
+    "v": 1780671835966,
+    "fit": "contain"
+  },
+  "canal-family-08.png": {
+    "file": "images/canal-family-08.png",
+    "v": 1780673786835,
+    "fit": "cover"
+  },
+  "canal-family-09.png": {
+    "file": "images/canal-family-09.png",
+    "v": 1780671835966,
+    "fit": "contain"
+  },
+  "canal-family-10.png": {
+    "file": "images/canal-family-10.png",
+    "v": 1780671835966,
+    "fit": "contain"
+  },
+  "canal-then-01-limehouse-1826.jpg": {
+    "file": "images/canal-then-01-limehouse-1826.jpg",
+    "v": 1780672322052,
+    "fit": "cover"
+  },
+  "canal-then-02-barging-1924.jpg": {
+    "file": "images/canal-then-02-barging-1924.jpg",
+    "v": 1780672322052,
+    "fit": "cover"
+  },
+  "canal-then-03-fruit-1944.jpg": {
+    "file": "images/canal-then-03-fruit-1944.jpg",
+    "v": 1780672322052,
+    "fit": "cover"
+  },
+  "canal-now-granary-square.jpg": {
+    "file": "images/canal-now-granary-square.jpg",
+    "v": 1780672322052,
+    "fit": "cover"
+  },
+  "railway-then-01-doncaster-1928.jpg": {
+    "file": "images/railway-then-01-doncaster-1928.jpg",
+    "v": 1780672322052,
+    "fit": "cover"
+  },
+  "railway-then-02-ecml-coal-train.jpg": {
+    "file": "images/railway-then-02-ecml-coal-train.jpg",
+    "v": 1780672322052,
+    "fit": "cover"
+  },
+  "railway-then-03-brodsworth-1967.png": {
+    "file": "images/railway-then-03-brodsworth-1967.png",
+    "v": 1780672322052,
+    "fit": "cover"
+  },
+  "railway-now-train-at-colliery.jpg": {
+    "file": "images/railway-now-train-at-colliery.jpg",
+    "v": 1780672322052,
+    "fit": "cover"
+  },
+  "handyside-canopy-interior.jpg": {
+    "file": "images/handyside-canopy-interior.jpg",
+    "v": 1780678738953,
+    "fit": "cover"
+  },
+  "buildup-model.jpg": {
+    "file": "images/buildup-model.png",
+    "v": 1780815305501,
+    "fit": "cover"
+  },
+  "public-01.jpg": {
+    "file": "images/public-01.jpg",
+    "v": 1780815319294,
+    "fit": "cover"
+  },
+  "public-02.jpg": {
+    "file": "images/public-02.jpg",
+    "v": 1780815339799,
+    "fit": "cover"
+  },
+  "public-03.jpg": {
+    "file": "images/public-03.jpg",
+    "v": 1780815347794,
+    "fit": "cover"
+  },
+  "public-04.jpg": {
+    "file": "images/public-04.jpg",
+    "v": 1780815370169,
+    "fit": "cover"
+  },
+  "public-05.jpg": {
+    "file": "images/public-05.png",
+    "v": 1780815651460,
+    "fit": "cover"
+  },
+  "public-06.jpg": {
+    "file": "images/public-06.png",
+    "v": 1780815518648,
+    "fit": "cover"
+  },
+  "public-07.jpg": {
+    "file": "images/public-07.jpg",
+    "v": 1780815485936,
+    "fit": "cover"
+  },
+  "public-08.jpg": {
+    "file": "images/public-08.jpg",
+    "v": 1780815507457,
+    "fit": "cover"
+  },
+  "public-09.jpg": {
+    "file": "images/public-09.jpg",
+    "v": 1780815480800,
+    "fit": "cover"
+  },
+  "public-10.jpg": {
+    "file": "images/public-10.jpg",
+    "v": 1780723432868,
+    "fit": "cover"
+  },
+  "public-11.jpg": {
+    "file": "images/public-11.jpg",
+    "v": 1780723437238,
+    "fit": "cover"
+  },
+  "public-12.jpg": {
+    "file": "images/public-12.jpg",
+    "v": 1780813070152,
+    "fit": "cover"
+  },
+  "public-13.jpg": {
+    "file": "images/public-13.jpg",
+    "v": 1780726320679,
+    "fit": "cover"
+  },
+  "public-14.jpg": {
+    "file": "images/public-14.png",
+    "v": 1780816143005,
+    "fit": "cover"
+  },
+  "tenant-01.jpg": {
+    "file": "images/tenant-01.jpg",
+    "v": 1780723719832,
+    "fit": "cover"
+  },
+  "tenant-02.jpg": {
+    "file": "images/tenant-02.png",
+    "v": 1780728866536,
+    "fit": "cover"
+  },
+  "tenant-03.jpg": {
+    "file": "images/tenant-03.png",
+    "v": 1780724370374,
+    "fit": "cover"
+  },
+  "tenant-04.jpg": {
+    "file": "images/tenant-04.png",
+    "v": 1780724479320,
+    "fit": "cover"
+  },
+  "tenant-05.jpg": {
+    "file": "images/tenant-05.png",
+    "v": 1780724038858,
+    "fit": "cover"
+  },
+  "tenant-06.jpg": {
+    "file": "images/tenant-06.png",
+    "v": 1780725550855,
+    "fit": "cover"
+  },
+  "tenant-07.jpg": {
+    "file": "images/tenant-07.png",
+    "v": 1780726858415,
+    "fit": "cover"
+  },
+  "tenant-08.jpg": {
+    "file": "images/tenant-08.png",
+    "v": 1780725425516,
+    "fit": "cover"
+  },
+  "tenant-09.jpg": {
+    "file": "images/tenant-09.png",
+    "v": 1780815209051,
+    "fit": "cover"
+  },
+  "tenant-10.jpg": {
+    "file": "images/tenant-10.png",
+    "v": 1780815461408,
+    "fit": "cover"
+  },
+  "tenant-11.jpg": {
+    "file": "images/tenant-11.png",
+    "v": 1780815224767,
+    "fit": "cover"
+  },
+  "tenant-12.jpg": {
+    "file": "images/tenant-12.jpg",
+    "v": 1780815239151,
+    "fit": "cover"
+  },
+  "tenant-13.jpg": {
+    "file": "images/tenant-13.jpg",
+    "v": 1780725718824,
+    "fit": "cover"
+  },
+  "tenant-14.jpg": {
+    "file": "images/tenant-14.png",
+    "v": 1780727385306,
+    "fit": "cover"
+  },
+  "tenant-15.jpg": {
+    "file": "images/tenant-15.png",
+    "v": 1780728114175,
+    "fit": "cover"
+  },
+  "tenant-16.jpg": {
+    "file": "images/tenant-16.png",
+    "v": 1780818597136,
+    "fit": "cover"
+  },
+  "tenant-17.jpg": {
+    "file": "images/tenant-17.jpg",
+    "v": 1780818612520,
+    "fit": "cover"
+  },
+  "public-15.jpg": {
+    "file": "images/public-15.jpg",
+    "v": 1780840941467,
+    "fit": "cover"
+  },
+  "public-16.jpg": {
+    "file": "images/public-16.png",
+    "v": 1780842106291,
+    "fit": "cover"
+  },
+  "public-17.jpg": {
+    "file": "images/public-17.png",
+    "v": 1780842123298,
+    "fit": "cover"
+  },
+  "public-18.jpg": {
+    "file": "images/public-18.jpg",
+    "v": 1780726445556,
+    "fit": "cover"
+  },
+  "tenant-19.jpg": {
+    "file": "images/tenant-19.png",
+    "v": 1780817470582,
+    "fit": "cover"
+  },
+  "tenant-20.jpg": {
+    "file": "images/tenant-20.png",
+    "v": 1780818568532,
+    "fit": "cover"
+  },
+  "tenant-18.jpg": {
+    "file": "images/tenant-18.jpg",
+    "v": 1780728275045,
+    "fit": "cover"
+  },
+  "samples-board.jpg": {
+    "file": "images/samples-board.png",
+    "v": 1780730211143,
+    "fit": "contain"
+  },
+  "plan-ground.jpg": {
+    "file": "images/plan-ground.jpg",
+    "v": 1780819933067,
+    "fit": "contain"
+  },
+  "plan-mezzanine.jpg": {
+    "file": "images/plan-mezzanine.jpg",
+    "v": 1780819856657,
+    "fit": "contain"
+  },
+  "plan-typical.jpg": {
+    "file": "images/plan-typical.jpg",
+    "v": 1780819860371,
+    "fit": "contain"
+  },
+  "plan-top.jpg": {
+    "file": "images/plan-top.jpg",
+    "v": 1780819862742,
+    "fit": "contain"
+  },
+  "section.jpg": {
+    "file": "images/section.jpg",
+    "v": 1780731103886,
+    "fit": "cover"
+  },
+  "tenant-21.jpg": {
+    "file": "images/tenant-21.jpg",
+    "v": 1780818531572,
+    "fit": "cover"
+  },
+  "tenant-22.jpg": {
+    "file": "images/tenant-22.jpg",
+    "v": 1780818535258,
+    "fit": "cover"
+  },
+  "tenant-23.jpg": {
+    "file": "images/tenant-23.png",
+    "v": 1780818537442,
+    "fit": "cover"
+  },
+  "tenant-24.jpg": {
+    "file": "images/tenant-24.jpg",
+    "v": 1780818590028,
+    "fit": "cover"
+  },
+  "tenant-25.jpg": {
+    "file": "images/tenant-25.png",
+    "v": 1780819021404,
+    "fit": "cover"
+  },
+  "public-19.jpg": {
+    "file": "images/public-19.jpg",
+    "v": 1780821175894,
+    "fit": "cover"
+  },
+  "tenant-26.jpg": {
+    "file": "images/tenant-26.png",
+    "v": 1780822516857,
+    "fit": "cover"
+  },
+  "tenant-27.jpg": {
+    "file": "images/tenant-27.png",
+    "v": 1780822737895,
+    "fit": "cover"
+  },
+  "tenant-28.jpg": {
+    "file": "images/tenant-28.png",
+    "v": 1780823217621,
+    "fit": "cover"
+  },
+  "tenant-29.jpg": {
+    "file": "images/tenant-29.png",
+    "v": 1780823980105,
+    "fit": "cover"
+  },
+  "engineer-diagram-01.jpg": {
+    "file": "images/engineer-diagram-01.jpg",
+    "v": 1780827504416,
+    "fit": "contain"
+  },
+  "early-study-signal-box.jpg": {
+    "file": "images/early-study-signal-box.jpg",
+    "v": 1780827961826,
+    "fit": "contain"
+  },
+  "early-study-canopy.jpg": {
+    "file": "images/early-study-canopy.jpg",
+    "v": 1780827970430,
+    "fit": "contain"
+  },
+  "early-study-both-conflict.jpg": {
+    "file": "images/early-study-both-conflict.jpg",
+    "v": 1780827974916,
+    "fit": "contain"
+  },
+  "modulation-01.jpg": {
+    "file": "images/modulation-01.png",
+    "v": 1780830848455,
+    "fit": "contain"
+  },
+  "modulation-02.jpg": {
+    "file": "images/modulation-02.png",
+    "v": 1780830852871,
+    "fit": "contain"
+  },
+  "modulation-03.jpg": {
+    "file": "images/modulation-03.png",
+    "v": 1780830858189,
+    "fit": "contain"
+  },
+  "modulation-04.jpg": {
+    "file": "images/modulation-04.png",
+    "v": 1780830866101,
+    "fit": "contain"
+  },
+  "modulation-05.jpg": {
+    "file": "images/modulation-05.png",
+    "v": 1780830873862,
+    "fit": "contain"
+  },
+  "modulation-06.jpg": {
+    "file": "images/modulation-06.png",
+    "v": 1780830881111,
+    "fit": "contain"
+  },
+  "current-direction-reference.jpg": {
+    "file": "images/current-direction-reference.jpg",
+    "v": 1780831661921,
+    "fit": "cover"
+  },
+  "01-from-the-wildlife-centre.jpg": {
+    "file": "images/01-from-the-wildlife-centre.png",
+    "fit": "cover",
+    "v": 1780842700307
+  },
+  "02-from-the-east-along-the-canal.jpg": {
+    "file": "images/02-from-the-east-along-the-canal.jpg",
+    "fit": "cover",
+    "v": 1780842700309
+  },
+  "03-from-camley-street-near-st-pancras.jpg": {
+    "file": "images/03-from-camley-street-near-st-pancras.jpg",
+    "fit": "cover",
+    "v": 1780842700312
+  },
+  "04-from-york-way-looking-north.jpg": {
+    "file": "images/04-from-york-way-looking-north.jpg",
+    "fit": "cover",
+    "v": 1780842700314
+  },
+  "05-from-the-kings-cross-platforms.jpg": {
+    "file": "images/05-from-the-kings-cross-platforms.jpg",
+    "fit": "cover",
+    "v": 1780842700317
+  },
+  "06-from-granary-square.jpg": {
+    "file": "images/06-from-granary-square.png",
+    "fit": "cover",
+    "v": 1780858554101
+  },
+  "07-across-the-canal-a-summers-day.jpg": {
+    "file": "images/07-across-the-canal-a-summers-day.png",
+    "fit": "cover",
+    "v": 1780858557839
+  },
+  "08-from-the-towpath.jpg": {
+    "file": "images/08-from-the-towpath.jpg",
+    "fit": "cover",
+    "v": 1780842700327
+  },
+  "09-the-gap-to-the-google-building.jpg": {
+    "file": "images/09-the-gap-to-the-google-building.jpg",
+    "fit": "cover",
+    "v": 1780842700330
+  },
+  "10-across-the-canal-word-on-the-water.jpg": {
+    "file": "images/10-across-the-canal-word-on-the-water.jpg",
+    "fit": "cover",
+    "v": 1780842700332
+  },
+  "11-1852-public-space.jpg": {
+    "file": "images/11-1852-public-space.png",
+    "fit": "cover",
+    "v": 1780858564529
+  },
+  "13-1852-railway-seating.jpg": {
+    "file": "images/13-1852-railway-seating.jpg",
+    "fit": "cover",
+    "v": 1780842700339
+  },
+  "14-looking-up-at-the-1820-room.jpg": {
+    "file": "images/14-looking-up-at-the-1820-room.jpg",
+    "fit": "cover",
+    "v": 1780842700341
+  },
+  "01-view-looking-south-on-york-way.jpg": {
+    "file": "images/01-view-looking-south-on-york-way.jpg",
+    "fit": "cover",
+    "v": 1780858657666
+  },
+  "02-the-corner-of-the-crossing-with-the-entrance-to-the-offices.jpg": {
+    "file": "images/02-the-corner-of-the-crossing-with-the-entrance-to-the-offices.jpg",
+    "fit": "cover",
+    "v": 1780858660805
+  },
+  "03-the-entrance.jpg": {
+    "file": "images/03-the-entrance.png",
+    "fit": "cover",
+    "v": 1780858664641
+  },
+  "04-the-soft-lobby.jpg": {
+    "file": "images/04-the-soft-lobby.png",
+    "fit": "cover",
+    "v": 1780858667815
+  },
+  "05-reception-desk-detail.jpg": {
+    "file": "images/05-reception-desk-detail.png",
+    "fit": "cover",
+    "v": 1780842700372
+  },
+  "07-view-into-the-bike-store.jpg": {
+    "file": "images/07-view-into-the-bike-store.png",
+    "fit": "cover",
+    "v": 1780842700380
+  },
+  "08-lift-detail.jpg": {
+    "file": "images/08-lift-detail.png",
+    "fit": "cover",
+    "v": 1780842700384
+  },
+  "09-brick-lift-lobby.jpg": {
+    "file": "images/09-brick-lift-lobby.png",
+    "fit": "cover",
+    "v": 1780842700388
+  },
+  "10-typical-office-floor-plate.jpg": {
+    "file": "images/10-typical-office-floor-plate.jpg",
+    "fit": "cover",
+    "v": 1780858874044
+  },
+  "11-brick-filigree-with-kings-cross-view.jpg": {
+    "file": "images/11-brick-filigree-with-kings-cross-view.png",
+    "fit": "cover",
+    "v": 1780842700395
+  },
+  "12-meeting-room.jpg": {
+    "file": "images/12-meeting-room.png",
+    "fit": "cover",
+    "v": 1780842700399
+  },
+  "13-balcony-view.jpg": {
+    "file": "images/13-balcony-view.jpg",
+    "fit": "cover",
+    "v": 1780842700401
+  },
+  "14-super-loo.jpg": {
+    "file": "images/14-super-loo.png",
+    "fit": "cover",
+    "v": 1780842700404
+  },
+  "15-natural-light-to-the-lift-lobby.jpg": {
+    "file": "images/15-natural-light-to-the-lift-lobby.png",
+    "fit": "cover",
+    "v": 1780842700408
+  },
+  "16-co-working-space-the-1820-room.jpg": {
+    "file": "images/16-co-working-space-the-1820-room.png",
+    "fit": "cover",
+    "v": 1780842700413
+  },
+  "17-detail-of-structural-truss.jpg": {
+    "file": "images/17-detail-of-structural-truss.png",
+    "fit": "cover",
+    "v": 1780858923532
+  },
+  "18-more-natural-co-working-space-the-1820-room.jpg": {
+    "file": "images/18-more-natural-co-working-space-the-1820-room.png",
+    "fit": "cover",
+    "v": 1780858927360
+  },
+  "19-wisteria-hanging-from-brick-slip-detail.jpg": {
+    "file": "images/19-wisteria-hanging-from-brick-slip-detail.png",
+    "fit": "cover",
+    "v": 1780858931315
+  },
+  "20-event-space-the-1820-room-yoga.jpg": {
+    "file": "images/20-event-space-the-1820-room-yoga.jpg",
+    "fit": "cover",
+    "v": 1780842700428
+  },
+  "21-brick-floor-the-multipurpose-1820-room.jpg": {
+    "file": "images/21-brick-floor-the-multipurpose-1820-room.png",
+    "fit": "cover",
+    "v": 1780842700432
+  },
+  "22-the-1820-room-the-permanent-wine-bar-and-restaurant.jpg": {
+    "file": "images/22-the-1820-room-the-permanent-wine-bar-and-restaurant.png",
+    "fit": "cover",
+    "v": 1780858939718
+  },
+  "23-detail-of-lighting-and-truss.jpg": {
+    "file": "images/23-detail-of-lighting-and-truss.png",
+    "fit": "cover",
+    "v": 1780842700439
+  },
+  "24-view-across-granary-square-and-kings-cross-from-the-1820-room.jpg": {
+    "file": "images/24-view-across-granary-square-and-kings-cross-from-the-1820-room.png",
+    "fit": "cover",
+    "v": 1780859003634
+  },
+  "25-new-years-eve-the-1820-room.jpg": {
+    "file": "images/25-new-years-eve-the-1820-room.png",
+    "fit": "cover",
+    "v": 1780859015246
+  },
+  "26-sunset-the-1820-room.jpg": {
+    "file": "images/26-sunset-the-1820-room.png",
+    "fit": "cover",
+    "v": 1780859034262
+  },
+  "27-the-1820-room-the-crossing.jpg": {
+    "file": "images/27-the-1820-room-the-crossing.png",
+    "fit": "cover",
+    "v": 1780859028496
+  },
+  "12-1852-cafe.jpg": {
+    "file": "images/12-1852-cafe.png",
+    "fit": "cover",
+    "v": 1780858579478
+  },
+  "15-inside-the-1852-cafe.jpg": {
+    "file": "images/15-inside-the-1852-cafe.jpg",
+    "fit": "cover",
+    "v": 1780858620877
+  },
+  "16-1852-cafe-and-canal.jpg": {
+    "file": "images/16-1852-cafe-and-canal.png",
+    "fit": "cover",
+    "v": 1780858624002
+  },
+  "17-1852-cafe-detail.jpg": {
+    "file": "images/17-1852-cafe-detail.png",
+    "fit": "cover",
+    "v": 1780858626757
+  },
+  "06-lift-lobby-and-connection-to-cafe.jpg": {
+    "file": "images/06-lift-lobby-and-connection-to-cafe.png",
+    "fit": "cover",
+    "v": 1780842732092
+  },
+  "viability-q6-public-or-private-roof.jpg": {
+    "file": "images/viability-q6-public-or-private-roof.jpg",
+    "v": 1780844171606,
+    "fit": "contain"
+  },
+  "pure-extrusion-sketch.jpg": {
+    "file": "images/pure-extrusion-sketch.jpg",
+    "v": 1780847787773,
+    "fit": "cover"
+  },
+  "main-body-sketch-01.jpg": {
+    "file": "images/main-body-sketch-01.jpg",
+    "v": 1780847798293,
+    "fit": "contain"
+  },
+  "office-floor-reception.jpg": {
+    "file": "images/office-floor-reception.jpg",
+    "v": 1780858863445,
+    "fit": "contain"
+  },
+  "floor-plate-in-use-01.jpg": {
+    "file": "images/floor-plate-in-use-01.jpg",
+    "v": 1780859252382,
+    "fit": "contain"
+  },
+  "floor-plate-in-use-03.jpg": {
+    "file": "images/floor-plate-in-use-03.jpg",
+    "v": 1780859258124,
+    "fit": "contain"
+  },
+  "floor-plate-in-use-02.jpg": {
+    "file": "images/floor-plate-in-use-02.jpg",
+    "v": 1780859264641,
+    "fit": "contain"
+  },
+  "buildup-06.jpg": {
+    "file": "images/buildup-06.jpg",
+    "v": 1780878418429,
+    "fit": "contain"
+  },
+  "buildup-07.jpg": {
+    "file": "images/buildup-07.jpg",
+    "v": 1780878707093,
+    "fit": "contain"
+  },
+  "buildup-01.jpg": {
+    "file": "images/buildup-01.jpg",
+    "v": 1780878402562,
+    "fit": "contain"
+  },
+  "buildup-02.jpg": {
+    "file": "images/buildup-02.jpg",
+    "v": 1780878408448,
+    "fit": "contain"
+  },
+  "buildup-03.jpg": {
+    "file": "images/buildup-03.jpg",
+    "v": 1780878410820,
+    "fit": "contain"
+  },
+  "buildup-04.jpg": {
+    "file": "images/buildup-04.jpg",
+    "v": 1780878413775,
+    "fit": "contain"
+  },
+  "buildup-05.jpg": {
+    "file": "images/buildup-05.jpg",
+    "v": 1780878415885,
+    "fit": "contain"
+  },
+  "primary-elements.jpg": {
+    "file": "images/primary-elements.jpg",
+    "v": 1780878531091,
+    "fit": "contain"
+  },
+  "detail-glazing-brick-01.jpg": {
+    "file": "images/detail-glazing-brick-01.jpg",
+    "v": 1780902074327,
+    "fit": "cover"
+  },
+  "detail-glazing-brick-02.jpg": {
+    "file": "images/detail-glazing-brick-02.jpg",
+    "v": 1780902079062,
+    "fit": "contain"
+  },
+  "flexibrick/scale-01.jpg": {
+    "file": "images/flexibrick_scale-01.jpg",
+    "v": 1780901419855,
+    "fit": "cover"
+  },
+  "flexibrick/scale-02.jpg": {
+    "file": "images/flexibrick_scale-02.jpg",
+    "v": 1780901424608,
+    "fit": "cover"
+  },
+  "flexibrick/scale-03.jpg": {
+    "file": "images/flexibrick_scale-03.jpg",
+    "v": 1780901429283,
+    "fit": "cover"
+  },
+  "flexibrick/detail-01.jpg": {
+    "file": "images/flexibrick_detail-01.jpg",
+    "v": 1780901448681,
+    "fit": "cover"
+  },
+  "flexibrick/detail-02.jpg": {
+    "file": "images/flexibrick_detail-02.jpg",
+    "v": 1780901453754,
+    "fit": "cover"
+  },
+  "flexibrick/detail-03.jpg": {
+    "file": "images/flexibrick_detail-03.jpg",
+    "v": 1780901457788,
+    "fit": "cover"
+  },
+  "flexibrick/cost-01.jpg": {
+    "file": "images/flexibrick_cost-01.jpg",
+    "v": 1780901463641,
+    "fit": "cover"
+  },
+  "flexibrick/cost-02.jpg": {
+    "file": "images/flexibrick_cost-02.jpg",
+    "v": 1780901468198,
+    "fit": "cover"
+  },
+  "flexibrick/cost-03.jpg": {
+    "file": "images/flexibrick_cost-03.jpg",
+    "v": 1780901472109,
+    "fit": "cover"
+  },
+  "flexibrick/landscape-01.jpg": {
+    "file": "images/flexibrick_landscape-01.jpg",
+    "v": 1780901479397,
+    "fit": "cover"
+  },
+  "flexibrick/landscape-02.jpg": {
+    "file": "images/flexibrick_landscape-02.jpg",
+    "v": 1780901482750,
+    "fit": "cover"
+  },
+  "flexibrick/landscape-03.jpg": {
+    "file": "images/flexibrick_landscape-03.jpg",
+    "v": 1780901486115,
+    "fit": "cover"
+  },
+  "materials-flexi-brick.jpg": {
+    "file": "images/materials-flexi-brick.jpg",
+    "v": 1780901619332,
+    "fit": "contain"
+  },
+  "detail-spandrel-panel.jpg": {
+    "file": "images/detail-spandrel-panel.jpg",
+    "v": 1780902082578,
+    "fit": "cover"
+  },
+  "closing.jpg": {
+    "file": "images/closing.png",
+    "v": 1780904704355,
     "fit": "cover"
   }
 }

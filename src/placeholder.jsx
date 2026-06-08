@@ -109,20 +109,21 @@ function Placeholder({
   number,
   aspect,            // override variant default
   fill = false,      // true → fills 100%×100% (cover/closing only)
+  fitMode,           // override object-fit ("contain" shows the whole image, no crop)
   align = "center",  // alignment within parent: center | left
   style,
   src,               // legacy: explicit src (manifest takes precedence)
 }) {
   const entry = useImageEntry(filename);
   const resolvedSrc = entry && entry.file ? `${entry.file}?v=${entry.v || 0}` : src;
-  const fit = (entry && entry.fit) || "cover";
+  const fit = fitMode || (entry && entry.fit) || "cover";
 
   // The visual content, always 100% × 100% of its (possibly aspect-locked) parent.
   // With a placed image we show it (object-fit per the chosen mode); otherwise
   // the striped placeholder.
   const content = resolvedSrc ? (
     <img className="placeholder__img" src={resolvedSrc} alt={caption || filename || ""}
-      draggable="false" style={{ objectFit: fit }} />
+      draggable="false" style={{ objectFit: fit, objectPosition: align === "left" ? "left center" : "center" }} />
   ) : (
     <div className="placeholder">
       <div className="placeholder__cross"></div>
